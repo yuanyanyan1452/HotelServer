@@ -1,47 +1,94 @@
+//package service.blservice;
+//
+//import java.util.ArrayList;
+//
+//import objects.*;
+//
+//public   interface StrategyBLService {
+//	// ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÄ½Ó¿ï¿½
+//
+//		/**
+//		 * @param input
+//		 * @return ï¿½Æµï¿½ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage hotelstrategy_make(HotelStrategy strategy);
+//
+//		/**
+//		 * @param strategy
+//		 * @return ï¿½Æµï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage hotelstrategy_update(HotelStrategy strategy);
+//
+//		/**
+//		 * @param strategy
+//		 * @return ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ó´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage webstrategy_make(WebStrategy strategy);
+//
+//		/**
+//		 * @param strategy
+//		 * @return ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Â´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage webstrategy_update(WebStrategy strategy);
+//
+//		// ï¿½á¹©ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ÃµÄ½Ó¿ï¿½
+//		/**
+//		 * @param hotelid
+//		 * @param clientid
+//		 * @return ï¿½Ãµï¿½ï¿½ï¿½Ó¦ï¿½Í»ï¿½ï¿½ï¿½ï¿½ÃµÄ¶ï¿½Ó¦ï¿½Æµï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+//		 */
+//		public ArrayList<HotelStrategy> getStrategy(int hotelid, int clientid);
+//
+//		/**
+//		 * @param clientid
+//		 * @return ï¿½Ãµï¿½ï¿½ï¿½Ó¦ï¿½Í»ï¿½Ê¹ï¿½Ãµï¿½ï¿½ï¿½Õ¾ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½
+//		 */
+//		public ArrayList<WebStrategy> getStrategy(int clientid);
+//}
 package service.blservice;
 
 import java.util.ArrayList;
 
 import objects.*;
 
-public   interface StrategyBLService {
-	// Ìá¹©¸ø½çÃæµ÷ÓÃµÄ½Ó¿Ú
+public interface StrategyBLService {
+	// æä¾›ç»™ç•Œé¢è°ƒç”¨çš„æ¥å£
 
-		/**
-		 * @param input
-		 * @return ¾ÆµêÌí¼Ó´ÙÏú²ßÂÔ
-		 */
-		public ResultMessage hotelstrategy_make(HotelStrategy strategy);
+	/**
+	 * @param input
+	 * @return é…’åº—æ·»åŠ ä¿ƒé”€ç­–ç•¥
+	 */
+	public ResultMessage hotelstrategy_make(HotelStrategy strategy);
 
-		/**
-		 * @param strategy
-		 * @return ¾Æµê¸üĞÂ´ÙÏú²ßÂÔ
-		 */
-		public ResultMessage hotelstrategy_update(HotelStrategy strategy);
+	/**
+	 * @param strategy
+	 * @return é…’åº—æ›´æ–°ä¿ƒé”€ç­–ç•¥
+	 */
+	public ResultMessage hotelstrategy_update(HotelStrategy strategy);
 
-		/**
-		 * @param strategy
-		 * @return ÍøÕ¾ÓªÏúÈËÔ±Ìí¼Ó´ÙÏú²ßÂÔ
-		 */
-		public ResultMessage webstrategy_make(WebStrategy strategy);
+	/**
+	 * @param strategy
+	 * @return ç½‘ç«™è¥é”€äººå‘˜æ·»åŠ ä¿ƒé”€ç­–ç•¥
+	 */
+	public ResultMessage webstrategy_make(WebStrategy strategy);
 
-		/**
-		 * @param strategy
-		 * @return ÍøÕ¾ÓªÏúÈËÔ±¸üĞÂ´ÙÏú²ßÂÔ
-		 */
-		public ResultMessage webstrategy_update(WebStrategy strategy);
+	/**
+	 * @param strategy
+	 * @return ç½‘ç«™è¥é”€äººå‘˜æ›´æ–°ä¿ƒé”€ç­–ç•¥
+	 */
+	public ResultMessage webstrategy_update(WebStrategy strategy);
 
-		// Ìá¹©¸øÍ¬²ãµ÷ÓÃµÄ½Ó¿Ú
-		/**
-		 * @param hotelid
-		 * @param clientid
-		 * @return µÃµ½¶ÔÓ¦¿Í»§ÊÊÓÃµÄ¶ÔÓ¦¾ÆµêµÄ´ÙÏú²ßÂÔÁĞ±í
-		 */
-		public ArrayList<HotelStrategy> getStrategy(int hotelid, int clientid);
+	// æä¾›ç»™åŒå±‚è°ƒç”¨çš„æ¥å£
+	/**
+	 * @param hotelid
+	 * @param clientid
+	 * @return å¾—åˆ°å¯¹åº”å®¢æˆ·é€‚ç”¨çš„å¯¹åº”é…’åº—çš„ä¿ƒé”€ç­–ç•¥åˆ—è¡¨
+	 */
+	public ArrayList<HotelStrategy> getStrategy(int hotelid, int clientid);
 
-		/**
-		 * @param clientid
-		 * @return µÃµ½¶ÔÓ¦¿Í»§Ê¹ÓÃµÄÍøÕ¾µÄ´ÙÏú²ßÂÔÁĞ±í
-		 */
-		public ArrayList<WebStrategy> getStrategy(int clientid);
+	/**
+	 * @param clientid
+	 * @return å¾—åˆ°å¯¹åº”å®¢æˆ·ä½¿ç”¨çš„ç½‘ç«™çš„ä¿ƒé”€ç­–ç•¥åˆ—è¡¨
+	 */
+	public ArrayList<WebStrategy> getStrategy(int clientid);
 }

@@ -4,67 +4,68 @@ import java.util.ArrayList;
 
 import vo.*;
 import objects.*;
+
 public interface HotelBLService {
-	// Ìá¹©¸ø½çÃæµ÷ÓÃµÄ½Ó¿Ú
-		/**
-		 * @param hotelid
-		 * @return ¾Æµê²é¿´ÏêÏ¸ĞÅÏ¢
-		 */
-		public HotelVO hotel_checkInfo(int hotelid);
+	// æä¾›ç»™ç•Œé¢è°ƒç”¨çš„æ¥å£
+	/**
+	 * @param hotelid
+	 * @return é…’åº—æŸ¥çœ‹è¯¦ç»†ä¿¡æ¯
+	 */
+	public HotelVO hotel_checkInfo(int hotelid);
 
-		/**
-		 * @param vo
-		 * @return ¾Æµê¸üĞÂÏêÏ¸ĞÅÏ¢
-		 */
-		public ResultMessage hotel_updateInfo(HotelVO vo);
+	/**
+	 * @param vo
+	 * @return é…’åº—æ›´æ–°è¯¦ç»†ä¿¡æ¯
+	 */
+	public ResultMessage hotel_updateInfo(HotelVO vo);
 
-		/**
-		 * @param room
-		 * @return ¾ÆµêÂ¼Èë¿ÉÓÃ·¿¼ä
-		 */
-		public ResultMessage hotel_importRoom(Room room);
+	/**
+	 * @param room
+	 * @return é…’åº—å½•å…¥å¯ç”¨æˆ¿é—´
+	 */
+	public ResultMessage hotel_importRoom(Room room);
 
-		/**
-		 * @param info
-		 * @return ¾Æµê¸üĞÂÈë×¡ĞÅÏ¢
-		 */
-		public ResultMessage hotel_updateAccomodation(AccommodationInfo info);
+	/**
+	 * @param info
+	 * @return é…’åº—æ›´æ–°å…¥ä½ä¿¡æ¯
+	 */
+	public ResultMessage hotel_updateAccomodation(AccommodationInfo info);
 
-		// Ìá¹©¸øÍ¬²ãµ÷ÓÃµÄ½Ó¿Ú
-		/**
-		 * @param hotelid
-		 * @return ·µ»Ø¶ÔÓ¦¾Æµê
-		 */
-		public Hotel searchHotel(int hotelid);
+	// æä¾›ç»™åŒå±‚è°ƒç”¨çš„æ¥å£
+	/**
+	 * @param hotelid
+	 * @return è¿”å›å¯¹åº”é…’åº—
+	 */
+	public Hotel searchHotel(int hotelid);
 
-		/**
-		 * @param clientid
-		 * @return ·µ»Ø¶ÔÓ¦¿Í»§Ô¤¶¨¹ıµÄ¾ÆµêÁĞ±í
-		 */
-		public ArrayList<Hotel> previousHotel(int clientid);
+	/**
+	 * @param clientid
+	 * @return è¿”å›å¯¹åº”å®¢æˆ·é¢„å®šè¿‡çš„é…’åº—åˆ—è¡¨
+	 */
+	public ArrayList<Hotel> previousHotel(int clientid);
 
-		/**
-		 * @param hotel
-		 * @return Ìí¼Ó¾Æµê
-		 */
-		public ResultMessage addHotel(Hotel hotel);
+	/**
+	 * @param hotel
+	 * @return æ·»åŠ é…’åº—
+	 */
+	public ResultMessage addHotel(Hotel hotel);
 
-		/**
-		 * @param worker
-		 * @return Ìí¼Ó¾Æµê¹¤×÷ÈËÔ±
-		 */
-		public ResultMessage addHotelWorker(HotelWorker worker);
+	/**
+	 * @param worker
+	 * @return æ·»åŠ é…’åº—å·¥ä½œäººå‘˜
+	 */
+	public ResultMessage addHotelWorker(HotelWorker worker);
 
-		/**
-		 * @param hotelid
-		 * @return ·µ»Ø¶ÔÓ¦¾ÆµêµÄ¹¤×÷ÈËÔ±
-		 */
-		public HotelWorker searchHotelWorker(int hotelid);
+	/**
+	 * @param hotelid
+	 * @return è¿”å›å¯¹åº”é…’åº—çš„å·¥ä½œäººå‘˜
+	 */
+	public HotelWorker searchHotelWorker(int hotelid);
 
-		/**
-		 * @param hotelid
-		 * @param worker
-		 * @return ¸üĞÂ¶ÔÓ¦¾ÆµêµÄ¹¤×÷ÈËÔ±ĞÅÏ¢
-		 */
-		public ResultMessage updateHotelWokerInfo(int hotelid, HotelWorker worker);
+	/**
+	 * @param hotelid
+	 * @param worker
+	 * @return æ›´æ–°å¯¹åº”é…’åº—çš„å·¥ä½œäººå‘˜ä¿¡æ¯
+	 */
+	public ResultMessage updateHotelWokerInfo(int hotelid, HotelWorker worker);
 }
