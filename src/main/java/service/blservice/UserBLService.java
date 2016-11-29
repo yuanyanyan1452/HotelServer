@@ -1,19 +1,20 @@
 package service.blservice;
 
 import objects.*;
+
 public interface UserBLService {
-	// 提供给界面调用的接口
+	// 鎻愪緵缁欑晫闈㈣皟鐢ㄧ殑鎺ュ彛
 	/**
 	 * @param username
 	 * @param password
-	 * @return 用户登录
+	 * @return 鐢ㄦ埛鐧诲綍
 	 */
 	public ResultMessage login(String username, String password);
 
 	/**
 	 * @param username
 	 * @param password
-	 * @return 用户注册
+	 * @return 鐢ㄦ埛娉ㄥ唽
 	 */
 	public ResultMessage register(String username, String password);
 }

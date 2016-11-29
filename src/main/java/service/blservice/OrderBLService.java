@@ -1,3 +1,106 @@
+//package service.blservice;
+//
+//import java.util.ArrayList;
+//
+//import vo.*;
+//import objects.*;
+//
+//public interface OrderBLService {
+//	// ï¿½á¹©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÄ½Ó¿ï¿½
+//		/**
+//		 * @param clientid
+//		 * @return ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_client_browse(int clientid);
+//
+//		/**
+//		 * @param clientid
+//		 * @param state
+//		 * @return ï¿½Í»ï¿½ï¿½ï¿½ï¿½İ¶ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_client_browse(int clientid, OrderState state);
+//
+//		/**
+//		 * @param clientid
+//		 * @param isExecute
+//		 * @return ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute);
+//
+//		/**
+//		 * @param hotelid
+//		 * @return ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_hotel_browse(int hotelid);
+//
+//		/**
+//		 * @param hotelid
+//		 * @param state
+//		 * @return ï¿½Æµï¿½ï¿½ï¿½İ¶ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_hotel_browse(int hotelid, OrderState state);
+//
+//		/**
+//		 * @param hotelid
+//		 * @param isExecute
+//		 * @return ï¿½Æµï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute);
+//
+//		/**
+//		 * @param clientid
+//		 * @param orderid
+//		 * @return ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage order_client_cancel(int clientid, int orderid);
+//
+//		/**
+//		 * @param vo
+//		 * @return ï¿½Í»ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage order_client_generate(OrderVO vo);
+//
+//		/**
+//		 * @param orderid
+//		 * @return ï¿½Æµï¿½Ö´ï¿½Ğ¶ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage order_hotel_execute(int orderid);
+//
+//		/**
+//		 * @return ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Î´Ö´ï¿½Ğ¶ï¿½ï¿½ï¿½
+//		 */
+//		public ArrayList<OrderVO> order_market_browseUnfilled();
+//
+//		/**
+//		 * @param orderid
+//		 * @return ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½
+//		 */
+//		public ResultMessage order_market_cancelAbnormal(int orderid);
+//
+//		/**
+//		 * @param type
+//		 * @param num
+//		 * @return ï¿½ï¿½ï¿½ã¶©ï¿½ï¿½ï¿½Ü¼Û£ï¿½ï¿½Ş´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½
+//		 */
+//		public int calculateTotalwithoutStrategy(RoomType type, int num);
+//
+//		/**
+//		 * @param type
+//		 * @param num
+//		 * @param list1
+//		 * @param list2
+//		 * @return ï¿½ï¿½ï¿½ã¶©ï¿½ï¿½ï¿½Ü¼Û£ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½
+//		 */
+//		public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
+//				ArrayList<WebStrategy> list2);
+//
+//		// ï¿½á¹©ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ÃµÄ½Ó¿ï¿½
+//		/**
+//		 * @param leaveTime
+//		 * @return ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ë¿ªÊ±ï¿½ï¿½
+//		 */
+//		public ResultMessage updateActualLeaveTime(int orderid, String leaveTime);
+//}
 package service.blservice;
 
 import java.util.ArrayList;
@@ -6,98 +109,98 @@ import vo.*;
 import objects.*;
 
 public interface OrderBLService {
-	// Ìá¹©¸ø½çÃæµ÷ÓÃµÄ½Ó¿Ú
-		/**
-		 * @param clientid
-		 * @return ¿Í»§ä¯ÀÀ¶©µ¥
-		 */
-		public ArrayList<OrderVO> order_client_browse(int clientid);
+	// æä¾›ç»™ç•Œé¢è°ƒç”¨çš„æ¥å£
+	/**
+	 * @param clientid
+	 * @return å®¢æˆ·æµè§ˆè®¢å•
+	 */
+	public ArrayList<OrderVO> order_client_browse(int clientid);
 
-		/**
-		 * @param clientid
-		 * @param state
-		 * @return ¿Í»§¸ù¾İ¶©µ¥×´Ì¬ä¯ÀÀ
-		 */
-		public ArrayList<OrderVO> order_client_browse(int clientid, OrderState state);
+	/**
+	 * @param clientid
+	 * @param state
+	 * @return å®¢æˆ·æ ¹æ®è®¢å•çŠ¶æ€æµè§ˆ
+	 */
+	public ArrayList<OrderVO> order_client_browse(int clientid, OrderState state);
 
-		/**
-		 * @param clientid
-		 * @param isExecute
-		 * @return ¿Í»§¸ù¾İÖ´ĞĞÇé¿öä¯ÀÀ
-		 */
-		public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute);
+	/**
+	 * @param clientid
+	 * @param isExecute
+	 * @return å®¢æˆ·æ ¹æ®æ‰§è¡Œæƒ…å†µæµè§ˆ
+	 */
+	public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute);
 
-		/**
-		 * @param hotelid
-		 * @return ¾Æµêä¯ÀÀ¶©µ¥
-		 */
-		public ArrayList<OrderVO> order_hotel_browse(int hotelid);
+	/**
+	 * @param hotelid
+	 * @return é…’åº—æµè§ˆè®¢å•
+	 */
+	public ArrayList<OrderVO> order_hotel_browse(int hotelid);
 
-		/**
-		 * @param hotelid
-		 * @param state
-		 * @return ¾Æµê¸ù¾İ¶©µ¥×´Ì¬ä¯ÀÀ
-		 */
-		public ArrayList<OrderVO> order_hotel_browse(int hotelid, OrderState state);
+	/**
+	 * @param hotelid
+	 * @param state
+	 * @return é…’åº—æ ¹æ®è®¢å•çŠ¶æ€æµè§ˆ
+	 */
+	public ArrayList<OrderVO> order_hotel_browse(int hotelid, OrderState state);
 
-		/**
-		 * @param hotelid
-		 * @param isExecute
-		 * @return ¾Æµê¸ù¾İÖ´ĞĞÇé¿öä¯ÀÀ
-		 */
-		public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute);
+	/**
+	 * @param hotelid
+	 * @param isExecute
+	 * @return é…’åº—æ ¹æ®æ‰§è¡Œæƒ…å†µæµè§ˆ
+	 */
+	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute);
 
-		/**
-		 * @param clientid
-		 * @param orderid
-		 * @return ¿Í»§³·Ïú¶©µ¥
-		 */
-		public ResultMessage order_client_cancel(int clientid, int orderid);
+	/**
+	 * @param clientid
+	 * @param orderid
+	 * @return å®¢æˆ·æ’¤é”€è®¢å•
+	 */
+	public ResultMessage order_client_cancel(int clientid, int orderid);
 
-		/**
-		 * @param vo
-		 * @return ¿Í»§Éú³É¶©µ¥
-		 */
-		public ResultMessage order_client_generate(OrderVO vo);
+	/**
+	 * @param vo
+	 * @return å®¢æˆ·ç”Ÿæˆè®¢å•
+	 */
+	public ResultMessage order_client_generate(OrderVO vo);
 
-		/**
-		 * @param orderid
-		 * @return ¾ÆµêÖ´ĞĞ¶©µ¥
-		 */
-		public ResultMessage order_hotel_execute(int orderid);
+	/**
+	 * @param orderid
+	 * @return é…’åº—æ‰§è¡Œè®¢å•
+	 */
+	public ResultMessage order_hotel_execute(int orderid);
 
-		/**
-		 * @return ÍøÕ¾ÓªÏúÈËÔ±ä¯ÀÀÎ´Ö´ĞĞ¶©µ¥
-		 */
-		public ArrayList<OrderVO> order_market_browseUnfilled();
+	/**
+	 * @return ç½‘ç«™è¥é”€äººå‘˜æµè§ˆæœªæ‰§è¡Œè®¢å•
+	 */
+	public ArrayList<OrderVO> order_market_browseUnfilled();
 
-		/**
-		 * @param orderid
-		 * @return ÍøÕ¾ÓªÏúÈËÔ±³·ÏúÒì³£¶©µ¥
-		 */
-		public ResultMessage order_market_cancelAbnormal(int orderid);
+	/**
+	 * @param orderid
+	 * @return ç½‘ç«™è¥é”€äººå‘˜æ’¤é”€å¼‚å¸¸è®¢å•
+	 */
+	public ResultMessage order_market_cancelAbnormal(int orderid);
 
-		/**
-		 * @param type
-		 * @param num
-		 * @return ¼ÆËã¶©µ¥×Ü¼Û£¨ÎŞ´ÙÏú²ßÂÔ£©
-		 */
-		public int calculateTotalwithoutStrategy(RoomType type, int num);
+	/**
+	 * @param type
+	 * @param num
+	 * @return è®¡ç®—è®¢å•æ€»ä»·ï¼ˆæ— ä¿ƒé”€ç­–ç•¥ï¼‰
+	 */
+	public int calculateTotalwithoutStrategy(RoomType type, int num);
 
-		/**
-		 * @param type
-		 * @param num
-		 * @param list1
-		 * @param list2
-		 * @return ¼ÆËã¶©µ¥×Ü¼Û£¨ÓĞ´ÙÏú²ßÂÔ£©
-		 */
-		public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
-				ArrayList<WebStrategy> list2);
+	/**
+	 * @param type
+	 * @param num
+	 * @param list1
+	 * @param list2
+	 * @return è®¡ç®—è®¢å•æ€»ä»·ï¼ˆæœ‰ä¿ƒé”€ç­–ç•¥ï¼‰
+	 */
+	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
+			ArrayList<WebStrategy> list2);
 
-		// Ìá¹©¸øÍ¬²ãµ÷ÓÃµÄ½Ó¿Ú
-		/**
-		 * @param leaveTime
-		 * @return ¸üĞÂ¶©µ¥Êµ¼ÊÀë¿ªÊ±¼ä
-		 */
-		public ResultMessage updateActualLeaveTime(int orderid, String leaveTime);
+	// æä¾›ç»™åŒå±‚è°ƒç”¨çš„æ¥å£
+	/**
+	 * @param leaveTime
+	 * @return æ›´æ–°è®¢å•å®é™…ç¦»å¼€æ—¶é—´
+	 */
+	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime);
 }
