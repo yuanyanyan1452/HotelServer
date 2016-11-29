@@ -6,19 +6,23 @@ import po.*;
 import objects.*;
 
 public interface OrderDataService {
-	//¸ù¾İ¶©µ¥id²éÕÒ¶ÔÓ¦¶©µ¥
-	public OrderPO find (int id) ;
+	//é€šè¿‡è®¢å•å·å¯»æ‰¾ç›¸åº”è®¢å•ä¿¡æ¯ï¼›
+	public OrderPO findByid (int id) ;
 	
-	//¸ù¾İ¾Æµêname²éÕÒ¶ÔÓ¦¶©µ¥ÁĞ±í
-	public ArrayList<OrderPO> find (String name) ;
+	//é€šè¿‡å®¢æˆ·idå¯»æ‰¾è®¢å•ï¼›
+	public ArrayList<OrderPO> findByClientid (int clientid) ;
 	
-	//Ìí¼Ó¶©µ¥
+	//é€šè¿‡é…’åº—idå¯»æ‰¾è®¢å•ï¼›
+	public ArrayList<OrderPO> findByHotelid (int hotelid) ;
+	
+	//ï¿½ï¿½Ó¶ï¿½ï¿½ï¿½
 	public ResultMessage insert(OrderPO po);
 	
-	//É¾³ı¶©µ¥
+	//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public ResultMessage delete(OrderPO po);
 	
-	//¸üĞÂ¶©µ¥
+	//ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½
 	public ResultMessage update(OrderPO po);
+
 	
 }

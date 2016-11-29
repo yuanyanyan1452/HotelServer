@@ -6,31 +6,31 @@ import po.*;
 import objects.*;
 
 public interface HotelDataService {
-	//¸ù¾Ý¾ÆµêÃû²éÕÒ¾Æµê
-	public HotelPO find(String hotelname);
+	//ï¿½ï¿½ï¿½Ý¾Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò¾Æµï¿½
+	public HotelPO find(int hotelid);
 	
-	//Ìí¼Ó¾Æµê
+	//ï¿½ï¿½Ó¾Æµï¿½
 	public ResultMessage insert(HotelPO po);
 	
-	//¸üÐÂ¾Æµê»ù±¾ÐÅÏ¢
+	//ï¿½ï¿½ï¿½Â¾Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	public ResultMessage update(HotelPO po);
 	
-	//É¾³ý¾Æµê
+	//É¾ï¿½ï¿½ï¿½Æµï¿½
 	public ResultMessage delete(HotelPO po);
 	
-	//·µ»ØËùÓÐ±»¶ÔÓ¦¿Í»§Ô¤¶©¹ýµÄ¾Æµê
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½Ó¦ï¿½Í»ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾Æµï¿½
 	public ArrayList<HotelPO> showClientHotels(int clientid);
 	
-	//·µ»Ø¶ÔÓ¦¾ÆµêµÄ¹¤×÷ÈËÔ±
+	//ï¿½ï¿½ï¿½Ø¶ï¿½Ó¦ï¿½Æµï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
 	public HotelWorkerPO findHotelWorker(String hotelname);
 	
-	//Ìí¼Ó¶ÔÓ¦¾ÆµêµÄ¹¤×÷ÈËÔ±
+	//ï¿½ï¿½Ó¶ï¿½Ó¦ï¿½Æµï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
 	public ResultMessage insertHotelWorker(String hotelname,HotelWorkerPO po);
 	
-	//¸üÐÂ¶ÔÓ¦¾ÆµêµÄ¹¤×÷ÈËÔ±ÐÅÏ¢
+	//ï¿½ï¿½ï¿½Â¶ï¿½Ó¦ï¿½Æµï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
 	public ResultMessage updateHotelWorker(String hotelname,HotelWorkerPO po);
 	
-	//É¾³ý¶ÔÓ¦¾ÆµêµÄ¹¤×÷ÈËÔ±
+	//É¾ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Æµï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½Ô±
 	public ResultMessage deleteHotelWorker(String hotelname,HotelWorkerPO po);
 	
 }
