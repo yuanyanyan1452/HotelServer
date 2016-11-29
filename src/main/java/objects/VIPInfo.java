@@ -6,17 +6,11 @@ public class VIPInfo {
 	};
 
 	VIPType type;
-	int VIPid;
-	String birthday;
-	String enterpriseName;
+	String info;
 
-	public VIPInfo(VIPType type, int vIPid, String info) {
+	public VIPInfo(VIPType type, String info) {
 		this.type = type;
-		VIPid = vIPid;
-		if(type == VIPType.NORMAL)
-			birthday = info;
-		else
-			enterpriseName = info;
+		this.info = info;
 	}
 
 	public VIPType getType() {
@@ -27,27 +21,11 @@ public class VIPInfo {
 		this.type = type;
 	}
 
-	public int getVIPid() {
-		return VIPid;
+	public String getInfo() {
+		return this.info;
 	}
 
-	public void setVIPid(int vIPid) {
-		VIPid = vIPid;
-	}
-
-	public String getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
-	}
-
-	public String getEnterpriseName() {
-		return enterpriseName;
-	}
-
-	public void setEnterpriseName(String enterpriseName) {
-		this.enterpriseName = enterpriseName;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 }

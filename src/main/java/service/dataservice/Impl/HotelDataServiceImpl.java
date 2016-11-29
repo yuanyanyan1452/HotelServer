@@ -190,4 +190,10 @@ public class HotelDataServiceImpl implements HotelDataService{
 		System.out.println(hotelpo.getid());
 		
 	}
+
+	@Override
+	public HotelPO find(String hotelname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

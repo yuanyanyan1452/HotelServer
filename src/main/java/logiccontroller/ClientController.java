@@ -9,26 +9,26 @@ import vo.*;
 import service.blservice.*;
 
 public class ClientController implements ClientBLService {
-	// ¿Í»§ÐÅÏ¢
+	// ï¿½Í»ï¿½ï¿½ï¿½Ï¢
 	int clientid = 1;
-	String client_name = "ÕÅÈý";
+	String client_name = "ï¿½ï¿½ï¿½ï¿½";
 	String contact = "11111111111";
 	int credit = 0;
 	ArrayList<String> credit_record = new ArrayList<String>();
-	VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
+	VIPInfo info = new VIPInfo(VIPType.NORMAL,"2000/01/01");
 
-	// ¾ÆµêÐÅÏ¢
-	String address = "ÄÏ¾©";
-	String business_address = "ÐÂ½Ö¿Ú";
-	String hotel_name = "Èç¼Ò";
-	String introduction = "ºÃ";
-	String service = "ºÃ";
-	String room_state = "Î´Ô¤¶¨";
-	String room_type = "Ë«ÈË·¿";
+	// ï¿½Æµï¿½ï¿½ï¿½Ï¢
+	String address = "ï¿½Ï¾ï¿½";
+	String business_address = "ï¿½Â½Ö¿ï¿½";
+	String hotel_name = "ï¿½ï¿½ï¿½";
+	String introduction = "ï¿½ï¿½";
+	String service = "ï¿½ï¿½";
+	String room_state = "Î´Ô¤ï¿½ï¿½";
+	String room_type = "Ë«ï¿½Ë·ï¿½";
 	int room_number = 1;
 	int room_price = 200;
-	String order = "ÎÞ";
-	String evaluation = "ÎÞ";
+	String order = "ï¿½ï¿½";
+	String evaluation = "ï¿½ï¿½";
 
 	public ClientVO client_checkInfo(int clientid) {
 		ClientVO client = new ClientVO(clientid,client_name,contact,credit,credit_record,info);

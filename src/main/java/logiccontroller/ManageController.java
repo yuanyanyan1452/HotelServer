@@ -10,37 +10,37 @@ import objects.*;
 import objects.VIPInfo.VIPType;
 
 public class ManageController implements ManageBLService{
-	//ÓÃ»§µÄĞÅÏ¢²ÎÊı
+	//ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 		String client_name="jack";
 		String client_contact="11111111111";
 		int client_credit=0;
-		String credit_record="ÎŞ";
+		String credit_record="ï¿½ï¿½";
 		int client_memberid=000001;
 		String client_member_type="PERSON";
 		String client_birthday="1997-1-1";
-		String client_company="ÄÏ¾©´óÑ§";
+		String client_company="ï¿½Ï¾ï¿½ï¿½ï¿½Ñ§";
 		
-		//¾Æµê¹¤×÷ÈËÔ±µÄĞÅÏ¢²ÎÊı
+		//ï¿½Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 		String hotelWorker_name="tom";
 		String hotelWorker_contact="11111111111";
-		String hotelWorker_hotel="Èç¼Ò";
+		String hotelWorker_hotel="ï¿½ï¿½ï¿½";
 		
-		//ÍøÕ¾ÓªÏúÈËÔ±ĞÅÏ¢²ÎÊı
+		//ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½
 		String MarketWorker_name="Mike";
 		String MarketWorker_contact="11111111111";
 		
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±ËÑË÷¿Í»§£¬²é¿´¿Í»§ĞÅÏ¢
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½é¿´ï¿½Í»ï¿½ï¿½ï¿½Ï¢
 		public ClientVO manage_searchClient(int client_id){
 			// TODO Auto-generated method stub
 			ArrayList<String> credit_record = new ArrayList<String>();
-			VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
-			ClientVO vo = new ClientVO(1, "ÕÅÈı", "11111111111", 0, credit_record, info);
+			VIPInfo info = new VIPInfo(VIPType.NORMAL,  "2000/01/01");
+			ClientVO vo = new ClientVO(1, "ï¿½ï¿½ï¿½ï¿½", "11111111111", 0, credit_record, info);
 			return vo;
 		}
 
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±¸üĞÂ¿Í»§ĞÅÏ¢
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Â¿Í»ï¿½ï¿½ï¿½Ï¢
 		public ResultMessage manage_updateClient(ClientVO clientvo) {
 			// TODO Auto-generated method stub
 			if(clientvo.getClientid()==1)
@@ -50,16 +50,16 @@ public class ManageController implements ManageBLService{
 
 		
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±Ìí¼ÓÍøÕ¾ÓªÏúÈËÔ±
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±
 		public ResultMessage manage_addMarketWorker(WebMarketVO mw) {
 			// TODO Auto-generated method stub
-			if(mw.getname()=="ÕÅÈı")
+			if(mw.getname()=="ï¿½ï¿½ï¿½ï¿½")
 				return ResultMessage.Success;
 			else return ResultMessage.Fail;
 		}
 
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±ËÑË÷ÍøÕ¾ÓªÏúÈËÔ±
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¾Óªï¿½ï¿½ï¿½ï¿½Ô±
 		public WebMarketVO manage_searchMarketWorker(int marketWorker_id) {
 			// TODO Auto-generated method stub
 			return new WebMarketVO(1,MarketWorker_name,MarketWorker_contact);
@@ -68,28 +68,28 @@ public class ManageController implements ManageBLService{
 		
 
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±Ìí¼Ó¾Æµê
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ó¾Æµï¿½
 		public ResultMessage manage_addHotel(HotelVO hotelvo) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±Ìí¼Ó¾Æµê¹¤×÷ÈËÔ±
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ó¾Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±
 		public ResultMessage manage_addHotelWorker(HotelWorkerVO w) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±ËÑË÷¾Æµê¹¤×÷ÈËÔ±
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±
 		public HotelWorkerVO manage_searchHotelWorker(int hotelid) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		@Override
-		//ÍøÕ¾¹ÜÀíÈËÔ±¸üĞÂ¾Æµê¹¤×÷ÈËÔ±ĞÅÏ¢
+		//ï¿½ï¿½Õ¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½Â¾Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢
 		public ResultMessage manage_updateHotelWorker(HotelWorkerVO hotelworkervo) {
 			// TODO Auto-generated method stub
 			return null;

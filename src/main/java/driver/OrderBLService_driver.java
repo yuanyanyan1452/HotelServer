@@ -11,7 +11,7 @@ import objects.VIPInfo.VIPType;
 public class OrderBLService_driver {
 	public void drive(OrderBLService orderBLService){
 		
-		//¿Í»§²é¿´¶©µ¥
+		//ï¿½Í»ï¿½ï¿½é¿´ï¿½ï¿½ï¿½ï¿½
 		ArrayList<OrderVO> OrderList_Client=new ArrayList<OrderVO>();
 		OrderList_Client=orderBLService.order_client_browse(1);
 		OrderVO order=OrderList_Client.get(0);
@@ -28,7 +28,7 @@ public class OrderBLService_driver {
 		System.out.println(order.getprice());
 		System.out.println(order.getexpect_number_of_people());
 		
-		//¾Æµê¹¤×÷ÈËÔ±²é¿´¶©µ¥
+		//ï¿½Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±ï¿½é¿´ï¿½ï¿½ï¿½ï¿½
 		ArrayList<OrderVO> OrderList_Hotel=new ArrayList<OrderVO>();
 		OrderList_Hotel=orderBLService.order_hotel_browse(1);
 		OrderVO hotel=OrderList_Hotel.get(0);
@@ -45,16 +45,16 @@ public class OrderBLService_driver {
 		System.out.println(hotel.getprice());
 		System.out.println(hotel.getexpect_number_of_people());
 		
-		//¿Í»§³·Ïú¶©µ¥
+		//ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ResultMessage result_client=orderBLService.order_client_cancel(1,1);
 		if(result_client==ResultMessage.Success){
-			System.out.println("³·Ïú³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 		}
 		else{
-			System.out.println("³·ÏúÊ§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 		
-		//¿Í»§Éú³É¶©µ¥
+		//ï¿½Í»ï¿½ï¿½ï¿½ï¿½É¶ï¿½ï¿½ï¿½
 		OrderVO o=new OrderVO(0, null, false, null, null, null, null, null, 0, null, 0, 0);
 		ResultMessage order1=orderBLService.order_client_generate(o);
 //		System.out.println(order1.getid());
@@ -70,16 +70,16 @@ public class OrderBLService_driver {
 //		System.out.println(order1.getprice());
 //		System.out.println(order1.getexpect_number_of_people());
 		
-		//¾Æµê¹¤×÷ÈËÔ±Ö´ÐÐ¶©µ¥
+		//ï¿½Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±Ö´ï¿½Ð¶ï¿½ï¿½ï¿½
 		ArrayList<String> credit_record = new ArrayList<String>();
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
-		ClientVO vo = new ClientVO(1, "ÕÅÈý", "11111111111", 0, credit_record, info);
+		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
+		ClientVO vo = new ClientVO(1, "ï¿½ï¿½ï¿½ï¿½", "11111111111", 0, credit_record, info);
 		ResultMessage result_hotel=orderBLService.order_hotel_execute(1);
 		if(result_hotel==ResultMessage.Success){
-			System.out.println("Ö´ÐÐ¶©µ¥³É¹¦");
+			System.out.println("Ö´ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 		}
 		else{
-			System.out.println("Ö´ÐÐ¶©µ¥Ê§°Ü");
+			System.out.println("Ö´ï¿½Ð¶ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 	}
 }

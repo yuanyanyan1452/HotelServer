@@ -3,16 +3,16 @@ package po;
 import java.io.Serializable;
 
 public class UserPO implements Serializable {
-	int id;
+	String username;
 	String password;
-	public UserPO(int i,String p){
-		id=i;
+	public UserPO(String u,String p){
+		username=u;
 		password=p;
 	}
-	public int getID(){
-		return id;
+	public String getusername(){
+		return this.username;
 	}
 	public String getPassword(){
-		return password;
+		return this.password;
 	}
 }

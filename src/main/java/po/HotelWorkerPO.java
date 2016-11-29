@@ -17,6 +17,9 @@ public class HotelWorkerPO implements Serializable{
 	public int gethotelid(){
 		return hotelid;
 	}
+	public void sethotelid(int id){
+		this.hotelid = id;
+	}
 	public String getname(){
 		return name;
 	}
