@@ -6,10 +6,7 @@ import po.*;
 import objects.*;
 
 public interface OrderDataService {
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/Four-People/master
 	//通过订单号寻找相应订单信息；
 	public OrderPO findByid (int id) ;
 	
@@ -19,20 +16,12 @@ public interface OrderDataService {
 	//通过酒店id寻找订单；
 	public ArrayList<OrderPO> findByHotelid (int hotelid) ;
 	
-
-	
-<<<<<<< HEAD
-=======
-	//���¶���
-	public OrderPO find (int id) ;
-	
-	public ArrayList<OrderPO> find (String name) ;
-	
+	//��Ӷ���
 	public ResultMessage insert(OrderPO po);
 	
+	//ɾ������
 	public ResultMessage delete(OrderPO po);
 	
->>>>>>> refs/remotes/Four-People/master
 	public ResultMessage update(OrderPO po);
 
 	
