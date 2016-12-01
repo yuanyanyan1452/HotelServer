@@ -15,6 +15,9 @@ public class WebMarketPO implements Serializable{
 	public int getid(){
 		return webmarketid;
 	}
+	public void setid(int id){
+		this.webmarketid = id;
+	}
 	public String getname(){
 		return name;
 	}

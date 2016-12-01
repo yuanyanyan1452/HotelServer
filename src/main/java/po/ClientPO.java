@@ -64,11 +64,11 @@ public class ClientPO implements Serializable {
 		this.credit_record = credit_record;
 	}
 
-	public VIPInfo getInfo() {
+	public VIPInfo getVIPInfo() {
 		return info;
 	}
 
-	public void setInfo(VIPInfo info) {
+	public void setVIPInfo(VIPInfo info) {
 		this.info = info;
 	}
 

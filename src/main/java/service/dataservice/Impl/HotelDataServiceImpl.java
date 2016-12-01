@@ -231,5 +231,22 @@ public class HotelDataServiceImpl implements HotelDataService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public static void main(String[]args){
+		HotelPO hotelpo = new HotelPO(10243,"1","1","1","1","1","1","1",1,1,"1","1");
+		HotelDataServiceImpl a = new HotelDataServiceImpl();
+		System.out.println(a.insert(hotelpo));
+		System.out.println(hotelpo.getid());
+		
+	}
+
+	@Override
+	public HotelPO find(String hotelname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+>>>>>>> refs/remotes/Four-People/master
 }

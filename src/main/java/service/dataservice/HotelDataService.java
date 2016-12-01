@@ -6,6 +6,7 @@ import po.*;
 import objects.*;
 
 public interface HotelDataService {
+<<<<<<< HEAD
 
 	//
 	public HotelPO findByid(int hotelid);
@@ -13,6 +14,13 @@ public interface HotelDataService {
 	public HotelPO findByName(String hotelname);
 
 	public HotelPO findByPrice(String price);
+=======
+	
+	public HotelPO find(int hotelid);
+	
+	
+	public HotelPO find(String hotelname);
+>>>>>>> refs/remotes/Four-People/master
 	
 	//
 	public ResultMessage insert(HotelPO po);
@@ -34,7 +42,11 @@ public interface HotelDataService {
 	
 	//
 	public ResultMessage updateHotelWorker(String hotelname,HotelWorkerPO po);
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> refs/remotes/Four-People/master
 	public ResultMessage deleteHotelWorker(String hotelname,HotelWorkerPO po);
 	
 }

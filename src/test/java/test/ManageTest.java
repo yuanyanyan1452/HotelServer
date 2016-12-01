@@ -35,7 +35,7 @@ public class ManageTest {
 	@Test
 	public void testmanage_updateClient(){
 		ArrayList<String> credit_record = new ArrayList<String>();
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
+		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
 		ClientVO vo = new ClientVO(1, "����", "11111111111", 0, credit_record, info);
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result = mserviceimpl.manage_updateClient(vo);

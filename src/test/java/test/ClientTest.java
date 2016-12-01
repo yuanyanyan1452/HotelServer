@@ -22,7 +22,7 @@ public class ClientTest {
 	public void client_checkInfoTest() {
 		ClientBLService clientcontroller = new ClientBLServiceImpl();
 		ArrayList<String> credit_record = new ArrayList<String>();
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
+		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
 		ClientVO vo = new ClientVO(1, "张三", "11111111111", 0, credit_record, info);
 		Assert.assertEquals(vo, clientcontroller.client_checkInfo(1));
 	}
@@ -31,7 +31,7 @@ public class ClientTest {
 	public void client_updateInfoTest() {
 		ClientBLService clientcontroller = new ClientBLServiceImpl();
 		ArrayList<String> credit_record = new ArrayList<String>();
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
+		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
 		ClientVO vo = new ClientVO(1, "张三", "11111111111", 0, credit_record, info);
 		Assert.assertEquals(ResultMessage.Success, clientcontroller.client_updateInfo(vo));
 	}
@@ -152,7 +152,7 @@ public class ClientTest {
 	public void client_enrollVIPTest() {
 		ClientBLService clientcontroller = new ClientBLServiceImpl();
 		MockClient30 client30 = new MockClient30(1);
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, 1, "2001/01/01");
+		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2001/01/01");
 		Assert.assertEquals(ResultMessage.Success, clientcontroller.client_enrollVIP(info, client30.getId()));
 	}
 

@@ -15,7 +15,7 @@ public class ManageBLService_driver {
 
 	public void drive(ManageBLService manageBLService){
 
-		//²âÊÔmanage_searchClient
+		//ï¿½ï¿½ï¿½ï¿½manage_searchClient
 		ClientVO vo = manageBLService.manage_searchClient(1);
 		System.out.println(vo.getClient_name());
 		System.out.println(vo.getContact());
@@ -25,49 +25,44 @@ public class ManageBLService_driver {
 			System.out.println(list1);
 		}
 		VIPInfo info = vo.getInfo();
-		System.out.println(info.getVIPid());
 		System.out.println(info.getType());
-		if(info.getType()==VIPType.NORMAL){
-			System.out.println(info.getBirthday());
-		}
-		else
-			System.out.println(info.getEnterpriseName());
+		System.out.println(info.getInfo());
 
 		
 
-		//²âÊÔmanage_updateClient
+		//ï¿½ï¿½ï¿½ï¿½manage_updateClient
 		ArrayList<String> credit_record = new ArrayList<String>();
-		VIPInfo info1 = new VIPInfo(VIPType.NORMAL, 1, "2000/01/01");
-		ClientVO vo1 = new ClientVO(1, "ÕÅÈı", "11111111111", 0, credit_record, info1);
+		VIPInfo info1 = new VIPInfo(VIPType.NORMAL,"2000/01/01");
+		ClientVO vo1 = new ClientVO(1, "ï¿½ï¿½ï¿½ï¿½", "11111111111", 0, credit_record, info1);
 		ResultMessage resultMessage = manageBLService.manage_updateClient(vo1);
 		if(resultMessage==ResultMessage.Success){
-			System.out.println("¸üĞÂ¿Í»§ĞÅÏ¢³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½Â¿Í»ï¿½ï¿½ï¿½Ï¢ï¿½É¹ï¿½");
 		}
 
 		else
-			System.out.println("¸üĞÂ¿Í»§ĞÅÏ¢Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½Â¿Í»ï¿½ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
 
 		
 
-		//²âÊÔmanage_addHotel
+		//ï¿½ï¿½ï¿½ï¿½manage_addHotel
 		resultMessage = manageBLService.manage_addHotel(new HotelVO(1,"1","1","1","1","1","1","1",1,1,"1","1"));
 		if(resultMessage==ResultMessage.Success)
-			System.out.println("Ìí¼Ó¾Æµê³É¹¦");
+			System.out.println("ï¿½ï¿½Ó¾Æµï¿½É¹ï¿½");
 		else
-			System.out.println("Ìí¼Ó¾ÆµêÊ§°Ü");
+			System.out.println("ï¿½ï¿½Ó¾Æµï¿½Ê§ï¿½ï¿½");
 
 		
 
-		//²âÊÔmanage_addHotelWorker
-		resultMessage = manageBLService.manage_addHotelWorker(new HotelWorkerVO(1,"lucy", "11111111111", "¸ñÁÖºÀÌ©"));
+		//ï¿½ï¿½ï¿½ï¿½manage_addHotelWorker
+		resultMessage = manageBLService.manage_addHotelWorker(new HotelWorkerVO(1,"lucy", "11111111111", "ï¿½ï¿½ï¿½Öºï¿½Ì©"));
 		if(resultMessage==ResultMessage.Success)
-			System.out.println("Ìí¼Ó¾Æµê¹¤×÷ÈËÔ±³É¹¦");
+			System.out.println("ï¿½ï¿½Ó¾Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±ï¿½É¹ï¿½");
 		else
-			System.out.println("Ìí¼Ó¾Æµê¹¤×÷ÈËÔ±Ê§°Ü");
+			System.out.println("ï¿½ï¿½Ó¾Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±Ê§ï¿½ï¿½");
 
 		
 
-		//²âÊÔmanage_searchHotelWorker
+		//ï¿½ï¿½ï¿½ï¿½manage_searchHotelWorker
 		HotelWorkerVO hWorkerVO = manageBLService.manage_searchHotelWorker(1);
 		System.out.println(hWorkerVO.gethotel());
 		System.out.println(hWorkerVO.getname());
@@ -75,37 +70,37 @@ public class ManageBLService_driver {
 
 		
 
-		//²âÊÔmanage_updateHotelWorker
+		//ï¿½ï¿½ï¿½ï¿½manage_updateHotelWorker
 		resultMessage = manageBLService.manage_updateHotelWorker(new HotelWorkerVO(1,"1","1","1"));
 		if(resultMessage==ResultMessage.Success)
-			System.out.println("¸üĞÂ¾Æµê¹¤×÷ÈËÔ±ĞÅÏ¢³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½Â¾Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½É¹ï¿½");
 		else
-			System.out.println("¸üĞÂ¾Æµê¹¤×÷ÈËÔ±ĞÅÏ¢Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½Â¾Æµê¹¤ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
 
 		
 
-		//²âÊÔmanage_addMarketWorker
+		//ï¿½ï¿½ï¿½ï¿½manage_addMarketWorker
 		resultMessage = manageBLService.manage_addMarketWorker(new WebMarketVO(1,"jack", "11111111111"));
 		if(resultMessage==ResultMessage.Success)
-			System.out.println("Ìí¼ÓÍøÂçÓªÏúÈËÔ±³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½É¹ï¿½");
 		else
-			System.out.println("Ìí¼ÓÍøÂçÓªÏúÈËÔ±Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óªï¿½ï¿½ï¿½ï¿½Ô±Ê§ï¿½ï¿½");
 
 		
 
-		//²âÊÔmanage_searchMarketWorker
+		//ï¿½ï¿½ï¿½ï¿½manage_searchMarketWorker
 		WebMarketVO webMarketVO = manageBLService.manage_searchMarketWorker(1);
 	    System.out.println(webMarketVO.getname());
 		System.out.println(webMarketVO.getcontact());
 
 		
 
-		//²âÊÔmanage_updateMarketWorker
+		//ï¿½ï¿½ï¿½ï¿½manage_updateMarketWorker
 		resultMessage = manageBLService.manage_updateMarketWorker(new WebMarketVO(1,"tom", "11111111111"));
 		if(resultMessage==ResultMessage.Success)
-			System.out.println("¸üĞÂÍøÂçÓªÏúÈËÔ±ĞÅÏ¢³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢ï¿½É¹ï¿½");
 		else
-			System.out.println("¸üĞÂÍøÂçÓªÏúÈËÔ±ĞÅÏ¢Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óªï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
 
 	}
 }

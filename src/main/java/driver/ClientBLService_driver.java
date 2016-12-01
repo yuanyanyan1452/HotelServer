@@ -12,7 +12,7 @@ public class ClientBLService_driver {
 
 	public void drive(ClientBLService clientBLService){
 		
-		//²âÊÔclient_checkInfo
+		//ï¿½ï¿½ï¿½ï¿½client_checkInfo
 		ClientVO vo = clientBLService.client_checkInfo(1);
 		System.out.println(vo.getClient_name());
 		System.out.println(vo.getContact());
@@ -22,29 +22,25 @@ public class ClientBLService_driver {
 			System.out.println(list1);
 		}
 		VIPInfo info = vo.getInfo();
-		System.out.println(info.getVIPid());
 		System.out.println(info.getType());
-		if(info.getType()==VIPType.NORMAL){
-			System.out.println(info.getBirthday());
-		}
-		else
-			System.out.println(info.getEnterpriseName());
+		System.out.println(info.getInfo());
 
-		//²âÊÔclient_updateInfo
+
+		//ï¿½ï¿½ï¿½ï¿½client_updateInfo
 		
 		ResultMessage resultMessage = clientBLService.client_updateInfo(vo);
 		if(resultMessage==ResultMessage.Success){
-			System.out.println("¸üÐÂ¿Í»§ÐÅÏ¢³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½Â¿Í»ï¿½ï¿½ï¿½Ï¢ï¿½É¹ï¿½");
 		}
 		else {
-			System.out.println("¸üÐÂ¿Í»§ÐÅÏ¢Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½Â¿Í»ï¿½ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
 		}
 
-		//²âÊÔclient_getpreviousHotelList
+		//ï¿½ï¿½ï¿½ï¿½client_getpreviousHotelList
 		ArrayList<HotelVO> list = clientBLService.client_getpreviousHotelList(1);
 		HotelVO vo2 = null;
 		if(list.isEmpty()){
-			System.out.println("¿Í»§Î´ÔøÔ¤¶¨¹ý¾Æµê");
+			System.out.println("ï¿½Í»ï¿½Î´ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½");
 		}
 		else{
 			for(int i=0;i<list.size();i++){
@@ -54,19 +50,19 @@ public class ClientBLService_driver {
 			}
 		}
 
-		//²âÊÔclient_checkCredit
+		//ï¿½ï¿½ï¿½ï¿½client_checkCredit
 		int credit_record = clientBLService.client_checkCredit(1);
 		System.out.println(credit_record);
 
-		//²âÊÔclient_setLocation
-		list = clientBLService.client_setLocation("ÄÏ¾©");
+		//ï¿½ï¿½ï¿½ï¿½client_setLocation
+		list = clientBLService.client_setLocation("ï¿½Ï¾ï¿½");
 		for(int i=0;i<list.size();i++){
 			vo2 = list.get(i);
 			System.out.println(vo2.getname());
 			System.out.println(vo2.getevaluation());
 		}
 
-		//²âÊÔclient_searchHotel
+		//ï¿½ï¿½ï¿½ï¿½client_searchHotel
 		list = clientBLService.client_searchHotel("condition");
 		for(int i=0;i<list.size();i++){
 			vo2 = list.get(i);
@@ -74,32 +70,32 @@ public class ClientBLService_driver {
 			System.out.println(vo2.getevaluation());
 		}
 
-		//²âÊÔclient_checkHotelInfo
+		//ï¿½ï¿½ï¿½ï¿½client_checkHotelInfo
 		vo2 = clientBLService.client_checkHotelInfo(1);
 		System.out.println(vo2.getname());
 		System.out.println(vo2.getaddress());
 		System.out.println(vo2.getbussiness_address());
 		System.out.println(vo2.getintroduction());
 		System.out.println(vo2.getservice());
-		//´Ë´¦Ê¡ÂÔÒ»²¿·ÖÊä³ö
-		//¡£¡£¡£
+		//ï¿½Ë´ï¿½Ê¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-		//²âÊÔclient_evaluateHotel
+		//ï¿½ï¿½ï¿½ï¿½client_evaluateHotel
 		Evaluation e=new Evaluation(4.0,"good");
 		resultMessage = clientBLService.client_evaluateHotel(e,1);
 		if(resultMessage == ResultMessage.Success){
-			System.out.println("ÆÀ¼Û³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½Û³É¹ï¿½");
 		}
 		else
-			System.out.println("ÆÀ¼ÛÊ§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 
-		//²âÊÔclient_enrollVIP
-		VIPInfo vip=new VIPInfo(VIPType.NORMAL,1,"2001/1/1");
+		//ï¿½ï¿½ï¿½ï¿½client_enrollVIP
+		VIPInfo vip=new VIPInfo(VIPType.NORMAL,"2001/1/1");
  		resultMessage = clientBLService.client_enrollVIP(vip,1);
 		if(resultMessage == ResultMessage.Success)
-			System.out.println("×¢²á»áÔ±³É¹¦");
+			System.out.println("×¢ï¿½ï¿½ï¿½Ô±ï¿½É¹ï¿½");
 		else
-			System.out.println("×¢²á»áÔ±Ê§°Ü");
+			System.out.println("×¢ï¿½ï¿½ï¿½Ô±Ê§ï¿½ï¿½");
 	}
 
 }
