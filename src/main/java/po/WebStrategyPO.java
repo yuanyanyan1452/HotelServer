@@ -15,6 +15,16 @@ public class WebStrategyPO implements Serializable{
 	String executeway;
 	boolean superposition;
 	
+	public WebStrategyPO(){
+		wsid=0;
+		name=null;
+		condition=null;
+		start_time=null;
+		end_time=null;
+		executeway=null;
+		superposition=false;
+	}
+	
 	public WebStrategyPO(int id,String n,String con,String st,String et,String ew,boolean iss){
 		wsid=id;
 		name=n;

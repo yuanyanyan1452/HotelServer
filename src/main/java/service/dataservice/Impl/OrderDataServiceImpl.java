@@ -7,13 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import objects.ResultMessage;
-import po.HotelPO;
 import po.OrderPO;
 import service.dataservice.OrderDataService;
 
 public class OrderDataServiceImpl implements OrderDataService {
 
-	@SuppressWarnings("null")
 	@Override
 	public OrderPO findByid(int id) {
 		// TODO Auto-generated method stub
@@ -21,7 +19,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "select *from orderrecord where id="+id;
-		OrderPO po = null;
+		OrderPO po = new OrderPO();
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -31,7 +29,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				po.setexecute(rs.getBoolean("execute"));
-				po.sethotel(rs.getString("hotel"));
 				po.setstart_time(rs.getString("start_time"));
 				po.setend_time(rs.getString("end_time"));
 				po.setlatest_execute_time(rs.getString("latest_execute_time"));
@@ -40,6 +37,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setstrategy(rs.getString("strategy"));
 				po.setprice(rs.getInt("price"));
 				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
+				po.sethave_child(rs.getBoolean("havechild"));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -59,13 +57,12 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				OrderPO po = null;
+				OrderPO po = new OrderPO();
 				po.setid(rs.getInt("id"));
 				po.setclientid(rs.getInt("clientid"));
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				po.setexecute(rs.getBoolean("execute"));
-				po.sethotel(rs.getString("hotel"));
 				po.setstart_time(rs.getString("start_time"));
 				po.setend_time(rs.getString("end_time"));
 				po.setlatest_execute_time(rs.getString("latest_execute_time"));
@@ -74,6 +71,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setstrategy(rs.getString("strategy"));
 				po.setprice(rs.getInt("price"));
 				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
+				po.sethave_child(rs.getBoolean("havechild"));
 				orderlist.add(po);
 			}
 		}catch(SQLException e){
@@ -82,16 +80,38 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return orderlist;
 	}
 	
-	public static void main(String[]args){
-		OrderDataServiceImpl order=new OrderDataServiceImpl();
-		ArrayList<OrderPO> orderlist=order.findByClientid(1);
-		int i=orderlist.size();
-		System.out.println(i);
-	}
-	
 	@Override
 	public ArrayList<OrderPO> findByHotelid(int hotelid) {
-		return null;
+		Connection conn = Connect.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select *from orderrecord where hotelid="+hotelid;
+		ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				OrderPO po = new OrderPO();
+				po.setid(rs.getInt("id"));
+				po.setclientid(rs.getInt("clientid"));
+				po.sethotelid(rs.getInt("hotelid"));
+				po.setstate(rs.getString("state"));
+				po.setexecute(rs.getBoolean("execute"));
+				po.setstart_time(rs.getString("start_time"));
+				po.setend_time(rs.getString("end_time"));
+				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				po.setroom_type(rs.getString("room_type"));
+				po.setroom_number(rs.getInt("room_number"));
+				po.setstrategy(rs.getString("strategy"));
+				po.setprice(rs.getInt("price"));
+				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
+				po.sethave_child(rs.getBoolean("havechild"));
+				orderlist.add(po);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return orderlist;
 	}
 
 	@Override
@@ -107,15 +127,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps.setInt(2, po.gethotelid());
 			ps.setString(3,po.getstate());
 			ps.setBoolean(4, po.getexecute());
-			ps.setString(5, po.gethotel());
-			ps.setString(6, po.getstart_time());
-			ps.setString(7, po.getend_time());
-			ps.setString(8, po.getlatest_execute_time());
-			ps.setString(9, po.getroom_type());
-			ps.setInt(10, po.getroom_number());
-			ps.setString(11, po.getstrategy());
-			ps.setInt(12,po.getprice());
-			ps.setInt(13, po.getexpect_number_of_people());
+			ps.setString(5, po.getstart_time());
+			ps.setString(6, po.getend_time());
+			ps.setString(7, po.getlatest_execute_time());
+			ps.setString(8, po.getroom_type());
+			ps.setInt(9, po.getroom_number());
+			ps.setString(10, po.getstrategy());
+			ps.setInt(11,po.getprice());
+			ps.setInt(12, po.getexpect_number_of_people());
+			ps.setBoolean(13, po.gethave_child());
 			int i=ps.executeUpdate();
 			setid(po);
 			if(i==0){
@@ -168,25 +188,25 @@ public class OrderDataServiceImpl implements OrderDataService {
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
-		String sql = "update orderrecord set clientid=?,hotelid=?,state=?,execute=?,hotel=?,start_time=?,"
+		String sql = "update orderrecord set clientid=?,hotelid=?,state=?,execute=?,start_time=?,"
 				+ "end_time=?,latest_execute_time=?,room_type=?,room_number=?,strategy=?,"
-				+ "price=?,expect_number_of_people=? where id=?";
+				+ "price=?,expect_number_of_people=?,havechild=? where id=?";
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, po.getclientid());
 			ps.setInt(2, po.gethotelid());
 			ps.setString(3,po.getstate());
 			ps.setBoolean(4, po.getexecute());
-			ps.setString(5, po.gethotel());
-			ps.setString(6, po.getstart_time());
-			ps.setString(7, po.getend_time());
-			ps.setString(8, po.getlatest_execute_time());
-			ps.setString(9, po.getroom_type());
-			ps.setInt(10, po.getroom_number());
-			ps.setString(11, po.getstrategy());
-			ps.setInt(12,po.getprice());
-			ps.setInt(13, po.getexpect_number_of_people());
-			ps.setInt(14, po.getid());
+			ps.setString(5, po.getstart_time());
+			ps.setString(6, po.getend_time());
+			ps.setString(7, po.getlatest_execute_time());
+			ps.setString(8, po.getroom_type());
+			ps.setInt(9, po.getroom_number());
+			ps.setString(10, po.getstrategy());
+			ps.setInt(11,po.getprice());
+			ps.setInt(12, po.getexpect_number_of_people());
+			ps.setInt(13, po.getid());
+			ps.setBoolean(14, po.gethave_child());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag=ResultMessage.Fail;
@@ -195,18 +215,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 			e.printStackTrace();
 		}
 		return flag;
-	}
-
-	@Override
-	public OrderPO find(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<OrderPO> find(String name) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
