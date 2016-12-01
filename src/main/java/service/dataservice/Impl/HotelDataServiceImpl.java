@@ -9,20 +9,20 @@ import java.util.ArrayList;
 import objects.ResultMessage;
 import po.HotelPO;
 import po.HotelWorkerPO;
+import po.OrderPO;
 import service.dataservice.HotelDataService;
 
 public class HotelDataServiceImpl implements HotelDataService{
 
-	@SuppressWarnings("null")
 	@Override
-	public HotelPO find(int hotelid){
+	public HotelPO findByid(int hotelid){
 		// TODO Auto-generated method stub
-		HotelPO hotelPO = null;
-		Connection conn = null;
+		HotelPO hotelPO = new HotelPO();
+		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "select * from hotel where id = "+hotelid;
-		conn = Connect.getConn();
+	
 		try{
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -37,22 +37,62 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setroom_type(rs.getString("room_type"));
 				hotelPO.setroom_number(rs.getInt("room_number"));
 				hotelPO.setroom_price(rs.getInt("room_price"));
-				hotelPO.setorder(rs.getString("hotel_order"));
 				hotelPO.setevaluation(rs.getString("evaluation"));
+				hotelPO.setmark(rs.getInt("mark"));
+				hotelPO.setmin_price(rs.getInt("min_price"));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return hotelPO;
 	}
+	
+	@Override
+	public HotelPO findByName(String hotelname) {
+		// TODO Auto-generated method stub
+		HotelPO hotelPO = new HotelPO();
+		Connection conn = Connect.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from hotel where name = '"+hotelname+"'";
 
+		try{
+			ps=conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				hotelPO.setid(rs.getInt("id"));
+				hotelPO.setname(rs.getString("name"));
+				hotelPO.setaddress(rs.getString("address"));
+				hotelPO.setbussiness_address(rs.getString("business_address"));
+				hotelPO.setintroduction(rs.getString("introduction"));
+				hotelPO.setservice(rs.getString("service"));
+				hotelPO.setroom_state(rs.getString("room_state"));
+				hotelPO.setroom_type(rs.getString("room_type"));
+				hotelPO.setroom_number(rs.getInt("room_number"));
+				hotelPO.setroom_price(rs.getInt("room_price"));
+				hotelPO.setevaluation(rs.getString("hotel_evaluation"));
+				hotelPO.setmark(rs.getInt("mark"));
+				hotelPO.setmin_price(rs.getInt("min_price"));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return hotelPO;
+	}
+	
+	@Override
+	public HotelPO findByPrice(String price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public ResultMessage insert(HotelPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
 		conn = Connect.getConn();
 		try{
 			ps=conn.prepareStatement(sql);
@@ -65,8 +105,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(7, po.getroom_type());
 			ps.setInt(8, po.getroom_number());
 			ps.setInt(9, po.getroom_price());
-			ps.setString(10, po.getorder());
-			ps.setString(11, po.getevaluation());
+			ps.setString(10, po.getevaluation());
+			ps.setInt(11, po.getmark());
+			ps.setInt(12, po.getmin_price());
 			int i=ps.executeUpdate();
 			setid(po);
 			if(i==0){
@@ -101,8 +142,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "update hotel set name=?,address=?,business_address=?,introduction=?,"
-				+ "service=?,room_state=?,room_type=?,room_number=?,room_price=?,hotel_order=?,"
-				+ "hotel_evaluation=? where id=?";
+				+ "service=?,room_state=?,room_type=?,room_number=?,room_price=?,"
+				+ "hotel_evaluation=?,mark=?,min_price=? where id=?";
 		conn = Connect.getConn();
 		try{
 			ps=conn.prepareStatement(sql);
@@ -115,9 +156,10 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(7, po.getroom_type());
 			ps.setInt(8, po.getroom_number());
 			ps.setInt(9, po.getroom_price());
-			ps.setString(10, po.getorder());
-			ps.setString(11, po.getevaluation());
-			ps.setInt(12, po.getid());
+			ps.setString(10, po.getevaluation());
+			ps.setInt(11, po.getid());
+			ps.setInt(12, po.getmark());
+			ps.setInt(13, po.getmin_price());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag = ResultMessage.Fail;
@@ -153,15 +195,22 @@ public class HotelDataServiceImpl implements HotelDataService{
 	public ArrayList<HotelPO> showClientHotels(int clientid) {
 		// TODO Auto-generated method stub
 		ArrayList<HotelPO> hotelList=new ArrayList<HotelPO>();
-		HotelPO po;
 		OrderDataServiceImpl orderImpl=new OrderDataServiceImpl();
-		
-		return null;
+		HotelDataServiceImpl hotelImpl=new HotelDataServiceImpl();
+		ArrayList<OrderPO> orderList=orderImpl.findByClientid(clientid);
+		for(int i=0;i<orderList.size();i++){
+			int hotelid=orderList.get(i).gethotelid();
+			HotelPO po=new HotelPO();
+			po=hotelImpl.findByid(hotelid);
+			hotelList.add(po);
+		}
+		return hotelList;
 	}
 
 	@Override
 	public HotelWorkerPO findHotelWorker(String hotelname) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -182,18 +231,5 @@ public class HotelDataServiceImpl implements HotelDataService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public static void main(String[]args){
-		HotelPO hotelpo = new HotelPO(10243,"1","1","1","1","1","1","1",1,1,"1","1");
-		HotelDataServiceImpl a = new HotelDataServiceImpl();
-		System.out.println(a.insert(hotelpo));
-		System.out.println(hotelpo.getid());
-		
-	}
 
-	@Override
-	public HotelPO find(String hotelname) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

@@ -12,7 +12,6 @@ public class OrderPO implements Serializable {
 	int hotelid;
 	String state;
 	boolean execute;
-	String hotel;
 	String start_time;
 	String end_time;
 	String latest_execute_time;
@@ -21,14 +20,30 @@ public class OrderPO implements Serializable {
 	String strategy;
 	int price;
 	int expect_number_of_people;
+	boolean havechild;
 	
-	public OrderPO(int i,int cid,int hid,String s,boolean e,String h,String st,String et,String lt,String rt,int rm,String str,int p,int en){
+	public OrderPO(){
+		id=0;
+		clientid=0;
+		hotelid=0;
+		state=null;
+		execute=false;
+		start_time=null;
+		end_time=null;
+		latest_execute_time=null;
+		room_type=null;
+		room_number=0;
+		strategy=null;
+		price=0;
+		expect_number_of_people=0;
+		havechild=false;
+	}
+	public OrderPO(int i,int cid,int hid,String s,boolean e,String st,String et,String lt,String rt,int rm,String str,int p,int en,boolean child){
 		id=i;
 		clientid=cid;
 		hotelid=hid;
 		state=s;
 		execute=e;
-		hotel=h;
 		start_time=st;
 		end_time=et;
 		latest_execute_time=lt;
@@ -37,6 +52,7 @@ public class OrderPO implements Serializable {
 		strategy=str;
 		price=p;
 		expect_number_of_people=en;
+		havechild=child;
 	}
 	
 	public void setid(int id){
@@ -72,13 +88,6 @@ public class OrderPO implements Serializable {
 	}
 	public boolean getexecute(){
 		return execute;
-	}
-	
-	public void sethotel(String hotel){
-		this.hotel = hotel;
-	}
-	public String gethotel(){
-		return hotel;
 	}
 	
 	public void setstart_time(String start_time){
@@ -135,5 +144,12 @@ public class OrderPO implements Serializable {
 	}
 	public int getexpect_number_of_people(){
 		return expect_number_of_people;
+	}
+	
+	public void sethave_child(boolean child){
+		havechild=child;
+	}
+	public boolean gethave_child(){
+		return havechild;
 	}
 }

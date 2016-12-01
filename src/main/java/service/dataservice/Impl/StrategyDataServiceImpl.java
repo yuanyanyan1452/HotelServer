@@ -7,22 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import objects.ResultMessage;
-import po.HotelPO;
 import po.HotelStrategyPO;
 import po.WebStrategyPO;
 import service.dataservice.StrategyDataService;
 
 public class StrategyDataServiceImpl implements StrategyDataService {
 
-	@SuppressWarnings("null")
 	@Override
 	public HotelStrategyPO find_hotel(String name) {
 		// TODO Auto-generated method stub
-		HotelStrategyPO po=null;
+		HotelStrategyPO po=new HotelStrategyPO();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql = "select *from hotelstrategy where name="+name;
+		String sql = "select *from hotelstrategy where name='"+name+"'";
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -149,14 +148,35 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	@Override
 	public ArrayList<HotelStrategyPO> showlist_hotel() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<HotelStrategyPO>hslist=new ArrayList<HotelStrategyPO>();
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select *from hotelstrategy";
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				HotelStrategyPO po=new HotelStrategyPO();
+				po.setid(rs.getInt("id"));
+				po.setname(rs.getString("name"));
+				po.setcondition(rs.getString("hs_condition"));
+				po.setstart_time(rs.getString("hs_start_time"));
+				po.setend_time(rs.getString("hs_end_time"));
+				po.setexecuteway(rs.getString("executeway"));
+				po.setsuperposition(rs.getBoolean("superposition"));
+				hslist.add(po);
+			}
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return hslist;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public WebStrategyPO find_web(String name) {
 		// TODO Auto-generated method stub
-		WebStrategyPO po=null;
+		WebStrategyPO po=new WebStrategyPO();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -255,7 +275,29 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	@Override
 	public ArrayList<WebStrategyPO> showlist_web() {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<WebStrategyPO>wslist=new ArrayList<WebStrategyPO>();
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select *from webstrategy";
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				WebStrategyPO po=new WebStrategyPO();
+				po.setid(rs.getInt("id"));
+				po.setname(rs.getString("name"));
+				po.setcondition(rs.getString("web_condition"));
+				po.setstart_time(rs.getString("ws_start_time"));
+				po.setend_time(rs.getString("ws_end_time"));
+				po.setexecuteway(rs.getString("executeway"));
+				po.setsuperposition(rs.getBoolean("superposition"));
+				wslist.add(po);
+			}
+		}catch(SQLException e){
+				e.printStackTrace();
+		}
+		return wslist;
 	}
 
 }
