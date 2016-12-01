@@ -82,12 +82,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return orderlist;
 	}
 	
-	public static void main(String[]args){
-		OrderDataServiceImpl order=new OrderDataServiceImpl();
-		ArrayList<OrderPO> orderlist=order.findByClientid(1);
-		int i=orderlist.size();
-		System.out.println(i);
-	}
+
 	
 	@Override
 	public ArrayList<OrderPO> findByHotelid(int hotelid) {
