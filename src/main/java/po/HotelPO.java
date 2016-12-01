@@ -13,10 +13,27 @@ public class HotelPO implements Serializable{
 	String room_type;
 	int room_number;
 	int room_price;
-	String order;
 	String evaluation;
+	int mark;
+	int min_price;
 	
-	public HotelPO(int id,String a,String ba,String na,String in,String s,String rs,String rt,int rn,int rp,String o,String e){
+	public HotelPO(){
+		hotelid=0;
+		address=null;
+		bussiness_address=null;
+		name=null;
+		introduction=null;
+		service=null;
+		room_state=null;
+		room_type=null;
+		room_number=0;
+		room_price=0;
+		evaluation=null;
+		mark=0;
+		min_price=0;
+	}
+	
+	public HotelPO(int id,String a,String ba,String na,String in,String s,String rs,String rt,int rn,int rp,String e,int m,int min){
 		hotelid = id;
 		address=a;
 		bussiness_address=ba;
@@ -27,8 +44,9 @@ public class HotelPO implements Serializable{
 		room_type=rt;
 		room_number=rn;
 		room_price=rp;
-		order=o;
 		evaluation=e;
+		mark=m;
+		min_price=min;
 	}
 	
 	public void setid(int id){
@@ -101,17 +119,24 @@ public class HotelPO implements Serializable{
 		return room_price;
 	}
 	
-	public void setorder(String hotel_order){
-		order = hotel_order;
-	}
-	public String getorder(){
-		return order;
-	}
-	
 	public void setevaluation(String evalu){
 		evaluation = evalu;
 	}
 	public String getevaluation(){
 		return evaluation;
+	}
+	
+	public void setmark(int m){
+		mark=m;
+	}
+	public int getmark(){
+		return mark;
+	}
+	
+	public void setmin_price(int min){
+		min_price=min;
+	}
+	public int getmin_price(){
+		return min_price;
 	}
 }
