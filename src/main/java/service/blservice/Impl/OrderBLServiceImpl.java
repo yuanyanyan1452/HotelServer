@@ -7,14 +7,20 @@ import objects.OrderState;
 import objects.ResultMessage;
 import objects.RoomType;
 import objects.WebStrategy;
+import po.OrderPO;
 import service.blservice.OrderBLService;
+import service.dataservice.OrderDataService;
+import service.dataservice.Impl.OrderDataServiceImpl;
 import vo.OrderVO;
 
 public class OrderBLServiceImpl implements OrderBLService {
-
+	OrderDataService orderdataservice=new OrderDataServiceImpl();
+	
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) {
 		// TODO Auto-generated method stub
+		ArrayList<OrderPO> orderpo_list=orderdataservice.findByClientid(clientid);
+
 		return null;
 	}
 
@@ -33,6 +39,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid) {
 		// TODO Auto-generated method stub
+		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+	
 		return null;
 	}
 
@@ -57,6 +65,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ResultMessage order_client_generate(OrderVO vo) {
 		// TODO Auto-generated method stub
+		ResultMessage result=orderdataservice.insert(po);
+		
 		return null;
 	}
 

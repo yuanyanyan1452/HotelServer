@@ -144,13 +144,13 @@ public class ClientDataServiceImpl implements ClientDataService {
 		return null;
 	}
 
-	public static void main(String[] args) {
-		ClientDataServiceImpl a = new ClientDataServiceImpl();
-		a.find(1);
-		ArrayList<String> aaa = new ArrayList<String>();
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
-		ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info);
-		a.insert(po);
-	}
+//	public static void main(String[] args) {
+//		ClientDataServiceImpl a = new ClientDataServiceImpl();
+//		a.find(1);
+//		ArrayList<String> aaa = new ArrayList<String>();
+//		VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
+//		ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info);
+//		a.insert(po);
+//	}
 
 }

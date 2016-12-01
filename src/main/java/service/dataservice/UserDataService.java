@@ -17,4 +17,6 @@ public interface UserDataService {
 	
 	
 	public ArrayList<UserPO> showUsers();
+
+	ResultMessage check(UserPO po);
 }
