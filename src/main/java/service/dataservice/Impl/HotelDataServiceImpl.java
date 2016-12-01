@@ -33,13 +33,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setbussiness_address(rs.getString("business_address"));
 				hotelPO.setintroduction(rs.getString("introduction"));
 				hotelPO.setservice(rs.getString("service"));
-				hotelPO.setroom_state(rs.getString("room_state"));
-				hotelPO.setroom_type(rs.getString("room_type"));
-				hotelPO.setroom_number(rs.getInt("room_number"));
-				hotelPO.setroom_price(rs.getInt("room_price"));
 				hotelPO.setevaluation(rs.getString("evaluation"));
 				hotelPO.setmark(rs.getInt("mark"));
-				hotelPO.setmin_price(rs.getInt("min_price"));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -66,13 +61,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setbussiness_address(rs.getString("business_address"));
 				hotelPO.setintroduction(rs.getString("introduction"));
 				hotelPO.setservice(rs.getString("service"));
-				hotelPO.setroom_state(rs.getString("room_state"));
-				hotelPO.setroom_type(rs.getString("room_type"));
-				hotelPO.setroom_number(rs.getInt("room_number"));
-				hotelPO.setroom_price(rs.getInt("room_price"));
 				hotelPO.setevaluation(rs.getString("hotel_evaluation"));
 				hotelPO.setmark(rs.getInt("mark"));
-				hotelPO.setmin_price(rs.getInt("min_price"));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -83,6 +73,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 	@Override
 	public HotelPO findByPrice(String price) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
@@ -90,10 +81,10 @@ public class HotelDataServiceImpl implements HotelDataService{
 	public ResultMessage insert(HotelPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
-		Connection conn = null;
+		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
-		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
-		conn = Connect.getConn();
+		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?)";
+
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, po.getname());
@@ -101,13 +92,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(3, po.getbussiness_address());
 			ps.setString(4, po.getintroduction());
 			ps.setString(5, po.getservice());
-			ps.setString(6, po.getroom_state());
-			ps.setString(7, po.getroom_type());
-			ps.setInt(8, po.getroom_number());
-			ps.setInt(9, po.getroom_price());
-			ps.setString(10, po.getevaluation());
-			ps.setInt(11, po.getmark());
-			ps.setInt(12, po.getmin_price());
+			ps.setString(6, po.getevaluation());
+			ps.setInt(7, po.getmark());
 			int i=ps.executeUpdate();
 			setid(po);
 			if(i==0){
@@ -142,8 +128,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "update hotel set name=?,address=?,business_address=?,introduction=?,"
-				+ "service=?,room_state=?,room_type=?,room_number=?,room_price=?,"
-				+ "hotel_evaluation=?,mark=?,min_price=? where id=?";
+				+ "service=?,hotel_evaluation=?,mark=? where id=?";
 		conn = Connect.getConn();
 		try{
 			ps=conn.prepareStatement(sql);
@@ -152,14 +137,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(3, po.getbussiness_address());
 			ps.setString(4, po.getintroduction());
 			ps.setString(5, po.getservice());
-			ps.setString(6, po.getroom_state());
-			ps.setString(7, po.getroom_type());
-			ps.setInt(8, po.getroom_number());
-			ps.setInt(9, po.getroom_price());
-			ps.setString(10, po.getevaluation());
-			ps.setInt(11, po.getid());
-			ps.setInt(12, po.getmark());
-			ps.setInt(13, po.getmin_price());
+			ps.setString(6, po.getevaluation());
+			ps.setInt(7, po.getmark());
+			ps.setInt(8, po.getid());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag = ResultMessage.Fail;
@@ -208,28 +188,35 @@ public class HotelDataServiceImpl implements HotelDataService{
 	}
 
 	@Override
-	public HotelWorkerPO findHotelWorker(String hotelname) {
+	public HotelWorkerPO findHotelWorker(int hotelid) {
 		// TODO Auto-generated method stub
+		HotelWorkerDataServiceImpl worker=new HotelWorkerDataServiceImpl();
 		
-		return null;
+		return worker.find(hotelid);
 	}
 
 	@Override
-	public ResultMessage insertHotelWorker(String hotelname, HotelWorkerPO po) {
+	public ResultMessage insertHotelWorker(int hotelid, HotelWorkerPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		HotelWorkerDataServiceImpl worker=new HotelWorkerDataServiceImpl();
+		
+		return worker.insert(po);
 	}
 
 	@Override
-	public ResultMessage updateHotelWorker(String hotelname, HotelWorkerPO po) {
+	public ResultMessage updateHotelWorker(int hotelid, HotelWorkerPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		HotelWorkerDataServiceImpl worker=new HotelWorkerDataServiceImpl();
+		
+		return worker.update(po);
 	}
 
 	@Override
-	public ResultMessage deleteHotelWorker(String hotelname, HotelWorkerPO po) {
+	public ResultMessage deleteHotelWorker(int hotelid, HotelWorkerPO po) {
 		// TODO Auto-generated method stub
-		return null;
+		HotelWorkerDataServiceImpl worker=new HotelWorkerDataServiceImpl();
+		
+		return worker.delete(po);
 	}
 
 }

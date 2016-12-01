@@ -27,15 +27,15 @@ public interface HotelDataService {
 	public ArrayList<HotelPO> showClientHotels(int clientid);
 	
 	//
-	public HotelWorkerPO findHotelWorker(String hotelname);
+	public HotelWorkerPO findHotelWorker(int hotelid);
 	
 	//
-	public ResultMessage insertHotelWorker(String hotelname,HotelWorkerPO po);
+	public ResultMessage insertHotelWorker(int hotelid,HotelWorkerPO po);
 	
 	//
-	public ResultMessage updateHotelWorker(String hotelname,HotelWorkerPO po);
+	public ResultMessage updateHotelWorker(int hotelid,HotelWorkerPO po);
 
-	public ResultMessage deleteHotelWorker(String hotelname,HotelWorkerPO po);
+	public ResultMessage deleteHotelWorker(int hotelid,HotelWorkerPO po);
 	
 }
 

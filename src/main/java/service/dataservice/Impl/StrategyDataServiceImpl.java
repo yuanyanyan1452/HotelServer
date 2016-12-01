@@ -27,6 +27,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			rs=ps.executeQuery();
 			while(rs.next()){
 				po.setid(rs.getInt("id"));
+				po.sethotelid(rs.getInt("hotelid"));
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
 				po.setstart_time(rs.getString("hs_start_time"));
@@ -46,15 +47,16 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
-		String sql = "insert into hotelstrategy values(NULL,?,?,?,?,?,?)";
+		String sql = "insert into hotelstrategy values(NULL,?,?,?,?,?,?,?)";
 		try{
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, po.getname());
-			ps.setString(2, po.getcondition());
-			ps.setString(3, po.getstart_time());
-			ps.setString(4, po.getend_time());
-			ps.setString(5, po.getexecuteway());
-			ps.setBoolean(6, po.getsuperposition());
+			ps.setInt(1, po.gethotelid());
+			ps.setString(2, po.getname());
+			ps.setString(3, po.getcondition());
+			ps.setString(4, po.getstart_time());
+			ps.setString(5, po.getend_time());
+			ps.setString(6, po.getexecuteway());
+			ps.setBoolean(7, po.getsuperposition());
 			int i=ps.executeUpdate();
 			sethsid(po);
 			if(i==0){
@@ -124,17 +126,18 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
-		String sql = "update hotelstrategy set name=?,hs_condition=?,hs_start_time=?,"
+		String sql = "update hotelstrategy set hotelid=?,name=?,hs_condition=?,hs_start_time=?,"
 				+ "hs_end_time=?,executeway=?,superposition=? where id=?";
 		try{
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, po.getname());
-			ps.setString(2, po.getcondition());
-			ps.setString(3, po.getstart_time());
-			ps.setString(4, po.getend_time());
-			ps.setString(5, po.getexecuteway());
-			ps.setBoolean(6, po.getsuperposition());
-			ps.setInt(7, po.getid());
+			ps.setInt(1, po.gethotelid());
+			ps.setString(2, po.getname());
+			ps.setString(3, po.getcondition());
+			ps.setString(4, po.getstart_time());
+			ps.setString(5, po.getend_time());
+			ps.setString(6, po.getexecuteway());
+			ps.setBoolean(7, po.getsuperposition());
+			ps.setInt(8, po.getid());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag=ResultMessage.Fail;
@@ -159,6 +162,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			while(rs.next()){
 				HotelStrategyPO po=new HotelStrategyPO();
 				po.setid(rs.getInt("id"));
+				po.sethotelid(rs.getInt("hotelid"));
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
 				po.setstart_time(rs.getString("hs_start_time"));
