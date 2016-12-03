@@ -1,68 +1,107 @@
 package vo;
 
+import java.io.Serializable;
 
-public class HotelVO {
-	int hotelid;
+public class HotelVO implements Serializable{
+	int hotelid ;
 	String address;
-	String business_address;
+	String bussiness_address;
 	String name;
 	String introduction;
 	String service;
-	String room_state;
-	String room_type;
-	int room_number;
-	int room_price;
-	String order;
+	int score; 
 	String evaluation;
+	int star;
 	
-	public HotelVO(int id,String a,String ba,String na,String in,String s,String rs,String rt,int rn,int rp,String o,String e){
+	public HotelVO(){
+		hotelid=0;
+		address=null;
+		bussiness_address=null;
+		name=null;
+		introduction=null;
+		service=null;
+		score=0;
+		evaluation=null;
+		star=0;
+	}
+	
+	public HotelVO(int id,String a,String ba,String na,String in,String s,int sc,String e,int m){
 		hotelid = id;
 		address=a;
-		business_address=ba;
+		bussiness_address=ba;
 		name=na;
 		introduction=in;
 		service=s;
-		room_state=rt;
-		room_type=rt;
-		room_number=rn;
-		room_price=rp;
-		order=o;
+		score=sc;
 		evaluation=e;
+		star=m;
+	}
+	
+	
+	
+	
+	public void setid(int id){
+		hotelid = id;
 	}
 	public int getid(){
 		return hotelid;
 	}
+	
+	public void setaddress(String addr){
+		address = addr;
+	}
 	public String getaddress(){
 		return address;
 	}
+	
+	public void setbussiness_address(String bussi_addr){
+		bussiness_address = bussi_addr;
+	}
 	public String getbussiness_address(){
-		return business_address;
+		return bussiness_address;
+	}
+	
+	public void setname(String name){
+		this.name = name;
 	}
 	public String getname(){
 		return name;
 	}
+	
+	public void setintroduction(String intro){
+		introduction = intro;
+	}
 	public String getintroduction(){
 		return introduction;
+	}
+	
+	public void setservice(String service){
+		this.service = service;
 	}
 	public String getservice(){
 		return service;
 	}
-	public String getroom_state(){
-		return room_state;
+	
+	public void setscore(int m){
+		score=m;
 	}
-	public String getroom_type(){
-		return room_type;
+	public int getcore(){
+		return score;
 	}
-	public int getroom_number(){
-		return room_number;
-	}
-	public int getroom_price(){
-		return room_price;
-	}
-	public String getorder(){
-		return order;
+	
+	public void setevaluation(String evalu){
+		evaluation = evalu;
 	}
 	public String getevaluation(){
 		return evaluation;
 	}
+	
+	
+	public void setstar(int m){
+		star=m;
+	}
+	public int getstar(){
+		return star;
+	}
+ 
 }

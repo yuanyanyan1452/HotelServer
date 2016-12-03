@@ -48,7 +48,7 @@ public class ManageTest {
 	 */
 	@Test
 	public void testmanage_addHotel(){
-		HotelVO hotelvo = new HotelVO(1,"1","1","1","1","1","1","1",1,1,"1","1");
+		HotelVO hotelvo = new HotelVO(1,"1","1","1","1","1",1,"1",1);
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result = mserviceimpl.manage_addHotel(hotelvo);
 		
@@ -61,7 +61,7 @@ public class ManageTest {
 	 */
 	@Test
 	public void testmanage_addHotelWorker(){
-		HotelWorkerVO hotelworkervo = new HotelWorkerVO(1,"1","2","3");
+		HotelWorkerVO hotelworkervo = new HotelWorkerVO(1,"1","1","1","2","3");
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result =  mserviceimpl.manage_addHotelWorker(hotelworkervo);
 		
@@ -86,7 +86,7 @@ public class ManageTest {
 	 */
 	@Test
 	public void testmanage_updateHotelWorker(){
-		HotelWorkerVO hotelworkervo = new HotelWorkerVO(1,"1","2","3");
+		HotelWorkerVO hotelworkervo = new HotelWorkerVO(1,"1","1","1","2","3");
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result =  mserviceimpl.manage_updateHotelWorker(hotelworkervo);
 		
@@ -99,7 +99,7 @@ public class ManageTest {
 	 */
 	@Test
 	public void testmanage_addMarketWorker(){
-		WebMarketVO webmarketvo = new WebMarketVO(1,"1","1");
+		WebMarketVO webmarketvo = new WebMarketVO(1,"1","1","1","1");
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result =  mserviceimpl.manage_addMarketWorker(webmarketvo);
 		
@@ -126,7 +126,7 @@ public class ManageTest {
 	 */
 	@Test
 	public void testmanage_updateMarketWorker(){
-		WebMarketVO webmarketvo = new WebMarketVO(1,"1","1");
+		WebMarketVO webmarketvo = new WebMarketVO(1,"1","1","1","1");
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result =  mserviceimpl.manage_addMarketWorker(webmarketvo);
 		
