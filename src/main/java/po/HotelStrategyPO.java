@@ -8,6 +8,7 @@ public class HotelStrategyPO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	int hsid;
+	int hotelid;
 	String name;
 	String condition;
 	String start_time;
@@ -17,6 +18,7 @@ public class HotelStrategyPO implements Serializable{
 	
 	public HotelStrategyPO(){
 		hsid=0;
+		hotelid=0;
 		name=null;
 		condition=null;
 		start_time=null;
@@ -25,8 +27,9 @@ public class HotelStrategyPO implements Serializable{
 		superposition=false;
 	}
 	
-	public HotelStrategyPO(int id,String n,String con,String st,String et,String ew,boolean iss){
+	public HotelStrategyPO(int id,int hid,String n,String con,String st,String et,String ew,boolean iss){
 		hsid=id;
+		hotelid=hid;
 		name=n;
 		condition=con;
 		start_time=st;
@@ -40,6 +43,13 @@ public class HotelStrategyPO implements Serializable{
 	}
 	public int getid(){
 		return hsid;
+	}
+	
+	public void sethotelid(int id){
+		hotelid = id;
+	}
+	public int gethotelid(){
+		return hotelid;
 	}
 	
 	public void setname(String name){
