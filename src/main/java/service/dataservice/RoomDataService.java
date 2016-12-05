@@ -3,6 +3,7 @@ package service.dataservice;
 import java.util.ArrayList;
 
 import objects.ResultMessage;
+import po.OrderPO;
 import po.RoomPO;
 
 public interface RoomDataService {
@@ -18,4 +19,7 @@ public interface RoomDataService {
 	
 	//更新可用房间信息
 	public ResultMessage update(RoomPO po);
+	
+	//每次生成订单时房间数量减少
+	public ResultMessage reduce(OrderPO po);
 }

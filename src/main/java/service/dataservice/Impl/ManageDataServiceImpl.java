@@ -42,7 +42,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 
 	@Override
-	public ResultMessage insertWebMarket(WebMarketPO po) {
+	public synchronized ResultMessage insertWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
 	    String sql = "insert into webmarket(id,Name,Contact) values(NULL,?,?)";
 	    PreparedStatement pstmt;
@@ -77,7 +77,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 
 	@Override
-	public ResultMessage updateWebMarket(WebMarketPO po) {
+	public synchronized ResultMessage updateWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
 	    String sql = "update webmarket set name=?,contact=? where id=?";
 	    PreparedStatement pstmt;
@@ -97,7 +97,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 
 	@Override
-	public ResultMessage deleteWebMarket(WebMarketPO po) {
+	public synchronized ResultMessage deleteWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
 	    String sql = "delete from webmarket where id='" + po.getid() + "'";
 	    PreparedStatement pstmt;
@@ -138,7 +138,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 
 	@Override
-	public ResultMessage updateWebManager(WebManagerPO po) {
+	public synchronized ResultMessage updateWebManager(WebManagerPO po) {
 		Connection conn = Connect.getConn();
 	    String sql = "update webmanager set contact=? where name=?";
 	    PreparedStatement pstmt;

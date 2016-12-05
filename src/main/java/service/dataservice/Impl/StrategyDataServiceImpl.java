@@ -42,7 +42,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 
 	@Override
-	public ResultMessage insert_hotel(HotelStrategyPO po) {
+	public synchronized ResultMessage insert_hotel(HotelStrategyPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
@@ -77,7 +77,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				po.setid(rs.getInt("id"));
+				po.setid(rs.getInt(1));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
-				po.setid(rs.getInt("id"));
+				po.setid(rs.getInt(1));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -101,7 +101,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 	
 	@Override
-	public ResultMessage delete_hotel(HotelStrategyPO po) {
+	public synchronized ResultMessage delete_hotel(HotelStrategyPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
@@ -121,7 +121,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 
 	@Override
-	public ResultMessage update_hotel(HotelStrategyPO po) {
+	public synchronized ResultMessage update_hotel(HotelStrategyPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
@@ -204,7 +204,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 
 	@Override
-	public ResultMessage insert_web(WebStrategyPO po) {
+	public synchronized ResultMessage insert_web(WebStrategyPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
@@ -230,7 +230,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 
 	@Override
-	public ResultMessage delete_web(WebStrategyPO po) {
+	public synchronized ResultMessage delete_web(WebStrategyPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
@@ -250,7 +250,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 
 	@Override
-	public ResultMessage update_web(WebStrategyPO po) {
+	public synchronized ResultMessage update_web(WebStrategyPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();

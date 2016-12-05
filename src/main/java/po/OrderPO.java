@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class OrderPO implements Serializable {
 	/**
@@ -11,13 +12,12 @@ public class OrderPO implements Serializable {
 	int clientid;
 	int hotelid;
 	String state;
+	String cancel_time;
 	boolean execute;
 	String start_time;
 	String end_time;
 	String latest_execute_time;
-	String room_type;
-	int room_number;
-	String strategy;
+	ArrayList<RoomOrderPO>room_order;
 	int price;
 	int expect_number_of_people;
 	boolean havechild;
@@ -27,29 +27,27 @@ public class OrderPO implements Serializable {
 		clientid=0;
 		hotelid=0;
 		state=null;
+		cancel_time=null;
 		execute=false;
 		start_time=null;
 		end_time=null;
 		latest_execute_time=null;
-		room_type=null;
-		room_number=0;
-		strategy=null;
+		room_order=null;
 		price=0;
 		expect_number_of_people=0;
 		havechild=false;
 	}
-	public OrderPO(int i,int cid,int hid,String s,boolean e,String st,String et,String lt,String rt,int rm,String str,int p,int en,boolean child){
+	public OrderPO(int i,int cid,int hid,String s,String cancel,boolean e,String st,String et,String lt,ArrayList<RoomOrderPO>list,int p,int en,boolean child){
 		id=i;
 		clientid=cid;
 		hotelid=hid;
 		state=s;
+		cancel_time=cancel;
 		execute=e;
 		start_time=st;
 		end_time=et;
 		latest_execute_time=lt;
-		room_type=rt;
-		room_number=rm;
-		strategy=str;
+		room_order=list;
 		price=p;
 		expect_number_of_people=en;
 		havechild=child;
@@ -83,6 +81,13 @@ public class OrderPO implements Serializable {
 		return state;
 	}
 	
+	public void setcancel_time(String cancel){
+		cancel_time=cancel;
+	}
+	public String getcancel_time(){
+		return cancel_time;
+	}
+	
 	public void setexecute(boolean isExecute){
 		execute = isExecute;
 	}
@@ -111,25 +116,11 @@ public class OrderPO implements Serializable {
 		return latest_execute_time; 
 	}
 	
-	public void setroom_type(String type){
-		room_type = type;
+	public void setroom_order(ArrayList<RoomOrderPO> list){
+		room_order = list;
 	}
-	public String getroom_type(){
-		return room_type;
-	}
-	
-	public void setroom_number(int number){
-		room_number = number;
-	}
-	public int getroom_number(){
-		return room_number;
-	}
-	
-	public void setstrategy(String strategy){
-		this.strategy = strategy;
-	}
-	public String getstrategy(){
-		return strategy;
+	public ArrayList<RoomOrderPO> getroom_order(){
+		return room_order;
 	}
 	
 	public void setprice(int price){
