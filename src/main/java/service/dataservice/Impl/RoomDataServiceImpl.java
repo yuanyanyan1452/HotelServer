@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import objects.ResultMessage;
+import po.OrderPO;
+import po.RoomOrderPO;
 import po.RoomPO;
 import service.dataservice.RoomDataService;
 
@@ -40,7 +42,7 @@ public class RoomDataServiceImpl implements RoomDataService{
 	}
 
 	@Override
-	public ResultMessage insert(RoomPO po) {
+	public synchronized ResultMessage insert(RoomPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag=ResultMessage.Success;
 		Connection conn=Connect.getConn();
@@ -65,7 +67,7 @@ public class RoomDataServiceImpl implements RoomDataService{
 	}
 
 	@Override
-	public ResultMessage delete(RoomPO po) {
+	public synchronized ResultMessage delete(RoomPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag=ResultMessage.Success;
 		Connection conn=Connect.getConn();
@@ -85,12 +87,12 @@ public class RoomDataServiceImpl implements RoomDataService{
 	}
 
 	@Override
-	public ResultMessage update(RoomPO po) {
+	public synchronized ResultMessage update(RoomPO po) {
 		// TODO Auto-generated method stub
 		ResultMessage flag=ResultMessage.Success;
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
-		String sql="update from room set hotelid=?,room_type=?,total_num=?,available_num=?,"
+		String sql="update room set hotelid=?,room_type=?,total_num=?,available_num=?,"
 				+ "price=? where id=?";
 		try{
 			ps=conn.prepareStatement(sql);
@@ -110,6 +112,57 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return flag;
 	}
 
+	@Override
+	public synchronized ResultMessage reduce(OrderPO po){
+		ResultMessage flag=ResultMessage.Success;
+		int hotelid=po.gethotelid();
+		ArrayList<RoomOrderPO> room_order=po.getroom_order();
+		
+		for(int i=0;i<room_order.size();i++){
+			String type=room_order.get(i).getroom_type();
+			int order_num=room_order.get(i).getroom_number();
+			int num=available_num(hotelid,type);
+			num=num-order_num;
+			
+			Connection conn=Connect.getConn();
+			PreparedStatement ps=null;
+			String sql="update room set available_num=? where hotelid=? and room_type=?";
+			try{
+				ps=conn.prepareStatement(sql);
+				ps.setInt(1, num);
+				ps.setInt(2,hotelid);
+				ps.setString(3, type);
+				
+				int j=ps.executeUpdate();
+				if(j==0){
+					flag=ResultMessage.Fail;
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			
+		}
+		return flag;
+	}
+
+	public synchronized int available_num(int hotelid,String room_type){
+		int available_num=0;
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select*from room where hotelid='"+hotelid+"' and room_type='"+room_type+"'";
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				available_num=rs.getInt("available_num");
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return available_num;
+	}
+	
 	public void setid(RoomPO po){
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -119,10 +172,26 @@ public class RoomDataServiceImpl implements RoomDataService{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				po.setid(rs.getInt("id"));
+				po.setid(rs.getInt(1));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 	}
+	
+//	public static void main(String[]args){
+//		RoomDataServiceImpl room=new RoomDataServiceImpl();
+//		OrderDataServiceImpl order=new OrderDataServiceImpl();
+//		OrderPO order_po=order.findByHotelid(1).get(0);
+//		RoomOrderPO po=order_po.getroom_order().get(0);
+//		
+//		System.out.println(po.getroom_type());
+//		System.out.println(po.getroom_number());
+//		ResultMessage flag=room.reduce(order_po);
+//		System.out.println(flag);
+//		
+//		
+//		//System.out.println(room.available_num(1,"标准间"));
+//	}
+	
 }

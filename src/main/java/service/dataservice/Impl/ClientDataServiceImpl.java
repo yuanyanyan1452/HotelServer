@@ -52,7 +52,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 	}
 
 	@Override
-	public ResultMessage insert(ClientPO po) {
+	public synchronized ResultMessage insert(ClientPO po) {
 		Connection conn = Connect.getConn();
 		String tempCreditRecord =""; // 存取数据库中读取的string
 		String[] CreditRecords; // 根据符号 /将各条信用记录分开
@@ -86,7 +86,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 	}
 
 	@Override
-	public ResultMessage update(ClientPO po) {
+	public synchronized ResultMessage update(ClientPO po) {
 		Connection conn = Connect.getConn();
 		String tempCreditRecord =""; // 存取数据库中读取的string
 		String[] CreditRecords; // 根据符号 /将各条信用记录分开
@@ -122,7 +122,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 	}
 
 	@Override
-	public ResultMessage delete(ClientPO po) {
+	public synchronized ResultMessage delete(ClientPO po) {
 		Connection conn = Connect.getConn();
 	    String sql = "delete from client where id = " + po.getClientid();
 	    PreparedStatement pstmt;

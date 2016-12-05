@@ -31,7 +31,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
 	
 	@Override
-	public ResultMessage insert(HotelWorkerPO po){
+	public synchronized ResultMessage insert(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
 	    String sql = "insert into hotelworker(hotelid,Name,Contact,hotel) values(NULL,?,?,?)";
 	    PreparedStatement pstmt;
@@ -67,7 +67,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	}
 	
 	@Override
-	public ResultMessage update(HotelWorkerPO po){
+	public synchronized ResultMessage update(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
 	    String sql = "update hotelworker set name=?,contact=?,hotel=? where id=?";
 	    PreparedStatement pstmt;
@@ -88,7 +88,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	}
 	
 	@Override
-	public ResultMessage delete(HotelWorkerPO po){
+	public synchronized ResultMessage delete(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
 	    String sql = "delete from hotelworker where id='" + po.gethotelid() + "'";
 	    PreparedStatement pstmt;

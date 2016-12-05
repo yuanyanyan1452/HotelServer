@@ -1,16 +1,20 @@
 package po;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class HotelPO implements Serializable{
 	int hotelid ;
+	String name;
 	String address;
 	String bussiness_address;
-	String name;
 	String introduction;
 	String service;
-	String evaluation;
-	int mark;
+	String star;
+	int score;
+	String hotel_evaluation;
+	int min_price;
+	ArrayList<Integer> book_clientid;
 	
 	public HotelPO(){
 		hotelid=0;
@@ -19,19 +23,23 @@ public class HotelPO implements Serializable{
 		name=null;
 		introduction=null;
 		service=null;
-		evaluation=null;
-		mark=0;
+		star=null;
+		score=0;
+		hotel_evaluation=null;
+		book_clientid=null;
 	}
 	
-	public HotelPO(int id,String a,String ba,String na,String in,String s,String e,int m){
+	public HotelPO(int id,String na,String a,String ba,String in,String s,String star,int score,String e,ArrayList<Integer>book){
 		hotelid = id;
+		name=na;
 		address=a;
 		bussiness_address=ba;
-		name=na;
 		introduction=in;
 		service=s;
-		evaluation=e;
-		mark=m;
+		this.star=star;
+		this.score=score;
+		hotel_evaluation=e;
+		book_clientid=book;
 	}
 	
 	public void setid(int id){
@@ -39,6 +47,13 @@ public class HotelPO implements Serializable{
 	}
 	public int getid(){
 		return hotelid;
+	}
+	
+	public void setname(String name){
+		this.name = name;
+	}
+	public String getname(){
+		return name;
 	}
 	
 	public void setaddress(String addr){
@@ -55,13 +70,6 @@ public class HotelPO implements Serializable{
 		return bussiness_address;
 	}
 	
-	public void setname(String name){
-		this.name = name;
-	}
-	public String getname(){
-		return name;
-	}
-	
 	public void setintroduction(String intro){
 		introduction = intro;
 	}
@@ -76,18 +84,38 @@ public class HotelPO implements Serializable{
 		return service;
 	}
 	
-	public void setevaluation(String evalu){
-		evaluation = evalu;
+	public void setstar(String star){
+		this.star = star;
 	}
-	public String getevaluation(){
-		return evaluation;
+	public String getstar(){
+		return star;
 	}
 	
-	public void setmark(int m){
-		mark=m;
+	public void setscore(int score){
+		this.score = score;
 	}
-	public int getmark(){
-		return mark;
+	public int getscore(){
+		return score;
+	}
+	
+	public void setevaluation(String evalu){
+		hotel_evaluation = evalu;
+	}
+	public String getevaluation(){
+		return hotel_evaluation;
+	}
+	
+	public void setmin_price(int p){
+		min_price=p;
+	}
+	public int getmin_price(){
+		return min_price;
 	}
  
+	public void setbook_clientid(ArrayList<Integer>book){
+		book_clientid=book;
+	}
+	public ArrayList<Integer> getbook_clientid(){
+		return book_clientid;
+	}
 }
