@@ -48,7 +48,7 @@ public class ManageTest {
 	 */
 	@Test
 	public void testmanage_addHotel(){
-		HotelVO hotelvo = new HotelVO(1,"1","1","1","1","1",1,"1",1);
+		HotelVO hotelvo = new HotelVO(1,"1","1","1","1","1",1,"1",1,1);
 		ManageBLServiceImpl mserviceimpl = new ManageBLServiceImpl();
 		ResultMessage result = mserviceimpl.manage_addHotel(hotelvo);
 		

@@ -1,15 +1,19 @@
 package vo;
 
-public class HotelBasicInfoVO {
+import java.io.Serializable;
+
+public class HotelBasicInfoVO implements Serializable{
 	int hotelid ;
 	String name;
 	int score; 
 	int star;
-	public HotelBasicInfoVO(int id,String na,int sc,int m){
+	int min_price;
+	public HotelBasicInfoVO(int id,String na,int sc,int m,int mp){
 		hotelid = id;
 		name=na;
 		score=sc;
 		star=m;
+		min_price=mp;
 	}
 	
 	public void setid(int id){
@@ -35,6 +39,13 @@ public class HotelBasicInfoVO {
 	}
 	public int getstar(){
 		return star;
+	}
+	
+	public void setmin_price(int m){
+		min_price=m;
+	}
+	public int getmin_price(){
+		return min_price;
 	}
 	
 }

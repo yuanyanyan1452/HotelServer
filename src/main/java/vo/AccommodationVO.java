@@ -1,6 +1,8 @@
 package vo;
 
-public class AccommodationVO {
+import java.io.Serializable;
+
+public class AccommodationVO implements Serializable{
 	String roomNumber;
 	String check_in;
 	String plan_check_out;

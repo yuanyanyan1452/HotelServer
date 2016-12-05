@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import objects.VIPInfo;
+import po.ClientPO;
 
 public class ClientVO implements Serializable {
 	int clientid;
@@ -102,5 +103,7 @@ public class ClientVO implements Serializable {
 	public void setVIPInfo(VIPInfo info) {
 		this.info = info;
 	}
+	
+
 
 }

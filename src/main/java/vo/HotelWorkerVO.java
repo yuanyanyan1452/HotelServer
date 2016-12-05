@@ -1,8 +1,8 @@
 package vo;
 
+import java.io.Serializable;
 
-
-public class HotelWorkerVO {
+public class HotelWorkerVO implements Serializable{
 	int hotelid;
 	String username;
 	String password;
@@ -20,6 +20,10 @@ public class HotelWorkerVO {
 	}
 	public int gethotelid(){
 		return hotelid;
+	}
+	
+	public void sethotelid(int id){
+		hotelid=id;
 	}
 	public String getusername(){
 		return username;

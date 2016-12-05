@@ -7,16 +7,31 @@ import objects.VIPInfo;
 
 public class ClientPO implements Serializable {
 	int clientid;
+	String username;
+	String password;
 	String client_name;
 	String contact;
 	int credit;
 	ArrayList<String> credit_record;
 	VIPInfo info;
 
+	public ClientPO(int clientid,String username,String password, String client_name, String contact, int credit, ArrayList<String> credit_record,
+			VIPInfo info) {
+		super();
+		this.clientid = clientid;
+		this.username=username;
+		this.password=password;
+		this.client_name = client_name;
+		this.contact = contact;
+		this.credit = credit;
+		this.credit_record = credit_record;
+		this.info = info;
+	}
 	public ClientPO(int clientid, String client_name, String contact, int credit, ArrayList<String> credit_record,
 			VIPInfo info) {
 		super();
 		this.clientid = clientid;
+		
 		this.client_name = client_name;
 		this.contact = contact;
 		this.credit = credit;
@@ -24,12 +39,31 @@ public class ClientPO implements Serializable {
 		this.info = info;
 	}
 
+	public ClientPO() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getClientid() {
 		return clientid;
 	}
 
 	public void setClientid(int clientid) {
 		this.clientid = clientid;
+	}
+	
+	public String getusername(){
+		return username;
+	}
+	
+	public void setusername(String um){
+		username=um;;
+	}
+	
+	public String getpassword(){
+		return password;
+	}
+	
+	public void setpassword(String pass){
+		password=pass;
 	}
 
 	public String getClient_name() {
@@ -71,5 +105,7 @@ public class ClientPO implements Serializable {
 	public void setVIPInfo(VIPInfo info) {
 		this.info = info;
 	}
+	
+
 
 }

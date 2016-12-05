@@ -1,6 +1,7 @@
 package vo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class HotelVO implements Serializable{
 	int hotelid ;
@@ -11,7 +12,9 @@ public class HotelVO implements Serializable{
 	String service;
 	int score; 
 	String evaluation;
-	int star;
+	String star;
+	int min_price;
+	ArrayList<Integer> book_clientid;
 	
 	public HotelVO(){
 		hotelid=0;
@@ -22,10 +25,12 @@ public class HotelVO implements Serializable{
 		service=null;
 		score=0;
 		evaluation=null;
-		star=0;
+		star=null;
+		min_price=0;
+		book_clientid=null;
 	}
 	
-	public HotelVO(int id,String a,String ba,String na,String in,String s,int sc,String e,int m){
+	public HotelVO(int id,String a,String ba,String na,String in,String s,int sc,String e,String m,int mp,ArrayList<Integer>book){
 		hotelid = id;
 		address=a;
 		bussiness_address=ba;
@@ -35,6 +40,8 @@ public class HotelVO implements Serializable{
 		score=sc;
 		evaluation=e;
 		star=m;
+		min_price=mp;
+		book_clientid=book;
 	}
 	
 	
@@ -97,11 +104,24 @@ public class HotelVO implements Serializable{
 	}
 	
 	
-	public void setstar(int m){
+	public void setstar(String m){
 		star=m;
 	}
-	public int getstar(){
+	public String getstar(){
 		return star;
 	}
- 
+	
+	public void setmin_price(int m){
+		min_price=m;
+	}
+	public int getmin_price(){
+		return min_price;
+	}
+	
+	public void setbook_clientid(ArrayList<Integer>book){
+		book_clientid=book;
+	}
+	public ArrayList<Integer> getbook_clientid(){
+		return book_clientid;
+	}
 }

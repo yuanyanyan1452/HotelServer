@@ -26,10 +26,11 @@ public class HotelPO implements Serializable{
 		star=null;
 		score=0;
 		hotel_evaluation=null;
+		min_price=0;
 		book_clientid=null;
 	}
 	
-	public HotelPO(int id,String na,String a,String ba,String in,String s,String star,int score,String e,ArrayList<Integer>book){
+	public HotelPO(int id,String na,String a,String ba,String in,String s,String star,int score,String e,int mp,ArrayList<Integer>book){
 		hotelid = id;
 		name=na;
 		address=a;
@@ -39,6 +40,7 @@ public class HotelPO implements Serializable{
 		this.star=star;
 		this.score=score;
 		hotel_evaluation=e;
+		min_price=mp;
 		book_clientid=book;
 	}
 	

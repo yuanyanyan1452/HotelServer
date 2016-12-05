@@ -1,8 +1,8 @@
 package vo;
 
+import java.io.Serializable;
 
-
-public class WebManagerVO {
+public class WebManagerVO implements Serializable{
 	String username;
 	String password;
 	String name;

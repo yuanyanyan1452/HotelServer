@@ -2,8 +2,12 @@ package service.blservice;
 
 import java.util.ArrayList;
 
-import vo.*;
-import objects.*;
+import objects.Hotel;
+import objects.HotelWorker;
+import objects.ResultMessage;
+import objects.Room;
+import vo.AccommodationVO;
+import vo.HotelVO;
 
 public interface HotelBLService {
 	// 提供给界面调用的接口
@@ -29,7 +33,7 @@ public interface HotelBLService {
 	 * @param info
 	 * @return 酒店更新入住信息
 	 */
-	public ResultMessage hotel_updateAccomodation(AccommodationInfo info);
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info);
 
 	// 提供给同层调用的接口
 	/**

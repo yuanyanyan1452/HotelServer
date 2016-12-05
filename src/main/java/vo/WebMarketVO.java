@@ -1,8 +1,8 @@
 package vo;
 
+import java.io.Serializable;
 
-
-public class WebMarketVO {
+public class WebMarketVO implements Serializable{
 	int webmarketid;
 	String username;
 	String password;

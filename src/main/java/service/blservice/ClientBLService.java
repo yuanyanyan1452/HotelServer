@@ -1,9 +1,14 @@
 package service.blservice;
 
-import vo.*;
 import java.util.ArrayList;
 
-import objects.*;
+import objects.Client;
+import objects.ResultMessage;
+import objects.RoomType;
+import objects.VIPInfo;
+import vo.ClientVO;
+import vo.EvaluationVO;
+import vo.HotelVO;
 
 public interface ClientBLService {
 	// 提供给界面调用的接口
@@ -94,7 +99,7 @@ public interface ClientBLService {
 	 * @param clientid
 	 * @return 客户评价酒店
 	 */
-	public ResultMessage client_evaluateHotel(Evaluation e, int clientid);
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid);
 
 	/**
 	 * @param info

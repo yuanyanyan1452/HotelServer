@@ -3,23 +3,42 @@ package po;
 import java.io.Serializable;
 
 public class WebManagerPO implements Serializable{
+	String username;
+	String password;
 	String name;
 	String contact;
-//	int id;
 	
-	public WebManagerPO(String n,String c){
+	public WebManagerPO(String u,String p,String n,String c){
+		username=u;
+		password=p;
 		name=n;
 		contact=c;
-//		id=i;
+	}
+	public WebManagerPO() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getusername(){
+		return username;
+	}
+	public void setusername(String um){
+		username=um;;
+	}
+	public String getpassword(){
+		return password;
+	}
+	public void setpassword(String pass){
+		password=pass;
 	}
 	public String getname(){
 		return name;
 	}
+	public void setname(String na) {
+		name = na;
+	}
 	public String getcontact(){
 		return contact;
 	}
-//	public int getid() {
-//		// TODO Auto-generated method stub
-//		return id;
-//	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 }

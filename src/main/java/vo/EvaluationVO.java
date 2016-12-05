@@ -1,6 +1,8 @@
 package vo;
 
-public class EvaluationVO {
+import java.io.Serializable;
+
+public class EvaluationVO implements Serializable{
 	double score;
 	String comments;
 	public EvaluationVO(double score, String comments) {

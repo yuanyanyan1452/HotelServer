@@ -4,9 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
-import objects.AccommodationInfo;
 import objects.Client;
-import objects.Evaluation;
 import objects.Hotel;
 import objects.HotelStrategy;
 import objects.HotelWorker;
@@ -21,21 +19,21 @@ import service.blservice.HotelBLService;
 import service.blservice.ManageBLService;
 import service.blservice.OrderBLService;
 import service.blservice.StrategyBLService;
-import service.blservice.UserBLService;
 import service.blservice.Impl.ClientBLServiceImpl;
 import service.blservice.Impl.HotelBLServiceImpl;
 import service.blservice.Impl.ManageBLServiceImpl;
 import service.blservice.Impl.OrderBLServiceImpl;
 import service.blservice.Impl.StrategyBLServiceImpl;
-import service.blservice.Impl.UserBLServiceImpl;
+import vo.AccommodationVO;
 import vo.ClientVO;
+import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
 import vo.WebMarketVO;
 
 public class DataRemoteObject extends UnicastRemoteObject 
- 	implements ClientBLService,HotelBLService,ManageBLService,OrderBLService,StrategyBLService,UserBLService{
+ 	implements ClientBLService,HotelBLService,ManageBLService,OrderBLService,StrategyBLService{
 	
 	private static final long serialVersionUID = 4029039744279087114L;
 	private ClientBLService clientbl;
@@ -43,7 +41,6 @@ public class DataRemoteObject extends UnicastRemoteObject
 	private ManageBLService managebl;
 	private OrderBLService orderbl;
 	private StrategyBLService strategybl;
-	private UserBLService userbl;
 	protected DataRemoteObject() throws RemoteException {
 		super();
 		clientbl=new ClientBLServiceImpl();
@@ -51,21 +48,10 @@ public class DataRemoteObject extends UnicastRemoteObject
 		managebl=new ManageBLServiceImpl();
 		orderbl=new OrderBLServiceImpl();
 		strategybl=new StrategyBLServiceImpl();
-		userbl=new UserBLServiceImpl();
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public ResultMessage login(String username, String password) {
-		// TODO Auto-generated method stub
-		return userbl.login(username, password);
-	}
-
-	@Override
-	public ResultMessage register(String username, String password) {
-		// TODO Auto-generated method stub
-		return userbl.register(username, password);
-	}
+	
 
 	@Override
 	public ResultMessage hotelstrategy_make(HotelStrategy strategy) {
@@ -261,7 +247,7 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage hotel_updateAccomodation(AccommodationInfo info) {
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info) {
 		// TODO Auto-generated method stub
 		return hotelbl.hotel_updateAccomodation(info);
 	}
@@ -381,7 +367,7 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage client_evaluateHotel(Evaluation e, int clientid) {
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid) {
 		// TODO Auto-generated method stub
 		return clientbl.client_evaluateHotel(e, clientid);
 	}
