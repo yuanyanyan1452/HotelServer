@@ -27,10 +27,12 @@ import service.blservice.Impl.StrategyBLServiceImpl;
 import vo.AccommodationVO;
 import vo.ClientVO;
 import vo.EvaluationVO;
+import vo.HotelStrategyVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
 import vo.WebMarketVO;
+import vo.WebStrategyVO;
 
 public class DataRemoteObject extends UnicastRemoteObject 
  	implements ClientBLService,HotelBLService,ManageBLService,OrderBLService,StrategyBLService{
@@ -54,27 +56,27 @@ public class DataRemoteObject extends UnicastRemoteObject
 	
 
 	@Override
-	public ResultMessage hotelstrategy_make(HotelStrategy strategy) {
+	public ResultMessage hotelstrategy_make(HotelStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		return strategybl.hotelstrategy_make(strategy);
+		return strategybl.hotelstrategy_make(strategyvo);
 	}
 
 	@Override
-	public ResultMessage hotelstrategy_update(HotelStrategy strategy) {
+	public ResultMessage hotelstrategy_update(HotelStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		return strategybl.hotelstrategy_update(strategy);
+		return strategybl.hotelstrategy_update(strategyvo);
 	}
 
 	@Override
-	public ResultMessage webstrategy_make(WebStrategy strategy) {
+	public ResultMessage webstrategy_make(WebStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		return strategybl.webstrategy_make(strategy);
+		return strategybl.webstrategy_make(strategyvo);
 	}
 
 	@Override
-	public ResultMessage webstrategy_update(WebStrategy strategy) {
+	public ResultMessage webstrategy_update(WebStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		return strategybl.webstrategy_update(strategy);
+		return strategybl.webstrategy_update(strategyvo);
 	}
 
 	@Override

@@ -31,7 +31,6 @@ public class ClientPO implements Serializable {
 			VIPInfo info) {
 		super();
 		this.clientid = clientid;
-		
 		this.client_name = client_name;
 		this.contact = contact;
 		this.credit = credit;

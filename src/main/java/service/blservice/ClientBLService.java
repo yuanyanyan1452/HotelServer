@@ -1,5 +1,6 @@
 package service.blservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import objects.Client;
@@ -10,7 +11,7 @@ import vo.ClientVO;
 import vo.EvaluationVO;
 import vo.HotelVO;
 
-public interface ClientBLService {
+public interface ClientBLService extends Remote{
 	// 提供给界面调用的接口
 
 	/**

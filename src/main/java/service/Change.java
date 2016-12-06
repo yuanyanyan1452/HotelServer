@@ -7,6 +7,7 @@ import po.HotelStrategyPO;
 import po.HotelWorkerPO;
 import po.OrderPO;
 import po.RoomOrderPO;
+import po.RoomPO;
 import po.WebManagerPO;
 import po.WebMarketPO;
 import po.WebStrategyPO;
@@ -16,6 +17,7 @@ import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
 import vo.RoomOrderVO;
+import vo.RoomVO;
 import vo.WebManagerVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
@@ -31,7 +33,7 @@ public class Change {
 		clientpo.setContact(clientvo.getContact());
 		clientpo.setCredit(clientvo.getCredit());
 		clientpo.setCredit_record(clientvo.getCredit_record());
-		clientpo.setVIPInfo(clientvo.getVIPInfo());
+//		clientpo.setVIPInfo(clientvo.getVIPInfo());
 		return clientpo;
 	}
 	
@@ -134,6 +136,18 @@ public class Change {
 		po.setroom_type(vo.getroom_type());
 		po.setroom_number(vo.getroom_number());
 		return po;
+	}
+	
+	public RoomPO roomvo_to_roompo(RoomVO vo){
+		RoomPO po=new RoomPO();
+		po.setid(vo.getid());
+		po.sethotelid(vo.gethotelid());
+		po.setroom_type(vo.getroom_type());
+		po.settotal_num(vo.gettotal_num());
+		po.setavailable_num(vo.getavailable_num());
+		po.setprice(vo.getprice());
+		return po;
+		
 	}
 	
 }

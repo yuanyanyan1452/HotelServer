@@ -2,17 +2,17 @@ package service.blservice.Impl;
 
 import java.util.ArrayList;
 
-import objects.HotelStrategy;
 import objects.OrderState;
 import objects.ResultMessage;
 import objects.RoomType;
-import objects.WebStrategy;
 import po.OrderPO;
 import service.Change;
 import service.blservice.OrderBLService;
 import service.dataservice.OrderDataService;
 import service.dataservice.Impl.OrderDataServiceImpl;
+import vo.HotelStrategyVO;
 import vo.OrderVO;
+import vo.WebStrategyVO;
 
 public class OrderBLServiceImpl implements OrderBLService {
 	OrderDataService orderdataservice=new OrderDataServiceImpl();
@@ -97,8 +97,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
-			ArrayList<WebStrategy> list2) {
+	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategyVO> list1,
+			ArrayList<WebStrategyVO> list2) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

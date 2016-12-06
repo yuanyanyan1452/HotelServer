@@ -5,20 +5,26 @@ import java.util.ArrayList;
 import objects.Hotel;
 import objects.HotelWorker;
 import objects.ResultMessage;
-import objects.Room;
 import po.HotelPO;
 import po.HotelWorkerPO;
+import po.RoomPO;
+import service.Change;
 import service.blservice.HotelBLService;
 import service.dataservice.HotelDataService;
 import service.dataservice.HotelWorkerDataService;
+import service.dataservice.RoomDataService;
 import service.dataservice.Impl.HotelDataServiceImpl;
 import service.dataservice.Impl.HotelWorkerDataServiceImpl;
+import service.dataservice.Impl.RoomDataServiceImpl;
 import vo.AccommodationVO;
 import vo.HotelVO;
+import vo.RoomVO;
 
 public class HotelBLServiceImpl implements HotelBLService {
 	HotelDataService hoteldataservice=new HotelDataServiceImpl();
 	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();		
+	RoomDataService roomdataservice=new RoomDataServiceImpl();
+	Change change =new Change();
 	@Override
 	public HotelVO hotel_checkInfo(int hotelid) {
 		// TODO Auto-generated method stub
@@ -37,9 +43,11 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public ResultMessage hotel_importRoom(Room room) {
+	public ResultMessage hotel_importRoom(RoomVO room) {
 		// TODO Auto-generated method stub
-		return null;
+		RoomPO po=change.roomvo_to_roompo(room);
+		ResultMessage result=roomdataservice.insert(po);
+		return result;
 	}
 
 	@Override

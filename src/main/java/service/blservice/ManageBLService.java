@@ -1,12 +1,14 @@
 package service.blservice;
 
+import java.rmi.Remote;
+
 import objects.ResultMessage;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.WebMarketVO;
 
-public interface ManageBLService {
+public interface ManageBLService extends Remote{
 	// 提供给界面调用的接口
 		/**
 		 * @param clientid

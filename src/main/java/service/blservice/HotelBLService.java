@@ -1,15 +1,16 @@
 package service.blservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import objects.Hotel;
 import objects.HotelWorker;
 import objects.ResultMessage;
-import objects.Room;
 import vo.AccommodationVO;
 import vo.HotelVO;
+import vo.RoomVO;
 
-public interface HotelBLService {
+public interface HotelBLService extends Remote{
 	// 提供给界面调用的接口
 	/**
 	 * @param hotelid
@@ -27,7 +28,7 @@ public interface HotelBLService {
 	 * @param room
 	 * @return 酒店录入可用房间
 	 */
-	public ResultMessage hotel_importRoom(Room room);
+	public ResultMessage hotel_importRoom(RoomVO room);
 
 	/**
 	 * @param info

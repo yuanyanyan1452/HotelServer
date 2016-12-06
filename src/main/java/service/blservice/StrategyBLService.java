@@ -47,6 +47,7 @@
 //}
 package service.blservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
 import objects.HotelStrategy;
@@ -55,7 +56,7 @@ import objects.WebStrategy;
 import vo.HotelStrategyVO;
 import vo.WebStrategyVO;
 
-public interface StrategyBLService {
+public interface StrategyBLService extends Remote{
 	// 提供给界面调用的接口
 
 	/**

@@ -103,12 +103,17 @@
 //}
 package service.blservice;
 
+import java.rmi.Remote;
 import java.util.ArrayList;
 
-import vo.*;
-import objects.*;
+import objects.OrderState;
+import objects.ResultMessage;
+import objects.RoomType;
+import vo.HotelStrategyVO;
+import vo.OrderVO;
+import vo.WebStrategyVO;
 
-public interface OrderBLService {
+public interface OrderBLService extends Remote{
 	// 提供给界面调用的接口
 	/**
 	 * @param clientid
@@ -194,8 +199,8 @@ public interface OrderBLService {
 	 * @param list2
 	 * @return 计算订单总价（有促销策略）
 	 */
-	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
-			ArrayList<WebStrategy> list2);
+	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategyVO> list1,
+			ArrayList<WebStrategyVO> list2);
 
 	// 提供给同层调用的接口
 	/**
