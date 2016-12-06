@@ -8,6 +8,7 @@ import objects.ResultMessage;
 import objects.RoomType;
 import objects.WebStrategy;
 import po.OrderPO;
+import service.Change;
 import service.blservice.OrderBLService;
 import service.dataservice.OrderDataService;
 import service.dataservice.Impl.OrderDataServiceImpl;
@@ -15,7 +16,7 @@ import vo.OrderVO;
 
 public class OrderBLServiceImpl implements OrderBLService {
 	OrderDataService orderdataservice=new OrderDataServiceImpl();
-	
+	Change change =new Change();
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) {
 		// TODO Auto-generated method stub
@@ -65,9 +66,9 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ResultMessage order_client_generate(OrderVO vo) {
 		// TODO Auto-generated method stub
+		OrderPO po=change.ordervo_to_orderpo(vo);
 		ResultMessage result=orderdataservice.insert(po);
-		
-		return null;
+		return result;
 	}
 
 	@Override
@@ -79,6 +80,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ArrayList<OrderVO> order_market_browseUnfilled() {
 		// TODO Auto-generated method stub
+//		ArrayList<OrderPO> unfilled_order_list=orderdataservice.
 		return null;
 	}
 

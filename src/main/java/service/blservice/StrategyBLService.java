@@ -49,7 +49,11 @@ package service.blservice;
 
 import java.util.ArrayList;
 
-import objects.*;
+import objects.HotelStrategy;
+import objects.ResultMessage;
+import objects.WebStrategy;
+import vo.HotelStrategyVO;
+import vo.WebStrategyVO;
 
 public interface StrategyBLService {
 	// 提供给界面调用的接口
@@ -58,25 +62,25 @@ public interface StrategyBLService {
 	 * @param input
 	 * @return 酒店添加促销策略
 	 */
-	public ResultMessage hotelstrategy_make(HotelStrategy strategy);
+	public ResultMessage hotelstrategy_make(HotelStrategyVO strategyvo);
 
 	/**
 	 * @param strategy
 	 * @return 酒店更新促销策略
 	 */
-	public ResultMessage hotelstrategy_update(HotelStrategy strategy);
+	public ResultMessage hotelstrategy_update(HotelStrategyVO strategyvo);
 
 	/**
 	 * @param strategy
 	 * @return 网站营销人员添加促销策略
 	 */
-	public ResultMessage webstrategy_make(WebStrategy strategy);
+	public ResultMessage webstrategy_make(WebStrategyVO strategyvo);
 
 	/**
 	 * @param strategy
 	 * @return 网站营销人员更新促销策略
 	 */
-	public ResultMessage webstrategy_update(WebStrategy strategy);
+	public ResultMessage webstrategy_update(WebStrategyVO strategyvo);
 
 	// 提供给同层调用的接口
 	/**

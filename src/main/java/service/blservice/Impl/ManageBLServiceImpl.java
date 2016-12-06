@@ -4,6 +4,7 @@ import objects.Client;
 import objects.HotelWorker;
 import objects.ResultMessage;
 import po.WebMarketPO;
+import service.Change;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
 import service.blservice.ManageBLService;
@@ -18,6 +19,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	ManageDataService managedataservice=new ManageDataServiceImpl();
 	HotelBLService hotelblservice=new HotelBLServiceImpl();
 	ClientBLService clientblservice=new ClientBLServiceImpl();
+	Change change=new Change();
 	@Override
 	public ClientVO manage_searchClient(int clientid) {
 		// TODO Auto-generated method stub
@@ -30,8 +32,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	public ResultMessage manage_updateClient(ClientVO clientvo) {
 		// TODO Auto-generated method stub
 		ResultMessage result=clientblservice.client_updateInfo(clientvo);
-		
-		return null;
+		return result;
 	}
 
 	@Override
@@ -83,8 +84,9 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage manage_updateMarketWorker(WebMarketVO mw) {
 		// TODO Auto-generated method stub
+		WebMarketPO po=change.marketvo_to_marketpo(mw);
 		ResultMessage result=managedataservice.updateWebMarket(po);
-		return null;
+		return result;
 	}
 	
 

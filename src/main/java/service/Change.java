@@ -1,9 +1,12 @@
 package service;
+import java.util.ArrayList;
+
 import po.ClientPO;
 import po.HotelPO;
 import po.HotelStrategyPO;
 import po.HotelWorkerPO;
 import po.OrderPO;
+import po.RoomOrderPO;
 import po.WebManagerPO;
 import po.WebMarketPO;
 import po.WebStrategyPO;
@@ -12,12 +15,13 @@ import vo.HotelStrategyVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
+import vo.RoomOrderVO;
 import vo.WebManagerVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
 
 public class Change {
-	
+	Change change=new Change();
 	public ClientPO clientvo_to_clientpo(ClientVO clientvo){
 		ClientPO clientpo=new ClientPO();
 		clientpo.setClientid(clientvo.getClientid());
@@ -57,7 +61,13 @@ public class Change {
 		orderpo.setstart_time(ordervo.getstart_time());
 		orderpo.setend_time(ordervo.getend_time());
 		orderpo.setlatest_execute_time(ordervo.getlatest_execute_time());
-		orderpo.setroom_order(ordervo.getroom_order());
+		ArrayList<RoomOrderPO> roomorderpo_list=new ArrayList<RoomOrderPO>();
+		ArrayList<RoomOrderVO> roomordervo_list=ordervo.getroom_order();
+		for(int i=0;i<roomordervo_list.size();i++){
+			RoomOrderPO roomorderpo=change.roomordervo_to_roomorderpo(roomordervo_list.get(i));
+			roomorderpo_list.add(roomorderpo);
+		}
+		orderpo.setroom_order(roomorderpo_list);
 		orderpo.setprice(ordervo.getprice());
 		orderpo.setexpect_number_of_people(ordervo.getexpect_number_of_people());
 		orderpo.sethave_child(ordervo.gethave_child());
@@ -119,5 +129,11 @@ public class Change {
 		return po;
 	}
 	
+	public RoomOrderPO roomordervo_to_roomorderpo(RoomOrderVO vo){
+		RoomOrderPO po=new RoomOrderPO();
+		po.setroom_type(vo.getroom_type());
+		po.setroom_number(vo.getroom_number());
+		return po;
+	}
 	
 }
