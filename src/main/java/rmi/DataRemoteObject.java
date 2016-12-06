@@ -10,7 +10,6 @@ import objects.HotelStrategy;
 import objects.HotelWorker;
 import objects.OrderState;
 import objects.ResultMessage;
-import objects.Room;
 import objects.RoomType;
 import objects.VIPInfo;
 import objects.WebStrategy;
@@ -31,6 +30,7 @@ import vo.HotelStrategyVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
+import vo.RoomVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
 
@@ -56,116 +56,116 @@ public class DataRemoteObject extends UnicastRemoteObject
 	
 
 	@Override
-	public ResultMessage hotelstrategy_make(HotelStrategyVO strategyvo) {
+	public ResultMessage hotelstrategy_make(HotelStrategyVO strategyvo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return strategybl.hotelstrategy_make(strategyvo);
 	}
 
 	@Override
-	public ResultMessage hotelstrategy_update(HotelStrategyVO strategyvo) {
+	public ResultMessage hotelstrategy_update(HotelStrategyVO strategyvo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return strategybl.hotelstrategy_update(strategyvo);
 	}
 
 	@Override
-	public ResultMessage webstrategy_make(WebStrategyVO strategyvo) {
+	public ResultMessage webstrategy_make(WebStrategyVO strategyvo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return strategybl.webstrategy_make(strategyvo);
 	}
 
 	@Override
-	public ResultMessage webstrategy_update(WebStrategyVO strategyvo) {
+	public ResultMessage webstrategy_update(WebStrategyVO strategyvo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return strategybl.webstrategy_update(strategyvo);
 	}
 
 	@Override
-	public ArrayList<HotelStrategy> getStrategy(int hotelid, int clientid) {
+	public ArrayList<HotelStrategyVO> getStrategy(int hotelid, int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return strategybl.getStrategy(hotelid, clientid);
 	}
 
 	@Override
-	public ArrayList<WebStrategy> getStrategy(int clientid) {
+	public ArrayList<WebStrategyVO> getStrategy(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return strategybl.getStrategy(clientid);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid) {
+	public ArrayList<OrderVO> order_client_browse(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_client_browse(clientid);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid, OrderState state) {
+	public ArrayList<OrderVO> order_client_browse(int clientid, String state) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_client_browse(clientid, state);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute) {
+	public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_client_browse(clientid, isExecute);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid) {
+	public ArrayList<OrderVO> order_hotel_browse(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_hotel_browse(hotelid);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid, OrderState state) {
+	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_hotel_browse(hotelid, state);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) {
+	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_hotel_browse(hotelid, isExecute);
 	}
 
 	@Override
-	public ResultMessage order_client_cancel(int clientid, int orderid) {
+	public ResultMessage order_client_cancel(int clientid, int orderid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_client_cancel(clientid, orderid);
 	}
 
 	@Override
-	public ResultMessage order_client_generate(OrderVO vo) {
+	public ResultMessage order_client_generate(OrderVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_client_generate(vo);
 	}
 
 	@Override
-	public ResultMessage order_hotel_execute(int orderid) {
+	public ResultMessage order_hotel_execute(int orderid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_hotel_execute(orderid);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_market_browseUnfilled() {
+	public ArrayList<OrderVO> order_market_browseUnfilled() throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_market_browseUnfilled();
 	}
 
 	@Override
-	public ResultMessage order_market_cancelAbnormal(int orderid) {
+	public ResultMessage order_market_cancelAbnormal(int orderid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_market_cancelAbnormal(orderid);
 	}
 
 	@Override
-	public int calculateTotalwithoutStrategy(RoomType type, int num) {
+	public int calculateTotalwithoutStrategy(RoomType type, int num) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.calculateTotalwithoutStrategy(type, num);
 	}
 
 	@Override
-	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
-			ArrayList<WebStrategy> list2) {
+	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategyVO> list1,
+			ArrayList<WebStrategyVO> list2) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.calculateTotalwithStrategy(type, num, list1, list2);
 	}
@@ -177,79 +177,79 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ClientVO manage_searchClient(int clientid) {
+	public ClientVO manage_searchClient(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_searchClient(clientid);
 	}
 
 	@Override
-	public ResultMessage manage_updateClient(ClientVO clientvo) {
+	public ResultMessage manage_updateClient(ClientVO clientvo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_updateClient(clientvo);
 	}
 
 	@Override
-	public ResultMessage manage_addHotel(HotelVO hotelvo) {
+	public ResultMessage manage_addHotel(HotelVO hotelvo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_addHotel(hotelvo);
 	}
 
 	@Override
-	public ResultMessage manage_addHotelWorker(HotelWorkerVO w) {
+	public ResultMessage manage_addHotelWorker(HotelWorkerVO w) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_addHotelWorker(w);
 	}
 
 	@Override
-	public HotelWorkerVO manage_searchHotelWorker(int hotelid) {
+	public HotelWorkerVO manage_searchHotelWorker(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_searchHotelWorker(hotelid);
 	}
 
 	@Override
-	public ResultMessage manage_updateHotelWorker(HotelWorkerVO w) {
+	public ResultMessage manage_updateHotelWorker(HotelWorkerVO w) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_updateHotelWorker(w);
 	}
 
 	@Override
-	public ResultMessage manage_addMarketWorker(WebMarketVO mw) {
+	public ResultMessage manage_addMarketWorker(WebMarketVO mw) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_addMarketWorker(mw);
 	}
 
 	@Override
-	public WebMarketVO manage_searchMarketWorker(int marketWorkerid) {
+	public WebMarketVO manage_searchMarketWorker(int marketWorkerid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_searchMarketWorker(marketWorkerid);
 	}
 
 	@Override
-	public ResultMessage manage_updateMarketWorker(WebMarketVO mw) {
+	public ResultMessage manage_updateMarketWorker(WebMarketVO mw) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.manage_updateMarketWorker(mw);
 	}
 
 	@Override
-	public HotelVO hotel_checkInfo(int hotelid) {
+	public HotelVO hotel_checkInfo(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return hotelbl.hotel_checkInfo(hotelid);
 	}
 
 	@Override
-	public ResultMessage hotel_updateInfo(HotelVO vo) {
+	public ResultMessage hotel_updateInfo(HotelVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return hotelbl.hotel_updateInfo(vo);
 	}
 
 	@Override
-	public ResultMessage hotel_importRoom(Room room) {
+	public ResultMessage hotel_importRoom(RoomVO room) throws RemoteException {
 		// TODO Auto-generated method stub
 		return hotelbl.hotel_importRoom(room);
 	}
 
 	@Override
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info) {
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info) throws RemoteException {
 		// TODO Auto-generated method stub
 		return hotelbl.hotel_updateAccomodation(info);
 	}
@@ -291,91 +291,91 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ClientVO client_checkInfo(int clientid) {
+	public ClientVO client_checkInfo(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_checkInfo(clientid);
 	}
 
 	@Override
-	public ResultMessage client_updateInfo(ClientVO vo) {
+	public ResultMessage client_updateInfo(ClientVO vo) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_updateInfo(vo);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_getpreviousHotelList(int clientid) {
+	public ArrayList<HotelVO> client_getpreviousHotelList(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_getpreviousHotelList(clientid);
 	}
 
 	@Override
-	public int client_checkCredit(int clientid) {
+	public int client_checkCredit(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_checkCredit(clientid);
 	}
 
 	@Override
-	public ArrayList<String> client_checkCreditList(int clientid) {
+	public ArrayList<String> client_checkCreditList(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_checkCreditList(clientid);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_setLocation(String location) {
+	public ArrayList<HotelVO> client_setLocation(String location) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_setLocation(location);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(String hotelname) {
+	public ArrayList<HotelVO> client_searchHotel(String hotelname) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_searchHotel(hotelname);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(RoomType type) {
+	public ArrayList<HotelVO> client_searchHotel(RoomType type) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_searchHotel(type);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(int lowprice, int highprice) {
+	public ArrayList<HotelVO> client_searchHotel(int lowprice, int highprice) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_searchHotel(lowprice, highprice);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(String inTime, String leaveTime) {
+	public ArrayList<HotelVO> client_searchHotel(String inTime, String leaveTime) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_searchHotel(inTime, leaveTime);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(int star) {
+	public ArrayList<HotelVO> client_searchHotel(int star) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_searchHotel(star);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(double lowscore, double highscore) {
+	public ArrayList<HotelVO> client_searchHotel(double lowscore, double highscore) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_searchHotel(lowscore, highscore);
 	}
 
 	@Override
-	public HotelVO client_checkHotelInfo(int hotelid) {
+	public HotelVO client_checkHotelInfo(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_checkHotelInfo(hotelid);
 	}
 
 	@Override
-	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid) {
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_evaluateHotel(e, clientid);
 	}
 
 	@Override
-	public ResultMessage client_enrollVIP(VIPInfo info, int clientid) {
+	public ResultMessage client_enrollVIP(VIPInfo info, int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_enrollVIP(info, clientid);
 	}

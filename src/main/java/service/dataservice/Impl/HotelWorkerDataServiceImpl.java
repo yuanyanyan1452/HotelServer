@@ -20,7 +20,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        HotelWorkerPO po = new HotelWorkerPO(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4));
+	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt(1),rs.getString(2),rs.getString(3));
 			return po;
 	        }
 	    } catch (SQLException e) {
@@ -31,19 +31,18 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
 	
 	@Override
-	public synchronized ResultMessage insert(HotelWorkerPO po){
+	public ResultMessage insert(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "insert into hotelworker(hotelid,Name,Contact,hotel) values(NULL,?,?,?)";
+	    String sql = "insert into hotelworker(hotelid,Name,Contact) values(NULL,encode(?,'key'),encode(?,'key'))";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
 	        pstmt.setString(1, po.getname());
 	        pstmt.setString(2, po.getcontact());
-	        pstmt.setString(3, po.gethotel());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
-	        setid(po);	//setid
+	        set_id(po);	//setid
 	        return ResultMessage.Success;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -51,9 +50,10 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	    }
 	}
 	
-	public void setid(HotelWorkerPO po){
+
+	public void set_id(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "select * from hotelworker where name = '"+po.getname()+"' and contact = '" +po.getcontact()+"'" ;	//需要执行的sql语句
+		 String sql = "select max(id) from hotelworker" ;	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -67,16 +67,15 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	}
 	
 	@Override
-	public synchronized ResultMessage update(HotelWorkerPO po){
+	public ResultMessage update(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "update hotelworker set name=?,contact=?,hotel=? where id=?";
+	    String sql = "update hotelworker set name=encode(?,'key'),contact=(?,'key') where id=?";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
 	        pstmt.setString(1, po.getname());
 	        pstmt.setString(2, po.getcontact());
-	        pstmt.setString(3, po.gethotel());
-	        pstmt.setInt(4, po.gethotelid());
+	        pstmt.setInt(3, po.gethotelid());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
@@ -88,7 +87,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	}
 	
 	@Override
-	public synchronized ResultMessage delete(HotelWorkerPO po){
+	public ResultMessage delete(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
 	    String sql = "delete from hotelworker where id='" + po.gethotelid() + "'";
 	    PreparedStatement pstmt;

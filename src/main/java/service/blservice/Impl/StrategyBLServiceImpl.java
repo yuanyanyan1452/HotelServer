@@ -7,7 +7,7 @@ import objects.ResultMessage;
 import objects.WebStrategy;
 import po.HotelStrategyPO;
 import po.WebStrategyPO;
-import service.Change;
+import service.VOChange;
 import service.blservice.StrategyBLService;
 import service.dataservice.StrategyDataService;
 import service.dataservice.Impl.StrategyDataServiceImpl;
@@ -16,11 +16,11 @@ import vo.WebStrategyVO;
 
 public class StrategyBLServiceImpl implements StrategyBLService {
 	StrategyDataService strategydataservice=new StrategyDataServiceImpl();
-	Change change=new Change();
+	VOChange vochange=new VOChange();
 	@Override
 	public ResultMessage hotelstrategy_make(HotelStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		HotelStrategyPO po=change.hotelstrategyvo_to_hotelstrategypo(strategyvo);
+		HotelStrategyPO po=vochange.hotelstrategyvo_to_hotelstrategypo(strategyvo);
 		ResultMessage result=strategydataservice.insert_hotel(po);
 		return null;
 	}
@@ -28,7 +28,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	@Override
 	public ResultMessage hotelstrategy_update(HotelStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		HotelStrategyPO po=change.hotelstrategyvo_to_hotelstrategypo(strategyvo);
+		HotelStrategyPO po=vochange.hotelstrategyvo_to_hotelstrategypo(strategyvo);
 		ResultMessage result=strategydataservice.update_hotel(po);
 		return null;
 	}
@@ -36,7 +36,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	@Override
 	public ResultMessage webstrategy_make(WebStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		WebStrategyPO po=change.webstrategyvo_to_webstrategypo(strategyvo);
+		WebStrategyPO po=vochange.webstrategyvo_to_webstrategypo(strategyvo);
 		ResultMessage result=strategydataservice.insert_web(po);
 		return null;
 	}
@@ -44,13 +44,13 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	@Override
 	public ResultMessage webstrategy_update(WebStrategyVO strategyvo) {
 		// TODO Auto-generated method stub
-		WebStrategyPO po=change.webstrategyvo_to_webstrategypo(strategyvo);
+		WebStrategyPO po=vochange.webstrategyvo_to_webstrategypo(strategyvo);
 		ResultMessage result=strategydataservice.update_web(po);
 		return null;
 	}
 
 	@Override
-	public ArrayList<HotelStrategy> getStrategy(int hotelid, int clientid) {
+	public ArrayList<HotelStrategyVO> getStrategy(int hotelid, int clientid) {
 		// TODO Auto-generated method stub
 		ArrayList<HotelStrategyPO> hotelstrategypo_list=strategydataservice.showlist_hotel();
 		
@@ -58,7 +58,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	}
 
 	@Override
-	public ArrayList<WebStrategy> getStrategy(int clientid) {
+	public ArrayList<WebStrategyVO> getStrategy(int clientid) {
 		// TODO Auto-generated method stub
 		ArrayList<WebStrategyPO> hotelstrategypo_list=strategydataservice.showlist_web();
 		

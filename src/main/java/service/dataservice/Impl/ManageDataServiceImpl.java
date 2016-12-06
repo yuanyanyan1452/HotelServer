@@ -1,5 +1,8 @@
 package service.dataservice.Impl;
-
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,12 +18,13 @@ public class ManageDataServiceImpl implements ManageDataService {
 	public static void main(String args[]){
 //		String webmarketname = "Rose";
 		ManageDataServiceImpl a = new ManageDataServiceImpl();
-//		a.findWebMarket(webmarketname);
+//		a.findWebMarket(5);
 //		
 		WebMarketPO po1 = new WebMarketPO(1,"David","123456789");
-//		a.insertWebMarket(po1);
+		a.insertWebMarket(po1);
+		a.findWebMarket(6);
 		
-		a.updateWebMarket(po1);
+//		a.updateWebMarket(po1);
 	}
 	
 	@Override
@@ -32,8 +36,8 @@ public class ManageDataServiceImpl implements ManageDataService {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        WebMarketPO po = new WebMarketPO(rs.getInt(1),rs.getString(2),rs.getString(3));
-			return po;
+	        WebMarketPO po = new WebMarketPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")));
+	        return po;
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -44,7 +48,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage insertWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
-	    String sql = "insert into webmarket(id,Name,Contact) values(NULL,?,?)";
+	    String sql = "insert into webmarket(id,Name,Contact) values(NULL,encode(?,'key'),encode(?,'key'))";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -53,17 +57,17 @@ public class ManageDataServiceImpl implements ManageDataService {
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
-	        setid(po);	//setid
+	        set_id(po);	//setid
 	        return ResultMessage.Success;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        return ResultMessage.Fail;
+	        return ResultMessage.Fail; 
 	    }
 	}
 	
-	public void setid(WebMarketPO po){
+	public synchronized void set_id(WebMarketPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "select * from webmarket where contact = " +"\""+po.getcontact()+"\"" ;	//需要执行的sql语句
+	    String sql = "select max(id) from webmarket" ;	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -79,7 +83,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage updateWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
-	    String sql = "update webmarket set name=?,contact=? where id=?";
+	    String sql = "update webmarket set name=encode(?,'key'),contact=encode(?,'key') where id=?";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -114,15 +118,15 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
   
 	@Override
-	public WebManagerPO findWebManager(String WebManagername) {
+	public synchronized WebManagerPO findWebManager(int WebManagerid) {
 		Connection conn = Connect.getConn();
-	    String sql = "select * from webmanager where name = '" + WebManagername +"'";	//需要执行的sql语句
+	    String sql = "select id,decode(name,'key'),decode(contact,'key') from webmanager where id = '" + WebManagerid +"'";	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        WebManagerPO po = new WebManagerPO(rs.getString(1),rs.getString(2));
+	        WebManagerPO po = new WebManagerPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")));
 			return po;
 	        }
 	    } catch (SQLException e) {
@@ -132,20 +136,34 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 
 	@Override
-	public ResultMessage insertWebManager(WebManagerPO po) {
-		// TODO Auto-generated method stub
-		return null;
+	public synchronized ResultMessage insertWebManager(WebManagerPO po) {
+		Connection conn = Connect.getConn();
+	    String sql = "insert into webnamager(id,Name,Contact) values(NULL,encode(?,'key'),encode(?,'key'))";
+	    PreparedStatement pstmt;
+	    ByteArrayInputStream stream = null;
+	    try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        pstmt.setString(1, po.getName());
+	        pstmt.setString(2, po.getContact());
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        conn.close();
+	        return ResultMessage.Success;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return ResultMessage.Fail;
+	    }
 	}
 
 	@Override
 	public synchronized ResultMessage updateWebManager(WebManagerPO po) {
 		Connection conn = Connect.getConn();
-	    String sql = "update webmanager set contact=? where name=?";
+	    String sql = "update webmanager set name=encode(?,'key'),contact=encode(?,'key') where id=" +po.getWebmanagerid();
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
-	        pstmt.setString(2, po.getname());
-	        pstmt.setString(1, po.getcontact());
+	        pstmt.setString(1, po.getName());
+	        pstmt.setString(2, po.getContact());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
@@ -157,8 +175,39 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 
 	@Override
-	public ResultMessage deleteWebManager(WebManagerPO po) {
-		// TODO Auto-generated method stub
+	public synchronized ResultMessage deleteWebManager(WebManagerPO po) {
+		Connection conn = Connect.getConn();
+	    String sql = "delete from webmarket where id =" + po.getWebmanagerid();
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
+	        pstmt.executeUpdate();
+	        pstmt.close();
+	        conn.close();
+	        return ResultMessage.Success;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return ResultMessage.Fail;
+	}
+	
+	/**
+	 * 将blob类型转化成string
+	 * @param blob
+	 * @return
+	 */
+	public String BlobtoString(Blob blob){
+		try{
+			InputStream is = blob.getBinaryStream();
+			byte[] b = new byte[is.available()];
+			is.read(b, 0, b.length);
+			String str = new String(b);
+			return str;
+		}catch(IOException e){
+			e.printStackTrace();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 		return null;
 	}
 

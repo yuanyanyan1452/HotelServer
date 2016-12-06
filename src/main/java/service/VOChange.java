@@ -22,17 +22,17 @@ import vo.WebManagerVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
 
-public class Change {
-	Change change=new Change();
+public class VOChange {
+	VOChange change=new VOChange();
 	public ClientPO clientvo_to_clientpo(ClientVO clientvo){
 		ClientPO clientpo=new ClientPO();
-		clientpo.setClientid(clientvo.getClientid());
+		clientpo.setclientid(clientvo.getclientid());
 		clientpo.setusername(clientvo.getusername());
 		clientpo.setpassword(clientvo.getpassword());
-		clientpo.setClient_name(clientvo.getClient_name());
-		clientpo.setContact(clientvo.getContact());
-		clientpo.setCredit(clientvo.getCredit());
-		clientpo.setCredit_record(clientvo.getCredit_record());
+		clientpo.setclient_name(clientvo.getclient_name());
+		clientpo.setcontact(clientvo.getcontact());
+		clientpo.setcredit(clientvo.getcredit());
+		clientpo.setcredit_record(clientvo.getcredit_record());
 //		clientpo.setVIPInfo(clientvo.getVIPInfo());
 		return clientpo;
 	}
@@ -48,7 +48,7 @@ public class Change {
 		hotelpo.setstar(hotelvo.getstar());
 		hotelpo.setmin_price(hotelvo.getmin_price());
 		hotelpo.setbook_clientid(hotelvo.getbook_clientid());
-		//评价没写
+		//评价,评分没写
 		return hotelpo;
 		
 	}
@@ -59,6 +59,7 @@ public class Change {
 		orderpo.setclientid(ordervo.getclientid());
 		orderpo.sethotelid(ordervo.gethotelid());
 		orderpo.setstate(ordervo.getstate());
+		orderpo.setcancel_time(ordervo.getcancel_time());
 		orderpo.setexecute(ordervo.getexecute());
 		orderpo.setstart_time(ordervo.getstart_time());
 		orderpo.setend_time(ordervo.getend_time());
@@ -73,7 +74,7 @@ public class Change {
 		orderpo.setprice(ordervo.getprice());
 		orderpo.setexpect_number_of_people(ordervo.getexpect_number_of_people());
 		orderpo.sethave_child(ordervo.gethave_child());
-		//策略没写
+	
 		return orderpo;
 	}
 	
@@ -108,26 +109,27 @@ public class Change {
 		po.setusername(vo.getusername());
 		po.setpassword(vo.getpassword());
 		po.setname(vo.getname());
-		po.setContact(vo.getcontact());
-		po.sethotel(vo.gethotel());
+		po.setcontact(vo.getcontact());
 		return po;
 	}
 	
 	public WebManagerPO managervo_to_managerpo(WebManagerVO vo){
 		WebManagerPO po=new WebManagerPO();
+		po.setwebmanagerid(vo.getwebmanagerid());
 		po.setusername(vo.getusername());
 		po.setpassword(vo.getpassword());
 		po.setname(vo.getname());
-		po.setContact(vo.getcontact());
+		po.setcontact(vo.getcontact());
 		return po;
 	}
 	
 	public WebMarketPO marketvo_to_marketpo(WebMarketVO vo){
 		WebMarketPO po=new WebMarketPO();
+		po.setwebmarketid(vo.getwebmarketid());
 		po.setusername(vo.getusername());
 		po.setpassword(vo.getpassword());
 		po.setname(vo.getname());
-		po.setContact(vo.getcontact());
+		po.setcontact(vo.getcontact());
 		return po;
 	}
 	

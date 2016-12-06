@@ -1,6 +1,7 @@
 package service.blservice;
 
 import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import objects.Hotel;
@@ -16,25 +17,25 @@ public interface HotelBLService extends Remote{
 	 * @param hotelid
 	 * @return 酒店查看详细信息
 	 */
-	public HotelVO hotel_checkInfo(int hotelid);
+	public HotelVO hotel_checkInfo(int hotelid)throws RemoteException;
 
 	/**
 	 * @param vo
 	 * @return 酒店更新详细信息
 	 */
-	public ResultMessage hotel_updateInfo(HotelVO vo);
+	public ResultMessage hotel_updateInfo(HotelVO vo)throws RemoteException;
 
 	/**
 	 * @param room
 	 * @return 酒店录入可用房间
 	 */
-	public ResultMessage hotel_importRoom(RoomVO room);
+	public ResultMessage hotel_importRoom(RoomVO room)throws RemoteException;
 
 	/**
 	 * @param info
 	 * @return 酒店更新入住信息
 	 */
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info);
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info)throws RemoteException;
 
 	// 提供给同层调用的接口
 	/**

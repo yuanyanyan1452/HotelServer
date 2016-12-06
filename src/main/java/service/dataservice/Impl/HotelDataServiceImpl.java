@@ -34,7 +34,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 				po.setservice(rs.getString("service"));
 				po.setstar(rs.getString("star"));
 				po.setscore(rs.getInt("score"));
-				po.setevaluation(rs.getString("hotel_evaluation"));
+				po.sethotel_evaluation(rs.getString("hotel_evaluation"));
 				po.setmin_price(rs.getInt("min_price"));
 				po.setbook_clientid(transformToArray(rs.getString("book_clientid")));
 				hotel_list.add(po);
@@ -67,7 +67,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setservice(rs.getString("service"));
 				hotelPO.setstar(rs.getString("star"));
 				hotelPO.setscore(rs.getInt("score"));
-				hotelPO.setevaluation(rs.getString("hotel_evaluation"));
+				hotelPO.sethotel_evaluation(rs.getString("hotel_evaluation"));
 				hotelPO.setmin_price(rs.getInt("min_price"));
 				hotelPO.setbook_clientid(transformToArray(rs.getString("book_clientid")));
 			}
@@ -98,7 +98,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setservice(rs.getString("service"));
 				hotelPO.setstar(rs.getString("star"));
 				hotelPO.setscore(rs.getInt("score"));
-				hotelPO.setevaluation(rs.getString("hotel_evaluation"));
+				hotelPO.sethotel_evaluation(rs.getString("hotel_evaluation"));
 				hotelPO.setmin_price(rs.getInt("min_price"));
 				hotelPO.setbook_clientid(transformToArray(rs.getString("book_clientid")));
 			}
@@ -132,7 +132,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(5, po.getservice());
 			ps.setString(6, po.getstar());
 			ps.setInt(7, po.getscore());
-			ps.setString(8, po.getevaluation());
+			ps.setString(8, po.gethotel_evaluation());
 			ps.setInt(9, po.getmin_price());
 			ps.setString(10, transformToStr(po.getbook_clientid()));
 			int i=ps.executeUpdate();
@@ -180,7 +180,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(5, po.getservice());
 			ps.setString(6, po.getstar());
 			ps.setInt(7, po.getscore());
-			ps.setString(8, po.getevaluation());
+			ps.setString(8, po.gethotel_evaluation());
 			ps.setInt(9, po.getmin_price());
 			ps.setString(10,transformToStr(po.getbook_clientid()));
 			ps.setInt(11, po.getid());

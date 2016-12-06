@@ -3,42 +3,61 @@ package po;
 import java.io.Serializable;
 
 public class WebManagerPO implements Serializable{
-	String username;
-	String password;
+	int webmanagerid;
 	String name;
 	String contact;
+	String username;
+	String password;
 	
-	public WebManagerPO(String u,String p,String n,String c){
-		username=u;
-		password=p;
+	public WebManagerPO(){
+		webmanagerid=0;
+		name=null;
+		contact=null;
+		username=null;
+		password=null;
+	}
+	
+	public WebManagerPO(int i,String n,String c,String u,String p){
+		webmanagerid = i;
 		name=n;
 		contact=c;
+		username=u;
+		password=p;
+//		id=i;
 	}
-	public WebManagerPO() {
-		// TODO Auto-generated constructor stub
+	public int getwebmanagerid() {
+		return webmanagerid;
 	}
-	public String getusername(){
-		return username;
+	public void setwebmanagerid(int webmanagerid) {
+		this.webmanagerid = webmanagerid;
 	}
-	public void setusername(String um){
-		username=um;;
-	}
-	public String getpassword(){
-		return password;
-	}
-	public void setpassword(String pass){
-		password=pass;
+	
+	public void setname(String name) {
+		this.name = name;
 	}
 	public String getname(){
 		return name;
 	}
-	public void setname(String na) {
-		name = na;
+	
+	
+	public void setcontact(String contact) {
+		this.contact = contact;
 	}
 	public String getcontact(){
 		return contact;
 	}
-	public void setContact(String contact) {
-		this.contact = contact;
+	
+	public void setusername(String username) {
+		this.username = username;
+	}
+	public String getusername() {
+		return username;
+	}
+	
+	public String getpassword() {
+		return password;
+	}
+	public void setpassword(String password) {
+		this.password = password;
 	}
 }

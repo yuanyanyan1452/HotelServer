@@ -4,58 +4,60 @@ import java.io.Serializable;
 
 public class HotelWorkerPO implements Serializable{
 	int hotelid;
-	String username;
-	String password;
 	String name;
 	String contact;
-	String hotel;
+	String username;
+	String password;
 	
-	public HotelWorkerPO(int id,String user,String pa,String n,String c,String h){
-		hotelid = id;
-		username=user;
-		password=pa;
+	public HotelWorkerPO(){
+		hotelid=0;
+		name=null;
+		contact=null;
+		username=null;
+		password=null;
+	}
+	
+	public HotelWorkerPO(int id,String n,String c,String u,String p){
+		hotelid=id;
 		name=n;
 		contact=c;
-		hotel=h;
+		username=u;
+		password=p;
 	}
-	public HotelWorkerPO() {
-		// TODO Auto-generated constructor stub
-	}
-	public int gethotelid(){
+	
+	public int gethotelid() {
 		return hotelid;
 	}
-
-	public void sethotelid(int id){
-		hotelid=id;
+	public void sethotelid(int hotelid) {
+		this.hotelid = hotelid;
 	}
-	public String getusername(){
-		return username;
+	
+	public void setname(String name) {
+		this.name = name;
 	}
-	public void setusername(String um){
-		username=um;;
-	}
-	public String getpassword(){
-		return password;
-	}
-	public void setpassword(String pass){
-		password=pass;
-	}
-	public String getname(){
+	public String getname() {
 		return name;
 	}
-	public void setname(String na) {
-		name = na;
-	}
-	public String getcontact(){
-		return contact;
-	}
-	public void setContact(String contact) {
+	
+	public void setcontact(String contact) {
 		this.contact = contact;
 	}
-	public String gethotel(){
-		return hotel;
+	public String getcontact() {
+		return contact;
 	}
-	public void sethotel(String h){
-		hotel=h;
+
+	public String getusername() {
+		return username;
 	}
+	public void setusername(String username) {
+		this.username = username;
+	}
+
+	public String getpassword() {
+		return password;
+	}
+	public void setpassword(String password) {
+		this.password = password;
+	}
+	
 }

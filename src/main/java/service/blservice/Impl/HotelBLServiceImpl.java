@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import objects.Hotel;
 import objects.HotelWorker;
+import objects.ObjectChange;
 import objects.ResultMessage;
 import po.HotelPO;
 import po.HotelWorkerPO;
 import po.RoomPO;
-import service.Change;
+import service.VOChange;
 import service.blservice.HotelBLService;
 import service.dataservice.HotelDataService;
 import service.dataservice.HotelWorkerDataService;
@@ -24,7 +25,8 @@ public class HotelBLServiceImpl implements HotelBLService {
 	HotelDataService hoteldataservice=new HotelDataServiceImpl();
 	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();		
 	RoomDataService roomdataservice=new RoomDataServiceImpl();
-	Change change =new Change();
+	VOChange vochange =new VOChange();
+	ObjectChange objectchange=new ObjectChange();
 	@Override
 	public HotelVO hotel_checkInfo(int hotelid) {
 		// TODO Auto-generated method stub
@@ -36,16 +38,15 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage hotel_updateInfo(HotelVO vo) {
 		// TODO Auto-generated method stub
-		HotelPO po=new HotelPO();
+		HotelPO po=vochange.hotelvo_to_hotelpo(vo);
 		ResultMessage result=hoteldataservice.update(po);
-		
-		return null;
+		return result;
 	}
 
 	@Override
 	public ResultMessage hotel_importRoom(RoomVO room) {
 		// TODO Auto-generated method stub
-		RoomPO po=change.roomvo_to_roompo(room);
+		RoomPO po=vochange.roomvo_to_roompo(room);
 		ResultMessage result=roomdataservice.insert(po);
 		return result;
 	}
@@ -84,10 +85,9 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage addHotelWorker(HotelWorker worker) {
 		// TODO Auto-generated method stub
-		HotelWorkerPO po=new HotelWorkerPO();
+		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
 		ResultMessage result=hotelworkerdataservice.insert(po);
-		
-		return null;
+		return result;
 	}
 
 	@Override
@@ -101,10 +101,9 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage updateHotelWokerInfo(int hotelid, HotelWorker worker) {
 		// TODO Auto-generated method stub
-		HotelWorkerPO po=new HotelWorkerPO();
+		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
 		ResultMessage result=hotelworkerdataservice.update(po);
-		
-		return null;
+		return result;
 	}
 
 

@@ -1,14 +1,16 @@
 package service.blservice.Impl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import objects.Client;
 import objects.Hotel;
+import objects.ObjectChange;
 import objects.ResultMessage;
 import objects.RoomType;
 import objects.VIPInfo;
 import po.ClientPO;
-import service.Change;
+import service.VOChange;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
 import service.dataservice.ClientDataService;
@@ -20,7 +22,17 @@ import vo.HotelVO;
 public class ClientBLServiceImpl implements ClientBLService {
 	ClientDataService clientdataservice=new ClientDataServiceImpl();
 	HotelBLService hotelblservice=new HotelBLServiceImpl();
-	Change change =new Change();
+	VOChange vochange =new VOChange();
+	ObjectChange objectchange=new ObjectChange();
+	
+	public ResultMessage client_login(String username,String password){
+		return null;
+	}
+	
+	public ResultMessage client_register(String username,String password){
+		return null;
+		
+	}
 	@Override
 	public ClientVO client_checkInfo(int clientid) {
 		// TODO Auto-generated method stub
@@ -32,7 +44,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage client_updateInfo(ClientVO vo) {
 		// TODO Auto-generated method stub
-		ClientPO po=change.clientvo_to_clientpo(vo);
+		ClientPO po=vochange.clientvo_to_clientpo(vo);
 		ResultMessage result=clientdataservice.update(po);
 		return result;
 	}
@@ -52,14 +64,14 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public int client_checkCredit(int clientid) {
 		// TODO Auto-generated method stub
-		int credit_number=clientdataservice.find(clientid).getCredit();
+		int credit_number=clientdataservice.find(clientid).getcredit();
 		return credit_number;
 	}
 
 	@Override
 	public ArrayList<String> client_checkCreditList(int clientid) {
 		// TODO Auto-generated method stub
-		ArrayList<String> credit_list=clientdataservice.find(clientid).getCredit_record();
+		ArrayList<String> credit_list=clientdataservice.find(clientid).getcredit_record();
 		return credit_list;
 	}
 
@@ -110,8 +122,8 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public HotelVO client_checkHotelInfo(int hotelid) {
 		// TODO Auto-generated method stub
 		Hotel hotel=hotelblservice.searchHotel(hotelid);
-//		HotelVO hotelvo
-		return null;
+		HotelVO hotelvo=objectchange.changetohotelvo(hotel);
+		return hotelvo;
 	}
 
 	@Override
@@ -125,16 +137,25 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public ResultMessage client_enrollVIP(VIPInfo info, int clientid) {
 		// TODO Auto-generated method stub
 		ClientPO po=clientdataservice.find(clientid);
-		po.setVIPInfo(info);
+		po.setvipinfo(info);
 		ResultMessage result=clientdataservice.update(po);
 		return result;
 	}
 
 	@Override
-	public ResultMessage updateClientCredit(int clientId, int value, int tag) {
+	public ResultMessage updateClientCredit(int clientid, int value, int tag) {
 		// TODO Auto-generated method stub
-		
-		return null;
+		ClientPO clientpo=clientdataservice.find(clientid);
+		int credit=clientpo.getclientid();
+		if(tag==1){
+			credit+=value;
+		}
+		else {
+			credit-=value;
+		}
+		clientpo.setcredit(credit);
+		ResultMessage result=clientdataservice.update(clientpo);
+		return result;
 	}
 
 	@Override
@@ -148,10 +169,9 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage updateClientInfo(Client client) {
 		// TODO Auto-generated method stub
-		ClientPO po=new ClientPO();
+		ClientPO po=objectchange.changetoclientpo(client);
 		ResultMessage result=clientdataservice.update(po);
-		
-		return null;
+		return result;
 	}
 
 }
