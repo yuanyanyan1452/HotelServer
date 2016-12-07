@@ -100,7 +100,8 @@ public class ManageBLServiceImpl implements ManageBLService {
 	public WebMarketVO manage_searchMarketWorker(int marketWorkerid) {
 		// TODO Auto-generated method stub
 		WebMarketPO webmarketpo=managedataservice.findWebMarket(marketWorkerid);
-		return null;
+		WebMarketVO webmarketvo=webmarketpo.changetowebmarketvo(webmarketpo);
+		return webmarketvo;
 	}
 
 	@Override

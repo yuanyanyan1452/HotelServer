@@ -7,6 +7,7 @@ import objects.Hotel;
 import objects.HotelWorker;
 import objects.ObjectChange;
 import objects.ResultMessage;
+import objects.RoomType;
 import po.HotelPO;
 import po.HotelWorkerPO;
 import po.RoomPO;
@@ -39,8 +40,8 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public HotelVO hotel_checkInfo(int hotelid) {
 		// TODO Auto-generated method stub
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
-		
-		return null;
+		HotelVO hotelvo=hotelpo.changetohotelvo(hotelpo);
+		return hotelvo;
 	}
 
 	@Override
@@ -69,25 +70,29 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public Hotel searchHotel(int hotelid) {
 		// TODO Auto-generated method stub
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
-		
-		return null;
+		Hotel hotel=hotelpo.changetohotel(hotelpo);
+		return hotel;
 	}
 
 	@Override
 	public ArrayList<Hotel> previousHotel(int clientid) {
 		// TODO Auto-generated method stub
-		ArrayList<HotelPO> previoushotel_list =hoteldataservice.showClientHotels(clientid);
-		
-		return null;
+		ArrayList<HotelPO> previoushotelpo_list =hoteldataservice.showClientHotels(clientid);
+		ArrayList<Hotel> previoushotel_list=new ArrayList<Hotel>();
+		for(int i=0;i<previoushotelpo_list.size();i++){
+			Hotel hotel=previoushotelpo_list.get(i).changetohotel(previoushotelpo_list.get(i));
+			previoushotel_list.add(hotel);
+		}
+		return previoushotel_list;
 	}
-
+	
+//
 	@Override
 	public ResultMessage addHotel(Hotel hotel) {
 		// TODO Auto-generated method stub
-		HotelPO po=new HotelPO();
+		HotelPO po=objectchange.changetohotelpo(hotel);
 		ResultMessage result=hoteldataservice.insert(po);
-		
-		return null;
+		return result;
 	}
 
 	@Override
@@ -102,8 +107,8 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public HotelWorker searchHotelWorker(int hotelid) {
 		// TODO Auto-generated method stub
 		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.find(hotelid);
-		
-		return null;
+		HotelWorker hotelworker=hotelworkerpo.changetohotelworker(hotelworkerpo);
+		return hotelworker;
 	}
 
 	@Override
@@ -112,6 +117,74 @@ public class HotelBLServiceImpl implements HotelBLService {
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
 		ResultMessage result=hotelworkerdataservice.update(po);
 		return result;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelBylocation(String address, String business_address) {
+		// TODO Auto-generated method stub
+		ArrayList<HotelPO> hotelpo_list=hoteldataservice.show_hotel_list(address, business_address);
+		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
+		for(int i=0;i<hotelpo_list.size();i++){
+			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
+			hotel_list.add(hotel);
+		}
+		return hotel_list;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByname(String hotelname) {
+		// TODO Auto-generated method stub
+//		ArrayList<HotelPO> hotelpo_list=hoteldataservice.findByName(hotelname);
+//		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
+//		for(int i=0;i<hotelpo_list.size();i++){
+//			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
+//			hotel_list.add(hotel);
+//		}
+//		return hotel_list;
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByroom(String type) {
+		// TODO Auto-generated method stub
+//		ArrayList<HotelPO> hotelpo_list=
+//		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
+//		for(int i=0;i<hotelpo_list.size();i++){
+//			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
+//			hotel_list.add(hotel);
+//		}
+//		return hotel_list;
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelBystar(String star) {
+		// TODO Auto-generated method stub
+		ArrayList<HotelPO> hotelpo_list=hoteldataservice.findByStar(star);
+		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
+		for(int i=0;i<hotelpo_list.size();i++){
+			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
+			hotel_list.add(hotel);
+		}
+		return hotel_list;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
