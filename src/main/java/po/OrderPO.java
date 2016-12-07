@@ -3,6 +3,9 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import objects.Order;
+import vo.OrderVO;
+
 public class OrderPO implements Serializable {
 	/**
 	 * 
@@ -142,5 +145,42 @@ public class OrderPO implements Serializable {
 	}
 	public boolean gethave_child(){
 		return havechild;
+	}
+	
+	public Order changetoorder(OrderPO po){
+		Order order=new Order();
+		order.setid(po.id);
+		order.setclientid(po.clientid);
+		order.sethotelid(po.hotelid);
+		order.setstate(po.state);
+		order.setcancel_time(po.cancel_time);
+		order.setexecute(po.execute);
+		order.setstart_time(po.start_time);
+		order.setend_time(po.end_time);
+		order.setlatest_execute_time(po.latest_execute_time);
+		order.setroom_order(po.room_order);
+		order.setprice(po.price);
+		order.setexpect_number_of_people(po.expect_number_of_people);
+		order.sethave_child(po.havechild);
+		return order;
+	}
+	
+	public OrderVO changetoordervo(OrderPO po){
+		OrderVO vo=new OrderVO();
+		vo.setid(po.id);
+		vo.setclientid(po.clientid);
+		vo.sethotelid(po.hotelid);
+		vo.setstate(po.state);
+		vo.setcancel_time(po.cancel_time);
+		vo.setexecute(po.execute);
+		vo.setstart_time(po.start_time);
+		vo.setend_time(po.end_time);
+		vo.setlatest_execute_time(po.latest_execute_time);
+		//po转vo
+		//vo.setroom_order(order.room_order);
+		vo.setprice(po.price);
+		vo.setexpect_number_of_people(po.expect_number_of_people);
+		vo.sethave_child(po.havechild);
+		return vo;
 	}
 }

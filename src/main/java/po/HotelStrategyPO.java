@@ -2,6 +2,9 @@ package po;
 
 import java.io.Serializable;
 
+import objects.HotelStrategy;
+import vo.HotelStrategyVO;
+
 public class HotelStrategyPO implements Serializable{
 	/**
 	 * 
@@ -92,5 +95,31 @@ public class HotelStrategyPO implements Serializable{
 	}
 	public boolean getsuperposition(){
 		return superposition;
+	}
+	
+	public HotelStrategy changetohotelstrategy(HotelStrategyPO po){
+		HotelStrategy hotelstrategy=new HotelStrategy();
+		hotelstrategy.setid(po.hsid);
+		hotelstrategy.sethotelid(po.hotelid);
+		hotelstrategy.setname(po.name);
+		hotelstrategy.setcondition(po.condition);
+		hotelstrategy.setstart_time(po.start_time);
+		hotelstrategy.setend_time(po.end_time);
+		hotelstrategy.setexecuteway(po.executeway);
+		hotelstrategy.setsuperposition(po.superposition);
+		return hotelstrategy;
+	}
+	
+	public HotelStrategyVO changetohotelstrategyvo(HotelStrategyPO po){
+		HotelStrategyVO vo=new HotelStrategyVO();
+		vo.setid(po.hsid);
+		vo.sethotelid(po.hotelid);
+		vo.setname(po.name);
+		vo.setcondition(po.condition);
+		vo.setstart_time(po.start_time);
+		vo.setend_time(po.end_time);
+		vo.setexecuteway(po.executeway);
+		vo.setsuperposition(po.superposition);
+		return vo;
 	}
 }

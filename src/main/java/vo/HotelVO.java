@@ -13,7 +13,6 @@ public class HotelVO implements Serializable{
 	String star;
 	int score;
 	String hotel_evaluation;
-	int min_price;
 	ArrayList<Integer> book_clientid;
 	
 	public HotelVO(){

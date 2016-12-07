@@ -11,15 +11,19 @@ public interface ManageDataService {
 		
 		public ResultMessage updateWebMarket(WebMarketPO po);
 		
-		public ResultMessage deleteWebMarket(WebMarketPO po);
+		public ResultMessage deleteWebMarket(int WebMarketid);
 		
-		public WebManagerPO findWebManager(String WebManagername);
+		public int findWebMarketIDbyName(String name);
+		
+		public WebManagerPO findWebManager(int WebManagerid);
 		
 		public ResultMessage insertWebManager(WebManagerPO po);
 		
 		public ResultMessage updateWebManager(WebManagerPO po);
 		
-		public ResultMessage deleteWebManager(WebManagerPO po);
+		public ResultMessage deleteWebManager(int WebManagerid);
+		
+		public int findWebManagerIDbyName(String name);
 	
 }
 

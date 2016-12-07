@@ -2,6 +2,9 @@ package po;
 
 import java.io.Serializable;
 
+import objects.HotelWorker;
+import vo.HotelWorkerVO;
+
 public class HotelWorkerPO implements Serializable{
 	int hotelid;
 	String name;
@@ -58,6 +61,26 @@ public class HotelWorkerPO implements Serializable{
 	}
 	public void setpassword(String password) {
 		this.password = password;
+	}
+	
+	public HotelWorker changetohotelworker(HotelWorkerPO po){
+		HotelWorker hotelworker=new HotelWorker();
+		hotelworker.sethotelid(po.hotelid);
+		hotelworker.setname(po.name);
+		hotelworker.setcontact(po.contact);
+		hotelworker.setusername(po.username);
+		hotelworker.setpassword(po.password);
+		return hotelworker;
+	}
+	
+	public HotelWorkerVO changetohotelworkervo(HotelWorkerPO po){
+		HotelWorkerVO vo=new HotelWorkerVO();
+		vo.sethotelid(po.hotelid);
+		vo.setname(po.name);
+		vo.setcontact(po.contact);
+		vo.setusername(po.username);
+		vo.setpassword(po.password);
+		return vo;
 	}
 	
 }

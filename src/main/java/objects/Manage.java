@@ -21,7 +21,6 @@ public class Manage {
 		contact=c;
 		username=u;
 		password=p;
-//		id=i;
 	}
 	public int getwebmanagerid() {
 		return webmanagerid;

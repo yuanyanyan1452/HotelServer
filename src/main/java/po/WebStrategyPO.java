@@ -2,6 +2,9 @@ package po;
 
 import java.io.Serializable;
 
+import objects.WebStrategy;
+import vo.WebStrategyVO;
+
 public class WebStrategyPO implements Serializable{
 	/**
 	 * 
@@ -82,5 +85,29 @@ public class WebStrategyPO implements Serializable{
 	}
 	public boolean getsuperposition(){
 		return superposition;
+	}
+	
+	public WebStrategy changetowebstrategy(WebStrategyPO po){
+		WebStrategy webstrategy=new WebStrategy();
+		webstrategy.setid(po.wsid);
+		webstrategy.setname(po.name);
+		webstrategy.setcondition(po.condition);
+		webstrategy.setstart_time(po.start_time);
+		webstrategy.setend_time(po.end_time);
+		webstrategy.setexecuteway(po.executeway);
+		webstrategy.setsuperposition(po.superposition);
+		return webstrategy;
+	}
+	
+	public WebStrategyVO changetowebstrategyvo(WebStrategyPO po){
+		WebStrategyVO vo=new WebStrategyVO();
+		vo.setid(po.wsid);
+		vo.setname(po.name);
+		vo.setcondition(po.condition);
+		vo.setstart_time(po.start_time);
+		vo.setend_time(po.end_time);
+		vo.setexecuteway(po.executeway);
+		vo.setsuperposition(po.superposition);
+		return vo;
 	}
 }

@@ -3,6 +3,7 @@ package po;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import objects.Client;
 import objects.VIPInfo;
 import vo.ClientVO;
 
@@ -112,6 +113,30 @@ public class ClientPO implements Serializable {
 		this.info = info;
 	}
 	
-
+	public ClientVO changetoclientvo(ClientPO po){
+		ClientVO vo=new ClientVO(0,null,null,0,null,null,null,null);
+		vo.setclientid(po.clientid);
+		vo.setclient_name(po.client_name);
+		vo.setcontact(po.contact);
+		vo.setcredit(po.credit);
+		vo.setcredit_record(po.credit_record);
+		vo.setvipinfo(po.info);
+		vo.setusername(po.username);
+		vo.setpassword(po.password);
+		return vo;
+	}
+	
+	public Client changetoclient(ClientPO po){
+		Client client = new Client();
+		client.setclientid(clientid);
+		client.setclient_name(client_name);
+		client.setcontact(contact);
+		client.setcredit(credit);
+		client.setcredit_record(credit_record);
+		client.setusername(username);
+		client.setpassword(password);
+		
+		return client;
+	}
 
 }
