@@ -1,5 +1,8 @@
 package po;
 
+import objects.Room;
+import vo.RoomVO;
+
 public class RoomPO {
 	int id;
 	int hotelid;
@@ -66,6 +69,28 @@ public class RoomPO {
 	}
 	public int getprice(){
 		return price;
+	}
+	
+	public Room changetoroom(RoomPO po){
+		Room room=new Room();
+		room.setid(po.id);
+		room.sethotelid(po.hotelid);
+		room.setroom_type(po.room_type);
+		room.settotal_num(po.total_num);
+		room.setavailable_num(po.available_num);
+		room.setprice(po.price);
+		return room;
+	}
+	
+	public RoomVO changetoroomvo(RoomPO po){
+		RoomVO vo=new RoomVO();
+		vo.setid(po.id);
+		vo.sethotelid(po.hotelid);
+		vo.setroom_type(po.room_type);
+		vo.settotal_num(po.total_num);
+		vo.setavailable_num(po.available_num);
+		vo.setprice(po.price);
+		return vo;
 	}
 }
 

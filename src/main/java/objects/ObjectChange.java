@@ -57,7 +57,6 @@ public class ObjectChange {
 		po.setstar(hotel.star);
 		po.setscore(hotel.score);
 		po.sethotel_evaluation(hotel.hotel_evaluation);
-		po.setmin_price(hotel.min_price);
 		po.setbook_clientid(hotel.book_clientid);
 		return po;
 	}
@@ -73,7 +72,6 @@ public class ObjectChange {
 		vo.setstar(hotel.star);
 		vo.setscore(hotel.score);
 		vo.sethotel_evaluation(hotel.hotel_evaluation);
-		vo.setmin_price(hotel.min_price);
 		vo.setbook_clientid(hotel.book_clientid);
 		return vo;
 	}

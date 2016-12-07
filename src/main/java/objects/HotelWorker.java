@@ -1,5 +1,8 @@
 package objects;
 
+import po.HotelWorkerPO;
+import vo.HotelWorkerVO;
+
 public class HotelWorker {
 	int hotelid;
 	String name;
@@ -57,5 +60,6 @@ public class HotelWorker {
 	public void setpassword(String password) {
 		this.password = password;
 	}
+	
 	
 }

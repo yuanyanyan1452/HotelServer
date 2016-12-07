@@ -1,5 +1,8 @@
 package service.dataservice.Impl;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,13 +17,13 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public HotelWorkerPO find(int hotelid){
 		Connection conn = Connect.getConn();
-	    String sql = "select * from hotelworker where id = " +hotelid;	//需要执行的sql语句
+	    String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from hotelworker where id = " +hotelid;	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt(1),rs.getString(2),rs.getString(3));
+	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),BlobtoString(rs.getBlob("decode(username,'key')")),BlobtoString(rs.getBlob("decode(password,'key')")));
 			return po;
 	        }
 	    } catch (SQLException e) {
@@ -33,12 +36,14 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public ResultMessage insert(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "insert into hotelworker(hotelid,Name,Contact) values(NULL,encode(?,'key'),encode(?,'key'))";
+	    String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key')";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
 	        pstmt.setString(1, po.getname());
 	        pstmt.setString(2, po.getcontact());
+	        pstmt.setString(3, po.getusername());
+	        pstmt.setString(4, po.getpassword());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
@@ -101,5 +106,25 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        e.printStackTrace();
 	    }
 	    return ResultMessage.Fail;
+	}
+	
+	/**
+	 * 将存储在数据库中的blob类型转化成string
+	 * @param blob
+	 * @return
+	 */
+	public String BlobtoString(Blob blob){
+		try{
+			InputStream is = blob.getBinaryStream();
+			byte[] b = new byte[is.available()];
+			is.read(b, 0, b.length);
+			String str = new String(b);
+			return str;
+		}catch(IOException e){
+			e.printStackTrace();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

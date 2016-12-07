@@ -12,7 +12,6 @@ public class Hotel {
 	String star;
 	int score;
 	String hotel_evaluation;
-	int min_price;
 	ArrayList<Integer> book_clientid;
 	
 	public Hotel(){
@@ -103,13 +102,7 @@ public class Hotel {
 	public String getevaluation(){
 		return hotel_evaluation;
 	}
-	
-	public void setmin_price(int p){
-		min_price=p;
-	}
-	public int getmin_price(){
-		return min_price;
-	}
+
  
 	public void setbook_clientid(ArrayList<Integer>book){
 		book_clientid=book;
