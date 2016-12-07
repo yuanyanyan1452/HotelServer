@@ -52,46 +52,46 @@ public interface ClientBLService extends Remote{
 	 * @param location
 	 * @return 客户获取对应地址的酒店列表
 	 */
-	public ArrayList<HotelVO> client_setLocation(String location)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address)throws RemoteException;
 
 	/**
 	 * @param hotelname
 	 * @return 符合对应酒店名的酒店列表
 	 */
-	public ArrayList<HotelVO> client_searchHotel(String hotelname)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelByname(String hotelname)throws RemoteException;
 
 	/**
 	 * @param type
 	 * @return 有符合对应房间类型的酒店列表
 	 */
-	public ArrayList<HotelVO> client_searchHotel(RoomType type)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelBytype(String type)throws RemoteException;
 
 	/**
 	 * @param lowprice
 	 * @param highprice
 	 * @return 有符合对应价格区间的房间的酒店列表
 	 */
-	public ArrayList<HotelVO> client_searchHotel(int lowprice, int highprice)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelByprice(int lowprice, int highprice)throws RemoteException;
 
 	/**
 	 * @param inTime
 	 * @param leaveTime
 	 * @return 有符合对应时间段的房间的酒店列表
 	 */
-	public ArrayList<HotelVO> client_searchHotel(String inTime, String leaveTime)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelBytime(String inTime, String leaveTime)throws RemoteException;
 
 	/**
 	 * @param star
 	 * @return 符合对应星级的酒店列表
 	 */
-	public ArrayList<HotelVO> client_searchHotel(int star)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelBystar(String star)throws RemoteException;
 
 	/**
 	 * @param lowscore
 	 * @param highscore
 	 * @return 符合对应评分区间的酒店列表
 	 */
-	public ArrayList<HotelVO> client_searchHotel(double lowscore, double highscore)throws RemoteException;
+	public ArrayList<HotelVO> client_searchHotelByscore(double lowscore, double highscore)throws RemoteException;
 
 	/**
 	 * @param hotelid

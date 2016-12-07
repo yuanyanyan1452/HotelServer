@@ -21,8 +21,12 @@ public class OrderBLServiceImpl implements OrderBLService {
 	public ArrayList<OrderVO> order_client_browse(int clientid) {
 		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByClientid(clientid);
-		
-		return null;
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list.size();i++){
+			OrderVO ordervo=orderpo_list.get(i).changetoordervo(orderpo_list.get(i));
+			ordervo_list.add(ordervo);
+		}
+		return ordervo_list;
 	}
 
 	@Override
@@ -30,8 +34,16 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub\
 		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, state, true);
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, state, false);
-		
- 		return null;
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list1.size();i++){
+			OrderVO ordervo=orderpo_list1.get(i).changetoordervo(orderpo_list1.get(i));
+			ordervo_list.add(ordervo);
+		}
+		for(int i=0;i<orderpo_list2.size();i++){
+			OrderVO ordervo=orderpo_list2.get(i).changetoordervo(orderpo_list2.get(i));
+			ordervo_list.add(ordervo);
+		}
+		return ordervo_list;
 	}
 
 	@Override
@@ -40,7 +52,19 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, "NORMAL", isExecute);
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, "ABNORMAL", isExecute);
 		ArrayList<OrderPO> orderpo_list3=orderdataservice.findByStatus(clientid, "CANCELLED", isExecute);
-		
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list1.size();i++){
+			OrderVO ordervo=orderpo_list1.get(i).changetoordervo(orderpo_list1.get(i));
+			ordervo_list.add(ordervo);
+		}
+		for(int i=0;i<orderpo_list2.size();i++){
+			OrderVO ordervo=orderpo_list2.get(i).changetoordervo(orderpo_list2.get(i));
+			ordervo_list.add(ordervo);
+		}
+		for(int i=0;i<orderpo_list3.size();i++){
+			OrderVO ordervo=orderpo_list3.get(i).changetoordervo(orderpo_list3.get(i));
+			ordervo_list.add(ordervo);
+		}
 		return null;
 	}
 
@@ -48,13 +72,18 @@ public class OrderBLServiceImpl implements OrderBLService {
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid) {
 		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
-	
-		return null;
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list.size();i++){
+			OrderVO ordervo=orderpo_list.get(i).changetoordervo(orderpo_list.get(i));
+			ordervo_list.add(ordervo);
+		}
+		return ordervo_list;
 	}
 
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) {
 		// TODO Auto-generated method stub
+		//ArrayList<OrderPO> orderpo_list1=orderdataservice.findByHotelid(hotelid);
 		return null;
 	}
 
@@ -67,7 +96,10 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ResultMessage order_client_cancel(int clientid, int orderid) {
 		// TODO Auto-generated method stub
-		return null;
+		OrderPO orderpo=orderdataservice.findByid(orderid);
+		orderpo.setstate("CANCELLED");
+		ResultMessage result=orderdataservice.update(orderpo);
+		return result;
 	}
 
 	@Override
@@ -82,8 +114,9 @@ public class OrderBLServiceImpl implements OrderBLService {
 	public ResultMessage order_hotel_execute(int orderid) {
 		// TODO Auto-generated method stub
 		OrderPO po=orderdataservice.findByid(orderid);
+		po.setexecute(true);
 		ResultMessage result=orderdataservice.update(po);
-		return null;
+		return result;
 	}
 
 	@Override

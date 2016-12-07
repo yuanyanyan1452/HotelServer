@@ -309,6 +309,48 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
+	public ArrayList<Hotel> searchHotelBylocation(String address, String business_address) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ArrayList<Hotel> searchHotelByname(String hotelname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByroom(String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelBystar(String star) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public ResultMessage client_login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_login(username, password);
@@ -350,45 +392,45 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_setLocation(String location) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_setLocation(location);
+		return clientbl.client_searchHotelByaddress(address,business_address);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(String hotelname) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelByname(String hotelname) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_searchHotel(hotelname);
+		return clientbl.client_searchHotelByname(hotelname);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(RoomType type) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelBytype(String type) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_searchHotel(type);
+		return clientbl.client_searchHotelBytype(type);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(int lowprice, int highprice) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelByprice(int lowprice, int highprice) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_searchHotel(lowprice, highprice);
+		return clientbl.client_searchHotelByprice(lowprice, highprice);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(String inTime, String leaveTime) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelBytime(String inTime, String leaveTime) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_searchHotel(inTime, leaveTime);
+		return clientbl.client_searchHotelBytime(inTime, leaveTime);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(int star) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelBystar(String star) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_searchHotel(star);
+		return clientbl.client_searchHotelBystar(star);
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(double lowscore, double highscore) throws RemoteException {
+	public ArrayList<HotelVO> client_searchHotelByscore(double lowscore, double highscore) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_searchHotel(lowscore, highscore);
+		return clientbl.client_searchHotelByscore(lowscore, highscore);
 	}
 
 	@Override
@@ -429,6 +471,7 @@ public class DataRemoteObject extends UnicastRemoteObject
 
 
 
+	
 	
 
 

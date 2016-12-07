@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import objects.Hotel;
 import objects.HotelWorker;
 import objects.ResultMessage;
+import objects.RoomType;
 import vo.AccommodationVO;
 import vo.HotelVO;
 import vo.RoomVO;
@@ -77,4 +78,49 @@ public interface HotelBLService extends Remote{
 	 * @return 更新对应酒店的工作人员信息
 	 */
 	public ResultMessage updateHotelWokerInfo(HotelWorker worker);
+	/**
+	 * @param location
+	 * @return 客户获取对应地址的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelBylocation(String address,String business_address);
+
+	/**
+	 * @param hotelname
+	 * @return 符合对应酒店名的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelByname(String hotelname);
+
+	/**
+	 * @param type
+	 * @return 有符合对应房间类型的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelByroom(String type);
+
+	/**
+	 * @param lowprice
+	 * @param highprice
+	 * @return 有符合对应价格区间的房间的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice);
+
+	/**
+	 * @param inTime
+	 * @param leaveTime
+	 * @return 有符合对应时间段的房间的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime);
+
+	/**
+	 * @param star
+	 * @return 符合对应星级的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelBystar(String star);
+
+	/**
+	 * @param lowscore
+	 * @param highscore
+	 * @return 符合对应评分区间的酒店列表
+	 */
+	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore);
+
 }

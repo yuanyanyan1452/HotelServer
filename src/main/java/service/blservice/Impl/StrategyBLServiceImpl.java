@@ -53,16 +53,24 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	public ArrayList<HotelStrategyVO> getStrategy(int hotelid, int clientid) {
 		// TODO Auto-generated method stub
 		ArrayList<HotelStrategyPO> hotelstrategypo_list=strategydataservice.showlist_hotel();
-		
-		return null;
+		ArrayList<HotelStrategyVO> hotelstrategyvo_list=new ArrayList<HotelStrategyVO>();
+		for(int i=0;i<hotelstrategypo_list.size();i++){
+			HotelStrategyVO hotelstrategyvo=hotelstrategypo_list.get(i).changetohotelstrategyvo(hotelstrategypo_list.get(i));
+			hotelstrategyvo_list.add(hotelstrategyvo);
+		}
+		return hotelstrategyvo_list;
 	}
 
 	@Override
 	public ArrayList<WebStrategyVO> getStrategy(int clientid) {
 		// TODO Auto-generated method stub
-		ArrayList<WebStrategyPO> hotelstrategypo_list=strategydataservice.showlist_web();
-		
-		return null;
+		ArrayList<WebStrategyPO> webstrategypo_list=strategydataservice.showlist_web();
+		ArrayList<WebStrategyVO> webstrategyvo_list=new ArrayList<WebStrategyVO>();
+		for(int i=0;i<webstrategypo_list.size();i++){
+			WebStrategyVO webstrategyvo=webstrategypo_list.get(i).changetowebstrategyvo(webstrategypo_list.get(i));
+			webstrategyvo_list.add(webstrategyvo);
+		}
+		return webstrategyvo_list;
 	}
 
 }
