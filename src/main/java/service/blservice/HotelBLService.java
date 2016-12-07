@@ -13,6 +13,9 @@ import vo.RoomVO;
 
 public interface HotelBLService extends Remote{
 	// 提供给界面调用的接口
+	
+	public ResultMessage hotelworker_login(String username,String password) throws RemoteException;
+	
 	/**
 	 * @param hotelid
 	 * @return 酒店查看详细信息

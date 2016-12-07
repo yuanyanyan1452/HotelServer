@@ -175,7 +175,19 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return orderbl.updateActualLeaveTime(orderid, leaveTime);
 	}
+	
+	@Override
+	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.webmanager_login(username, password);
+	}
 
+	@Override
+	public ResultMessage webmarket_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.webmarket_login(username, password);
+	}
+	
 	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -230,6 +242,12 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return managebl.manage_updateMarketWorker(mw);
 	}
 
+	@Override
+	public ResultMessage hotelworker_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return hotelbl.hotelworker_login(username, password);
+	}
+	
 	@Override
 	public HotelVO hotel_checkInfo(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -289,7 +307,18 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return hotelbl.updateHotelWokerInfo(hotelid, worker);
 	}
+	
+	@Override
+	public ResultMessage client_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return clientbl.client_login(username, password);
+	}
 
+	@Override
+	public ResultMessage client_register(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return clientbl.client_register(username, password);
+	}
 	@Override
 	public ClientVO client_checkInfo(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -397,5 +426,17 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return clientbl.updateClientInfo(client);
 	}
+
+
+
+	
+
+
+
+	
+
+
+
+	
 
 }
