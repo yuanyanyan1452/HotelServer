@@ -11,6 +11,11 @@ import vo.WebMarketVO;
 
 public interface ManageBLService extends Remote{
 	// 提供给界面调用的接口
+	
+		public ResultMessage webmanager_login(String username,String password) throws RemoteException;
+		
+		public ResultMessage webmarket_login(String username,String password) throws RemoteException;
+		
 		/**
 		 * @param clientid
 		 * @return 搜索客户
