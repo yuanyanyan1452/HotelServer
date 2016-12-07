@@ -1,5 +1,6 @@
 package service.blservice.Impl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import objects.Hotel;
@@ -27,6 +28,13 @@ public class HotelBLServiceImpl implements HotelBLService {
 	RoomDataService roomdataservice=new RoomDataServiceImpl();
 	VOChange vochange =new VOChange();
 	ObjectChange objectchange=new ObjectChange();
+	
+	@Override
+	public ResultMessage hotelworker_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public HotelVO hotel_checkInfo(int hotelid) {
 		// TODO Auto-generated method stub
@@ -99,12 +107,13 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public ResultMessage updateHotelWokerInfo(int hotelid, HotelWorker worker) {
+	public ResultMessage updateHotelWokerInfo( HotelWorker worker) {
 		// TODO Auto-generated method stub
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
 		ResultMessage result=hotelworkerdataservice.update(po);
 		return result;
 	}
 
+	
 
 }

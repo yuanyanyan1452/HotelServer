@@ -2,6 +2,9 @@ package po;
 
 import java.io.Serializable;
 
+import objects.WebMarket;
+import vo.WebMarketVO;
+
 public class WebMarketPO implements Serializable{
 	int webmarketid;
 	String name;
@@ -63,6 +66,26 @@ public class WebMarketPO implements Serializable{
 
 	public void setpassword(String password) {
 		this.password = password;
+	}
+	
+	public WebMarket changetowebmarket(WebMarketPO po){
+		WebMarket webmarket=new WebMarket();
+		webmarket.setwebmarketid(po.webmarketid);
+		webmarket.setname(po.name);
+		webmarket.setcontact(po.contact);
+		webmarket.setusername(po.username);
+		webmarket.setpassword(po.password);
+		return webmarket;
+	}
+	
+	public WebMarketVO changetowebmarketvo(WebMarketPO po){
+		WebMarketVO vo=new WebMarketVO();
+		vo.setwebmarketid(po.webmarketid);
+		vo.setname(po.name);
+		vo.setcontact(po.contact);
+		vo.setusername(po.username);
+		vo.setpassword(po.password);
+		return vo;
 	}
 	
 	

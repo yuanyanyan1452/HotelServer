@@ -2,6 +2,9 @@ package po;
 
 import java.io.Serializable;
 
+import objects.Manage;
+import vo.WebManagerVO;
+
 public class WebManagerPO implements Serializable{
 	int webmanagerid;
 	String name;
@@ -59,5 +62,25 @@ public class WebManagerPO implements Serializable{
 	}
 	public void setpassword(String password) {
 		this.password = password;
+	}
+	
+	public Manage changetowebmanager(WebManagerPO po){
+		Manage webmanager=new Manage();
+		webmanager.setwebmanagerid(po.webmanagerid);
+		webmanager.setname(po.name);
+		webmanager.setcontact(po.contact);
+		webmanager.setusername(po.username);
+		webmanager.setpassword(po.password);
+		return webmanager;
+	}
+	
+	public WebManagerVO changetowebmanagervo(WebManagerPO po){
+		WebManagerVO vo=new WebManagerVO();
+		vo.setwebmanagerid(po.webmanagerid);
+		vo.setname(po.name);
+		vo.setcontact(po.contact);
+		vo.setusername(po.username);
+		vo.setpassword(po.password);
+		return vo;
 	}
 }

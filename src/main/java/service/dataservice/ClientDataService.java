@@ -11,8 +11,10 @@ public interface ClientDataService {
 	
 	public ResultMessage update(ClientPO po);
 	
-	public ResultMessage delete(ClientPO po);
+	public ResultMessage delete(int clientid);
 	
-	public ResultMessage updateCredit(ClientPO po);
+	public ResultMessage check(String username,String password);
+	
+	public ClientPO getclientpo(String username,String password);
 }
 

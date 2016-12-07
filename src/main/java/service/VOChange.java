@@ -1,6 +1,15 @@
 package service;
 import java.util.ArrayList;
 
+import objects.Client;
+import objects.Hotel;
+import objects.HotelStrategy;
+import objects.HotelWorker;
+import objects.Manage;
+import objects.Order;
+import objects.VIPInfo;
+import objects.WebMarket;
+import objects.WebStrategy;
 import po.ClientPO;
 import po.HotelPO;
 import po.HotelStrategyPO;
@@ -18,6 +27,8 @@ import vo.HotelWorkerVO;
 import vo.OrderVO;
 import vo.RoomOrderVO;
 import vo.RoomVO;
+import vo.VIPInfoVO;
+import vo.VIPInfoVO.VIPType;
 import vo.WebManagerVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
@@ -33,9 +44,23 @@ public class VOChange {
 		clientpo.setcontact(clientvo.getcontact());
 		clientpo.setcredit(clientvo.getcredit());
 		clientpo.setcredit_record(clientvo.getcredit_record());
-//		clientpo.setVIPInfo(clientvo.getVIPInfo());
+		clientpo.setvipinfo(clientvo.getvipinfo());
 		return clientpo;
 	}
+	
+	public Client clientvo_to_client(ClientVO clientvo){
+		Client client=new Client();
+		client.setclientid(clientvo.getclientid());
+		client.setusername(clientvo.getusername());
+		client.setpassword(clientvo.getpassword());
+		client.setclient_name(clientvo.getclient_name());
+		client.setcontact(clientvo.getcontact());
+		client.setcredit(clientvo.getcredit());
+		client.setcredit_record(clientvo.getcredit_record());
+		client.setvipinfo(clientvo.getvipinfo());
+		return client;
+	}
+	
 	
 	public HotelPO hotelvo_to_hotelpo(HotelVO hotelvo){
 		HotelPO hotelpo=new HotelPO();
@@ -46,10 +71,27 @@ public class VOChange {
 		hotelpo.setintroduction(hotelvo.getintroduction());
 		hotelpo.setservice(hotelvo.getservice());
 		hotelpo.setstar(hotelvo.getstar());
-		hotelpo.setmin_price(hotelvo.getmin_price());
+		hotelpo.setscore(hotelvo.getscore());
+		hotelpo.sethotel_evaluation(hotelvo.gethotel_evaluation());
 		hotelpo.setbook_clientid(hotelvo.getbook_clientid());
-		//评价,评分没写
 		return hotelpo;
+		
+	}
+	
+	public Hotel hotelvo_to_hotel(HotelVO hotelvo){
+		Hotel hotel=new Hotel();
+		hotel.setid(hotelvo.getid());
+		hotel.setname(hotelvo.getname());
+		hotel.setaddress(hotelvo.getaddress());
+		hotel.setbussiness_address(hotelvo.getbussiness_address());
+		hotel.setintroduction(hotelvo.getintroduction());
+		hotel.setservice(hotelvo.getservice());
+		hotel.setstar(hotelvo.getstar());
+		hotel.setevaluation(hotelvo.gethotel_evaluation());
+		hotel.setbook_clientid(hotelvo.getbook_clientid());
+		hotel.setbook_clientid(hotelvo.getbook_clientid());
+		//评价,评分没写
+		return hotel;
 		
 	}
 	
@@ -78,6 +120,31 @@ public class VOChange {
 		return orderpo;
 	}
 	
+	public Order ordervo_to_order(OrderVO ordervo){
+		Order order=new Order();
+		order.setid(ordervo.getid());
+		order.setclientid(ordervo.getclientid());
+		order.sethotelid(ordervo.gethotelid());
+		order.setstate(ordervo.getstate());
+		order.setcancel_time(ordervo.getcancel_time());
+		order.setexecute(ordervo.getexecute());
+		order.setstart_time(ordervo.getstart_time());
+		order.setend_time(ordervo.getend_time());
+		order.setlatest_execute_time(ordervo.getlatest_execute_time());
+		ArrayList<RoomOrderPO> roomorderpo_list=new ArrayList<RoomOrderPO>();
+		ArrayList<RoomOrderVO> roomordervo_list=ordervo.getroom_order();
+		for(int i=0;i<roomordervo_list.size();i++){
+			RoomOrderPO roomorderpo=change.roomordervo_to_roomorderpo(roomordervo_list.get(i));
+			roomorderpo_list.add(roomorderpo);
+		}
+		order.setroom_order(roomorderpo_list);
+		order.setprice(ordervo.getprice());
+		order.setexpect_number_of_people(ordervo.getexpect_number_of_people());
+		order.sethave_child(ordervo.gethave_child());
+	
+		return order;
+	}
+	
 	public  HotelStrategyPO hotelstrategyvo_to_hotelstrategypo(HotelStrategyVO vo){
 		HotelStrategyPO po=new HotelStrategyPO();
 		po.setid(vo.getid());
@@ -89,6 +156,19 @@ public class VOChange {
 		po.setexecuteway(vo.getexecuteway());
 		po.setsuperposition(vo.getsuperposition());
 		return po;
+	}
+	
+	public  HotelStrategy hotelstrategyvo_to_hotelstrategy(HotelStrategyVO vo){
+		HotelStrategy hs=new HotelStrategy();
+		hs.setid(vo.getid());
+		hs.sethotelid(vo.gethotelid());
+		hs.setname(vo.getname());
+		hs.setcondition(vo.getcondition());
+		hs.setstart_time(vo.getstart_time());
+		hs.setend_time(vo.getend_time());
+		hs.setexecuteway(vo.getexecuteway());
+		hs.setsuperposition(vo.getsuperposition());
+		return hs;
 	}
 	
 	public WebStrategyPO webstrategyvo_to_webstrategypo(WebStrategyVO vo){
@@ -103,6 +183,18 @@ public class VOChange {
 		return po;
 	}
 	
+	public WebStrategy webstrategyvo_to_webstrategy(WebStrategyVO vo){
+		WebStrategy ws=new WebStrategy();
+		ws.setid(vo.getid());
+		ws.setname(vo.getname());
+		ws.setcondition(vo.getcondition());
+		ws.setstart_time(vo.getstart_time());
+		ws.setend_time(vo.getend_time());
+		ws.setexecuteway(vo.getexecuteway());
+		ws.setsuperposition(vo.getsuperposition());
+		return ws;
+	}
+	
 	public HotelWorkerPO hotelworkervo_to_hotelworkerpo(HotelWorkerVO vo){
 		HotelWorkerPO po=new HotelWorkerPO();
 		po.sethotelid(vo.gethotelid());
@@ -111,6 +203,16 @@ public class VOChange {
 		po.setname(vo.getname());
 		po.setcontact(vo.getcontact());
 		return po;
+	}
+	
+	public HotelWorker hotelworkervo_to_hotelworker(HotelWorkerVO vo){
+		HotelWorker hw=new HotelWorker();
+		hw.sethotelid(vo.gethotelid());
+		hw.setusername(vo.getusername());
+		hw.setpassword(vo.getpassword());
+		hw.setname(vo.getname());
+		hw.setcontact(vo.getcontact());
+		return hw;
 	}
 	
 	public WebManagerPO managervo_to_managerpo(WebManagerVO vo){
@@ -123,6 +225,16 @@ public class VOChange {
 		return po;
 	}
 	
+	public Manage managervo_to_manager(WebManagerVO vo){
+		Manage wm=new Manage();
+		wm.setwebmanagerid(vo.getwebmanagerid());
+		wm.setusername(vo.getusername());
+		wm.setpassword(vo.getpassword());
+		wm.setname(vo.getname());
+		wm.setcontact(vo.getcontact());
+		return wm;
+	}
+	
 	public WebMarketPO marketvo_to_marketpo(WebMarketVO vo){
 		WebMarketPO po=new WebMarketPO();
 		po.setwebmarketid(vo.getwebmarketid());
@@ -131,6 +243,16 @@ public class VOChange {
 		po.setname(vo.getname());
 		po.setcontact(vo.getcontact());
 		return po;
+	}
+	
+	public WebMarket marketvo_to_market(WebMarketVO vo){
+		WebMarket wm=new WebMarket();
+		wm.setwebmarketid(vo.getwebmarketid());
+		wm.setusername(vo.getusername());
+		wm.setpassword(vo.getpassword());
+		wm.setname(vo.getname());
+		wm.setcontact(vo.getcontact());
+		return wm;
 	}
 	
 	public RoomOrderPO roomordervo_to_roomorderpo(RoomOrderVO vo){
@@ -150,6 +272,18 @@ public class VOChange {
 		po.setprice(vo.getprice());
 		return po;
 		
+	}
+	
+	public VIPInfo vipinfovo_tovioinfo(VIPInfoVO vo){
+		VIPInfo vipinfo=new VIPInfo();
+		if(vo.getType()==VIPType.Enterprise){
+		vipinfo.setType(objects.VIPInfo.VIPType.Enterprise);
+		}
+		else{
+			vipinfo.setType(objects.VIPInfo.VIPType.NORMAL);
+		}
+		vipinfo.setInfo(vo.getInfo());
+		return vipinfo;
 	}
 	
 }

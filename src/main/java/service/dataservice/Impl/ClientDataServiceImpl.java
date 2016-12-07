@@ -14,13 +14,12 @@ import objects.ResultMessage;
 import objects.VIPInfo;
 import objects.VIPInfo.VIPType;
 import po.ClientPO;
-import po.WebMarketPO;
 import service.dataservice.ClientDataService;
 
 public class ClientDataServiceImpl implements ClientDataService {
 
 	@Override
-	public ClientPO find(int clientid) {
+	public synchronized ClientPO find(int clientid) {
 		Connection conn = Connect.getConn();
 		String sql = "select id,decode(name,'key'),decode(name,'contact'),credit,creditrecord,viptype,info,decode(username,'key'),decode(password,'key') from client where id = " + clientid; // 需要执行的sql语句
 		PreparedStatement pstmt;
@@ -95,14 +94,12 @@ public class ClientDataServiceImpl implements ClientDataService {
 	    }
 	}
 	@Override
-	public ResultMessage insert(ClientPO po) {
+	public synchronized ResultMessage insert(ClientPO po) {
 		Connection conn = Connect.getConn();
 		String tempCreditRecord =""; // 存取数据库中读取的string
-		String[] CreditRecords; // 根据符号 /将各条信用记录分开
 		ArrayList<String> CreditRecordList = new ArrayList<String>();
 		String sql = "insert into client (id,Name,Contact,Credit,CreditRecord,viptype,info,username,password) values(NULL,encode(?,'key'),encode(?,'key'),?,?,?,?,encode(?,'key'),encode(?,'key'))";
 		PreparedStatement pstmt;
-		ByteArrayInputStream stream = null;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, po.getclient_name());
@@ -133,10 +130,9 @@ public class ClientDataServiceImpl implements ClientDataService {
 	}
 
 	@Override
-	public ResultMessage update(ClientPO po) {
+	public synchronized ResultMessage update(ClientPO po) {
 		Connection conn = Connect.getConn();
 		String tempCreditRecord =""; // 存取数据库中读取的string
-		String[] CreditRecords; // 根据符号 /将各条信用记录分开
 		ArrayList<String> CreditRecordList = new ArrayList<String>();
 
 	    String sql = "update client set name=encode(?,'key'), contact=encode(?,'key'), credit=?, creditrecord=?, viptype=?, info=? ,username=encode(?,'key') , password=encode(?,'key') where id=?";
@@ -177,9 +173,9 @@ public class ClientDataServiceImpl implements ClientDataService {
 	}
 
 	@Override
-	public ResultMessage delete(ClientPO po) {
+	public synchronized ResultMessage delete(int clientid) {
 		Connection conn = Connect.getConn();
-	    String sql = "delete from client where id = " + po.getclientid();
+	    String sql = "delete from client where id = " + clientid;
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -193,11 +189,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 		return ResultMessage.Fail;
 	}
 
-	@Override
-	public ResultMessage updateCredit(ClientPO po) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	public static void main(String[] args) {
 		ClientDataServiceImpl a = new ClientDataServiceImpl();
 //		ArrayList<String> aaa = new ArrayList<String>();
@@ -205,17 +197,11 @@ public class ClientDataServiceImpl implements ClientDataService {
 //		ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info,"1","1");
 //		a.insert(po);
 		a.find(1);
-		ClientPO po = a.check("1","1");
-		System.out.print(po.getclientid());
-		System.out.print(po.getclient_name());
-		System.out.print(po.getcontact());
-		System.out.print(po.getcredit());
-		System.out.print(po.getcredit_record());
-		System.out.print(po.getusername());
+		System.out.println(a.check("1","1"));
 //		a.update(po);
 		
 	}
-	public ClientPO check(String username,String password){
+	public ClientPO getclientpo(String username,String password){
 		Connection conn = Connect.getConn();
 		String sql = "select id,decode(name,'key'),decode(contact,'key'),credit,creditrecord,viptype,info from client where username =encode(?,'key') and password = encode(?,'key')" ;
 		PreparedStatement pstmt;
@@ -253,10 +239,28 @@ public class ClientDataServiceImpl implements ClientDataService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-
-		
 		return null;
 	}
+	
+	public ResultMessage check(String username,String password){
+		Connection conn = Connect.getConn();
+		String sql = "select id from client where username =encode(?,'key') and password = encode(?,'key')" ;
+		PreparedStatement pstmt;
+		try {
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				if(rs.getInt("id")!=-1)
+					return ResultMessage.Success;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return ResultMessage.Fail;
+	}
+	
 	
 //	public static void main(String[] args) {
 //		ClientDataServiceImpl a = new ClientDataServiceImpl();
