@@ -15,9 +15,9 @@ public interface HotelDataService {
 	
 	//通过酒店名称查找酒店
 	public HotelPO findByName(String hotelname);
-
-	//通过价格区间查找酒店
-	public HotelPO findByPrice(String price);
+	
+	//根据星级搜索酒店
+	public ArrayList<HotelPO> findByStar(String star);
 	
 	//新增一个酒店
 	public ResultMessage insert(HotelPO po);

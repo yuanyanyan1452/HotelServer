@@ -179,19 +179,52 @@ public class RoomDataServiceImpl implements RoomDataService{
 		}
 	}
 	
+	public int find_min_price(int hotelid){
+		int min_price=0;
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select price from room where hotelid="+hotelid;
+		
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				if(min_price==0||min_price>rs.getInt("price")){
+					min_price=rs.getInt("price");
+				}
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return min_price;
+	}
+	
+	public int find_max_price(int hotelid){
+		int max_price=0;
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select price from room where hotelid="+hotelid;
+		
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				if(max_price<rs.getInt("price")){
+					max_price=rs.getInt("price");
+				}
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return max_price;
+	}
+	
 //	public static void main(String[]args){
 //		RoomDataServiceImpl room=new RoomDataServiceImpl();
-//		OrderDataServiceImpl order=new OrderDataServiceImpl();
-//		OrderPO order_po=order.findByHotelid(1).get(0);
-//		RoomOrderPO po=order_po.getroom_order().get(0);
-//		
-//		System.out.println(po.getroom_type());
-//		System.out.println(po.getroom_number());
-//		ResultMessage flag=room.reduce(order_po);
-//		System.out.println(flag);
-//		
-//		
-//		//System.out.println(room.available_num(1,"标准间"));
+//		int min_price=room.find_min_price(2);
+//		System.out.println(min_price);
 //	}
 	
 }
