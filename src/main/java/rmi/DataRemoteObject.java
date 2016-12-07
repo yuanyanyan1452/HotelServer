@@ -303,9 +303,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage updateHotelWokerInfo(int hotelid, HotelWorker worker) {
+	public ResultMessage updateHotelWokerInfo( HotelWorker worker) {
 		// TODO Auto-generated method stub
-		return hotelbl.updateHotelWokerInfo(hotelid, worker);
+		return hotelbl.updateHotelWokerInfo(worker);
 	}
 	
 	@Override

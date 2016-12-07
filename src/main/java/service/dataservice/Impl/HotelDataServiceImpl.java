@@ -25,19 +25,18 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
 			while(rs.next()){
-				HotelPO po=new HotelPO();
-				po.setid(rs.getInt("id"));
-				po.setname(rs.getString("name"));
-				po.setaddress(rs.getString("address"));
-				po.setbussiness_address(rs.getString("business_address"));
-				po.setintroduction(rs.getString("introduction"));
-				po.setservice(rs.getString("service"));
-				po.setstar(rs.getString("star"));
-				po.setscore(rs.getInt("score"));
-				po.sethotel_evaluation(rs.getString("hotel_evaluation"));
-				po.setmin_price(rs.getInt("min_price"));
-				po.setbook_clientid(transformToArray(rs.getString("book_clientid")));
-				hotel_list.add(po);
+				HotelPO hotelPO=new HotelPO();
+				hotelPO.setid(rs.getInt("id"));
+				hotelPO.setname(rs.getString("name"));
+				hotelPO.setaddress(rs.getString("address"));
+				hotelPO.setbussiness_address(rs.getString("business_address"));
+				hotelPO.setintroduction(rs.getString("introduction"));
+				hotelPO.setservice(rs.getString("service"));
+				hotelPO.setstar(rs.getString("star"));
+				hotelPO.setscore(rs.getString("score"));
+				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
+				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
+				hotel_list.add(hotelPO);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -66,10 +65,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setintroduction(rs.getString("introduction"));
 				hotelPO.setservice(rs.getString("service"));
 				hotelPO.setstar(rs.getString("star"));
-				hotelPO.setscore(rs.getInt("score"));
-				hotelPO.sethotel_evaluation(rs.getString("hotel_evaluation"));
-				hotelPO.setmin_price(rs.getInt("min_price"));
-				hotelPO.setbook_clientid(transformToArray(rs.getString("book_clientid")));
+				hotelPO.setscore(rs.getString("score"));
+				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
+				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -97,10 +95,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setintroduction(rs.getString("introduction"));
 				hotelPO.setservice(rs.getString("service"));
 				hotelPO.setstar(rs.getString("star"));
-				hotelPO.setscore(rs.getInt("score"));
-				hotelPO.sethotel_evaluation(rs.getString("hotel_evaluation"));
-				hotelPO.setmin_price(rs.getInt("min_price"));
-				hotelPO.setbook_clientid(transformToArray(rs.getString("book_clientid")));
+				hotelPO.setscore(rs.getString("score"));
+				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
+				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -109,10 +106,35 @@ public class HotelDataServiceImpl implements HotelDataService{
 	}
 	
 	@Override
-	public HotelPO findByPrice(String price) {
+	public ArrayList<HotelPO> findByStar(String star){
 		// TODO Auto-generated method stub
+		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select*from hotel where star='"+star+"'";
 		
-		return null;
+		try{
+			ps=conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				HotelPO hotelPO=new HotelPO();
+				hotelPO.setid(rs.getInt("id"));
+				hotelPO.setname(rs.getString("name"));
+				hotelPO.setaddress(rs.getString("address"));
+				hotelPO.setbussiness_address(rs.getString("business_address"));
+				hotelPO.setintroduction(rs.getString("introduction"));
+				hotelPO.setservice(rs.getString("service"));
+				hotelPO.setstar(rs.getString("star"));
+				hotelPO.setscore(rs.getString("score"));
+				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
+				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
+				list.add(hotelPO);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
 	}
 	
 	@Override
@@ -121,7 +143,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
-		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?,?,?)";
 
 		try{
 			ps=conn.prepareStatement(sql);
@@ -131,10 +153,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(4, po.getintroduction());
 			ps.setString(5, po.getservice());
 			ps.setString(6, po.getstar());
-			ps.setInt(7, po.getscore());
-			ps.setString(8, po.gethotel_evaluation());
-			ps.setInt(9, po.getmin_price());
-			ps.setString(10, transformToStr(po.getbook_clientid()));
+			ps.setString(7, po.getscore());
+			ps.setString(8, evaluTransformToStr(po.gethotel_evaluation()));
+			ps.setString(9, bookTransformToStr(po.getbook_clientid()));
 			int i=ps.executeUpdate();
 			setid(po);
 			if(i==0){
@@ -169,7 +190,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "update hotel set name=?,address=?,business_address=?,introduction=?,"
-				+ "service=?,star=?,score=?,hotel_evaluation=?,min_price=?,book_clientid=? where id=?";
+				+ "service=?,star=?,score=?,hotel_evaluation=?,book_clientid=? where id=?";
 		conn = Connect.getConn();
 		try{
 			ps=conn.prepareStatement(sql);
@@ -179,11 +200,10 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(4, po.getintroduction());
 			ps.setString(5, po.getservice());
 			ps.setString(6, po.getstar());
-			ps.setInt(7, po.getscore());
-			ps.setString(8, po.gethotel_evaluation());
-			ps.setInt(9, po.getmin_price());
-			ps.setString(10,transformToStr(po.getbook_clientid()));
-			ps.setInt(11, po.getid());
+			ps.setString(7, po.getscore());
+			ps.setString(8, evaluTransformToStr(po.gethotel_evaluation()));
+			ps.setString(9, bookTransformToStr(po.getbook_clientid()));
+			ps.setInt(10, po.getid());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag = ResultMessage.Fail;
@@ -231,7 +251,17 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return hotelList;
 	}
 
-	public ArrayList<Integer> transformToArray(String s){
+	public int find_min_price(int hotelid){
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		return room.find_min_price(hotelid);
+	}
+	
+	public int find_max_price(int hotelid){
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		return room.find_max_price(hotelid);
+	}
+	
+	public ArrayList<Integer> bookTransformToArray(String s){
 		ArrayList<Integer> book_clientid=new ArrayList<Integer>();
 		String[]trans=s.split(",");
 		for(int i=0;i<trans.length;i++){
@@ -241,7 +271,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return book_clientid;
 	}
 	
-	public String transformToStr(ArrayList<Integer> book_clientid){
+	public String bookTransformToStr(ArrayList<Integer> book_clientid){
 		String s="";
 		for(int i=0;i<book_clientid.size()-1;i++){
 			s+=String.valueOf(book_clientid.get(i))+",";
@@ -250,9 +280,28 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return s;
 	}
 	
+	public ArrayList<String> evaluTransformToArray(String s){
+		ArrayList<String> evalu = new ArrayList<String>();
+		String[]e=s.split(",");
+		for(int i=0;i<e.length;i++){
+			String temp=e[i];
+			evalu.add(temp);
+		}
+		return evalu;
+		
+	}
+	
+	public String evaluTransformToStr(ArrayList<String> evalu){
+		String s="";
+		for(int i=0;i<evalu.size()-1;i++){
+			s+=evalu.get(i)+",";
+		}
+		s+=evalu.get(evalu.size()-1);
+		return s;
+		
+	}
 //	public static void main(String[]args){
 //		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-//		HotelPO po=hotel.findByid(1);
-//		System.out.println(po.getbook_clientid().size());
+//		System.out.println(hotel.find_min_price(1));
 //	}
 }

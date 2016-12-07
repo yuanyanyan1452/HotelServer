@@ -37,7 +37,6 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public ClientVO client_checkInfo(int clientid) {
 		// TODO Auto-generated method stub
 		ClientPO clientpo=clientdataservice.find(clientid);
-		
 		return null;
 	}
 

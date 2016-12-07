@@ -76,5 +76,5 @@ public interface HotelBLService extends Remote{
 	 * @param worker
 	 * @return 更新对应酒店的工作人员信息
 	 */
-	public ResultMessage updateHotelWokerInfo(int hotelid, HotelWorker worker);
+	public ResultMessage updateHotelWokerInfo(HotelWorker worker);
 }

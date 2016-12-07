@@ -13,6 +13,10 @@ public class VIPInfo {
 		this.info = info;
 	}
 
+	public VIPInfo() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public VIPType getType() {
 		return type;
 	}

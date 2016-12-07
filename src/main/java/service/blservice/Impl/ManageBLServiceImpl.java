@@ -1,6 +1,9 @@
 package service.blservice.Impl;
 
+import java.rmi.RemoteException;
+
 import objects.Client;
+import objects.Hotel;
 import objects.HotelWorker;
 import objects.ObjectChange;
 import objects.ResultMessage;
@@ -22,6 +25,19 @@ public class ManageBLServiceImpl implements ManageBLService {
 	ClientBLService clientblservice=new ClientBLServiceImpl();
 	VOChange vochange=new VOChange();
 	ObjectChange objectchange=new ObjectChange();
+	
+	@Override
+	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage webmarket_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public ClientVO manage_searchClient(int clientid) {
 		// TODO Auto-generated method stub
@@ -33,7 +49,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage manage_updateClient(ClientVO clientvo) {
 		// TODO Auto-generated method stub
-		Client client
+		Client client=vochange.clientvo_to_client(clientvo);
 		ResultMessage result=clientblservice.updateClientInfo(client);
 		return result;
 	}
@@ -41,19 +57,19 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage manage_addHotel(HotelVO hotelvo) {
 		// TODO Auto-generated method stub
-		Hotel hotel
+		Hotel hotel=vochange.hotelvo_to_hotel(hotelvo);
 		ResultMessage result=hotelblservice.addHotel(hotel);
 		
-		return null;
+		return result;
 	}
 
 	@Override
-	public ResultMessage manage_addHotelWorker(HotelWorkerVO w) {
+	public ResultMessage manage_addHotelWorker(HotelWorkerVO workervo) {
 		// TODO Auto-generated method stub
-		HotelWorker hotelworker
+		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(workervo);
 		ResultMessage result=hotelblservice.addHotelWorker(hotelworker);
 		
-		return null;
+		return result;
 	}
 
 	@Override
@@ -61,16 +77,15 @@ public class ManageBLServiceImpl implements ManageBLService {
 		// TODO Auto-generated method stub
 		HotelWorker hotelworker=hotelblservice.searchHotelWorker(hotelid);
 		HotelWorkerVO hotelworkervo=objectchange.changetohotelworkervo(hotelworker);
-		return null;
+		return hotelworkervo;
 	}
 
 	@Override
-	public ResultMessage manage_updateHotelWorker(HotelWorkerVO w) {
+	public ResultMessage manage_updateHotelWorker(HotelWorkerVO worker) {
 		// TODO Auto-generated method stub
-		HotelWorker hotelworker
-		ResultMessage result=hotelblservice.updateHotelWokerInfo(hotelid, hotelworker);
-		
-		return null;
+		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(worker);
+		ResultMessage result=hotelblservice.updateHotelWokerInfo( hotelworker);
+		return result;
 	}
 
 	@Override
@@ -78,7 +93,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 		// TODO Auto-generated method stub
 		WebMarketPO po=vochange.marketvo_to_marketpo(webmarketvo);
 		ResultMessage result=managedataservice.insertWebMarket(po);
-		return null;
+		return result;
 	}
 
 	@Override
@@ -95,6 +110,8 @@ public class ManageBLServiceImpl implements ManageBLService {
 		ResultMessage result=managedataservice.updateWebMarket(po);
 		return result;
 	}
+
+	
 	
 
 }
