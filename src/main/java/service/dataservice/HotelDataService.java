@@ -20,7 +20,7 @@ public interface HotelDataService {
 	public ArrayList<HotelPO> findByStar(String star);
 	
 	//新增一个酒店
-	public ResultMessage insert(HotelPO po);
+	public ResultMessage insert(HotelPO po); 
 	
 	//更新酒店信息
 	public ResultMessage update(HotelPO po);
