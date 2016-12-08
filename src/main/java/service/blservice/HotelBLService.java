@@ -46,81 +46,81 @@ public interface HotelBLService extends Remote{
 	 * @param hotelid
 	 * @return 返回对应酒店
 	 */
-	public Hotel searchHotel(int hotelid);
+	public Hotel searchHotel(int hotelid)throws RemoteException;
 
 	/**
 	 * @param clientid
 	 * @return 返回对应客户预定过的酒店列表
 	 */
-	public ArrayList<Hotel> previousHotel(int clientid);
+	public ArrayList<Hotel> previousHotel(int clientid)throws RemoteException;
 
 	/**
 	 * @param hotel
 	 * @return 添加酒店
 	 */
-	public ResultMessage addHotel(Hotel hotel);
+	public ResultMessage addHotel(Hotel hotel)throws RemoteException;
 
 	/**
 	 * @param worker
 	 * @return 添加酒店工作人员
 	 */
-	public ResultMessage addHotelWorker(HotelWorker worker);
+	public ResultMessage addHotelWorker(HotelWorker worker)throws RemoteException;
 
 	/**
 	 * @param hotelid
 	 * @return 返回对应酒店的工作人员
 	 */
-	public HotelWorker searchHotelWorker(int hotelid);
+	public HotelWorker searchHotelWorker(int hotelid)throws RemoteException;
 
 	/**
 	 * @param hotelid
 	 * @param worker
 	 * @return 更新对应酒店的工作人员信息
 	 */
-	public ResultMessage updateHotelWokerInfo(HotelWorker worker);
+	public ResultMessage updateHotelWokerInfo(HotelWorker worker)throws RemoteException;
 	/**
 	 * @param location
 	 * @return 客户获取对应地址的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelBylocation(String address,String business_address);
+	public ArrayList<Hotel> searchHotelBylocation(String address,String business_address)throws RemoteException;
 
 	/**
 	 * @param hotelname
 	 * @return 符合对应酒店名的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelByname(String hotelname);
+	public ArrayList<Hotel> searchHotelByname(String hotelname)throws RemoteException;
 
 	/**
 	 * @param type
 	 * @return 有符合对应房间类型的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelByroom(String type);
+	public ArrayList<Hotel> searchHotelByroom(String type)throws RemoteException;
 
 	/**
 	 * @param lowprice
 	 * @param highprice
 	 * @return 有符合对应价格区间的房间的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice);
+	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice)throws RemoteException;
 
 	/**
 	 * @param inTime
 	 * @param leaveTime
 	 * @return 有符合对应时间段的房间的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime);
+	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime)throws RemoteException;
 
 	/**
 	 * @param star
 	 * @return 符合对应星级的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelBystar(String star);
+	public ArrayList<Hotel> searchHotelBystar(String star)throws RemoteException;
 
 	/**
 	 * @param lowscore
 	 * @param highscore
 	 * @return 符合对应评分区间的酒店列表
 	 */
-	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore);
+	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore)throws RemoteException;
 
 }

@@ -43,7 +43,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public ClientVO client_checkInfo(int clientid) {
 		// TODO Auto-generated method stub
 		ClientPO clientpo=clientdataservice.find(clientid);
-		ClientVO clientvo=clientpo.changetoclientvo(clientpo);
+		ClientVO clientvo=clientpo.changetoclientvo();
 		return clientvo;
 	}
 
@@ -56,7 +56,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_getpreviousHotelList(int clientid) {
+	public ArrayList<HotelVO> client_getpreviousHotelList(int clientid) throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrayList<Hotel> previoushotel_list=hotelblservice.previousHotel(clientid);
 		ArrayList<HotelVO> previoushotelVO_list=new ArrayList<HotelVO>();
@@ -82,7 +82,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address) {
+	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address) throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBylocation(address, business_address);
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
@@ -94,7 +94,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelByname(String hotelname) {
+	public ArrayList<HotelVO> client_searchHotelByname(String hotelname) throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByname(hotelname);
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
@@ -132,7 +132,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelBytime(String inTime, String leaveTime) {
+	public ArrayList<HotelVO> client_searchHotelBytime(String inTime, String leaveTime)throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBytime(inTime, leaveTime);
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
@@ -144,7 +144,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelBystar(String star) {
+	public ArrayList<HotelVO> client_searchHotelBystar(String star) throws RemoteException{
 		// TODO Auto-generated method stub
 		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBystar(star);
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
@@ -156,7 +156,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelByscore(double lowscore, double highscore) {
+	public ArrayList<HotelVO> client_searchHotelByscore(double lowscore, double highscore)throws RemoteException {
 		// TODO Auto-generated method stub
 		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByscore(lowscore, highscore);
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
@@ -168,7 +168,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public HotelVO client_checkHotelInfo(int hotelid) {
+	public HotelVO client_checkHotelInfo(int hotelid) throws RemoteException{
 		// TODO Auto-generated method stub
 		Hotel hotel=hotelblservice.searchHotel(hotelid);
 		HotelVO hotelvo=objectchange.changetohotelvo(hotel);
@@ -213,7 +213,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public Client checkClientInfo(int clientid) {
 		// TODO Auto-generated method stub
 		ClientPO clientpo=clientdataservice.find(clientid);
-		Client client=clientpo.changetoclient(clientpo);
+		Client client=clientpo.changetoclient();
 		return client;
 	}
 

@@ -63,23 +63,23 @@ public class HotelWorkerPO implements Serializable{
 		this.password = password;
 	}
 	
-	public HotelWorker changetohotelworker(HotelWorkerPO po){
+	public HotelWorker changetohotelworker(){
 		HotelWorker hotelworker=new HotelWorker();
-		hotelworker.sethotelid(po.hotelid);
-		hotelworker.setname(po.name);
-		hotelworker.setcontact(po.contact);
-		hotelworker.setusername(po.username);
-		hotelworker.setpassword(po.password);
+		hotelworker.sethotelid(this.hotelid);
+		hotelworker.setname(this.name);
+		hotelworker.setcontact(this.contact);
+		hotelworker.setusername(this.username);
+		hotelworker.setpassword(this.password);
 		return hotelworker;
 	}
 	
-	public HotelWorkerVO changetohotelworkervo(HotelWorkerPO po){
+	public HotelWorkerVO changetohotelworkervo(){
 		HotelWorkerVO vo=new HotelWorkerVO();
-		vo.sethotelid(po.hotelid);
-		vo.setname(po.name);
-		vo.setcontact(po.contact);
-		vo.setusername(po.username);
-		vo.setpassword(po.password);
+		vo.sethotelid(this.hotelid);
+		vo.setname(this.name);
+		vo.setcontact(this.contact);
+		vo.setusername(this.username);
+		vo.setpassword(this.password);
 		return vo;
 	}
 	

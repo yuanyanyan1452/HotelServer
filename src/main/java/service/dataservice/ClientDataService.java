@@ -16,5 +16,7 @@ public interface ClientDataService {
 	public ResultMessage check(String username,String password);
 	
 	public ClientPO getclientpo(String username,String password);
+	
+	public int findClientIDbyUsername(String username);
 }
 

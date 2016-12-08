@@ -87,27 +87,27 @@ public class WebStrategyPO implements Serializable{
 		return superposition;
 	}
 	
-	public WebStrategy changetowebstrategy(WebStrategyPO po){
+	public WebStrategy changetowebstrategy(){
 		WebStrategy webstrategy=new WebStrategy();
-		webstrategy.setid(po.wsid);
-		webstrategy.setname(po.name);
-		webstrategy.setcondition(po.condition);
-		webstrategy.setstart_time(po.start_time);
-		webstrategy.setend_time(po.end_time);
-		webstrategy.setexecuteway(po.executeway);
-		webstrategy.setsuperposition(po.superposition);
+		webstrategy.setid(this.wsid);
+		webstrategy.setname(this.name);
+		webstrategy.setcondition(this.condition);
+		webstrategy.setstart_time(this.start_time);
+		webstrategy.setend_time(this.end_time);
+		webstrategy.setexecuteway(this.executeway);
+		webstrategy.setsuperposition(this.superposition);
 		return webstrategy;
 	}
 	
-	public WebStrategyVO changetowebstrategyvo(WebStrategyPO po){
+	public WebStrategyVO changetowebstrategyvo(){
 		WebStrategyVO vo=new WebStrategyVO();
-		vo.setid(po.wsid);
-		vo.setname(po.name);
-		vo.setcondition(po.condition);
-		vo.setstart_time(po.start_time);
-		vo.setend_time(po.end_time);
-		vo.setexecuteway(po.executeway);
-		vo.setsuperposition(po.superposition);
+		vo.setid(this.wsid);
+		vo.setname(this.name);
+		vo.setcondition(this.condition);
+		vo.setstart_time(this.start_time);
+		vo.setend_time(this.end_time);
+		vo.setexecuteway(this.executeway);
+		vo.setsuperposition(this.superposition);
 		return vo;
 	}
 }

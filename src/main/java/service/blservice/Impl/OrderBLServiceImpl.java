@@ -23,7 +23,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByClientid(clientid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
-			OrderVO ordervo=orderpo_list.get(i).changetoordervo(orderpo_list.get(i));
+			OrderVO ordervo=orderpo_list.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		return ordervo_list;
@@ -36,11 +36,11 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, state, false);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list1.size();i++){
-			OrderVO ordervo=orderpo_list1.get(i).changetoordervo(orderpo_list1.get(i));
+			OrderVO ordervo=orderpo_list1.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		for(int i=0;i<orderpo_list2.size();i++){
-			OrderVO ordervo=orderpo_list2.get(i).changetoordervo(orderpo_list2.get(i));
+			OrderVO ordervo=orderpo_list2.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		return ordervo_list;
@@ -54,15 +54,15 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<OrderPO> orderpo_list3=orderdataservice.findByStatus(clientid, "CANCELLED", isExecute);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list1.size();i++){
-			OrderVO ordervo=orderpo_list1.get(i).changetoordervo(orderpo_list1.get(i));
+			OrderVO ordervo=orderpo_list1.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		for(int i=0;i<orderpo_list2.size();i++){
-			OrderVO ordervo=orderpo_list2.get(i).changetoordervo(orderpo_list2.get(i));
+			OrderVO ordervo=orderpo_list2.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		for(int i=0;i<orderpo_list3.size();i++){
-			OrderVO ordervo=orderpo_list3.get(i).changetoordervo(orderpo_list3.get(i));
+			OrderVO ordervo=orderpo_list3.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		return null;
@@ -74,7 +74,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
-			OrderVO ordervo=orderpo_list.get(i).changetoordervo(orderpo_list.get(i));
+			OrderVO ordervo=orderpo_list.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
 		return ordervo_list;

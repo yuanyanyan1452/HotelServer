@@ -208,5 +208,5 @@ public interface OrderBLService extends Remote{
 	 * @param leaveTime
 	 * @return 更新订单实际离开时间
 	 */
-	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime);
+	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime)throws RemoteException;
 }

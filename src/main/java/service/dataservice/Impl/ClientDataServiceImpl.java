@@ -261,6 +261,24 @@ public class ClientDataServiceImpl implements ClientDataService {
 		return ResultMessage.Fail;
 	}
 	
+	public int findClientIDbyUsername(String username){
+		Connection conn = Connect.getConn();
+		int result =0;
+		String sql = "select id from client where name = encode(?,'key')";
+		PreparedStatement pstmt;
+		try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1, username);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	result = rs.getInt("id");
+	        }
+	        return result;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return -1;
+	    }
+	}
 	
 //	public static void main(String[] args) {
 //		ClientDataServiceImpl a = new ClientDataServiceImpl();
