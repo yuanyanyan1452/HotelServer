@@ -39,7 +39,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 	
 	@Override
-	public ClientVO manage_searchClient(int clientid) {
+	public ClientVO manage_searchClient(int clientid) throws RemoteException{
 		// TODO Auto-generated method stub
 		Client client= clientblservice.checkClientInfo(clientid);
 		ClientVO clientvo=objectchange.changetoclientvo(client);
@@ -47,7 +47,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public ResultMessage manage_updateClient(ClientVO clientvo) {
+	public ResultMessage manage_updateClient(ClientVO clientvo) throws RemoteException{
 		// TODO Auto-generated method stub
 		Client client=vochange.clientvo_to_client(clientvo);
 		ResultMessage result=clientblservice.updateClientInfo(client);
@@ -55,7 +55,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public ResultMessage manage_addHotel(HotelVO hotelvo) {
+	public ResultMessage manage_addHotel(HotelVO hotelvo) throws RemoteException{
 		// TODO Auto-generated method stub
 		Hotel hotel=vochange.hotelvo_to_hotel(hotelvo);
 		ResultMessage result=hotelblservice.addHotel(hotel);
@@ -64,7 +64,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public ResultMessage manage_addHotelWorker(HotelWorkerVO workervo) {
+	public ResultMessage manage_addHotelWorker(HotelWorkerVO workervo) throws RemoteException{
 		// TODO Auto-generated method stub
 		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(workervo);
 		ResultMessage result=hotelblservice.addHotelWorker(hotelworker);
@@ -73,7 +73,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public HotelWorkerVO manage_searchHotelWorker(int hotelid) {
+	public HotelWorkerVO manage_searchHotelWorker(int hotelid) throws RemoteException{
 		// TODO Auto-generated method stub
 		HotelWorker hotelworker=hotelblservice.searchHotelWorker(hotelid);
 		HotelWorkerVO hotelworkervo=objectchange.changetohotelworkervo(hotelworker);
@@ -81,7 +81,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public ResultMessage manage_updateHotelWorker(HotelWorkerVO worker) {
+	public ResultMessage manage_updateHotelWorker(HotelWorkerVO worker) throws RemoteException{
 		// TODO Auto-generated method stub
 		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(worker);
 		ResultMessage result=hotelblservice.updateHotelWokerInfo( hotelworker);

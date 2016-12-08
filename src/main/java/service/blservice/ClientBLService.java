@@ -121,17 +121,17 @@ public interface ClientBLService extends Remote{
 	 * @param tag
 	 * @return 更新客户信用值
 	 */
-	public ResultMessage updateClientCredit(int clientId, int value, int tag);
+	public ResultMessage updateClientCredit(int clientId, int value, int tag)throws RemoteException;
 
 	/**
 	 * @param clientid
 	 * @return 查看客户详细信息
 	 */
-	public Client checkClientInfo(int clientid);
+	public Client checkClientInfo(int clientid)throws RemoteException;
 
 	/**
 	 * @param client
 	 * @return 更新客户详细信息
 	 */
-	public ResultMessage updateClientInfo(Client client);
+	public ResultMessage updateClientInfo(Client client)throws RemoteException;
 }

@@ -34,7 +34,7 @@ import vo.WebMarketVO;
 import vo.WebStrategyVO;
 
 public class VOChange {
-	VOChange change=new VOChange();
+	
 	public ClientPO clientvo_to_clientpo(ClientVO clientvo){
 		ClientPO clientpo=new ClientPO();
 		clientpo.setclientid(clientvo.getclientid());
@@ -109,7 +109,7 @@ public class VOChange {
 		ArrayList<RoomOrderPO> roomorderpo_list=new ArrayList<RoomOrderPO>();
 		ArrayList<RoomOrderVO> roomordervo_list=ordervo.getroom_order();
 		for(int i=0;i<roomordervo_list.size();i++){
-			RoomOrderPO roomorderpo=change.roomordervo_to_roomorderpo(roomordervo_list.get(i));
+			RoomOrderPO roomorderpo=this.roomordervo_to_roomorderpo(roomordervo_list.get(i));
 			roomorderpo_list.add(roomorderpo);
 		}
 		orderpo.setroom_order(roomorderpo_list);
@@ -134,7 +134,7 @@ public class VOChange {
 		ArrayList<RoomOrderPO> roomorderpo_list=new ArrayList<RoomOrderPO>();
 		ArrayList<RoomOrderVO> roomordervo_list=ordervo.getroom_order();
 		for(int i=0;i<roomordervo_list.size();i++){
-			RoomOrderPO roomorderpo=change.roomordervo_to_roomorderpo(roomordervo_list.get(i));
+			RoomOrderPO roomorderpo=this.roomordervo_to_roomorderpo(roomordervo_list.get(i));
 			roomorderpo_list.add(roomorderpo);
 		}
 		order.setroom_order(roomorderpo_list);

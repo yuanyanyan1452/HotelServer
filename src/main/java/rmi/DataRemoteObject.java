@@ -171,7 +171,7 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) {
+	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) throws RemoteException{
 		// TODO Auto-generated method stub
 		return orderbl.updateActualLeaveTime(orderid, leaveTime);
 	}
@@ -273,37 +273,37 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public Hotel searchHotel(int hotelid) {
+	public Hotel searchHotel(int hotelid) throws RemoteException{
 		// TODO Auto-generated method stub
 		return hotelbl.searchHotel(hotelid);
 	}
 
 	@Override
-	public ArrayList<Hotel> previousHotel(int clientid) {
+	public ArrayList<Hotel> previousHotel(int clientid) throws RemoteException{
 		// TODO Auto-generated method stub
 		return hotelbl.previousHotel(clientid);
 	}
 
 	@Override
-	public ResultMessage addHotel(Hotel hotel) {
+	public ResultMessage addHotel(Hotel hotel) throws RemoteException{
 		// TODO Auto-generated method stub
 		return hotelbl.addHotel(hotel);
 	}
 
 	@Override
-	public ResultMessage addHotelWorker(HotelWorker worker) {
+	public ResultMessage addHotelWorker(HotelWorker worker) throws RemoteException{
 		// TODO Auto-generated method stub
 		return hotelbl.addHotelWorker(worker);
 	}
 
 	@Override
-	public HotelWorker searchHotelWorker(int hotelid) {
+	public HotelWorker searchHotelWorker(int hotelid) throws RemoteException{
 		// TODO Auto-generated method stub
 		return hotelbl.searchHotelWorker(hotelid);
 	}
 
 	@Override
-	public ResultMessage updateHotelWokerInfo( HotelWorker worker) {
+	public ResultMessage updateHotelWokerInfo( HotelWorker worker) throws RemoteException{
 		// TODO Auto-generated method stub
 		return hotelbl.updateHotelWokerInfo(worker);
 	}
@@ -452,19 +452,19 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage updateClientCredit(int clientId, int value, int tag) {
+	public ResultMessage updateClientCredit(int clientId, int value, int tag) throws RemoteException{
 		// TODO Auto-generated method stub
 		return clientbl.updateClientCredit(clientId, value, tag);
 	}
 
 	@Override
-	public Client checkClientInfo(int clientid) {
+	public Client checkClientInfo(int clientid) throws RemoteException{
 		// TODO Auto-generated method stub
 		return clientbl.checkClientInfo(clientid);
 	}
 
 	@Override
-	public ResultMessage updateClientInfo(Client client) {
+	public ResultMessage updateClientInfo(Client client) throws RemoteException{
 		// TODO Auto-generated method stub
 		return clientbl.updateClientInfo(client);
 	}
