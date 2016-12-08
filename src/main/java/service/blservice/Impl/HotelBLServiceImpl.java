@@ -107,7 +107,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public HotelWorker searchHotelWorker(int hotelid) {
 		// TODO Auto-generated method stub
 		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.find(hotelid);
-		HotelWorker hotelworker=hotelworkerpo.changetohotelworker(hotelworkerpo);
+		HotelWorker hotelworker=hotelworkerpo.changetohotelworker();
 		return hotelworker;
 	}
 

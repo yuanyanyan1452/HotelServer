@@ -43,7 +43,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public ClientVO client_checkInfo(int clientid) {
 		// TODO Auto-generated method stub
 		ClientPO clientpo=clientdataservice.find(clientid);
-		ClientVO clientvo=clientpo.changetoclientvo(clientpo);
+		ClientVO clientvo=clientpo.changetoclientvo();
 		return clientvo;
 	}
 
@@ -213,7 +213,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public Client checkClientInfo(int clientid) {
 		// TODO Auto-generated method stub
 		ClientPO clientpo=clientdataservice.find(clientid);
-		Client client=clientpo.changetoclient(clientpo);
+		Client client=clientpo.changetoclient();
 		return client;
 	}
 

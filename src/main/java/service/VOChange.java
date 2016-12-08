@@ -7,6 +7,7 @@ import objects.HotelStrategy;
 import objects.HotelWorker;
 import objects.Manage;
 import objects.Order;
+import objects.RoomOrder;
 import objects.VIPInfo;
 import objects.WebMarket;
 import objects.WebStrategy;
@@ -131,13 +132,13 @@ public class VOChange {
 		order.setstart_time(ordervo.getstart_time());
 		order.setend_time(ordervo.getend_time());
 		order.setlatest_execute_time(ordervo.getlatest_execute_time());
-		ArrayList<RoomOrderPO> roomorderpo_list=new ArrayList<RoomOrderPO>();
+		ArrayList<RoomOrder> roomorder_list=new ArrayList<RoomOrder>();
 		ArrayList<RoomOrderVO> roomordervo_list=ordervo.getroom_order();
 		for(int i=0;i<roomordervo_list.size();i++){
-			RoomOrderPO roomorderpo=this.roomordervo_to_roomorderpo(roomordervo_list.get(i));
-			roomorderpo_list.add(roomorderpo);
+			RoomOrder roomorder=this.roomordervo_to_roomorder(roomordervo_list.get(i));
+			roomorder_list.add(roomorder);
 		}
-		order.setroom_order(roomorderpo_list);
+		order.setroom_order(roomorder_list);
 		order.setprice(ordervo.getprice());
 		order.setexpect_number_of_people(ordervo.getexpect_number_of_people());
 		order.sethave_child(ordervo.gethave_child());
@@ -145,6 +146,8 @@ public class VOChange {
 		return order;
 	}
 	
+	
+
 	public  HotelStrategyPO hotelstrategyvo_to_hotelstrategypo(HotelStrategyVO vo){
 		HotelStrategyPO po=new HotelStrategyPO();
 		po.setid(vo.getid());
@@ -260,6 +263,14 @@ public class VOChange {
 		po.setroom_type(vo.getroom_type());
 		po.setroom_number(vo.getroom_number());
 		return po;
+	}
+	
+	public RoomOrder roomordervo_to_roomorder(RoomOrderVO vo) {
+		// TODO Auto-generated method stub
+		RoomOrder order=new RoomOrder();
+		order.setroom_type(vo.getroom_type());
+		order.setroom_number(vo.getroom_number());
+		return order;
 	}
 	
 	public RoomPO roomvo_to_roompo(RoomVO vo){

@@ -55,7 +55,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 		ArrayList<HotelStrategyPO> hotelstrategypo_list=strategydataservice.showlist_hotel();
 		ArrayList<HotelStrategyVO> hotelstrategyvo_list=new ArrayList<HotelStrategyVO>();
 		for(int i=0;i<hotelstrategypo_list.size();i++){
-			HotelStrategyVO hotelstrategyvo=hotelstrategypo_list.get(i).changetohotelstrategyvo(hotelstrategypo_list.get(i));
+			HotelStrategyVO hotelstrategyvo=hotelstrategypo_list.get(i).changetohotelstrategyvo();
 			hotelstrategyvo_list.add(hotelstrategyvo);
 		}
 		return hotelstrategyvo_list;
@@ -67,7 +67,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 		ArrayList<WebStrategyPO> webstrategypo_list=strategydataservice.showlist_web();
 		ArrayList<WebStrategyVO> webstrategyvo_list=new ArrayList<WebStrategyVO>();
 		for(int i=0;i<webstrategypo_list.size();i++){
-			WebStrategyVO webstrategyvo=webstrategypo_list.get(i).changetowebstrategyvo(webstrategypo_list.get(i));
+			WebStrategyVO webstrategyvo=webstrategypo_list.get(i).changetowebstrategyvo();
 			webstrategyvo_list.add(webstrategyvo);
 		}
 		return webstrategyvo_list;
