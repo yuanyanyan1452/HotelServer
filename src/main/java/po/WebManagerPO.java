@@ -64,23 +64,23 @@ public class WebManagerPO implements Serializable{
 		this.password = password;
 	}
 	
-	public Manage changetowebmanager(WebManagerPO po){
+	public Manage changetowebmanager(){
 		Manage webmanager=new Manage();
-		webmanager.setwebmanagerid(po.webmanagerid);
-		webmanager.setname(po.name);
-		webmanager.setcontact(po.contact);
-		webmanager.setusername(po.username);
-		webmanager.setpassword(po.password);
+		webmanager.setwebmanagerid(this.webmanagerid);
+		webmanager.setname(this.name);
+		webmanager.setcontact(this.contact);
+		webmanager.setusername(this.username);
+		webmanager.setpassword(this.password);
 		return webmanager;
 	}
 	
-	public WebManagerVO changetowebmanagervo(WebManagerPO po){
+	public WebManagerVO changetowebmanagervo(){
 		WebManagerVO vo=new WebManagerVO();
-		vo.setwebmanagerid(po.webmanagerid);
-		vo.setname(po.name);
-		vo.setcontact(po.contact);
-		vo.setusername(po.username);
-		vo.setpassword(po.password);
+		vo.setwebmanagerid(this.webmanagerid);
+		vo.setname(this.name);
+		vo.setcontact(this.contact);
+		vo.setusername(this.username);
+		vo.setpassword(this.password);
 		return vo;
 	}
 }

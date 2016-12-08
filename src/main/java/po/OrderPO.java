@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import objects.Order;
+import objects.RoomOrder;
 import vo.OrderVO;
+import vo.RoomOrderVO;
 
 public class OrderPO implements Serializable {
 	/**
@@ -147,40 +149,47 @@ public class OrderPO implements Serializable {
 		return havechild;
 	}
 	
-	public Order changetoorder(OrderPO po){
+	public Order changetoorder(){
 		Order order=new Order();
-		order.setid(po.id);
-		order.setclientid(po.clientid);
-		order.sethotelid(po.hotelid);
-		order.setstate(po.state);
-		order.setcancel_time(po.cancel_time);
-		order.setexecute(po.execute);
-		order.setstart_time(po.start_time);
-		order.setend_time(po.end_time);
-		order.setlatest_execute_time(po.latest_execute_time);
-		order.setroom_order(po.room_order);
-		order.setprice(po.price);
-		order.setexpect_number_of_people(po.expect_number_of_people);
-		order.sethave_child(po.havechild);
+		order.setid(this.id);
+		order.setclientid(this.clientid);
+		order.sethotelid(this.hotelid);
+		order.setstate(this.state);
+		order.setcancel_time(this.cancel_time);
+		order.setexecute(this.execute);
+		order.setstart_time(this.start_time);
+		order.setend_time(this.end_time);
+		order.setlatest_execute_time(this.latest_execute_time);
+		ArrayList<RoomOrder> roomorderlist = new ArrayList<RoomOrder>();
+		for(int i=0;i<this.room_order.size();i++){
+			roomorderlist.add(room_order.get(i).changetoroomorder());
+		}
+		order.setroom_order(roomorderlist);
+		order.setprice(this.price);
+		order.setexpect_number_of_people(this.expect_number_of_people);
+		order.sethave_child(this.havechild);
 		return order;
 	}
 	
-	public OrderVO changetoordervo(OrderPO po){
+	public OrderVO changetoordervo(){
 		OrderVO vo=new OrderVO();
-		vo.setid(po.id);
-		vo.setclientid(po.clientid);
-		vo.sethotelid(po.hotelid);
-		vo.setstate(po.state);
-		vo.setcancel_time(po.cancel_time);
-		vo.setexecute(po.execute);
-		vo.setstart_time(po.start_time);
-		vo.setend_time(po.end_time);
-		vo.setlatest_execute_time(po.latest_execute_time);
-		//po转vo
-		//vo.setroom_order(order.room_order);
-		vo.setprice(po.price);
-		vo.setexpect_number_of_people(po.expect_number_of_people);
-		vo.sethave_child(po.havechild);
+		vo.setid(this.id);
+		vo.setclientid(this.clientid);
+		vo.sethotelid(this.hotelid);
+		vo.setstate(this.state);
+		vo.setcancel_time(this.cancel_time);
+		vo.setexecute(this.execute);
+		vo.setstart_time(this.start_time);
+		vo.setend_time(this.end_time);
+		vo.setlatest_execute_time(this.latest_execute_time);
+		ArrayList<RoomOrderVO> roomordervolist = new ArrayList<RoomOrderVO>();
+		for(int i=0;i<this.room_order.size();i++){
+			roomordervolist.add(room_order.get(i).changetoroomordervo());
+		}
+		vo.setroom_order(roomordervolist);
+		vo.setprice(this.price);
+		vo.setexpect_number_of_people(this.expect_number_of_people);
+		vo.sethave_child(this.havechild);
 		return vo;
 	}
 }

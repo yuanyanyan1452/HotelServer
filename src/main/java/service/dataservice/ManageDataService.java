@@ -13,7 +13,13 @@ public interface ManageDataService {
 		
 		public ResultMessage deleteWebMarket(int WebMarketid);
 		
-		public int findWebMarketIDbyName(String name);
+		public ResultMessage checkWebMarket(String username,String password);
+		
+		public WebMarketPO getwebmarketpo(String username,String password);
+		
+		public int findWebMarketIDbyUsername(String username);
+		
+		
 		
 		public WebManagerPO findWebManager(int WebManagerid);
 		
@@ -23,7 +29,11 @@ public interface ManageDataService {
 		
 		public ResultMessage deleteWebManager(int WebManagerid);
 		
-		public int findWebManagerIDbyName(String name);
+		public ResultMessage checkWebManager(String username,String password);
+		
+		public WebManagerPO getwebmanagerpo(String username,String password);
+		
+		public int findWebManagerIDbyUsername(String username);
 	
 }
 

@@ -1,10 +1,13 @@
 package objects;
 
+import java.util.ArrayList;
+
 import po.ClientPO;
 import po.HotelPO;
 import po.HotelStrategyPO;
 import po.HotelWorkerPO;
 import po.OrderPO;
+import po.RoomOrderPO;
 import po.RoomPO;
 import po.WebManagerPO;
 import po.WebMarketPO;
@@ -14,6 +17,7 @@ import vo.HotelStrategyVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
+import vo.RoomOrderVO;
 import vo.RoomVO;
 import vo.WebManagerVO;
 import vo.WebMarketVO;
@@ -142,6 +146,21 @@ public class ObjectChange {
 		return vo;
 	}
 	
+	public RoomOrderPO changetoroomorderpo(RoomOrder roomorder){
+		RoomOrderPO po = new RoomOrderPO();
+		po.setroom_number(roomorder.room_number);
+		po.setroom_type(roomorder.room_type);
+		return po;
+	}
+	
+	public RoomOrderVO changetoroomordervo(RoomOrder roomorder){
+		RoomOrderVO vo = new RoomOrderVO();
+		vo.setroom_number(roomorder.room_number);
+		vo.setroom_type(roomorder.room_type);
+		return vo;
+		
+	}
+	
 	public OrderPO changetoorderpo(Order order){
 		OrderPO po=new OrderPO();
 		po.setid(order.id);
@@ -153,7 +172,11 @@ public class ObjectChange {
 		po.setstart_time(order.start_time);
 		po.setend_time(order.end_time);
 		po.setlatest_execute_time(order.latest_execute_time);
-		po.setroom_order(order.room_order);
+		ArrayList<RoomOrderPO> list = new ArrayList<RoomOrderPO>();
+		for(int i=0;i<order.room_order.size();i++){
+			list.add(changetoroomorderpo(order.room_order.get(i)));
+		}
+		po.setroom_order(list);
 		po.setprice(order.price);
 		po.setexpect_number_of_people(order.expect_number_of_people);
 		po.sethave_child(order.havechild);
@@ -173,6 +196,11 @@ public class ObjectChange {
 		vo.setlatest_execute_time(order.latest_execute_time);
 		//po转vo
 		//vo.setroom_order(order.room_order);
+		ArrayList<RoomOrderVO> list = new ArrayList<RoomOrderVO>();
+		for(int i=0;i<order.room_order.size();i++){
+			list.add(changetoroomordervo(order.room_order.get(i)));
+		}
+		vo.setroom_order(list);
 		vo.setprice(order.price);
 		vo.setexpect_number_of_people(order.expect_number_of_people);
 		vo.sethave_child(order.havechild);

@@ -97,29 +97,29 @@ public class HotelStrategyPO implements Serializable{
 		return superposition;
 	}
 	
-	public HotelStrategy changetohotelstrategy(HotelStrategyPO po){
+	public HotelStrategy changetohotelstrategy(){
 		HotelStrategy hotelstrategy=new HotelStrategy();
-		hotelstrategy.setid(po.hsid);
-		hotelstrategy.sethotelid(po.hotelid);
-		hotelstrategy.setname(po.name);
-		hotelstrategy.setcondition(po.condition);
-		hotelstrategy.setstart_time(po.start_time);
-		hotelstrategy.setend_time(po.end_time);
-		hotelstrategy.setexecuteway(po.executeway);
-		hotelstrategy.setsuperposition(po.superposition);
+		hotelstrategy.setid(this.hsid);
+		hotelstrategy.sethotelid(this.hotelid);
+		hotelstrategy.setname(this.name);
+		hotelstrategy.setcondition(this.condition);
+		hotelstrategy.setstart_time(this.start_time);
+		hotelstrategy.setend_time(this.end_time);
+		hotelstrategy.setexecuteway(this.executeway);
+		hotelstrategy.setsuperposition(this.superposition);
 		return hotelstrategy;
 	}
 	
-	public HotelStrategyVO changetohotelstrategyvo(HotelStrategyPO po){
+	public HotelStrategyVO changetohotelstrategyvo(){
 		HotelStrategyVO vo=new HotelStrategyVO();
-		vo.setid(po.hsid);
-		vo.sethotelid(po.hotelid);
-		vo.setname(po.name);
-		vo.setcondition(po.condition);
-		vo.setstart_time(po.start_time);
-		vo.setend_time(po.end_time);
-		vo.setexecuteway(po.executeway);
-		vo.setsuperposition(po.superposition);
+		vo.setid(this.hsid);
+		vo.sethotelid(this.hotelid);
+		vo.setname(this.name);
+		vo.setcondition(this.condition);
+		vo.setstart_time(this.start_time);
+		vo.setend_time(this.end_time);
+		vo.setexecuteway(this.executeway);
+		vo.setsuperposition(this.superposition);
 		return vo;
 	}
 }
