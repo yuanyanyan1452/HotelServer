@@ -14,7 +14,7 @@ public class Order {
 	String start_time;
 	String end_time;
 	String latest_execute_time;
-	ArrayList<RoomOrderPO>room_order;
+	ArrayList<RoomOrder> room_order;
 	int price;
 	int expect_number_of_people;
 	boolean havechild;
@@ -34,7 +34,7 @@ public class Order {
 		expect_number_of_people=0;
 		havechild=false;
 	}
-	public Order(int i,int cid,int hid,String s,String cancel,boolean e,String st,String et,String lt,ArrayList<RoomOrderPO>list,int p,int en,boolean child){
+	public Order(int i,int cid,int hid,String s,String cancel,boolean e,String st,String et,String lt,ArrayList<RoomOrder>list,int p,int en,boolean child){
 		id=i;
 		clientid=cid;
 		hotelid=hid;
@@ -113,10 +113,10 @@ public class Order {
 		return latest_execute_time; 
 	}
 	
-	public void setroom_order(ArrayList<RoomOrderPO> list){
+	public void setroom_order(ArrayList<RoomOrder> list){
 		room_order = list;
 	}
-	public ArrayList<RoomOrderPO> getroom_order(){
+	public ArrayList<RoomOrder> getroom_order(){
 		return room_order;
 	}
 	

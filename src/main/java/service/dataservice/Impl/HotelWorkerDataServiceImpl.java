@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import objects.ResultMessage;
+import po.ClientPO;
 import po.HotelWorkerPO;
 import po.WebMarketPO;
 import service.dataservice.HotelWorkerDataService;
@@ -34,7 +35,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
 	
 	@Override
-	public ResultMessage insert(HotelWorkerPO po){
+	public synchronized ResultMessage insert(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
 	    String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key')";
 	    PreparedStatement pstmt;
@@ -72,7 +73,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	}
 	
 	@Override
-	public ResultMessage update(HotelWorkerPO po){
+	public synchronized ResultMessage update(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
 	    String sql = "update hotelworker set name=encode(?,'key'),contact=(?,'key') where id=?";
 	    PreparedStatement pstmt;
@@ -92,9 +93,9 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	}
 	
 	@Override
-	public ResultMessage delete(HotelWorkerPO po){
+	public synchronized ResultMessage delete(int hotelid){
 		Connection conn = Connect.getConn();
-	    String sql = "delete from hotelworker where id='" + po.gethotelid() + "'";
+	    String sql = "delete from hotelworker where id='" + hotelid + "'";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -106,6 +107,63 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        e.printStackTrace();
 	    }
 	    return ResultMessage.Fail;
+	}
+	
+	public ResultMessage check(String username,String password){
+		Connection conn = Connect.getConn();
+		String sql = "select id from hotelworker where username =encode(?,'key') and password = encode(?,'key')" ;
+		PreparedStatement pstmt;
+		try {
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				if(rs.getInt("id")!=-1)
+					return ResultMessage.Success;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return ResultMessage.Fail;
+	}
+	
+	public HotelWorkerPO gethotelworkerpo(String username,String password){
+		Connection conn = Connect.getConn();
+	    String sql = "select id,decode(name,'key'),decode(contact,'key') from hotelworker where username = encode(?,'key') and password = encode(?,'key')";	//需要执行的sql语句
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1,username);
+	        pstmt.setString(2, password);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
+			return po;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
+	public int findhotelid_of_hotelworkerbyUsername(String username){
+		Connection conn = Connect.getConn();
+		int result =0;
+		String sql = "select id from hotelworker where name = encode(?,'key')";
+		PreparedStatement pstmt;
+		try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1, username);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	result = rs.getInt("id");
+	        }
+	        return result;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return -1;
+	    }
 	}
 	
 	/**

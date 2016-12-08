@@ -68,23 +68,23 @@ public class WebMarketPO implements Serializable{
 		this.password = password;
 	}
 	
-	public WebMarket changetowebmarket(WebMarketPO po){
+	public WebMarket changetowebmarket(){
 		WebMarket webmarket=new WebMarket();
-		webmarket.setwebmarketid(po.webmarketid);
-		webmarket.setname(po.name);
-		webmarket.setcontact(po.contact);
-		webmarket.setusername(po.username);
-		webmarket.setpassword(po.password);
+		webmarket.setwebmarketid(this.webmarketid);
+		webmarket.setname(this.name);
+		webmarket.setcontact(this.contact);
+		webmarket.setusername(this.username);
+		webmarket.setpassword(this.password);
 		return webmarket;
 	}
 	
-	public WebMarketVO changetowebmarketvo(WebMarketPO po){
+	public WebMarketVO changetowebmarketvo(){
 		WebMarketVO vo=new WebMarketVO();
-		vo.setwebmarketid(po.webmarketid);
-		vo.setname(po.name);
-		vo.setcontact(po.contact);
-		vo.setusername(po.username);
-		vo.setpassword(po.password);
+		vo.setwebmarketid(this.webmarketid);
+		vo.setname(this.name);
+		vo.setcontact(this.contact);
+		vo.setusername(this.username);
+		vo.setpassword(this.password);
 		return vo;
 	}
 	

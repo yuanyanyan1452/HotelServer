@@ -71,25 +71,25 @@ public class RoomPO {
 		return price;
 	}
 	
-	public Room changetoroom(RoomPO po){
+	public Room changetoroom(){
 		Room room=new Room();
-		room.setid(po.id);
-		room.sethotelid(po.hotelid);
-		room.setroom_type(po.room_type);
-		room.settotal_num(po.total_num);
-		room.setavailable_num(po.available_num);
-		room.setprice(po.price);
+		room.setid(this.id);
+		room.sethotelid(this.hotelid);
+		room.setroom_type(this.room_type);
+		room.settotal_num(this.total_num);
+		room.setavailable_num(this.available_num);
+		room.setprice(this.price);
 		return room;
 	}
 	
-	public RoomVO changetoroomvo(RoomPO po){
+	public RoomVO changetoroomvo(){
 		RoomVO vo=new RoomVO();
-		vo.setid(po.id);
-		vo.sethotelid(po.hotelid);
-		vo.setroom_type(po.room_type);
-		vo.settotal_num(po.total_num);
-		vo.setavailable_num(po.available_num);
-		vo.setprice(po.price);
+		vo.setid(this.id);
+		vo.sethotelid(this.hotelid);
+		vo.setroom_type(this.room_type);
+		vo.settotal_num(this.total_num);
+		vo.setavailable_num(this.available_num);
+		vo.setprice(this.price);
 		return vo;
 	}
 }

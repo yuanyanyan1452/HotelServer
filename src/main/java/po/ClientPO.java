@@ -113,28 +113,28 @@ public class ClientPO implements Serializable {
 		this.info = info;
 	}
 	
-	public ClientVO changetoclientvo(ClientPO po){
+	public ClientVO changetoclientvo(){
 		ClientVO vo=new ClientVO(0,null,null,0,null,null,null,null);
-		vo.setclientid(po.clientid);
-		vo.setclient_name(po.client_name);
-		vo.setcontact(po.contact);
-		vo.setcredit(po.credit);
-		vo.setcredit_record(po.credit_record);
-		vo.setvipinfo(po.info);
-		vo.setusername(po.username);
-		vo.setpassword(po.password);
+		vo.setclientid(this.clientid);
+		vo.setclient_name(this.client_name);
+		vo.setcontact(this.contact);
+		vo.setcredit(this.credit);
+		vo.setcredit_record(this.credit_record);
+		vo.setvipinfo(this.info);
+		vo.setusername(this.username);
+		vo.setpassword(this.password);
 		return vo;
 	}
 	
-	public Client changetoclient(ClientPO po){
+	public Client changetoclient(){
 		Client client = new Client();
-		client.setclientid(clientid);
-		client.setclient_name(client_name);
-		client.setcontact(contact);
-		client.setcredit(credit);
-		client.setcredit_record(credit_record);
-		client.setusername(username);
-		client.setpassword(password);
+		client.setclientid(this.clientid);
+		client.setclient_name(this.client_name);
+		client.setcontact(this.contact);
+		client.setcredit(this.credit);
+		client.setcredit_record(this.credit_record);
+		client.setusername(this.username);
+		client.setpassword(this.password);
 		
 		return client;
 	}

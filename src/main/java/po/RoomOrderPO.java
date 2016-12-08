@@ -1,5 +1,8 @@
 package po;
 
+import objects.RoomOrder;
+import vo.RoomOrderVO;
+
 public class RoomOrderPO {
 	String room_type;
 	int room_number;
@@ -26,5 +29,20 @@ public class RoomOrderPO {
 	}
 	public int getroom_number(){
 		return room_number;
+	}
+	
+	public RoomOrder changetoroomorder(){
+		RoomOrder roomorder = new RoomOrder();
+		roomorder.setroom_number(this.room_number);
+		roomorder.setroom_type(this.room_type);
+		return roomorder;
+	}
+	
+	public RoomOrderVO changetoroomordervo(){
+		RoomOrderVO vo = new RoomOrderVO();
+		vo.setroom_number(this.room_number);
+		vo.setroom_type(this.room_type);
+		return vo;
+		
 	}
 }

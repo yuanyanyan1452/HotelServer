@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import objects.ResultMessage;
+import po.ClientPO;
 import po.WebManagerPO;
 import po.WebMarketPO;
 import service.dataservice.ManageDataService;
@@ -82,20 +83,6 @@ public class ManageDataServiceImpl implements ManageDataService {
 	    }
 	}
 	
-	public synchronized void set_id(WebManagerPO po){
-		Connection conn = Connect.getConn();
-	    String sql = "select max(id) from webmarket" ;	//需要执行的sql语句
-	    PreparedStatement pstmt;
-	    try {
-	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
-	        ResultSet rs = pstmt.executeQuery();
-	        while(rs.next()){
-	        	po.setwebmanagerid(rs.getInt(1));
-	        }
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
 
 	@Override
 	public synchronized ResultMessage updateWebMarket(WebMarketPO po) {
@@ -137,13 +124,55 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 	
 	@Override
-	public synchronized int findWebMarketIDbyName(String name){
+	public ResultMessage checkWebMarket(String username,String password){
+		Connection conn = Connect.getConn();
+		String sql = "select id from webmarket where username =encode(?,'key') and password = encode(?,'key')" ;
+		PreparedStatement pstmt;
+		try {
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				if(rs.getInt("id")!=-1)
+					return ResultMessage.Success;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return ResultMessage.Fail;
+	}
+	
+	@Override
+	public WebMarketPO getwebmarketpo(String username,String password){
+		Connection conn = Connect.getConn();
+	    String sql = "select id,decode(name,'key'),decode(contact,'key') from webmarket where username =encode(?,'key') and password=encode(?,'key')";	//需要执行的sql语句
+	    PreparedStatement pstmt;
+
+	    try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+		    pstmt.setString(1, username);
+		    pstmt.setString(2, password);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	WebMarketPO po = new WebMarketPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
+	        return po;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
+	@Override
+	public synchronized int findWebMarketIDbyUsername(String username){
 		Connection conn = Connect.getConn();
 		int result =0;
 		String sql = "select id from webmarket where name = encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1, username);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
 	        	result = rs.getInt("id");
@@ -196,6 +225,22 @@ public class ManageDataServiceImpl implements ManageDataService {
 	    }
 	}
 
+	
+	public synchronized void set_id(WebManagerPO po){
+		Connection conn = Connect.getConn();
+	    String sql = "select max(id) from webmanager" ;	//需要执行的sql语句
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	po.setwebmanagerid(rs.getInt(1));
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
 	@Override
 	public synchronized ResultMessage updateWebManager(WebManagerPO po) {
 		Connection conn = Connect.getConn();
@@ -220,7 +265,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage deleteWebManager(int webManagerid) {
 		Connection conn = Connect.getConn();
-	    String sql = "delete from webmarket where id =" + webManagerid;
+	    String sql = "delete from webmanager where id =" + webManagerid;
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -235,13 +280,54 @@ public class ManageDataServiceImpl implements ManageDataService {
 	}
 	
 	@Override
-	public synchronized int findWebManagerIDbyName(String name){
+	public ResultMessage checkWebManager(String username,String password){
+		Connection conn = Connect.getConn();
+		String sql = "select id from webmanager where username =encode(?,'key') and password = encode(?,'key')" ;
+		PreparedStatement pstmt;
+		try {
+			pstmt = (PreparedStatement) conn.prepareStatement(sql);
+			pstmt.setString(1, username);
+			pstmt.setString(2, password);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				if(rs.getInt("id")!=-1)
+					return ResultMessage.Success;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return ResultMessage.Fail;
+	}
+	
+	@Override
+	public WebManagerPO getwebmanagerpo(String username,String password){
+		Connection conn = Connect.getConn();
+	    String sql = "select id,decode(name,'key'),decode(contact,'key') from webmanager where username=encode(?,'key') and password=encode(?,'key')";	//需要执行的sql语句
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1, username);
+	        pstmt.setString(2, password);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	WebManagerPO po = new WebManagerPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
+			return po;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
+	@Override
+	public synchronized int findWebManagerIDbyUsername(String username){
 		Connection conn = Connect.getConn();
 		int result =0;
 		String sql = "select id from webmanager where name = encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1, username);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
 	        	result = rs.getInt("id");
