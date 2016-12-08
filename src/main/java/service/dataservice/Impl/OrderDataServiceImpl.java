@@ -118,7 +118,77 @@ public class OrderDataServiceImpl implements OrderDataService {
 	}
 
 	@Override
+	public ArrayList<OrderPO> findByState(String state){
+		// TODO Auto-generated method stub
+		ArrayList<OrderPO> list=new ArrayList<OrderPO>();
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select*from orderrecord where state='"+state+"'";
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				OrderPO po = new OrderPO();
+				po.setid(rs.getInt("id"));
+				po.setclientid(rs.getInt("clientid"));
+				po.sethotelid(rs.getInt("hotelid"));
+				po.setstate(rs.getString("state"));
+				po.setcancel_time(rs.getString("cancel_time"));
+				po.setexecute(rs.getBoolean("execute"));
+				po.setstart_time(rs.getString("start_time"));
+				po.setend_time(rs.getString("end_time"));
+				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				String r=rs.getString("room_order");
+				po.setroom_order(transformToArray(r));
+				po.setprice(rs.getInt("price"));
+				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
+				po.sethave_child(rs.getBoolean("havechild"));
+				list.add(po);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public ArrayList<OrderPO> findByExecute(boolean execute) {
+		// TODO Auto-generated method stub
+		ArrayList<OrderPO> list=new ArrayList<OrderPO>();
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		String sql="select*from orderrecord where execute='"+execute+"'";
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				OrderPO po = new OrderPO();
+				po.setid(rs.getInt("id"));
+				po.setclientid(rs.getInt("clientid"));
+				po.sethotelid(rs.getInt("hotelid"));
+				po.setstate(rs.getString("state"));
+				po.setcancel_time(rs.getString("cancel_time"));
+				po.setexecute(rs.getBoolean("execute"));
+				po.setstart_time(rs.getString("start_time"));
+				po.setend_time(rs.getString("end_time"));
+				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				String r=rs.getString("room_order");
+				po.setroom_order(transformToArray(r));
+				po.setprice(rs.getInt("price"));
+				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
+				po.sethave_child(rs.getBoolean("havechild"));
+				list.add(po);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+	@Override
 	public ArrayList<OrderPO> findByHotelid(int hotelid) {
+		// TODO Auto-generated method stub
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;

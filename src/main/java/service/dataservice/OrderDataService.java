@@ -16,6 +16,12 @@ public interface OrderDataService {
 	//分别浏览正常异常撤销与已执行未执行订单
 	public ArrayList<OrderPO> findByStatus(int clientid,String state,boolean execute);
 	
+	// 根据订单状态查找订单
+	public ArrayList<OrderPO> findByState(String state);
+	
+	//根据执行情况查找订单
+	 public ArrayList<OrderPO> findByExecute(boolean execute);
+	 
 	//通过酒店id寻找订单；
 	public ArrayList<OrderPO> findByHotelid (int hotelid) ;
 	
