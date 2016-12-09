@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import objects.ResultMessage;
 import po.OrderPO;
 import service.VOChange;
-import service.System;
+import service.BL;
 import service.blservice.OrderBLService;
 import service.dataservice.OrderDataService;
 import service.dataservice.Impl.OrderDataServiceImpl;
@@ -19,7 +19,7 @@ import vo.WebStrategyVO;
 public class OrderBLServiceImpl implements OrderBLService {
 	OrderDataService orderdataservice=new OrderDataServiceImpl();
 	VOChange vochange =new VOChange();
-	System system=new System();
+	BL bl=new BL();
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) {
 		// TODO Auto-generated method stub
@@ -86,14 +86,29 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) {
 		// TODO Auto-generated method stub
-		//ArrayList<OrderPO> orderpo_list1=orderdataservice.findByHotelid(hotelid);
-		return null;
+		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list.size();i++){
+			if(orderpo_list.get(i).getstate()==state){
+				OrderVO ordervo=orderpo_list.get(i).changetoordervo();
+				ordervo_list.add(ordervo);
+			}
+		}
+		return ordervo_list;
 	}
 
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list.size();i++){
+			if(orderpo_list.get(i).getexecute()==isExecute){
+				OrderVO ordervo=orderpo_list.get(i).changetoordervo();
+				ordervo_list.add(ordervo);
+			}
+		}
+		return ordervo_list;
 	}
 
 	@Override
@@ -101,7 +116,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setstate("CANCELLED");
-		String time=system.get_current_time();
+		String time=bl.get_current_time();
 		orderpo.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(orderpo);
 		return result;
@@ -136,7 +151,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub
 		OrderPO po=orderdataservice.findByid(orderid);
 		po.setstate("CANCELLED");
-		String time=system.get_current_time();
+		String time=bl.get_current_time();
 		po.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(po);
 		return result;

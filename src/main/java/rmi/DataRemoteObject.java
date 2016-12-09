@@ -381,6 +381,13 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return null;
 	}
 	
+
+	@Override
+	public ResultMessage evalutehotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public ResultMessage client_login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -508,6 +515,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return clientbl.updateClientInfo(client);
 	}
+
+
 
 
 

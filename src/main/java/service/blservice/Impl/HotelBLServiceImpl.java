@@ -20,6 +20,7 @@ import service.dataservice.Impl.HotelDataServiceImpl;
 import service.dataservice.Impl.HotelWorkerDataServiceImpl;
 import service.dataservice.Impl.RoomDataServiceImpl;
 import vo.AccommodationVO;
+import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.RoomVO;
 
@@ -194,6 +195,25 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ResultMessage evalutehotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
+		// TODO Auto-generated method stub
+		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
+		String score=hotelpo.getscore();
+		String [] scorelist=score.split(",");
+		double average_score=Double.parseDouble(scorelist[0]);
+		int numofpeople=Integer.parseInt(scorelist[1]);
+		int new_numofpeople=numofpeople+1;
+		double new_average_score=((average_score*numofpeople)+e.getScore())/new_numofpeople;
+		String newscore=String.valueOf(new_average_score)+","+String.valueOf(new_numofpeople);
+		hotelpo.setscore(newscore);
+		ArrayList<String> newcomment=hotelpo.gethotel_evaluation();
+		newcomment.add(e.getComments());
+		hotelpo.sethotel_evaluation(newcomment);
+		ResultMessage result=hoteldataservice.update(hotelpo);
+		return result;
 	}
 
 

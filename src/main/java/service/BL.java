@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class System {
+public class BL {
 	
 	public String get_current_time(){
 		Date date=new Date();
@@ -13,5 +13,7 @@ public class System {
 		return time;
 	}
 	
-	
+	public void auto_change_ordersgtate(){
+//		ArrayList<OrderPO> orderpo_list=
+	}
 }

@@ -7,9 +7,9 @@ import objects.Client;
 import objects.Hotel;
 import objects.ObjectChange;
 import objects.ResultMessage;
-import objects.RoomType;
 import objects.VIPInfo;
 import po.ClientPO;
+import po.HotelPO;
 import service.VOChange;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
@@ -189,10 +189,10 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid,int hotelid) {
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid,int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
-		
-		return null;
+		ResultMessage result=hotelblservice.evalutehotel(e, clientid, hotelid);
+		return result;
 	}
 
 	@Override
