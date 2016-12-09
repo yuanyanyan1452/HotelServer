@@ -113,18 +113,18 @@ public class HotelPO implements Serializable{
 	public ArrayList<Integer> getbook_clientid(){
 		return book_clientid;
 	}
-	public HotelVO changetohotelvo(HotelPO po){
+	public HotelVO changetohotelvo(){
 		HotelVO vo = new HotelVO();
-		vo.setid(po.getid());
-		vo.setname(name);
-		vo.setaddress(po.getaddress());
-		vo.setbussiness_address(bussiness_address);
-		vo.setintroduction(introduction);
-		vo.setservice(service);
-		vo.setstar(star);
-		vo.setscore(score);
-		vo.sethotel_evaluation(hotel_evaluation);
-		vo.setbook_clientid(book_clientid);
+		vo.setid(this.hotelid);
+		vo.setname(this.name);
+		vo.setaddress(this.address);
+		vo.setbussiness_address(this.bussiness_address);
+		vo.setintroduction(this.introduction);
+		vo.setservice(this.service);
+		vo.setstar(this.star);
+		vo.setscore(this.score);
+		vo.sethotel_evaluation(this.hotel_evaluation);
+		vo.setbook_clientid(this.book_clientid);
 		return vo;
 	}
 
@@ -132,16 +132,16 @@ public class HotelPO implements Serializable{
 
 	public Hotel changetohotel(HotelPO po){
 		Hotel hotel = new Hotel();
-		hotel.setid(po.getid());
-		hotel.setname(name);
-		hotel.setaddress(address);
-		hotel.setbussiness_address(bussiness_address);
-		hotel.setintroduction(introduction);
-		hotel.setservice(service);
-		hotel.setstar(star);
-		hotel.setscore(score);
-		hotel.setevaluation(hotel_evaluation);
-		hotel.setbook_clientid(book_clientid);
+		hotel.setid(this.hotelid);
+		hotel.setname(this.name);
+		hotel.setaddress(this.address);
+		hotel.setbussiness_address(this.bussiness_address);
+		hotel.setintroduction(this.introduction);
+		hotel.setservice(this.service);
+		hotel.setstar(this.star);
+		hotel.setscore(this.score);
+		hotel.setevaluation(this.hotel_evaluation);
+		hotel.setbook_clientid(this.book_clientid);
 		return hotel;
 	}
 }

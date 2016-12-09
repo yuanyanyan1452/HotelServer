@@ -94,91 +94,91 @@ public class ClientBLServiceImpl implements ClientBLService {
 		return credit_list;
 	}
 
-	@Override
-	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address) throws RemoteException{
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBylocation(address, business_address);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotelByname(String hotelname) throws RemoteException{
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByname(hotelname);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotelBytype(String type) throws RemoteException {
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByroom(type);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-		
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotelByprice(int lowprice, int highprice) throws RemoteException {
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByprice(lowprice, highprice);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-	
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotelBytime(String inTime, String leaveTime)throws RemoteException {
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBytime(inTime, leaveTime);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotelBystar(String star) throws RemoteException{
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBystar(star);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotelByscore(double lowscore, double highscore)throws RemoteException {
-		// TODO Auto-generated method stub
-		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByscore(lowscore, highscore);
-		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-		for(int i=0;i<hotel_list.size();i++){
-			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-			hotelvo_list.add(vo);
-		}
-		return hotelvo_list;
-	}
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address) throws RemoteException{
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBylocation(address, business_address);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//	}
+//
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelByname(ArrayList<HotelVO> list,String hotelname) throws RemoteException{
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByname(list,hotelname);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//	}
+//
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelBytype(ArrayList<HotelVO> list,String type) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByroom(list,type);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//		
+//	}
+//
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelByprice(ArrayList<HotelVO> list,int lowprice, int highprice) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByprice(list,lowprice, highprice);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//	
+//	}
+//
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelBytime(ArrayList<HotelVO> list,String inTime, String leaveTime)throws RemoteException {
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBytime(list,inTime, leaveTime);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//	}
+//
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelBystar(ArrayList<HotelVO> list,String star) throws RemoteException{
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelBystar(list,star);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//	}
+//
+//	@Override
+//	public ArrayList<HotelVO> client_searchHotelByscore(ArrayList<HotelVO> list,double lowscore, double highscore)throws RemoteException {
+//		// TODO Auto-generated method stub
+//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByscore(list,lowscore, highscore);
+//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+//		for(int i=0;i<hotel_list.size();i++){
+//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+//			hotelvo_list.add(vo);
+//		}
+//		return hotelvo_list;
+//	}
 
 	@Override
 	public HotelVO client_checkHotelInfo(int hotelid) throws RemoteException{

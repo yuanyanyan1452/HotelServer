@@ -35,21 +35,25 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage hotelworker_login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ResultMessage result=hotelworkerdataservice.check(username, password);
+		return result;
 	}
 	
 	@Override
 	public ResultMessage hotelworker_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.gethotelworkerpo(username, oldpassword);
+		hotelworkerpo.setpassword(newpassword);
+		ResultMessage result=hotelworkerdataservice.update(hotelworkerpo);
+		return result;
 	}
 
 	@Override
 	public HotelVO hotel_checkInfo(int hotelid) {
 		// TODO Auto-generated method stub
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
-		HotelVO hotelvo=hotelpo.changetohotelvo(hotelpo);
+		HotelVO hotelvo=hotelpo.changetohotelvo();
 		return hotelvo;
 	}
 
@@ -130,71 +134,92 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public ArrayList<Hotel> searchHotelBylocation(String address, String business_address) {
+	public ArrayList<HotelVO> searchHotelBylocation(String address, String business_address) {
 		// TODO Auto-generated method stub
 		ArrayList<HotelPO> hotelpo_list=hoteldataservice.show_hotel_list(address, business_address);
-		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
+		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
 		for(int i=0;i<hotelpo_list.size();i++){
-			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
-			hotel_list.add(hotel);
+			HotelVO hotelvo=hotelpo_list.get(i).changetohotelvo();
+			hotelvo_list.add(hotelvo);
 		}
-		return hotel_list;
+		return hotelvo_list;
 	}
-
+	
 	@Override
-	public ArrayList<Hotel> searchHotelByname(String hotelname) {
+	public ArrayList<HotelVO> searchHotelByname(ArrayList<HotelVO> list,String hotelname) {
 		// TODO Auto-generated method stub
-//		ArrayList<HotelPO> hotelpo_list=hoteldataservice.findByName(hotelname);
-//		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
-//		for(int i=0;i<hotelpo_list.size();i++){
-//			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
-//			hotel_list.add(hotel);
-//		}
-//		return hotel_list;
-		return null;
-	}
-
-	@Override
-	public ArrayList<Hotel> searchHotelByroom(String type) {
-		// TODO Auto-generated method stub
-//		ArrayList<HotelPO> hotelpo_list=roomdataservice.
-//		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
-//		for(int i=0;i<hotelpo_list.size();i++){
-//			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
-//			hotel_list.add(hotel);
-//		}
-//		return hotel_list;
-		return null;
-	}
-
-	@Override
-	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Hotel> searchHotelBystar(String star) {
-		// TODO Auto-generated method stub
-		ArrayList<HotelPO> hotelpo_list=hoteldataservice.findByStar(star);
-		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
-		for(int i=0;i<hotelpo_list.size();i++){
-			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
-			hotel_list.add(hotel);
+		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getname()==hotelname){
+				newlist.add(list.get(i));
+			}
 		}
-		return hotel_list;
+		return newlist;
 	}
 
 	@Override
-	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore) {
+	public ArrayList<HotelVO> searchHotelByroom(ArrayList<HotelVO> list,String type) {
+		// TODO Auto-generated method stub
+		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
+		for(int i=0;i<list.size();i++){
+			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
+			for(int j=0;j<roomlist.size();j++){
+				if(roomlist.get(j).getroom_type()==type){
+					newlist.add(list.get(i));
+					break;
+				}
+			}
+		}
+		return newlist;
+	}
+
+	@Override
+	public ArrayList<HotelVO> searchHotelByprice(ArrayList<HotelVO> list,int lowprice, int highprice) {
+		// TODO Auto-generated method stub
+		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
+		for(int i=0;i<list.size();i++){
+			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
+			for(int j=0;j<roomlist.size();j++){
+				if(roomlist.get(j).getprice()<=highprice&&roomlist.get(j).getprice()>=lowprice){
+					newlist.add(list.get(i));
+					break;
+				}
+			}
+		}
+		return newlist;
+	}
+
+	@Override
+	public ArrayList<HotelVO> searchHotelBytime(ArrayList<HotelVO> list,String inTime, String leaveTime) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ArrayList<HotelVO> searchHotelBystar(ArrayList<HotelVO> list,String star) {
+		// TODO Auto-generated method stub
+		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).getstar()==star){
+				newlist.add(list.get(i));
+			}
+		}
+		return newlist;
+	}
+
+	@Override
+	public ArrayList<HotelVO> searchHotelByscore(ArrayList<HotelVO> list,double lowscore, double highscore) {
+		// TODO Auto-generated method stub
+		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
+		for(int i=0;i<list.size();i++){
+			String score=list.get(i).getscore();
+			String [] scorelist=score.split(",");
+			double average_score=Double.parseDouble(scorelist[0]);
+			if(average_score>=lowscore&&average_score<=highscore){
+				newlist.add(list.get(i));
+			}
+		}
+		return newlist;
 	}
 
 	@Override

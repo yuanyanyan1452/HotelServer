@@ -142,8 +142,13 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ArrayList<OrderVO> order_market_browseUnfilled() {
 		// TODO Auto-generated method stub
-//		ArrayList<OrderPO> unfilled_order_list=orderdataservice.
-		return null;
+		ArrayList<OrderPO> unfilled_order_list=orderdataservice.findByState("ABNORMAL");
+		ArrayList<OrderVO> list=new ArrayList<OrderVO>();
+		for(int i=0;i<unfilled_order_list.size();i++){
+			OrderVO ordervo=unfilled_order_list.get(i).changetoordervo();
+			list.add(ordervo);
+		}
+		return list;
 	}
 
 	@Override
