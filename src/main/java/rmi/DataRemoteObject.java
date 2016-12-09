@@ -30,6 +30,7 @@ import vo.HotelStrategyVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.OrderVO;
+import vo.RoomOrderVO;
 import vo.RoomVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
@@ -158,22 +159,28 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public int calculateTotalwithoutStrategy(RoomType type, int num) throws RemoteException {
+	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderbl.calculateTotalwithoutStrategy(type, num);
+		return orderbl.calculateTotalwithoutStrategy(roomlist);
 	}
 
 	@Override
-	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategyVO> list1,
+	public int calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist, ArrayList<HotelStrategyVO> list1,
 			ArrayList<WebStrategyVO> list2) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderbl.calculateTotalwithStrategy(type, num, list1, list2);
+		return orderbl.calculateTotalwithStrategy(roomlist, list1, list2);
 	}
 
 	@Override
 	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) throws RemoteException{
 		// TODO Auto-generated method stub
 		return orderbl.updateActualLeaveTime(orderid, leaveTime);
+	}
+	
+	@Override
+	public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderbl.order_checkin(info, orderid);
 	}
 	
 	@Override
@@ -187,6 +194,23 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return managebl.webmarket_login(username, password);
 	}
+	
+	@Override
+	public ResultMessage webmarket_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.webmarket_change_password(username, oldpassword, newpassword);
+	}
+
+
+
+	@Override
+	public ResultMessage webmanager_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.webmanager_change_password(username, oldpassword, newpassword);
+	}
+
 	
 	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException {
@@ -249,6 +273,13 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
+	public ResultMessage hotelworker_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return hotelbl.hotelworker_change_password(username, oldpassword, newpassword);
+	}
+
+	@Override
 	public HotelVO hotel_checkInfo(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return hotelbl.hotel_checkInfo(hotelid);
@@ -267,9 +298,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info) throws RemoteException {
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return hotelbl.hotel_updateAccomodation(info);
+		return hotelbl.hotel_updateAccomodation(info,orderid);
 	}
 
 	@Override
@@ -361,6 +392,15 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return clientbl.client_register(username, password);
 	}
+	
+	@Override
+	public ResultMessage client_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return clientbl.client_change_password(username, oldpassword, newpassword);
+	}
+
+
 	@Override
 	public ClientVO client_checkInfo(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -440,9 +480,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid) throws RemoteException {
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid,int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.client_evaluateHotel(e, clientid);
+		return clientbl.client_evaluateHotel(e, clientid,hotelid);
 	}
 
 	@Override
@@ -470,6 +510,18 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 
+
+	
+
+
+
+	
+
+
+	
+
+
+	
 
 	
 	

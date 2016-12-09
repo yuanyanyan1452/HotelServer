@@ -7,12 +7,12 @@ import objects.Hotel;
 import objects.HotelWorker;
 import objects.ObjectChange;
 import objects.ResultMessage;
-import objects.RoomType;
 import po.HotelPO;
 import po.HotelWorkerPO;
 import po.RoomPO;
 import service.VOChange;
 import service.blservice.HotelBLService;
+import service.blservice.OrderBLService;
 import service.dataservice.HotelDataService;
 import service.dataservice.HotelWorkerDataService;
 import service.dataservice.RoomDataService;
@@ -27,11 +27,19 @@ public class HotelBLServiceImpl implements HotelBLService {
 	HotelDataService hoteldataservice=new HotelDataServiceImpl();
 	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();		
 	RoomDataService roomdataservice=new RoomDataServiceImpl();
+	OrderBLService orderblservice= new OrderBLServiceImpl();
 	VOChange vochange =new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
 	@Override
 	public ResultMessage hotelworker_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public ResultMessage hotelworker_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -61,9 +69,10 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info) {
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ResultMessage result=orderblservice.order_checkin(info, orderid);
+		return result;
 	}
 
 	@Override
@@ -147,7 +156,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ArrayList<Hotel> searchHotelByroom(String type) {
 		// TODO Auto-generated method stub
-//		ArrayList<HotelPO> hotelpo_list=
+//		ArrayList<HotelPO> hotelpo_list=roomdataservice.
 //		ArrayList<Hotel> hotel_list=new ArrayList<Hotel>();
 //		for(int i=0;i<hotelpo_list.size();i++){
 //			Hotel hotel=hotelpo_list.get(i).changetohotel(hotelpo_list.get(i));
@@ -186,6 +195,9 @@ public class HotelBLServiceImpl implements HotelBLService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	
 
 	
 

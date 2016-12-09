@@ -25,12 +25,13 @@ public class ClientBLServiceImpl implements ClientBLService {
 	VOChange vochange =new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
-	
+	@Override
 	public ResultMessage client_login(String username,String password){
 		ResultMessage result=clientdataservice.check(username, password);
 		return result;
 	}
 	
+	@Override
 	public ResultMessage client_register(String username,String password){
 		ClientPO clientpo=new ClientPO();
 		clientpo.setusername(username);
@@ -39,6 +40,18 @@ public class ClientBLServiceImpl implements ClientBLService {
 		return result;
 		
 	}
+	
+	@Override
+	public ResultMessage client_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		ClientPO clientpo=clientdataservice.getclientpo(username, oldpassword);
+		clientpo.setpassword(newpassword);
+		ResultMessage result=clientdataservice.update(clientpo);
+		return result;
+	}
+	
+	
 	@Override
 	public ClientVO client_checkInfo(int clientid) {
 		// TODO Auto-generated method stub
@@ -106,29 +119,29 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelBytype(String type) {
+	public ArrayList<HotelVO> client_searchHotelBytype(String type) throws RemoteException {
 		// TODO Auto-generated method stub
-//		ArrayList<Hotel> hotel_list=
-//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-//		for(int i=0;i<hotel_list.size();i++){
-//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-//			hotelvo_list.add(vo);
-//		}
-//		return hotelvo_list;
-		return null;
+		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByroom(type);
+		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+		for(int i=0;i<hotel_list.size();i++){
+			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+			hotelvo_list.add(vo);
+		}
+		return hotelvo_list;
+		
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotelByprice(int lowprice, int highprice) {
+	public ArrayList<HotelVO> client_searchHotelByprice(int lowprice, int highprice) throws RemoteException {
 		// TODO Auto-generated method stub
-//		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByprice(lowprice, highprice);
-//		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
-//		for(int i=0;i<hotel_list.size();i++){
-//			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
-//			hotelvo_list.add(vo);
-//		}
-//		return hotelvo_list;
-		return null;
+		ArrayList<Hotel> hotel_list=hotelblservice.searchHotelByprice(lowprice, highprice);
+		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+		for(int i=0;i<hotel_list.size();i++){
+			HotelVO vo=objectchange.changetohotelvo(hotel_list.get(i));
+			hotelvo_list.add(vo);
+		}
+		return hotelvo_list;
+	
 	}
 
 	@Override
@@ -176,7 +189,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	}
 
 	@Override
-	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid) {
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid,int hotelid) {
 		// TODO Auto-generated method stub
 		
 		return null;
@@ -224,5 +237,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 		ResultMessage result=clientdataservice.update(po);
 		return result;
 	}
+
+	
 
 }

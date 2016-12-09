@@ -39,6 +39,20 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 	
 	@Override
+	public ResultMessage webmarket_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultMessage webmanager_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException{
 		// TODO Auto-generated method stub
 		Client client= clientblservice.checkClientInfo(clientid);
@@ -110,6 +124,8 @@ public class ManageBLServiceImpl implements ManageBLService {
 		ResultMessage result=managedataservice.updateWebMarket(po);
 		return result;
 	}
+
+	
 
 	
 	
