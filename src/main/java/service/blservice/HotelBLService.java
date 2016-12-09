@@ -9,6 +9,7 @@ import objects.HotelWorker;
 import objects.ResultMessage;
 import objects.RoomType;
 import vo.AccommodationVO;
+import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.RoomVO;
 
@@ -16,6 +17,8 @@ public interface HotelBLService extends Remote{
 	// 提供给界面调用的接口
 	
 	public ResultMessage hotelworker_login(String username,String password) throws RemoteException;
+	
+	public ResultMessage hotelworker_change_password(String username,String oldpassword,String newpassword)throws RemoteException;
 	
 	/**
 	 * @param hotelid
@@ -39,7 +42,7 @@ public interface HotelBLService extends Remote{
 	 * @param info
 	 * @return 酒店更新入住信息
 	 */
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info)throws RemoteException;
+	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid)throws RemoteException;
 
 	// 提供给同层调用的接口
 	/**
@@ -123,4 +126,5 @@ public interface HotelBLService extends Remote{
 	 */
 	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore)throws RemoteException;
 
+	public ResultMessage evalutehotel(EvaluationVO e, int clientid,int hotelid) throws RemoteException;
 }

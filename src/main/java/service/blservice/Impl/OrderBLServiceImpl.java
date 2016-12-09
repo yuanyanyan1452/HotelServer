@@ -1,22 +1,25 @@
 package service.blservice.Impl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import objects.OrderState;
 import objects.ResultMessage;
-import objects.RoomType;
 import po.OrderPO;
 import service.VOChange;
+import service.BL;
 import service.blservice.OrderBLService;
 import service.dataservice.OrderDataService;
 import service.dataservice.Impl.OrderDataServiceImpl;
+import vo.AccommodationVO;
 import vo.HotelStrategyVO;
 import vo.OrderVO;
+import vo.RoomOrderVO;
 import vo.WebStrategyVO;
 
 public class OrderBLServiceImpl implements OrderBLService {
 	OrderDataService orderdataservice=new OrderDataServiceImpl();
 	VOChange vochange =new VOChange();
+	BL bl=new BL();
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) {
 		// TODO Auto-generated method stub
@@ -83,14 +86,29 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) {
 		// TODO Auto-generated method stub
-		//ArrayList<OrderPO> orderpo_list1=orderdataservice.findByHotelid(hotelid);
-		return null;
+		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list.size();i++){
+			if(orderpo_list.get(i).getstate()==state){
+				OrderVO ordervo=orderpo_list.get(i).changetoordervo();
+				ordervo_list.add(ordervo);
+			}
+		}
+		return ordervo_list;
 	}
 
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) {
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpo_list.size();i++){
+			if(orderpo_list.get(i).getexecute()==isExecute){
+				OrderVO ordervo=orderpo_list.get(i).changetoordervo();
+				ordervo_list.add(ordervo);
+			}
+		}
+		return ordervo_list;
 	}
 
 	@Override
@@ -98,6 +116,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setstate("CANCELLED");
+		String time=bl.get_current_time();
+		orderpo.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(orderpo);
 		return result;
 	}
@@ -131,27 +151,48 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub
 		OrderPO po=orderdataservice.findByid(orderid);
 		po.setstate("CANCELLED");
+		String time=bl.get_current_time();
+		po.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(po);
 		return result;
 	}
 
 	@Override
-	public int calculateTotalwithoutStrategy(RoomType type, int num) {
+	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist) {
 		// TODO Auto-generated method stub
+		for(int i=0;i<roomlist.size();i++){
+			
+		}
 		return 0;
 	}
 
 	@Override
-	public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategyVO> list1,
+	public int calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist, ArrayList<HotelStrategyVO> list1,
 			ArrayList<WebStrategyVO> list2) {
 		// TODO Auto-generated method stub
+		for(int i=0;i<roomlist.size();i++){
+			
+		}
 		return 0;
 	}
 
 	@Override
 	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) {
 		// TODO Auto-generated method stub
-		return null;
+		OrderPO orderpo=orderdataservice.findByid(orderid);
+		orderpo.setend_time(leaveTime);
+		ResultMessage result=orderdataservice.update(orderpo);
+		return result;
+	}
+
+	@Override
+	public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {
+		// TODO Auto-generated method stub
+		OrderPO orderpo=orderdataservice.findByid(orderid);
+		orderpo.setstart_time(info.getCheckIn());
+		orderpo.setend_time(info.getPlanCheckOut());
+		ResultMessage result =orderdataservice.update(orderpo);
+		return result;
 	}
 
 }

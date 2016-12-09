@@ -18,6 +18,8 @@ public interface ClientBLService extends Remote{
 	public ResultMessage client_login(String username,String password)throws RemoteException ;
 	
 	public ResultMessage client_register(String username,String password)throws RemoteException;
+	
+	public ResultMessage client_change_password(String username,String oldpassword,String newpassword)throws RemoteException;
 	/**
 	 * @param clientid
 	 * @return 客户获取详细信息
@@ -104,7 +106,7 @@ public interface ClientBLService extends Remote{
 	 * @param clientid
 	 * @return 客户评价酒店
 	 */
-	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid)throws RemoteException;
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid,int hotelid)throws RemoteException;
 
 	/**
 	 * @param info
