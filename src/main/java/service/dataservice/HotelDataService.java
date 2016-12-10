@@ -14,7 +14,7 @@ public interface HotelDataService {
 	public HotelPO findByid(int hotelid);
 	
 	//通过酒店名称查找酒店
-	public HotelPO findByName(String hotelname);
+	public ArrayList<HotelPO> findByName(String hotelname);
 	
 	//根据星级搜索酒店
 	public ArrayList<HotelPO> findByStar(String star);

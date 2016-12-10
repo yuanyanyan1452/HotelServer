@@ -3,6 +3,7 @@ package vo;
 public class RoomOrderVO {
 	String room_type;
 	int room_number;
+	int num_of_days;
 	
 	public RoomOrderVO(){
 		room_type=null;
@@ -26,5 +27,12 @@ public class RoomOrderVO {
 	}
 	public int getroom_number(){
 		return room_number;
+	}
+	
+	public void setnum_of_days(int num){
+		num_of_days=num;
+	}
+	public int getnum_of_days(){
+		return num_of_days;
 	}
 }
