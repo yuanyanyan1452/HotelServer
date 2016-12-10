@@ -541,9 +541,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 
 
 	@Override
-	public ClientVO clinet_getclientvo(String username) throws RemoteException {
+	public ClientVO client_getclientvo(String username) throws RemoteException {
 		// TODO Auto-generated method stub
-		return clientbl.clinet_getclientvo(username);
+		return clientbl.client_getclientvo(username);
 	}
 
 
