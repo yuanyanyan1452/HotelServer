@@ -150,6 +150,7 @@ public class ObjectChange {
 		RoomOrderPO po = new RoomOrderPO();
 		po.setroom_number(roomorder.room_number);
 		po.setroom_type(roomorder.room_type);
+		po.setnum_of_days(roomorder.num_of_days);
 		return po;
 	}
 	
@@ -157,6 +158,7 @@ public class ObjectChange {
 		RoomOrderVO vo = new RoomOrderVO();
 		vo.setroom_number(roomorder.room_number);
 		vo.setroom_type(roomorder.room_type);
+		vo.setnum_of_days(roomorder.num_of_days);
 		return vo;
 		
 	}

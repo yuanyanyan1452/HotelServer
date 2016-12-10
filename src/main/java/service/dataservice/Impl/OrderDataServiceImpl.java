@@ -332,6 +332,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 			RoomOrderPO room=new RoomOrderPO();
 			room.setroom_type(temp2[0]);
 			room.setroom_number(Integer.parseInt(temp2[1]));
+			room.setnum_of_days(Integer.parseInt(temp2[2]));
 			room_order.add(room);
 		}
 		return room_order;
@@ -341,18 +342,19 @@ public class OrderDataServiceImpl implements OrderDataService {
 		String s = "";
 		for(int i=0;i<r.size()-1;i++){
 			RoomOrderPO room=r.get(i);
-			s+=room.getroom_type()+","+String.valueOf(room.getroom_number())+"/";
+			s+=room.getroom_type()+","+String.valueOf(room.getroom_number())
+			+","+String.valueOf(room.getnum_of_days())+"/";
 		}
 		RoomOrderPO last=r.get(r.size()-1);
-		s+=last.getroom_type()+","+String.valueOf(last.getroom_number());
+		s+=last.getroom_type()+","+String.valueOf(last.getroom_number())+","+String.valueOf(last.getnum_of_days());
 		return s;
 	}
 	
 //	public static void main(String[]args){
 //		OrderDataServiceImpl order=new OrderDataServiceImpl();
-//		String s="标准间,1/双人房,2";
+//		String s="标准间,1,3/双人房,2,3";
 //		ArrayList<RoomOrderPO>room=order.transformToArray(s);
-//		System.out.print(room.get(1).getroom_number());
+//		System.out.print(room.get(1).getroom_type());
 //	}
 
 }

@@ -262,6 +262,7 @@ public class VOChange {
 		RoomOrderPO po=new RoomOrderPO();
 		po.setroom_type(vo.getroom_type());
 		po.setroom_number(vo.getroom_number());
+		po.setnum_of_days(vo.getnum_of_days());
 		return po;
 	}
 	
@@ -270,6 +271,7 @@ public class VOChange {
 		RoomOrder order=new RoomOrder();
 		order.setroom_type(vo.getroom_type());
 		order.setroom_number(vo.getroom_number());
+		order.setnum_of_days(vo.getnum_of_days());
 		return order;
 	}
 	

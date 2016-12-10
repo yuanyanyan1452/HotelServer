@@ -76,9 +76,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 	}
 	
 	@Override
-	public HotelPO findByName(String hotelname) {
+	public ArrayList<HotelPO> findByName(String hotelname) {
 		// TODO Auto-generated method stub
-		HotelPO hotelPO = new HotelPO();
+		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -88,6 +88,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
+				HotelPO hotelPO = new HotelPO();
 				hotelPO.setid(rs.getInt("id"));
 				hotelPO.setname(rs.getString("name"));
 				hotelPO.setaddress(rs.getString("address"));
@@ -98,11 +99,12 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.setscore(rs.getString("score"));
 				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
 				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
+				list.add(hotelPO);
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
-		return hotelPO;
+		return list;
 	}
 	
 	@Override
@@ -300,8 +302,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return s;
 		
 	}
-//	public static void main(String[]args){
-//		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-//		System.out.println(hotel.find_min_price(1));
-//	}
+	public static void main(String[] args){
+		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+		System.out.println(hotel.find_min_price(1));
+	}
 }

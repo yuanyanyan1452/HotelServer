@@ -6,6 +6,7 @@ import vo.RoomOrderVO;
 public class RoomOrderPO {
 	String room_type;
 	int room_number;
+	int num_of_days;
 	
 	public RoomOrderPO(){
 		room_type=null;
@@ -31,10 +32,18 @@ public class RoomOrderPO {
 		return room_number;
 	}
 	
+	public void setnum_of_days(int num){
+		num_of_days=num;
+	}
+	public int getnum_of_days(){
+		return num_of_days;
+	}
+	
 	public RoomOrder changetoroomorder(){
 		RoomOrder roomorder = new RoomOrder();
 		roomorder.setroom_number(this.room_number);
 		roomorder.setroom_type(this.room_type);
+		roomorder.setnum_of_days(this.num_of_days);
 		return roomorder;
 	}
 	
@@ -42,6 +51,7 @@ public class RoomOrderPO {
 		RoomOrderVO vo = new RoomOrderVO();
 		vo.setroom_number(this.room_number);
 		vo.setroom_type(this.room_type);
+		vo.setnum_of_days(this.num_of_days);
 		return vo;
 		
 	}
