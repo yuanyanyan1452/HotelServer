@@ -34,12 +34,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
 				if(rs.getString("hs_start_time")==null){
-					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("hs_start_time")));
 				}
 				if(rs.getString("hs_end_time")==null){
-					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setend_time(fmt.parse(rs.getString("hs_end_time")));
 				}
@@ -186,12 +186,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
 				if(rs.getString("hs_start_time")==null){
-					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("hs_start_time")));
 				}
 				if(rs.getString("hs_end_time")==null){
-					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setend_time(fmt.parse(rs.getString("hs_end_time")));
 				}
@@ -226,12 +226,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("web_condition"));
 				if(rs.getString("ws_start_time")==null){
-					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("ws_start_time")));
 				}
 				if(rs.getString("ws_end_time")==null){
-					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setend_time(fmt.parse(rs.getString("ws_end_time")));
 				}
@@ -343,12 +343,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("web_condition"));
 				if(rs.getString("ws_start_time")==null){
-					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("ws_start_time")));
 				}
 				if(rs.getString("ws_end_time")==null){
-					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
 				}else{
 					po.setend_time(fmt.parse(rs.getString("ws_end_time")));
 				}
@@ -365,9 +365,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		return wslist;
 	}
 	
-	public static void main(String[]args){
-		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
-		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
-	}
+//	public static void main(String[]args){
+//		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
+//		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
+//	}
 
 }
