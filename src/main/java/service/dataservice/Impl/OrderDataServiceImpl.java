@@ -1,7 +1,6 @@
 package service.dataservice.Impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,7 +34,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setcancel_time(null);
 				}else{
 					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
 				}
@@ -77,7 +76,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setcancel_time(null);
 				}else{
 					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
 				}
@@ -122,7 +121,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 						po.sethotelid(rs.getInt("hotelid"));
 						po.setstate(rs.getString("state"));
 						if(rs.getString("cancel_time")==null){
-							po.setcancel_time(fmt.parse("1111-11-11 11:11:11"));
+							po.setcancel_time(null);
 						}else{
 							po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
 						}
@@ -165,7 +164,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setcancel_time(null);
 				}else{
 					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
 				}
@@ -208,7 +207,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setcancel_time(null);
 				}else{
 					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
 				}
@@ -251,7 +250,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
 				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setcancel_time(null);
 				}else{
 					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
 				}
@@ -289,8 +288,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps.setInt(1, po.getclientid());
 			ps.setInt(2, po.gethotelid());
 			ps.setString(3,po.getstate());
-			
-			ps.setString(4, fmt.format(po.getcancel_time()));
+			if(po.getcancel_time()==null){
+				ps.setString(4, null);
+			}else{
+				ps.setString(4, fmt.format(po.getcancel_time()));
+			}
 			ps.setBoolean(5, po.getexecute());
 			ps.setString(6, fmt.format(po.getstart_time()));
 			ps.setString(7,fmt.format(po.getend_time()));
@@ -362,7 +364,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps.setInt(1, po.getclientid());
 			ps.setInt(2, po.gethotelid());
 			ps.setString(3,po.getstate());
-			ps.setString(4, fmt.format(po.getcancel_time()));
+			if(po.getcancel_time()==null){
+				ps.setString(4, null);
+			}else{
+				ps.setString(4, fmt.format(po.getcancel_time()));
+			}
 			ps.setBoolean(5, po.getexecute());
 			ps.setString(6, fmt.format(po.getstart_time()));
 			ps.setString(7,fmt.format(po.getend_time()));
@@ -409,17 +415,14 @@ public class OrderDataServiceImpl implements OrderDataService {
 	
 //	public static void main(String[]args){
 //		OrderDataServiceImpl order=new OrderDataServiceImpl();
-//		ArrayList<RoomOrderPO> list=new ArrayList<RoomOrderPO>();
-//		list.add(new RoomOrderPO("标准间",1,2));
+////		ArrayList<RoomOrderPO> list=new ArrayList<RoomOrderPO>();
+////		list.add(new RoomOrderPO("标准间",1,2));
 //		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //		OrderPO po;
-//		try {
-//			po = new OrderPO(0,1,3,"正常",fmt.parse("1111-11-11 11:11:11"),true,fmt.parse("2016-12-09 14:52:36"),fmt.parse("2016-12-10 09:18:47"),fmt.parse("2016-12-09 15:26:48"),list,450,3,false);
-//			System.out.print(order.insert(po));
-//		} catch (ParseException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+//		
+//			System.out.print(order.findByid(1).getcancel_time());
+//		
 //	}
+
 
 }

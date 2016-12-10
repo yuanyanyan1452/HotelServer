@@ -166,9 +166,13 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist) {
 		// TODO Auto-generated method stub
+		int price = 0;
 		for(int i=0;i<roomlist.size();i++){
-			
+			RoomOrderVO roomvo=roomlist.get(i);
+			price+=roomvo.getnum_of_days()*roomvo.getroom_number();
+		//没有价格
 		}
+		
 		return 0;
 	}
 
@@ -176,9 +180,13 @@ public class OrderBLServiceImpl implements OrderBLService {
 	public int calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist, ArrayList<HotelStrategyVO> list1,
 			ArrayList<WebStrategyVO> list2) {
 		// TODO Auto-generated method stub
+		
+		int price = 0;
 		for(int i=0;i<roomlist.size();i++){
-			
+			RoomOrderVO roomvo=roomlist.get(i);
+			price+=roomvo.getnum_of_days()*roomvo.getroom_number();
 		}
+		ArrayList<Integer> price_list=new ArrayList<Integer>();
 		return 0;
 	}
 

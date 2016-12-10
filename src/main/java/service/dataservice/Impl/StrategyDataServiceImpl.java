@@ -34,12 +34,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
 				if(rs.getString("hs_start_time")==null){
-					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setstart_time(null);
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("hs_start_time")));
 				}
 				if(rs.getString("hs_end_time")==null){
-					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setend_time(null);
 				}else{
 					po.setend_time(fmt.parse(rs.getString("hs_end_time")));
 				}
@@ -69,8 +69,16 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			ps.setInt(1, po.gethotelid());
 			ps.setString(2, po.getname());
 			ps.setString(3, po.getcondition());
-			ps.setString(4, fmt.format(po.getstart_time()));
-			ps.setString(5, fmt.format(po.getend_time()));
+			if(po.getstart_time()==null){
+				ps.setString(4, null);
+			}else{
+				ps.setString(4, fmt.format(po.getstart_time()));
+			}
+			if(po.getend_time()==null){
+				ps.setString(5, null);
+			}else{
+				ps.setString(5, fmt.format(po.getend_time()));
+			}
 			ps.setString(6, po.getexecuteway());
 			ps.setBoolean(7, po.getsuperposition());
 			int i=ps.executeUpdate();
@@ -151,8 +159,16 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			ps.setInt(1, po.gethotelid());
 			ps.setString(2, po.getname());
 			ps.setString(3, po.getcondition());
-			ps.setString(4, fmt.format(po.getstart_time()));
-			ps.setString(5, fmt.format(po.getend_time()));
+			if(po.getstart_time()==null){
+				ps.setString(4, null);
+			}else{
+				ps.setString(4, fmt.format(po.getstart_time()));
+			}
+			if(po.getend_time()==null){
+				ps.setString(5, null);
+			}else{
+				ps.setString(5, fmt.format(po.getend_time()));
+			}
 			ps.setString(6, po.getexecuteway());
 			ps.setBoolean(7, po.getsuperposition());
 			ps.setInt(8, po.getid());
@@ -186,12 +202,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
 				if(rs.getString("hs_start_time")==null){
-					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setstart_time(null);
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("hs_start_time")));
 				}
 				if(rs.getString("hs_end_time")==null){
-					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setend_time(null);
 				}else{
 					po.setend_time(fmt.parse(rs.getString("hs_end_time")));
 				}
@@ -226,12 +242,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("web_condition"));
 				if(rs.getString("ws_start_time")==null){
-					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setstart_time(null);
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("ws_start_time")));
 				}
 				if(rs.getString("ws_end_time")==null){
-					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setend_time(null);
 				}else{
 					po.setend_time(fmt.parse(rs.getString("ws_end_time")));
 				}
@@ -260,8 +276,16 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, po.getname());
 			ps.setString(2, po.getcondition());
-			ps.setString(3, fmt.format(po.getstart_time()));
-			ps.setString(4, fmt.format(po.getend_time()));
+			if(po.getstart_time()==null){
+				ps.setString(3, null);
+			}else{
+				ps.setString(3, fmt.format(po.getstart_time()));
+			}
+			if(po.getend_time()==null){
+				ps.setString(4, null);
+			}else{
+				ps.setString(4, fmt.format(po.getend_time()));
+			}
 			ps.setString(5, po.getexecuteway());
 			ps.setBoolean(6, po.getsuperposition());
 			int i=ps.executeUpdate();
@@ -309,8 +333,16 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, po.getname());
 			ps.setString(2, po.getcondition());
-			ps.setString(3, fmt.format(po.getstart_time()));
-			ps.setString(4, fmt.format(po.getend_time()));
+			if(po.getstart_time()==null){
+				ps.setString(3, null);
+			}else{
+				ps.setString(3, fmt.format(po.getstart_time()));
+			}
+			if(po.getend_time()==null){
+				ps.setString(4, null);
+			}else{
+				ps.setString(4, fmt.format(po.getend_time()));
+			}
 			ps.setString(5, po.getexecuteway());
 			ps.setBoolean(6, po.getsuperposition());
 			ps.setInt(7, po.getid());
@@ -343,12 +375,12 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("web_condition"));
 				if(rs.getString("ws_start_time")==null){
-					po.setstart_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setstart_time(null);
 				}else{
 					po.setstart_time(fmt.parse(rs.getString("ws_start_time")));
 				}
 				if(rs.getString("ws_end_time")==null){
-					po.setend_time(fmt.parse("1111-11-11 11:11:11"));
+					po.setend_time(null);
 				}else{
 					po.setend_time(fmt.parse(rs.getString("ws_end_time")));
 				}
@@ -365,9 +397,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		return wslist;
 	}
 	
-//	public static void main(String[]args){
-//		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
-//		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
-//	}
+	public static void main(String[]args){
+		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
+		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
+	}
 
 }
