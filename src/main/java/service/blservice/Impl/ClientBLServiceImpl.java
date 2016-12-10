@@ -51,10 +51,16 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public ResultMessage client_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
 		// TODO Auto-generated method stub
+		ResultMessage result=clientdataservice.check(username, oldpassword);
+		if(result==ResultMessage.Success){
 		ClientPO clientpo=clientdataservice.getclientpo(username, oldpassword);
 		clientpo.setpassword(newpassword);
-		ResultMessage result=clientdataservice.update(clientpo);
-		return result;
+		ResultMessage result1=clientdataservice.update(clientpo);
+		return result1;
+		}
+		else{
+			return ResultMessage.Fail;
+		}
 	}
 	
 	
@@ -247,11 +253,9 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ClientVO client_getclientvo(String username) throws RemoteException {
 		// TODO Auto-generated method stub
-		int id=clientdataservice.findClientIDbyUsername(username);
-		ClientPO clientpo=clientdataservice.find(id);
-		System.out.println(clientpo.getclient_name());
+		int clientid=clientdataservice.findClientIDbyUsername(username);
+		ClientPO clientpo=clientdataservice.find(clientid);
 		ClientVO vo=clientpo.changetoclientvo();
-		System.out.println(vo.getclient_name());
 		return vo;
 	}
 
