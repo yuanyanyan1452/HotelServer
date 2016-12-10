@@ -238,6 +238,15 @@ public class ClientBLServiceImpl implements ClientBLService {
 		return result;
 	}
 
+	@Override
+	public ClientVO clinet_getclientvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		int id=clientdataservice.findClientIDbyUsername(username);
+		ClientPO clientpo=clientdataservice.find(id);
+		ClientVO vo=clientpo.changetoclientvo();		
+		return vo;
+	}
+
 	
 
 }

@@ -1,20 +1,26 @@
 package objects;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import po.RoomOrderPO;
+import vo.RoomOrderVO;
 
 public class Order {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	int id;
 	int clientid;
 	int hotelid;
 	String state;
-	String cancel_time;
+	Date cancel_time;
 	boolean execute;
-	String start_time;
-	String end_time;
-	String latest_execute_time;
-	ArrayList<RoomOrder> room_order;
+	Date start_time;
+	Date end_time;
+	Date latest_execute_time;
+	ArrayList<RoomOrder>room_order;
 	int price;
 	int expect_number_of_people;
 	boolean havechild;
@@ -34,7 +40,7 @@ public class Order {
 		expect_number_of_people=0;
 		havechild=false;
 	}
-	public Order(int i,int cid,int hid,String s,String cancel,boolean e,String st,String et,String lt,ArrayList<RoomOrder>list,int p,int en,boolean child){
+	public Order(int i,int cid,int hid,String s,Date cancel,boolean e,Date st,Date et,Date lt,ArrayList<RoomOrder>list,int p,int en,boolean child){
 		id=i;
 		clientid=cid;
 		hotelid=hid;
@@ -78,10 +84,10 @@ public class Order {
 		return state;
 	}
 	
-	public void setcancel_time(String cancel){
+	public void setcancel_time(Date cancel){
 		cancel_time=cancel;
 	}
-	public String getcancel_time(){
+	public Date getcancel_time(){
 		return cancel_time;
 	}
 	
@@ -92,24 +98,24 @@ public class Order {
 		return execute;
 	}
 	
-	public void setstart_time(String start_time){
+	public void setstart_time(Date start_time){
 		this.start_time = start_time;
 	}
-	public String getstart_time(){
+	public Date getstart_time(){
 		return start_time;
 	}
 	
-	public void setend_time(String end_time){
+	public void setend_time(Date end_time){
 		this.end_time = end_time;
 	}
-	public String getend_time(){
+	public Date getend_time(){
 		return end_time;
 	}
 	
-	public void setlatest_execute_time(String latest_execute_time){
+	public void setlatest_execute_time(Date latest_execute_time){
 		this.latest_execute_time = latest_execute_time; 
 	}
-	public String getlatest_execute_time(){
+	public Date getlatest_execute_time(){
 		return latest_execute_time; 
 	}
 	

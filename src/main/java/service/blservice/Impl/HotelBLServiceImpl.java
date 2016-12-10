@@ -22,6 +22,7 @@ import service.dataservice.Impl.RoomDataServiceImpl;
 import vo.AccommodationVO;
 import vo.EvaluationVO;
 import vo.HotelVO;
+import vo.HotelWorkerVO;
 import vo.RoomVO;
 
 public class HotelBLServiceImpl implements HotelBLService {
@@ -239,6 +240,15 @@ public class HotelBLServiceImpl implements HotelBLService {
 		hotelpo.sethotel_evaluation(newcomment);
 		ResultMessage result=hoteldataservice.update(hotelpo);
 		return result;
+	}
+
+	@Override
+	public HotelWorkerVO hotelworker_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		int id=hotelworkerdataservice.findhotelid_of_hotelworkerbyUsername(username);
+		HotelWorkerPO po=hotelworkerdataservice.find(id);
+		HotelWorkerVO vo=po.changetohotelworkervo();
+		return vo;
 	}
 
 

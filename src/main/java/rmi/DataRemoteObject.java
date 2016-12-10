@@ -3,16 +3,13 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Date;
 
 import objects.Client;
 import objects.Hotel;
-import objects.HotelStrategy;
 import objects.HotelWorker;
-import objects.OrderState;
 import objects.ResultMessage;
-import objects.RoomType;
 import objects.VIPInfo;
-import objects.WebStrategy;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
 import service.blservice.ManageBLService;
@@ -32,6 +29,7 @@ import vo.HotelWorkerVO;
 import vo.OrderVO;
 import vo.RoomOrderVO;
 import vo.RoomVO;
+import vo.WebManagerVO;
 import vo.WebMarketVO;
 import vo.WebStrategyVO;
 
@@ -172,7 +170,7 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) throws RemoteException{
+	public ResultMessage updateActualLeaveTime(int orderid, Date leaveTime) throws RemoteException{
 		// TODO Auto-generated method stub
 		return orderbl.updateActualLeaveTime(orderid, leaveTime);
 	}
@@ -514,6 +512,38 @@ public class DataRemoteObject extends UnicastRemoteObject
 	public ResultMessage updateClientInfo(Client client) throws RemoteException{
 		// TODO Auto-generated method stub
 		return clientbl.updateClientInfo(client);
+	}
+
+
+
+	@Override
+	public WebMarketVO webmarket_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.webmarket_getvo(username);
+	}
+
+
+
+	@Override
+	public WebManagerVO webmanager_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.webmanager_getvo(username);
+	}
+
+
+
+	@Override
+	public HotelWorkerVO hotelworker_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return hotelbl.hotelworker_getvo(username);
+	}
+
+
+
+	@Override
+	public ClientVO clinet_getclientvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		return clientbl.clinet_getclientvo(username);
 	}
 
 

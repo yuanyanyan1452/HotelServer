@@ -18,6 +18,7 @@ import service.dataservice.Impl.ManageDataServiceImpl;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
+import vo.WebManagerVO;
 import vo.WebMarketVO;
 
 public class ManageBLServiceImpl implements ManageBLService {
@@ -130,6 +131,24 @@ public class ManageBLServiceImpl implements ManageBLService {
 		WebMarketPO po=vochange.marketvo_to_marketpo(mw);
 		ResultMessage result=managedataservice.updateWebMarket(po);
 		return result;
+	}
+
+	@Override
+	public WebMarketVO webmarket_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		int id=managedataservice.findWebMarketIDbyUsername(username);
+		WebMarketPO webmarketpo=managedataservice.findWebMarket(id);
+		WebMarketVO vo=webmarketpo.changetowebmarketvo();
+		return vo;
+	}
+
+	@Override
+	public WebManagerVO webmanager_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		int id=managedataservice.findWebManagerIDbyUsername(username);
+		WebManagerPO webmanagerpo=managedataservice.findWebManager(id);
+		WebManagerVO vo=webmanagerpo.changetowebmanagervo();
+		return vo;
 	}
 
 	
