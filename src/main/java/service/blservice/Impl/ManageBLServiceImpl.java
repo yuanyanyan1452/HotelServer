@@ -7,6 +7,7 @@ import objects.Hotel;
 import objects.HotelWorker;
 import objects.ObjectChange;
 import objects.ResultMessage;
+import po.WebManagerPO;
 import po.WebMarketPO;
 import service.VOChange;
 import service.blservice.ClientBLService;
@@ -17,6 +18,7 @@ import service.dataservice.Impl.ManageDataServiceImpl;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
+import vo.WebManagerVO;
 import vo.WebMarketVO;
 
 public class ManageBLServiceImpl implements ManageBLService {
@@ -29,27 +31,35 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ResultMessage result=managedataservice.checkWebManager(username, password);
+		return result;
 	}
 
 	@Override
 	public ResultMessage webmarket_login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		ResultMessage result=managedataservice.checkWebMarket(username, password);
+		return result;
 	}
 	
 	@Override
 	public ResultMessage webmarket_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		WebMarketPO webmarketpo=managedataservice.getwebmarketpo(username, oldpassword);
+		webmarketpo.setpassword(newpassword);
+		ResultMessage result=managedataservice.updateWebMarket(webmarketpo);
+		return result;
 	}
 
 	@Override
 	public ResultMessage webmanager_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		WebManagerPO webmanagerpo=managedataservice.getwebmanagerpo(username, oldpassword);
+		webmanagerpo.setpassword(newpassword);
+		ResultMessage result=managedataservice.updateWebManager(webmanagerpo);
+		return result;
 	}
 	
 	@Override
@@ -73,7 +83,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 		// TODO Auto-generated method stub
 		Hotel hotel=vochange.hotelvo_to_hotel(hotelvo);
 		ResultMessage result=hotelblservice.addHotel(hotel);
-		
 		return result;
 	}
 
@@ -82,7 +91,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 		// TODO Auto-generated method stub
 		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(workervo);
 		ResultMessage result=hotelblservice.addHotelWorker(hotelworker);
-		
 		return result;
 	}
 
@@ -123,6 +131,24 @@ public class ManageBLServiceImpl implements ManageBLService {
 		WebMarketPO po=vochange.marketvo_to_marketpo(mw);
 		ResultMessage result=managedataservice.updateWebMarket(po);
 		return result;
+	}
+
+	@Override
+	public WebMarketVO webmarket_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		int id=managedataservice.findWebMarketIDbyUsername(username);
+		WebMarketPO webmarketpo=managedataservice.findWebMarket(id);
+		WebMarketVO vo=webmarketpo.changetowebmarketvo();
+		return vo;
+	}
+
+	@Override
+	public WebManagerVO webmanager_getvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		int id=managedataservice.findWebManagerIDbyUsername(username);
+		WebManagerPO webmanagerpo=managedataservice.findWebManager(id);
+		WebManagerVO vo=webmanagerpo.changetowebmanagervo();
+		return vo;
 	}
 
 	

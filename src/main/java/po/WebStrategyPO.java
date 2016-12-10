@@ -1,6 +1,7 @@
 package po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import objects.WebStrategy;
 import vo.WebStrategyVO;
@@ -13,8 +14,8 @@ public class WebStrategyPO implements Serializable{
 	int wsid;
 	String name;
 	String condition;
-	String start_time;
-	String end_time;
+	Date start_time;
+	Date end_time;
 	String executeway;
 	boolean superposition;
 	
@@ -28,7 +29,7 @@ public class WebStrategyPO implements Serializable{
 		superposition=false;
 	}
 	
-	public WebStrategyPO(int id,String n,String con,String st,String et,String ew,boolean iss){
+	public WebStrategyPO(int id,String n,String con,Date st,Date et,String ew,boolean iss){
 		wsid=id;
 		name=n;
 		condition=con;
@@ -59,17 +60,17 @@ public class WebStrategyPO implements Serializable{
 		return condition;
 	}
 	
-	public void setstart_time(String start_time){
+	public void setstart_time(Date start_time){
 		this.start_time=start_time;
 	}
-	public String getstart_time(){
+	public Date getstart_time(){
 		return start_time;
 	}
 	
-	public void setend_time(String end_time){
+	public void setend_time(Date end_time){
 		this.end_time=end_time;
 	}
-	public String getend_time(){
+	public Date getend_time(){
 		return end_time;
 	}
 	

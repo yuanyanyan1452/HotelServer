@@ -2,11 +2,12 @@ package service.blservice.Impl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import objects.ResultMessage;
 import po.OrderPO;
-import service.VOChange;
 import service.BL;
+import service.VOChange;
 import service.blservice.OrderBLService;
 import service.dataservice.OrderDataService;
 import service.dataservice.Impl.OrderDataServiceImpl;
@@ -116,7 +117,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setstate("CANCELLED");
-		String time=bl.get_current_time();
+		Date time=new Date();
 		orderpo.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(orderpo);
 		return result;
@@ -142,8 +143,13 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ArrayList<OrderVO> order_market_browseUnfilled() {
 		// TODO Auto-generated method stub
-//		ArrayList<OrderPO> unfilled_order_list=orderdataservice.
-		return null;
+		ArrayList<OrderPO> unfilled_order_list=orderdataservice.findByState("ABNORMAL");
+		ArrayList<OrderVO> list=new ArrayList<OrderVO>();
+		for(int i=0;i<unfilled_order_list.size();i++){
+			OrderVO ordervo=unfilled_order_list.get(i).changetoordervo();
+			list.add(ordervo);
+		}
+		return list;
 	}
 
 	@Override
@@ -151,7 +157,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		// TODO Auto-generated method stub
 		OrderPO po=orderdataservice.findByid(orderid);
 		po.setstate("CANCELLED");
-		String time=bl.get_current_time();
+		Date time=new Date();
 		po.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(po);
 		return result;
@@ -177,7 +183,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) {
+	public ResultMessage updateActualLeaveTime(int orderid, Date leaveTime) {
 		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setend_time(leaveTime);

@@ -11,12 +11,15 @@ import objects.RoomType;
 import vo.AccommodationVO;
 import vo.EvaluationVO;
 import vo.HotelVO;
+import vo.HotelWorkerVO;
 import vo.RoomVO;
 
 public interface HotelBLService extends Remote{
 	// 提供给界面调用的接口
 	
 	public ResultMessage hotelworker_login(String username,String password) throws RemoteException;
+	
+	public HotelWorkerVO hotelworker_getvo(String username)throws RemoteException;
 	
 	public ResultMessage hotelworker_change_password(String username,String oldpassword,String newpassword)throws RemoteException;
 	
@@ -43,7 +46,50 @@ public interface HotelBLService extends Remote{
 	 * @return 酒店更新入住信息
 	 */
 	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid)throws RemoteException;
+	/**
+	 * @param location
+	 * @return 客户获取对应地址的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelBylocation(String address,String business_address)throws RemoteException;
 
+	/**
+	 * @param hotelname
+	 * @return 符合对应酒店名的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelByname(ArrayList<HotelVO> list,String hotelname)throws RemoteException;
+
+	/**
+	 * @param type
+	 * @return 有符合对应房间类型的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelByroom(ArrayList<HotelVO> list,String type)throws RemoteException;
+
+	/**
+	 * @param lowprice
+	 * @param highprice
+	 * @return 有符合对应价格区间的房间的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelByprice(ArrayList<HotelVO> list,int lowprice, int highprice)throws RemoteException;
+
+	/**
+	 * @param inTime
+	 * @param leaveTime
+	 * @return 有符合对应时间段的房间的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelBytime(ArrayList<HotelVO> list,String inTime, String leaveTime)throws RemoteException;
+
+	/**
+	 * @param star
+	 * @return 符合对应星级的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelBystar(ArrayList<HotelVO> list,String star)throws RemoteException;
+
+	/**
+	 * @param lowscore
+	 * @param highscore
+	 * @return 符合对应评分区间的酒店列表
+	 */
+	public ArrayList<HotelVO> searchHotelByscore(ArrayList<HotelVO> list,double lowscore, double highscore)throws RemoteException;
 	// 提供给同层调用的接口
 	/**
 	 * @param hotelid
@@ -81,50 +127,7 @@ public interface HotelBLService extends Remote{
 	 * @return 更新对应酒店的工作人员信息
 	 */
 	public ResultMessage updateHotelWokerInfo(HotelWorker worker)throws RemoteException;
-	/**
-	 * @param location
-	 * @return 客户获取对应地址的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelBylocation(String address,String business_address)throws RemoteException;
-
-	/**
-	 * @param hotelname
-	 * @return 符合对应酒店名的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelByname(String hotelname)throws RemoteException;
-
-	/**
-	 * @param type
-	 * @return 有符合对应房间类型的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelByroom(String type)throws RemoteException;
-
-	/**
-	 * @param lowprice
-	 * @param highprice
-	 * @return 有符合对应价格区间的房间的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelByprice(int lowprice, int highprice)throws RemoteException;
-
-	/**
-	 * @param inTime
-	 * @param leaveTime
-	 * @return 有符合对应时间段的房间的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelBytime(String inTime, String leaveTime)throws RemoteException;
-
-	/**
-	 * @param star
-	 * @return 符合对应星级的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelBystar(String star)throws RemoteException;
-
-	/**
-	 * @param lowscore
-	 * @param highscore
-	 * @return 符合对应评分区间的酒店列表
-	 */
-	public ArrayList<Hotel> searchHotelByscore(double lowscore, double highscore)throws RemoteException;
+	
 
 	public ResultMessage evalutehotel(EvaluationVO e, int clientid,int hotelid) throws RemoteException;
 }
