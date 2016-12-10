@@ -8,11 +8,13 @@ public class RoomOrderVO {
 	public RoomOrderVO(){
 		room_type=null;
 		room_number=0;
+		num_of_days=0;
 	}
 	
-	public RoomOrderVO(String t,int n){
+	public RoomOrderVO(String t,int n,int num){
 		room_type=t;
 		room_number=n;
+		num_of_days=num;
 	}
 	
 	public void setroom_type(String t){

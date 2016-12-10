@@ -243,7 +243,9 @@ public class ClientBLServiceImpl implements ClientBLService {
 		// TODO Auto-generated method stub
 		int id=clientdataservice.findClientIDbyUsername(username);
 		ClientPO clientpo=clientdataservice.find(id);
-		ClientVO vo=clientpo.changetoclientvo();		
+		System.out.println(clientpo.getclient_name());
+		ClientVO vo=clientpo.changetoclientvo();
+		System.out.println(vo.getclient_name());
 		return vo;
 	}
 

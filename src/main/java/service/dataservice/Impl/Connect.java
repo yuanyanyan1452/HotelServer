@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class Connect {
 	public static Connection getConn(){
 		String driver = "com.mysql.jdbc.Driver";
-		String url = "jdbc:mysql://localhost:3306/system?useUnicode=true&characterEncoding=utf-8&useSSL=false";
+		String url = "jdbc:mysql://localhost:3306/system?useUnicode=true&characterEncoding=utf-8&useSSL=false&zeroDateTimeBehavior=convertToNull";
 		Connection conn = null;
 		try{
 			File file = new File("D:\\connect.txt");
