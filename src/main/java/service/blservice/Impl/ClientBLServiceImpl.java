@@ -34,10 +34,16 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage client_register(String username,String password){
 		ClientPO clientpo=new ClientPO();
+		int clientid=clientdataservice.findClientIDbyUsername(username);
+		if(clientid!=-1){
 		clientpo.setusername(username);
 		clientpo.setpassword(password);
 		ResultMessage result=clientdataservice.insert(clientpo);
 		return result;
+		}
+		else{
+			return ResultMessage.Fail;
+		}
 		
 	}
 	

@@ -182,6 +182,12 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
+	public OrderVO order_findbyid(int orderid) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderbl.order_findbyid(orderid);
+	}
+	
+	@Override
 	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.webmanager_login(username, password);
@@ -546,6 +552,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return clientbl.client_getclientvo(username);
 	}
 
+
+
+	
 
 
 

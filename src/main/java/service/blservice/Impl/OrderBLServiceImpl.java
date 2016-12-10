@@ -201,4 +201,12 @@ public class OrderBLServiceImpl implements OrderBLService {
 		return result;
 	}
 
+	@Override
+	public OrderVO order_findbyid(int orderid) throws RemoteException {
+		// TODO Auto-generated method stub
+		OrderPO orderpo=orderdataservice.findByid(orderid);
+		OrderVO ordervo=orderpo.changetoordervo();
+		return ordervo;
+	}
+
 }
