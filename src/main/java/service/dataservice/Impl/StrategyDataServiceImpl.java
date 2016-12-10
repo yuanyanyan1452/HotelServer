@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import objects.ResultMessage;
@@ -21,6 +23,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		String sql = "select *from hotelstrategy where name='"+name+"'";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{
 			ps=conn.prepareStatement(sql);
@@ -30,12 +33,23 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
-				po.setstart_time(rs.getString("hs_start_time"));
-				po.setend_time(rs.getString("hs_end_time"));
+				if(rs.getString("hs_start_time")==null){
+					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setstart_time(fmt.parse(rs.getString("hs_start_time")));
+				}
+				if(rs.getString("hs_end_time")==null){
+					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setend_time(fmt.parse(rs.getString("hs_end_time")));
+				}
 				po.setexecuteway(rs.getString("executeway"));
 				po.setsuperposition(rs.getBoolean("superposition"));
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return po;
@@ -48,13 +62,15 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
 		String sql = "insert into hotelstrategy values(NULL,?,?,?,?,?,?,?)";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, po.gethotelid());
 			ps.setString(2, po.getname());
 			ps.setString(3, po.getcondition());
-			ps.setString(4, po.getstart_time());
-			ps.setString(5, po.getend_time());
+			ps.setString(4, fmt.format(po.getstart_time()));
+			ps.setString(5, fmt.format(po.getend_time()));
 			ps.setString(6, po.getexecuteway());
 			ps.setBoolean(7, po.getsuperposition());
 			int i=ps.executeUpdate();
@@ -128,13 +144,15 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		PreparedStatement ps=null;
 		String sql = "update hotelstrategy set hotelid=?,name=?,hs_condition=?,hs_start_time=?,"
 				+ "hs_end_time=?,executeway=?,superposition=? where id=?";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, po.gethotelid());
 			ps.setString(2, po.getname());
 			ps.setString(3, po.getcondition());
-			ps.setString(4, po.getstart_time());
-			ps.setString(5, po.getend_time());
+			ps.setString(4, fmt.format(po.getstart_time()));
+			ps.setString(5, fmt.format(po.getend_time()));
 			ps.setString(6, po.getexecuteway());
 			ps.setBoolean(7, po.getsuperposition());
 			ps.setInt(8, po.getid());
@@ -156,6 +174,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		String sql="select *from hotelstrategy";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -165,14 +185,25 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("hs_condition"));
-				po.setstart_time(rs.getString("hs_start_time"));
-				po.setend_time(rs.getString("hs_end_time"));
+				if(rs.getString("hs_start_time")==null){
+					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setstart_time(fmt.parse(rs.getString("hs_start_time")));
+				}
+				if(rs.getString("hs_end_time")==null){
+					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setend_time(fmt.parse(rs.getString("hs_end_time")));
+				}
 				po.setexecuteway(rs.getString("executeway"));
 				po.setsuperposition(rs.getBoolean("superposition"));
 				hslist.add(po);
 			}
 		}catch(SQLException e){
 				e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return hslist;
 	}
@@ -184,7 +215,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql = "select *from webstrategy where name="+name;
+		String sql = "select *from webstrategy where name='"+name+"'";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -192,12 +225,23 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setid(rs.getInt("id"));
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("web_condition"));
-				po.setstart_time(rs.getString("ws_start_time"));
-				po.setend_time(rs.getString("ws_end_time"));
+				if(rs.getString("ws_start_time")==null){
+					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setstart_time(fmt.parse(rs.getString("ws_start_time")));
+				}
+				if(rs.getString("ws_end_time")==null){
+					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setend_time(fmt.parse(rs.getString("ws_end_time")));
+				}
 				po.setexecuteway(rs.getString("executeway"));
 				po.setsuperposition(rs.getBoolean("superposition"));
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return po;
@@ -210,12 +254,14 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
 		String sql = "insert into webstrategy values(NULL,?,?,?,?,?,?)";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, po.getname());
 			ps.setString(2, po.getcondition());
-			ps.setString(3, po.getstart_time());
-			ps.setString(4, po.getend_time());
+			ps.setString(3, fmt.format(po.getstart_time()));
+			ps.setString(4, fmt.format(po.getend_time()));
 			ps.setString(5, po.getexecuteway());
 			ps.setBoolean(6, po.getsuperposition());
 			int i=ps.executeUpdate();
@@ -257,12 +303,14 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		PreparedStatement ps=null;
 		String sql = "update webstrategy set name=?,web_condition=?,ws_start_time=?,"
 				+ "ws_end_time=?,executeway=?,superposition=? where id=?";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, po.getname());
 			ps.setString(2, po.getcondition());
-			ps.setString(3, po.getstart_time());
-			ps.setString(4, po.getend_time());
+			ps.setString(3, fmt.format(po.getstart_time()));
+			ps.setString(4, fmt.format(po.getend_time()));
 			ps.setString(5, po.getexecuteway());
 			ps.setBoolean(6, po.getsuperposition());
 			ps.setInt(7, po.getid());
@@ -284,6 +332,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		String sql="select *from webstrategy";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -292,16 +342,32 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setid(rs.getInt("id"));
 				po.setname(rs.getString("name"));
 				po.setcondition(rs.getString("web_condition"));
-				po.setstart_time(rs.getString("ws_start_time"));
-				po.setend_time(rs.getString("ws_end_time"));
+				if(rs.getString("ws_start_time")==null){
+					po.setstart_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setstart_time(fmt.parse(rs.getString("ws_start_time")));
+				}
+				if(rs.getString("ws_end_time")==null){
+					po.setend_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setend_time(fmt.parse(rs.getString("ws_end_time")));
+				}
 				po.setexecuteway(rs.getString("executeway"));
 				po.setsuperposition(rs.getBoolean("superposition"));
 				wslist.add(po);
 			}
 		}catch(SQLException e){
 				e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return wslist;
+	}
+	
+	public static void main(String[]args){
+		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
+		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
 	}
 
 }

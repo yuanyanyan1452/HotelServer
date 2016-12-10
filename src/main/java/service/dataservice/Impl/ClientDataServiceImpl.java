@@ -21,7 +21,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 	@Override
 	public synchronized ClientPO find(int clientid) {
 		Connection conn = Connect.getConn();
-		String sql = "select id,decode(name,'key'),decode(name,'contact'),credit,creditrecord,viptype,info,decode(username,'key'),decode(password,'key') from client where id = " + clientid; // 需要执行的sql语句
+		String sql = "select id,decode(name,'key'),decode(contact,'key'),credit,creditrecord,viptype,info,decode(username,'key'),decode(password,'key') from client where id = " + clientid; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		ClientPO clientpo = new ClientPO(0, null, null, 0, null, null,null,null);
 		String tempCreditRecord; // 存取数据库中读取的string
@@ -33,7 +33,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 			while (rs.next()) {
 				clientpo.setclientid(rs.getInt("id"));
 				clientpo.setclient_name(BlobtoString(rs.getBlob("decode(name,'key')")));
-				clientpo.setcontact(BlobtoString(rs.getBlob("decode(name,'contact')")));
+				clientpo.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
 				clientpo.setcredit(rs.getInt("credit"));
 				tempCreditRecord = rs.getString("creditrecord");
 				CreditRecords = tempCreditRecord.split("/");
@@ -49,12 +49,18 @@ public class ClientDataServiceImpl implements ClientDataService {
 				clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 
-				return clientpo;
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		return null;
+		System.out.println(clientpo.getclient_name());
+		return clientpo;
+	}
+	
+	public static void main(String[]args){
+		ClientDataServiceImpl client=new ClientDataServiceImpl();
+		System.out.println(client.find(1).getclient_name());
 	}
 	
 	/**
@@ -190,17 +196,17 @@ public class ClientDataServiceImpl implements ClientDataService {
 	}
 
 	
-	public static void main(String[] args) {
-		ClientDataServiceImpl a = new ClientDataServiceImpl();
-//		ArrayList<String> aaa = new ArrayList<String>();
-//		VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
-//		ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info,"1","1");
-//		a.insert(po);
-		a.find(1);
-		System.out.println(a.check("1","1"));
-//		a.update(po);
-		
-	}
+//	public static void main(String[] args) {
+//		ClientDataServiceImpl a = new ClientDataServiceImpl();
+////		ArrayList<String> aaa = new ArrayList<String>();
+////		VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
+////		ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info,"1","1");
+////		a.insert(po);
+//		a.find(1);
+//		System.out.println(a.check("1","1"));
+////		a.update(po);
+//		
+//	}
 	public ClientPO getclientpo(String username,String password){
 		Connection conn = Connect.getConn();
 		String sql = "select id,decode(name,'key'),decode(contact,'key'),credit,creditrecord,viptype,info from client where username =encode(?,'key') and password = encode(?,'key')" ;
@@ -264,7 +270,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 	public int findClientIDbyUsername(String username){
 		Connection conn = Connect.getConn();
 		int result =0;
-		String sql = "select id from client where name = encode(?,'key')";
+		String sql = "select id from client where username = encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);

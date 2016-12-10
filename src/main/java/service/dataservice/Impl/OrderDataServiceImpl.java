@@ -1,9 +1,12 @@
 package service.dataservice.Impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import objects.ResultMessage;
@@ -21,6 +24,8 @@ public class OrderDataServiceImpl implements OrderDataService {
 		ResultSet rs = null;
 		String sql = "select *from orderrecord where id="+id;
 		OrderPO po = new OrderPO();
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -29,11 +34,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setclientid(rs.getInt("clientid"));
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
-				po.setcancel_time(rs.getString("cancel_time"));
+				if(rs.getString("cancel_time")==null){
+					po.setcancel_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+				}
 				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(rs.getString("start_time"));
-				po.setend_time(rs.getString("end_time"));
-				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				po.setstart_time(fmt.parse(rs.getString("start_time")));
+				po.setend_time(fmt.parse(rs.getString("end_time")));
+				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
 				String r=rs.getString("room_order");
 				po.setroom_order(transformToArray(r));
 				po.setprice(rs.getInt("price"));
@@ -42,7 +51,10 @@ public class OrderDataServiceImpl implements OrderDataService {
 			}
 		}catch(SQLException e){
 			e.printStackTrace();
-		}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		return po;
 	}
 	
@@ -54,6 +66,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		ResultSet rs = null;
 		String sql = "select *from orderrecord where clientid="+clientid;
 		ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -63,11 +76,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setclientid(rs.getInt("clientid"));
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
-				po.setcancel_time(rs.getString("cancel_time"));
+				if(rs.getString("cancel_time")==null){
+					po.setcancel_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+				}
 				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(rs.getString("start_time"));
-				po.setend_time(rs.getString("end_time"));
-				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				po.setstart_time(fmt.parse(rs.getString("start_time")));
+				po.setend_time(fmt.parse(rs.getString("end_time")));
+				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
 				String r=rs.getString("room_order");
 				po.setroom_order(transformToArray(r));
 				po.setprice(rs.getInt("price"));
@@ -76,6 +93,9 @@ public class OrderDataServiceImpl implements OrderDataService {
 				orderlist.add(po);
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return orderlist;
@@ -90,6 +110,8 @@ public class OrderDataServiceImpl implements OrderDataService {
 				String sql = "select *from orderrecord where clientid='"+clientid+"' and"
 						+ "state='"+state+"' and execute='"+execute+"'";
 				ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
+				SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				
 				try{
 					ps=conn.prepareStatement(sql);
 					rs=ps.executeQuery();
@@ -99,11 +121,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 						po.setclientid(rs.getInt("clientid"));
 						po.sethotelid(rs.getInt("hotelid"));
 						po.setstate(rs.getString("state"));
-						po.setcancel_time(rs.getString("cancel_time"));
+						if(rs.getString("cancel_time")==null){
+							po.setcancel_time(fmt.parse("0000-00-00 00:00:00"));
+						}else{
+							po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+						}
 						po.setexecute(rs.getBoolean("execute"));
-						po.setstart_time(rs.getString("start_time"));
-						po.setend_time(rs.getString("end_time"));
-						po.setlatest_execute_time(rs.getString("latest_execute_time"));
+						po.setstart_time(fmt.parse(rs.getString("start_time")));
+						po.setend_time(fmt.parse(rs.getString("end_time")));
+						po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
 						String r=rs.getString("room_order");
 						po.setroom_order(transformToArray(r));
 						po.setprice(rs.getInt("price"));
@@ -112,6 +138,9 @@ public class OrderDataServiceImpl implements OrderDataService {
 						orderlist.add(po);
 					}
 				}catch(SQLException e){
+					e.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return orderlist;
@@ -125,6 +154,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		String sql="select*from orderrecord where state='"+state+"'";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -134,11 +164,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setclientid(rs.getInt("clientid"));
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
-				po.setcancel_time(rs.getString("cancel_time"));
+				if(rs.getString("cancel_time")==null){
+					po.setcancel_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+				}
 				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(rs.getString("start_time"));
-				po.setend_time(rs.getString("end_time"));
-				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				po.setstart_time(fmt.parse(rs.getString("start_time")));
+				po.setend_time(fmt.parse(rs.getString("end_time")));
+				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
 				String r=rs.getString("room_order");
 				po.setroom_order(transformToArray(r));
 				po.setprice(rs.getInt("price"));
@@ -147,6 +181,9 @@ public class OrderDataServiceImpl implements OrderDataService {
 				list.add(po);
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -160,6 +197,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		String sql="select*from orderrecord where execute='"+execute+"'";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -169,11 +207,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setclientid(rs.getInt("clientid"));
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
-				po.setcancel_time(rs.getString("cancel_time"));
+				if(rs.getString("cancel_time")==null){
+					po.setcancel_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+				}
 				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(rs.getString("start_time"));
-				po.setend_time(rs.getString("end_time"));
-				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				po.setstart_time(fmt.parse(rs.getString("start_time")));
+				po.setend_time(fmt.parse(rs.getString("end_time")));
+				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
 				String r=rs.getString("room_order");
 				po.setroom_order(transformToArray(r));
 				po.setprice(rs.getInt("price"));
@@ -182,6 +224,9 @@ public class OrderDataServiceImpl implements OrderDataService {
 				list.add(po);
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -194,6 +239,8 @@ public class OrderDataServiceImpl implements OrderDataService {
 		ResultSet rs = null;
 		String sql = "select *from orderrecord where hotelid="+hotelid;
 		ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			rs=ps.executeQuery();
@@ -203,11 +250,15 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setclientid(rs.getInt("clientid"));
 				po.sethotelid(rs.getInt("hotelid"));
 				po.setstate(rs.getString("state"));
-				po.setcancel_time(rs.getString("cancel_time"));
+				if(rs.getString("cancel_time")==null){
+					po.setcancel_time(fmt.parse("0000-00-00 00:00:00"));
+				}else{
+					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+				}
 				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(rs.getString("start_time"));
-				po.setend_time(rs.getString("end_time"));
-				po.setlatest_execute_time(rs.getString("latest_execute_time"));
+				po.setstart_time(fmt.parse(rs.getString("start_time")));
+				po.setend_time(fmt.parse(rs.getString("end_time")));
+				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
 				String r=rs.getString("room_order");
 				po.setroom_order(transformToArray(r));
 				po.setprice(rs.getInt("price"));
@@ -216,6 +267,9 @@ public class OrderDataServiceImpl implements OrderDataService {
 				orderlist.add(po);
 			}
 		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return orderlist;
@@ -228,16 +282,19 @@ public class OrderDataServiceImpl implements OrderDataService {
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		String sql = "insert into orderrecord values(NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, po.getclientid());
 			ps.setInt(2, po.gethotelid());
 			ps.setString(3,po.getstate());
-			ps.setString(4, po.getcancel_time());
+			
+			ps.setString(4, fmt.format(po.getcancel_time()));
 			ps.setBoolean(5, po.getexecute());
-			ps.setString(6, po.getstart_time());
-			ps.setString(7, po.getend_time());
-			ps.setString(8, po.getlatest_execute_time());
+			ps.setString(6, fmt.format(po.getstart_time()));
+			ps.setString(7,fmt.format(po.getend_time()));
+			ps.setString(8, fmt.format(po.getlatest_execute_time()));
 			ArrayList<RoomOrderPO> room_order=po.getroom_order();
 			ps.setString(9, transformToStr(room_order));
 			ps.setInt(10,po.getprice());
@@ -298,22 +355,23 @@ public class OrderDataServiceImpl implements OrderDataService {
 		String sql = "update orderrecord set clientid=?,hotelid=?,state=?,cancel_time=?,execute=?,start_time=?,"
 				+ "end_time=?,latest_execute_time=?,room_order=?,price=?,"
 				+ "expect_number_of_people=?,havechild=? where id=?";
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		try{
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, po.getclientid());
 			ps.setInt(2, po.gethotelid());
 			ps.setString(3,po.getstate());
-			ps.setString(4, po.getcancel_time());
+			ps.setString(4, fmt.format(po.getcancel_time()));
 			ps.setBoolean(5, po.getexecute());
-			ps.setString(6, po.getstart_time());
-			ps.setString(7, po.getend_time());
-			ps.setString(8, po.getlatest_execute_time());
-			ArrayList<RoomOrderPO>room_order=po.getroom_order();
-			ps.setString(9, transformToStr(room_order));
+			ps.setString(6, fmt.format(po.getstart_time()));
+			ps.setString(7,fmt.format(po.getend_time()));
+			ps.setString(8, fmt.format(po.getlatest_execute_time()));
+			ArrayList<RoomOrderPO> room_order=po.getroom_order();
+			ps.setString(9,transformToStr(room_order));
 			ps.setInt(10,po.getprice());
 			ps.setInt(11, po.getexpect_number_of_people());
 			ps.setBoolean(12, po.gethave_child());
-			ps.setInt(13, po.getid());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag=ResultMessage.Fail;
@@ -332,6 +390,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 			RoomOrderPO room=new RoomOrderPO();
 			room.setroom_type(temp2[0]);
 			room.setroom_number(Integer.parseInt(temp2[1]));
+			room.setnum_of_days(Integer.parseInt(temp2[2]));
 			room_order.add(room);
 		}
 		return room_order;
@@ -341,18 +400,26 @@ public class OrderDataServiceImpl implements OrderDataService {
 		String s = "";
 		for(int i=0;i<r.size()-1;i++){
 			RoomOrderPO room=r.get(i);
-			s+=room.getroom_type()+","+String.valueOf(room.getroom_number())+"/";
+			s+=room.getroom_type()+","+String.valueOf(room.getroom_number())+","+String.valueOf(room.getnum_of_days())+"/";
 		}
 		RoomOrderPO last=r.get(r.size()-1);
-		s+=last.getroom_type()+","+String.valueOf(last.getroom_number());
+		s+=last.getroom_type()+","+String.valueOf(last.getroom_number())+","+String.valueOf(last.getnum_of_days());
 		return s;
 	}
 	
 //	public static void main(String[]args){
 //		OrderDataServiceImpl order=new OrderDataServiceImpl();
-//		String s="标准间,1/双人房,2";
-//		ArrayList<RoomOrderPO>room=order.transformToArray(s);
-//		System.out.print(room.get(1).getroom_number());
+//		ArrayList<RoomOrderPO> list=new ArrayList<RoomOrderPO>();
+//		list.add(new RoomOrderPO("标准间",1,2));
+//		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		OrderPO po;
+//		try {
+//			po = new OrderPO(0,1,3,"正常",fmt.parse("0000-00-00 00:00:00"),true,fmt.parse("2016-12-09 14:52:36"),fmt.parse("2016-12-10 09:18:47"),fmt.parse("2016-12-09 15:26:48"),list,450,3,false);
+//			System.out.print(order.insert(po));
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //	}
 
 }
