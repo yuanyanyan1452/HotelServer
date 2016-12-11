@@ -14,7 +14,7 @@ public interface StrategyDataService {
 	
 	public ResultMessage update_hotel(HotelStrategyPO po);
 	
-	public ArrayList<HotelStrategyPO> showlist_hotel() ;
+	public ArrayList<HotelStrategyPO> showlist_hotel(int hotelid) ;
 	
 	public WebStrategyPO find_web(String name);
 	

@@ -79,15 +79,15 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ArrayList<HotelStrategyVO> getStrategy(int hotelid, int clientid) throws RemoteException {
+	public ArrayList<HotelStrategyVO> getHotelStrategy(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return strategybl.getStrategy(hotelid, clientid);
+		return strategybl.getHotelStrategy(hotelid);
 	}
 
 	@Override
-	public ArrayList<WebStrategyVO> getStrategy(int clientid) throws RemoteException {
+	public ArrayList<WebStrategyVO> getWebStrategy(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return strategybl.getStrategy(clientid);
+		return strategybl.getWebStrategy(clientid);
 	}
 
 	@Override
@@ -157,16 +157,15 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist) throws RemoteException {
+	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderbl.calculateTotalwithoutStrategy(roomlist);
+		return orderbl.calculateTotalwithoutStrategy(roomlist,hotelid);
 	}
 
 	@Override
-	public int calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist, ArrayList<HotelStrategyVO> list1,
-			ArrayList<WebStrategyVO> list2) throws RemoteException {
+	public int calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid,int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
-		return orderbl.calculateTotalwithStrategy(roomlist, list1, list2);
+		return orderbl.calculateTotalwithStrategy(roomlist, hotelid,clientid);
 	}
 
 	@Override

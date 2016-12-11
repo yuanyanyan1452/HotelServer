@@ -183,13 +183,13 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	}
 
 	@Override
-	public ArrayList<HotelStrategyPO> showlist_hotel() {
+	public ArrayList<HotelStrategyPO> showlist_hotel(int hotelid) {
 		// TODO Auto-generated method stub
 		ArrayList<HotelStrategyPO>hslist=new ArrayList<HotelStrategyPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select *from hotelstrategy";
+		String sql="select *from hotelstrategy where hotelid='"+hotelid+"";
 		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{

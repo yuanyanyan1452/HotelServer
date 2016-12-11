@@ -52,10 +52,12 @@ public class ClientBLServiceImpl implements ClientBLService {
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		ResultMessage result=clientdataservice.check(username, oldpassword);
+		System.out.println("r1="+result);
 		if(result==ResultMessage.Success){
 		ClientPO clientpo=clientdataservice.getclientpo(username, oldpassword);
 		clientpo.setpassword(newpassword);
 		ResultMessage result1=clientdataservice.update(clientpo);
+		System.out.println("r2="+result1);
 		return result1;
 		}
 		else{
