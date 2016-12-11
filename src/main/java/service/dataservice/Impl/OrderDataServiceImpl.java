@@ -378,6 +378,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps.setInt(10,po.getprice());
 			ps.setInt(11, po.getexpect_number_of_people());
 			ps.setBoolean(12, po.gethave_child());
+			ps.setInt(13, po.getid());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag=ResultMessage.Fail;
