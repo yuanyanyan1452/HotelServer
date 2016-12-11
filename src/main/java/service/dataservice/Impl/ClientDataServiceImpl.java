@@ -54,7 +54,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
-		System.out.println(clientpo.getclient_name());
 		return clientpo;
 	}
 	
@@ -102,28 +101,18 @@ public class ClientDataServiceImpl implements ClientDataService {
 	@Override
 	public synchronized ResultMessage insert(ClientPO po) {
 		Connection conn = Connect.getConn();
-		String tempCreditRecord =""; // 存取数据库中读取的string
-		ArrayList<String> CreditRecordList = new ArrayList<String>();
 		String sql = "insert into client (id,Name,Contact,Credit,CreditRecord,viptype,info,username,password) values(NULL,encode(?,'key'),encode(?,'key'),?,?,?,?,encode(?,'key'),encode(?,'key'))";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
-			pstmt.setString(1, po.getclient_name());
-			pstmt.setString(2, po.getcontact());
-			pstmt.setInt(3, po.getcredit()); 
-			CreditRecordList = po.getcredit_record();
-			for(int i=0;i<CreditRecordList.size();i++){
-				if(i!=CreditRecordList.size()-1){
-					tempCreditRecord += CreditRecordList.get(i) + "/";
-				}else
-					tempCreditRecord += CreditRecordList.get(i);
-			}
-			pstmt.setString(4,tempCreditRecord);
-			pstmt.setString(5,po.getvipinfo().getType().toString());
-			pstmt.setString(6, po.getvipinfo().getInfo());
+			pstmt.setString(1, "");
+			pstmt.setString(2, "");
+			pstmt.setInt(3, 0); 
+			pstmt.setString(4, "");
+			pstmt.setString(5,"");
+			pstmt.setString(6,"");
 			pstmt.setString(7, po.getusername());
 			pstmt.setString(8, po.getpassword());
-            
             set_id(po);
 			pstmt.executeUpdate();
 			pstmt.close();

@@ -14,25 +14,35 @@ import po.HotelWorkerPO;
 import po.WebMarketPO;
 import service.dataservice.HotelWorkerDataService;
 
+
 public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public HotelWorkerPO find(int hotelid){
 		Connection conn = Connect.getConn();
-	    String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from hotelworker where id = " +hotelid;	//需要执行的sql语句
+	    String sql = "select hotelid,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from hotelworker where hotelid = " +hotelid;	//需要执行的sql语句
 	    PreparedStatement pstmt;
+	    HotelWorkerPO po = new HotelWorkerPO();
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),BlobtoString(rs.getBlob("decode(username,'key')")),BlobtoString(rs.getBlob("decode(password,'key')")));
-			return po;
+	        	po.sethotelid(rs.getInt("hotelid"));
+	        	po.setname(BlobtoString(rs.getBlob("decode(name,'key')")));
+	        	po.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
+	        	po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
+	        	po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return null;
+	    return po;
 	}
 	
+	public static void main(String[] args){
+		HotelWorkerDataServiceImpl a= new HotelWorkerDataServiceImpl();
+		String s = a.find(1).getname();
+		System.out.println(s);
+	}
 	
 	@Override
 	public synchronized ResultMessage insert(HotelWorkerPO po){
@@ -41,8 +51,8 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
-	        pstmt.setString(1, po.getname());
-	        pstmt.setString(2, po.getcontact());
+	        pstmt.setString(1, "");
+	        pstmt.setString(2, "");
 	        pstmt.setString(3, po.getusername());
 	        pstmt.setString(4, po.getpassword());
 	        pstmt.executeUpdate();
@@ -59,7 +69,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 
 	public void set_id(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-		 String sql = "select max(id) from hotelworker" ;	//需要执行的sql语句
+		 String sql = "select max(hotelid) from hotelworker" ;	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -75,7 +85,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public synchronized ResultMessage update(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "update hotelworker set name=encode(?,'key'),contact=(?,'key') where id=?";
+	    String sql = "update hotelworker set name=encode(?,'key'),contact=(?,'key') where hotelid=?";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -95,7 +105,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public synchronized ResultMessage delete(int hotelid){
 		Connection conn = Connect.getConn();
-	    String sql = "delete from hotelworker where id='" + hotelid + "'";
+	    String sql = "delete from hotelworker where hotelid='" + hotelid + "'";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -111,7 +121,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
 	public ResultMessage check(String username,String password){
 		Connection conn = Connect.getConn();
-		String sql = "select id from hotelworker where username =encode(?,'key') and password = encode(?,'key')" ;
+		String sql = "select hotelid from hotelworker where username =encode(?,'key') and password = encode(?,'key')" ;
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -119,7 +129,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if(rs.getInt("id")!=-1)
+				if(rs.getInt("hotelid")!=-1)
 					return ResultMessage.Success;
 			}
 		} catch (SQLException e) {
@@ -130,7 +140,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
 	public HotelWorkerPO gethotelworkerpo(String username,String password){
 		Connection conn = Connect.getConn();
-	    String sql = "select id,decode(name,'key'),decode(contact,'key') from hotelworker where username = encode(?,'key') and password = encode(?,'key')";	//需要执行的sql语句
+	    String sql = "select hotelid,decode(name,'key'),decode(contact,'key') from hotelworker where username = encode(?,'key') and password = encode(?,'key')";	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -147,17 +157,18 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	    return null;
 	}
 	
+	
 	public int findhotelid_of_hotelworkerbyUsername(String username){
 		Connection conn = Connect.getConn();
 		int result =0;
-		String sql = "select id from hotelworker where name = encode(?,'key')";
+		String sql = "select hotelid from hotelworker where username = encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        pstmt.setString(1, username);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        	result = rs.getInt("id");
+	        	result = rs.getInt("hotelid");
 	        }
 	        return result;
 	    } catch (SQLException e) {

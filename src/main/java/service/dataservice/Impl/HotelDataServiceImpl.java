@@ -74,6 +74,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		}
 		return hotelPO;
 	}
+
 	
 	@Override
 	public ArrayList<HotelPO> findByName(String hotelname) {
@@ -304,6 +305,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 	}
 	public static void main(String[] args){
 		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-		System.out.println(hotel.find_min_price(1));
+		System.out.println(hotel.findByid(1).getname());
 	}
 }

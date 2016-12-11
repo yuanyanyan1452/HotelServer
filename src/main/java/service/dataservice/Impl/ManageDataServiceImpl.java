@@ -17,13 +17,14 @@ import service.dataservice.ManageDataService;
 public class ManageDataServiceImpl implements ManageDataService {
 
 	public static void main(String args[]){
-//		String webmarketname = "Rose";
+
 		ManageDataServiceImpl a = new ManageDataServiceImpl();
-//		a.findWebMarket(5);
-//		
-//		WebMarketPO po1 = new WebMarketPO(1,"David","123456789");
-//		a.insertWebMarket(po1);
-		a.findWebMarket(6);
+
+		WebMarketPO po = a.findWebMarket(1);
+		System.out.println(po.getname());
+		System.out.println(po.getcontact());
+		System.out.println(po.getusername());
+		System.out.println(po.getpassword());
 		
 //		a.updateWebMarket(po1);
 	}
@@ -33,17 +34,22 @@ public class ManageDataServiceImpl implements ManageDataService {
 		Connection conn = Connect.getConn();
 	    String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from webmarket where id = '"+WebMarketid +"'";	//需要执行的sql语句
 	    PreparedStatement pstmt;
+	    WebMarketPO po = new WebMarketPO();
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        	WebMarketPO po = new WebMarketPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),BlobtoString(rs.getBlob("decode(username,'key')")),BlobtoString(rs.getBlob("decode(password,'key')")));
-	        return po;
+	        	po.setwebmarketid(WebMarketid);
+	        	po.setname(BlobtoString(rs.getBlob("decode(name,'key')")));
+	        	po.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
+	        	po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
+	        	po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
+//	        	po = new WebMarketPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),BlobtoString(rs.getBlob("decode(username,'key')")),BlobtoString(rs.getBlob("decode(password,'key')")));
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    return null;
+	    return po;
 	}
 
 	@Override
@@ -53,8 +59,8 @@ public class ManageDataServiceImpl implements ManageDataService {
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
-	        pstmt.setString(1, po.getname());
-	        pstmt.setString(2, po.getcontact());
+	        pstmt.setString(1, "");
+	        pstmt.setString(2, "");
 	        pstmt.setString(3, po.getusername());
 	        pstmt.setString(4, po.getpassword());
 	        pstmt.executeUpdate();
@@ -168,7 +174,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	public synchronized int findWebMarketIDbyUsername(String username){
 		Connection conn = Connect.getConn();
 		int result =0;
-		String sql = "select id from webmarket where name = encode(?,'key')";
+		String sql = "select id from webmarket where username = encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -208,16 +214,16 @@ public class ManageDataServiceImpl implements ManageDataService {
 		Connection conn = Connect.getConn();
 	    String sql = "insert into webnamager(id,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'))";
 	    PreparedStatement pstmt;
-	    ByteArrayInputStream stream = null;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
-	        pstmt.setString(1, po.getname());
-	        pstmt.setString(2, po.getcontact());
+	        pstmt.setString(1, "");
+	        pstmt.setString(2, "");
 	        pstmt.setString(3, po.getusername());
 	        pstmt.setString(4, po.getpassword());
 	        pstmt.executeUpdate();
 	        pstmt.close();
 	        conn.close();
+	        set_id(po);
 	        return ResultMessage.Success;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -323,7 +329,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	public synchronized int findWebManagerIDbyUsername(String username){
 		Connection conn = Connect.getConn();
 		int result =0;
-		String sql = "select id from webmanager where name = encode(?,'key')";
+		String sql = "select id from webmanager where username = encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
