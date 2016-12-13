@@ -83,7 +83,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from hotel where name = '"+hotelname+"'";
+		String sql = "select * from hotel where name like '%"+hotelname+"%'";
 
 		try{
 			ps=conn.prepareStatement(sql);
@@ -303,8 +303,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return s;
 		
 	}
-	public static void main(String[] args){
-		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-		System.out.println(hotel.findByid(1).getname());
-	}
+//	public static void main(String[] args){
+//		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+//		System.out.println(hotel.findByName("天丰").get(0).getaddress());
+//	}
 }
