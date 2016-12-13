@@ -101,7 +101,19 @@ public class DataRemoteObject extends UnicastRemoteObject
 		// TODO Auto-generated method stub
 		return strategybl.getwebstrategybyname(name);
 	}
+	
+	@Override
+	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -217,15 +229,12 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return managebl.webmarket_change_password(username, oldpassword, newpassword);
 	}
 
-
-
 	@Override
 	public ResultMessage webmanager_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.webmanager_change_password(username, oldpassword, newpassword);
 	}
-
 	
 	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException {
@@ -453,48 +462,6 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return clientbl.client_checkCreditList(clientid);
 	}
 
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelByaddress(String address,String business_address) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelByaddress(address,business_address);
-//	}
-//
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelByname(ArrayList<HotelVO> list,String hotelname) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelByname(list,hotelname);
-//	}
-//
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelBytype(ArrayList<HotelVO> list,String type) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelBytype(list,type);
-//	}
-//
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelByprice(ArrayList<HotelVO> list,int lowprice, int highprice) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelByprice(list,lowprice, highprice);
-//	}
-//
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelBytime(ArrayList<HotelVO> list,String inTime, String leaveTime) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelBytime(list,inTime, leaveTime);
-//	}
-//
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelBystar(ArrayList<HotelVO> list,String star) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelBystar(list,star);
-//	}
-//
-//	@Override
-//	public ArrayList<HotelVO> client_searchHotelByscore(ArrayList<HotelVO> list,double lowscore, double highscore) throws RemoteException {
-//		// TODO Auto-generated method stub
-//		return clientbl.client_searchHotelByscore(list,lowscore, highscore);
-//	}
-
 	@Override
 	public HotelVO client_checkHotelInfo(int hotelid) throws RemoteException {
 		// TODO Auto-generated method stub
@@ -531,69 +498,28 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return clientbl.updateClientInfo(client);
 	}
 
-
-
 	@Override
 	public WebMarketVO webmarket_getvo(String username) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.webmarket_getvo(username);
 	}
 
-
-
 	@Override
 	public WebManagerVO webmanager_getvo(String username) throws RemoteException {
 		// TODO Auto-generated method stub
 		return managebl.webmanager_getvo(username);
 	}
-
-
-
+	
 	@Override
 	public HotelWorkerVO hotelworker_getvo(String username) throws RemoteException {
 		// TODO Auto-generated method stub
 		return hotelbl.hotelworker_getvo(username);
 	}
 
-
-
 	@Override
 	public ClientVO client_getclientvo(String username) throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientbl.client_getclientvo(username);
 	}
-
-
-
-	
-
-
-	
-
-
-
-
-	
-
-
-
-	
-
-
-	
-
-
-	
-
-	
-	
-
-
-
-	
-
-
-
-	
 
 }

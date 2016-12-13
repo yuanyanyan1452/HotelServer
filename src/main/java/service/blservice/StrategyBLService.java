@@ -101,4 +101,7 @@ public interface StrategyBLService extends Remote{
 	
 	public WebStrategyVO getwebstrategybyname(String name)throws RemoteException;
 
+	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo)throws RemoteException;
+	
+	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo)throws RemoteException;
 }

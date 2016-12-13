@@ -91,4 +91,20 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 		
 	}
 
+	@Override
+	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo) {
+		// TODO Auto-generated method stub
+		HotelStrategyPO hotelstrategypo=vochange.hotelstrategyvo_to_hotelstrategypo(hotelstrategyvo);
+		ResultMessage result=strategydataservice.delete_hotel(hotelstrategypo);
+		return result;
+	}
+
+	@Override
+	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo) {
+		// TODO Auto-generated method stub
+		WebStrategyPO webstrategypo=vochange.webstrategyvo_to_webstrategypo(webstrategyvo);
+		ResultMessage result=strategydataservice.delete_web(webstrategypo);
+		return result;
+	}
+
 }
