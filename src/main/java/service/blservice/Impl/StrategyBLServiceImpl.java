@@ -1,5 +1,6 @@
 package service.blservice.Impl;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import objects.HotelStrategy;
@@ -71,6 +72,23 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 			webstrategyvo_list.add(webstrategyvo);
 		}
 		return webstrategyvo_list;
+	}
+
+	@Override
+	public HotelStrategyVO gethotelstrategybyname(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		HotelStrategyPO hotelstrategypo=strategydataservice.find_hotel(name);
+		HotelStrategyVO hotelstrategyvo=hotelstrategypo.changetohotelstrategyvo();
+		return hotelstrategyvo;
+	}
+
+	@Override
+	public WebStrategyVO getwebstrategybyname(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		WebStrategyPO webstrategypo=strategydataservice.find_web(name);
+		WebStrategyVO webstrategyvo=webstrategypo.changetowebstrategyvo();
+		return webstrategyvo;
+		
 	}
 
 }

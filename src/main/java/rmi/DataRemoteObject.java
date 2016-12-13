@@ -91,6 +91,18 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
+	public HotelStrategyVO gethotelstrategybyname(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return strategybl.gethotelstrategybyname(name);
+	}
+
+	@Override
+	public WebStrategyVO getwebstrategybyname(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		return strategybl.getwebstrategybyname(name);
+	}
+
+	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) throws RemoteException {
 		// TODO Auto-generated method stub
 		return orderbl.order_client_browse(clientid);
@@ -551,6 +563,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return clientbl.client_getclientvo(username);
 	}
 
+
+
+	
 
 
 	
