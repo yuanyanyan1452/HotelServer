@@ -112,7 +112,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from webstrategy where name = "+po.getname() ;
+		String sql = "select * from webstrategy where name = '"+po.getname()+"'" ;
 		try{
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
