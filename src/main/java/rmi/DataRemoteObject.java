@@ -103,15 +103,15 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
-	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo) {
+	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo) throws RemoteException {
 		// TODO Auto-generated method stub
-		return null;
+		return strategybl.hotelstrategy_delete(hotelstrategyvo);
 	}
 
 	@Override
-	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo) {
+	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo) throws RemoteException{
 		// TODO Auto-generated method stub
-		return null;
+		return strategybl.webstrategy_delete(webstrategyvo);
 	}
 	
 	@Override
