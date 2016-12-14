@@ -41,7 +41,10 @@ public class ClientDataServiceImpl implements ClientDataService {
 					CreditRecordList.add(CreditRecords[i]);
 				}
 				clientpo.setcredit_record(CreditRecordList);
-				if (rs.getString("info").contains("normal")) {
+				if (rs.getString("info")==null) {
+					clientpo.setvipinfo(null);
+				}
+				else if (rs.getString("info").contains("normal")) {
 					clientpo.setvipinfo(new VIPInfo(VIPType.NORMAL, rs.getString("info")));
 				} else
 					clientpo.setvipinfo(new VIPInfo(VIPType.Enterprise, rs.getString("info")));
@@ -147,8 +150,15 @@ public class ClientDataServiceImpl implements ClientDataService {
 					tempCreditRecord += CreditRecordList.get(i);
 			}
 			pstmt.setString(4,tempCreditRecord);
-			pstmt.setString(5,po.getvipinfo().getType().toString());
-			pstmt.setString(6,po.getvipinfo().getInfo());
+			if (po.getvipinfo()!=null) {
+				pstmt.setString(5,po.getvipinfo().getType().toString());
+				pstmt.setString(6,po.getvipinfo().getInfo());
+			}
+			else {
+				pstmt.setString(5, "");
+				pstmt.setString(6, "");
+			}
+			
 			
 			stream = new ByteArrayInputStream(po.getusername().getBytes());
             pstmt.setBinaryStream(7,stream,stream.available());
