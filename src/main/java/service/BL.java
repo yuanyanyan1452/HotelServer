@@ -1,6 +1,5 @@
 package service;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,12 +9,7 @@ import service.dataservice.Impl.OrderDataServiceImpl;
 
 public class BL {
 	
-//	public Date get_current_time(){
-//		Date date=new Date();
-//		DateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		String time=format.format(date);
-//		return time;
-//	}
+
 	
 	public void auto_change_ordersgtate(){
 		OrderDataService orderdataservice=new OrderDataServiceImpl();
@@ -26,7 +20,7 @@ public class BL {
 			Date latest_execute_time=orderpo.getlatest_execute_time();
 			boolean compare=date.after(latest_execute_time);
 			if(compare){
-				orderpo.setstate("ABNORMAL");
+				orderpo.setstate("异常");
 				orderdataservice.update(orderpo);
 			}
 		}

@@ -20,7 +20,6 @@ import service.dataservice.Impl.ClientDataServiceImpl;
 import service.dataservice.Impl.OrderDataServiceImpl;
 import service.dataservice.Impl.RoomDataServiceImpl;
 import vo.AccommodationVO;
-import vo.ClientVO;
 import vo.HotelStrategyVO;
 import vo.OrderVO;
 import vo.RoomOrderVO;
@@ -35,7 +34,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 	BL bl=new BL();
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid) {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByClientid(clientid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -47,7 +45,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid, String state) {
-		// TODO Auto-generated method stub\
 		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, state, true);
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, state, false);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
@@ -64,7 +61,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute) {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, "NORMAL", isExecute);
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, "ABNORMAL", isExecute);
 		ArrayList<OrderPO> orderpo_list3=orderdataservice.findByStatus(clientid, "CANCELLED", isExecute);
@@ -86,7 +82,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid) {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -98,7 +93,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -112,7 +106,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -126,9 +119,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_client_cancel(int clientid, int orderid) {
-		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
-		orderpo.setstate("CANCELLED");
+		orderpo.setstate("已撤销");
 		Date time=new Date();
 		orderpo.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(orderpo);
@@ -137,7 +129,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_client_generate(OrderVO vo) {
-		// TODO Auto-generated method stub
 		OrderPO po=vochange.ordervo_to_orderpo(vo);
 		ResultMessage result=orderdataservice.insert(po);
 		return result;
@@ -145,7 +136,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_hotel_execute(int orderid) {
-		// TODO Auto-generated method stub
 		OrderPO po=orderdataservice.findByid(orderid);
 		po.setexecute(true);
 		ResultMessage result=orderdataservice.update(po);
@@ -154,7 +144,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_market_browseUnfilled() {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> unfilled_order_list=orderdataservice.findByState("ABNORMAL");
 		ArrayList<OrderVO> list=new ArrayList<OrderVO>();
 		for(int i=0;i<unfilled_order_list.size();i++){
@@ -166,9 +155,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_market_cancelAbnormal(int orderid) {
-		// TODO Auto-generated method stub
 		OrderPO po=orderdataservice.findByid(orderid);
-		po.setstate("CANCELLED");
+		po.setstate("已撤销");
 		Date time=new Date();
 		po.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(po);
@@ -177,7 +165,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid) throws RemoteException {
-		// TODO Auto-generated method stub
 		int price = 0;
 		ArrayList<RoomPO> roomlistttt=roomdataservice.find(hotelid);
 		
@@ -263,7 +250,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage updateActualLeaveTime(int orderid, Date leaveTime) {
-		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setend_time(leaveTime);
 		ResultMessage result=orderdataservice.update(orderpo);
@@ -272,7 +258,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {
-		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setstart_time(info.getCheckIn());
 		orderpo.setend_time(info.getPlanCheckOut());
@@ -282,7 +267,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public OrderVO order_findbyid(int orderid) throws RemoteException {
-		// TODO Auto-generated method stub
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		OrderVO ordervo=orderpo.changetoordervo();
 		return ordervo;

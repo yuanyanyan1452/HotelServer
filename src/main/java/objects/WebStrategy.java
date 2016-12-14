@@ -2,9 +2,6 @@ package objects;
 
 import java.util.Date;
 
-import po.WebStrategyPO;
-import vo.WebStrategyVO;
-
 public class WebStrategy {
 
 	/**

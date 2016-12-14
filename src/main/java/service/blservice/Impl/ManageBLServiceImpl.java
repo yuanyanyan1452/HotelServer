@@ -30,14 +30,12 @@ public class ManageBLServiceImpl implements ManageBLService {
 	
 	@Override
 	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
-		// TODO Auto-generated method stub
 		ResultMessage result=managedataservice.checkWebManager(username, password);
 		return result;
 	}
 
 	@Override
 	public ResultMessage webmarket_login(String username, String password) throws RemoteException {
-		// TODO Auto-generated method stub
 		ResultMessage result=managedataservice.checkWebMarket(username, password);
 		return result;
 	}
@@ -45,7 +43,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage webmarket_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		// TODO Auto-generated method stub
 		WebMarketPO webmarketpo=managedataservice.getwebmarketpo(username, oldpassword);
 		webmarketpo.setpassword(newpassword);
 		ResultMessage result=managedataservice.updateWebMarket(webmarketpo);
@@ -55,7 +52,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage webmanager_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		// TODO Auto-generated method stub
 		WebManagerPO webmanagerpo=managedataservice.getwebmanagerpo(username, oldpassword);
 		webmanagerpo.setpassword(newpassword);
 		ResultMessage result=managedataservice.updateWebManager(webmanagerpo);
@@ -64,7 +60,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 	
 	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException{
-		// TODO Auto-generated method stub
 		Client client= clientblservice.checkClientInfo(clientid);
 		ClientVO clientvo=objectchange.changetoclientvo(client);
 		return clientvo;
@@ -72,7 +67,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ResultMessage manage_updateClient(ClientVO clientvo) throws RemoteException{
-		// TODO Auto-generated method stub
 		Client client=vochange.clientvo_to_client(clientvo);
 		ResultMessage result=clientblservice.updateClientInfo(client);
 		return result;
@@ -80,7 +74,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ResultMessage manage_addHotel(HotelVO hotelvo) throws RemoteException{
-		// TODO Auto-generated method stub
 		Hotel hotel=vochange.hotelvo_to_hotel(hotelvo);
 		ResultMessage result=hotelblservice.addHotel(hotel);
 		return result;
@@ -88,7 +81,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ResultMessage manage_addHotelWorker(HotelWorkerVO workervo) throws RemoteException{
-		// TODO Auto-generated method stub
 		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(workervo);
 		ResultMessage result=hotelblservice.addHotelWorker(hotelworker);
 		return result;
@@ -96,7 +88,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public HotelWorkerVO manage_searchHotelWorker(int hotelid) throws RemoteException{
-		// TODO Auto-generated method stub
 		HotelWorker hotelworker=hotelblservice.searchHotelWorker(hotelid);
 		HotelWorkerVO hotelworkervo=objectchange.changetohotelworkervo(hotelworker);
 		return hotelworkervo;
@@ -104,7 +95,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ResultMessage manage_updateHotelWorker(HotelWorkerVO worker) throws RemoteException{
-		// TODO Auto-generated method stub
 		HotelWorker hotelworker=vochange.hotelworkervo_to_hotelworker(worker);
 		ResultMessage result=hotelblservice.updateHotelWokerInfo( hotelworker);
 		return result;
@@ -112,7 +102,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ResultMessage manage_addMarketWorker(WebMarketVO webmarketvo) {
-		// TODO Auto-generated method stub
 		WebMarketPO po=vochange.marketvo_to_marketpo(webmarketvo);
 		ResultMessage result=managedataservice.insertWebMarket(po);
 		return result;
@@ -120,14 +109,12 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public WebMarketVO manage_searchMarketWorker(int marketWorkerid) {
-		// TODO Auto-generated method stub
 		WebMarketPO webmarketpo=managedataservice.findWebMarket(marketWorkerid);
 		WebMarketVO webmarketvo=webmarketpo.changetowebmarketvo();		return webmarketvo;
 	}
 
 	@Override
 	public ResultMessage manage_updateMarketWorker(WebMarketVO mw) {
-		// TODO Auto-generated method stub
 		WebMarketPO po=vochange.marketvo_to_marketpo(mw);
 		ResultMessage result=managedataservice.updateWebMarket(po);
 		return result;
@@ -135,7 +122,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public WebMarketVO webmarket_getvo(String username) throws RemoteException {
-		// TODO Auto-generated method stub
 		int id=managedataservice.findWebMarketIDbyUsername(username);
 		WebMarketPO webmarketpo=managedataservice.findWebMarket(id);
 		WebMarketVO vo=webmarketpo.changetowebmarketvo();
@@ -144,7 +130,6 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public WebManagerVO webmanager_getvo(String username) throws RemoteException {
-		// TODO Auto-generated method stub
 		int id=managedataservice.findWebManagerIDbyUsername(username);
 		WebManagerPO webmanagerpo=managedataservice.findWebManager(id);
 		WebManagerVO vo=webmanagerpo.changetowebmanagervo();

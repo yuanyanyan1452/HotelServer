@@ -1,5 +1,4 @@
 package service.dataservice.Impl;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
@@ -9,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import objects.ResultMessage;
-import po.ClientPO;
 import po.WebManagerPO;
 import po.WebMarketPO;
 import service.dataservice.ManageDataService;

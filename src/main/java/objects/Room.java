@@ -1,8 +1,5 @@
   package objects;
 
-import po.RoomPO;
-import vo.RoomVO;
-
 public class Room {
 	int id;
 	int hotelid;

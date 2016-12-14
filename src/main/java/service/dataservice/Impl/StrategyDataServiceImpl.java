@@ -17,7 +17,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public HotelStrategyPO find_hotel(String name) {
-		// TODO Auto-generated method stub
 		HotelStrategyPO po=new HotelStrategyPO();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -49,7 +48,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return po;
@@ -57,7 +55,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public synchronized ResultMessage insert_hotel(HotelStrategyPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -126,7 +123,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 	
 	@Override
 	public synchronized ResultMessage delete_hotel(HotelStrategyPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -146,7 +142,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public synchronized ResultMessage update_hotel(HotelStrategyPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -184,7 +179,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public ArrayList<HotelStrategyPO> showlist_hotel(int hotelid) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelStrategyPO>hslist=new ArrayList<HotelStrategyPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -218,7 +212,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		}catch(SQLException e){
 				e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return hslist;
@@ -226,7 +219,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public WebStrategyPO find_web(String name) {
-		// TODO Auto-generated method stub
 		WebStrategyPO po=new WebStrategyPO();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -257,7 +249,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return po;
@@ -265,7 +256,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public synchronized ResultMessage insert_web(WebStrategyPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -301,7 +291,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public synchronized ResultMessage delete_web(WebStrategyPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -321,7 +310,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public synchronized ResultMessage update_web(WebStrategyPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -358,7 +346,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 
 	@Override
 	public ArrayList<WebStrategyPO> showlist_web() {
-		// TODO Auto-generated method stub
 		ArrayList<WebStrategyPO>wslist=new ArrayList<WebStrategyPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -391,7 +378,6 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		}catch(SQLException e){
 				e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return wslist;
