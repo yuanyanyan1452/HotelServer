@@ -16,7 +16,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 
 	@Override
 	public ArrayList<RoomPO> find(int hotelid) {
-		// TODO Auto-generated method stub
 		ArrayList<RoomPO> roomlist=new ArrayList<RoomPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -43,7 +42,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 
 	@Override
 	public synchronized ResultMessage insert(RoomPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag=ResultMessage.Success;
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -68,7 +66,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 
 	@Override
 	public synchronized ResultMessage delete(RoomPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag=ResultMessage.Success;
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -88,7 +85,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 
 	@Override
 	public synchronized ResultMessage update(RoomPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag=ResultMessage.Success;
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;

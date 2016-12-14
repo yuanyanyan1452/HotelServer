@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import objects.Hotel;
 import objects.HotelWorker;
 import objects.ResultMessage;
-import objects.RoomType;
 import vo.AccommodationVO;
 import vo.EvaluationVO;
 import vo.HotelVO;

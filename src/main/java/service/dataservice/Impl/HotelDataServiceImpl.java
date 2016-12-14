@@ -47,7 +47,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 
 	@Override
 	public HotelPO findByid(int hotelid){
-		// TODO Auto-generated method stub
 		HotelPO hotelPO = new HotelPO();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -78,7 +77,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 	
 	@Override
 	public ArrayList<HotelPO> findByName(String hotelname) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -110,7 +108,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 	
 	@Override
 	public ArrayList<HotelPO> findByStar(String star){
-		// TODO Auto-generated method stub
 		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -142,7 +139,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 	
 	@Override
 	public synchronized ResultMessage insert(HotelPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -188,7 +184,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 	
 	@Override
 	public synchronized ResultMessage update(HotelPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -219,7 +214,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 
 	@Override
 	public synchronized ResultMessage delete(HotelPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -240,7 +234,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 
 	@Override
 	public ArrayList<HotelPO> showClientHotels(int clientid) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelPO> hotelList=new ArrayList<HotelPO>();
 		OrderDataServiceImpl orderImpl=new OrderDataServiceImpl();
 		HotelDataServiceImpl hotelImpl=new HotelDataServiceImpl();

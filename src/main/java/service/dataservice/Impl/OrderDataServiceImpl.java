@@ -17,7 +17,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 
 	@Override
 	public OrderPO findByid(int id) {
-		// TODO Auto-generated method stub
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -51,7 +50,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
 		return po;
@@ -59,7 +57,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 	
 	@Override
 	public ArrayList<OrderPO> findByClientid(int clientid) {
-		// TODO Auto-generated method stub
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -94,7 +91,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return orderlist;
@@ -102,7 +98,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 	
 	@Override
 	public ArrayList<OrderPO> findByStatus(int clientid,String state,boolean execute){
-		// TODO Auto-generated method stub
 				Connection conn = Connect.getConn();
 				PreparedStatement ps = null;
 				ResultSet rs = null;
@@ -139,7 +134,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 				}catch(SQLException e){
 					e.printStackTrace();
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				return orderlist;
@@ -147,7 +141,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 
 	@Override
 	public ArrayList<OrderPO> findByState(String state){
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> list=new ArrayList<OrderPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -182,7 +175,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -190,7 +182,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 	
 	@Override
 	public ArrayList<OrderPO> findByExecute(boolean execute) {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> list=new ArrayList<OrderPO>();
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -225,14 +216,12 @@ public class OrderDataServiceImpl implements OrderDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
 	}
 	@Override
 	public ArrayList<OrderPO> findByHotelid(int hotelid) {
-		// TODO Auto-generated method stub
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -268,7 +257,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return orderlist;
@@ -276,7 +264,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 
 	@Override
 	public synchronized ResultMessage insert(OrderPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -331,7 +318,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 	
 	@Override
 	public synchronized ResultMessage delete(OrderPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;
@@ -350,7 +336,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 
 	@Override
 	public synchronized ResultMessage update(OrderPO po) {
-		// TODO Auto-generated method stub
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps=null;

@@ -35,7 +35,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 	
 	@Override
 	public ResultMessage hotelworker_login(String username, String password) throws RemoteException {
-		// TODO Auto-generated method stub
 		ResultMessage result=hotelworkerdataservice.check(username, password);
 		return result;
 	}
@@ -43,7 +42,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage hotelworker_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		// TODO Auto-generated method stub
 		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.gethotelworkerpo(username, oldpassword);
 		hotelworkerpo.setpassword(newpassword);
 		ResultMessage result=hotelworkerdataservice.update(hotelworkerpo);
@@ -52,7 +50,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public HotelVO hotel_checkInfo(int hotelid) {
-		// TODO Auto-generated method stub
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		HotelVO hotelvo=hotelpo.changetohotelvo();
 		return hotelvo;
@@ -60,7 +57,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ResultMessage hotel_updateInfo(HotelVO vo) {
-		// TODO Auto-generated method stub
 		HotelPO po=vochange.hotelvo_to_hotelpo(vo);
 		ResultMessage result=hoteldataservice.update(po);
 		return result;
@@ -68,7 +64,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ResultMessage hotel_importRoom(RoomVO room) {
-		// TODO Auto-generated method stub
 		RoomPO po=vochange.roomvo_to_roompo(room);
 		ResultMessage result=roomdataservice.insert(po);
 		return result;
@@ -76,14 +71,12 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid) throws RemoteException {
-		// TODO Auto-generated method stub
 		ResultMessage result=orderblservice.order_checkin(info, orderid);
 		return result;
 	}
 
 	@Override
 	public Hotel searchHotel(int hotelid) {
-		// TODO Auto-generated method stub
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		Hotel hotel=hotelpo.changetohotel(hotelpo);
 		return hotel;
@@ -91,7 +84,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ArrayList<Hotel> previousHotel(int clientid) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelPO> previoushotelpo_list =hoteldataservice.showClientHotels(clientid);
 		ArrayList<Hotel> previoushotel_list=new ArrayList<Hotel>();
 		for(int i=0;i<previoushotelpo_list.size();i++){
@@ -104,7 +96,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 //
 	@Override
 	public ResultMessage addHotel(Hotel hotel) {
-		// TODO Auto-generated method stub
 		HotelPO po=objectchange.changetohotelpo(hotel);
 		ResultMessage result=hoteldataservice.insert(po);
 		return result;
@@ -112,7 +103,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ResultMessage addHotelWorker(HotelWorker worker) {
-		// TODO Auto-generated method stub
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
 		ResultMessage result=hotelworkerdataservice.insert(po);
 		return result;
@@ -120,7 +110,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public HotelWorker searchHotelWorker(int hotelid) {
-		// TODO Auto-generated method stub
 		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.find(hotelid);
 		HotelWorker hotelworker=hotelworkerpo.changetohotelworker();
 		return hotelworker;
@@ -128,7 +117,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ResultMessage updateHotelWokerInfo( HotelWorker worker) {
-		// TODO Auto-generated method stub
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
 		ResultMessage result=hotelworkerdataservice.update(po);
 		return result;
@@ -136,7 +124,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ArrayList<HotelVO> searchHotelBylocation(String address, String business_address) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelPO> hotelpo_list=hoteldataservice.show_hotel_list(address, business_address);
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
 		for(int i=0;i<hotelpo_list.size();i++){
@@ -148,7 +135,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 	
 	@Override
 	public ArrayList<HotelVO> searchHotelByname(ArrayList<HotelVO> list,String hotelname) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).getname()==hotelname){
@@ -160,7 +146,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ArrayList<HotelVO> searchHotelByroom(ArrayList<HotelVO> list,String type) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
 			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
@@ -176,7 +161,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ArrayList<HotelVO> searchHotelByprice(ArrayList<HotelVO> list,int lowprice, int highprice) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
 			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
@@ -198,7 +182,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ArrayList<HotelVO> searchHotelBystar(ArrayList<HotelVO> list,String star) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
 			if(list.get(i).getstar()==star){
@@ -210,7 +193,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ArrayList<HotelVO> searchHotelByscore(ArrayList<HotelVO> list,double lowscore, double highscore) {
-		// TODO Auto-generated method stub
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
 			String score=list.get(i).getscore();
@@ -225,7 +207,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public ResultMessage evalutehotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
-		// TODO Auto-generated method stub
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		String score=hotelpo.getscore();
 		String [] scorelist=score.split(",");
@@ -244,7 +225,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public HotelWorkerVO hotelworker_getvo(String username) throws RemoteException {
-		// TODO Auto-generated method stub
 		int id=hotelworkerdataservice.findhotelid_of_hotelworkerbyUsername(username);
 		HotelWorkerPO po=hotelworkerdataservice.find(id);
 		HotelWorkerVO vo=po.changetohotelworkervo();

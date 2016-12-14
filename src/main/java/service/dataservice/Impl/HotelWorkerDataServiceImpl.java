@@ -9,9 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import objects.ResultMessage;
-import po.ClientPO;
 import po.HotelWorkerPO;
-import po.WebMarketPO;
 import service.dataservice.HotelWorkerDataService;
 
 
