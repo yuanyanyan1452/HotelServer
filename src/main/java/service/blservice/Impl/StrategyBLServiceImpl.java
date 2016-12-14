@@ -92,7 +92,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	}
 
 	@Override
-	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo) {
+	public ResultMessage hotelstrategy_delete(HotelStrategyVO hotelstrategyvo) throws RemoteException{
 		// TODO Auto-generated method stub
 		HotelStrategyPO hotelstrategypo=vochange.hotelstrategyvo_to_hotelstrategypo(hotelstrategyvo);
 		ResultMessage result=strategydataservice.delete_hotel(hotelstrategypo);
@@ -100,7 +100,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	}
 
 	@Override
-	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo) {
+	public ResultMessage webstrategy_delete(WebStrategyVO webstrategyvo) throws RemoteException{
 		// TODO Auto-generated method stub
 		WebStrategyPO webstrategypo=vochange.webstrategyvo_to_webstrategypo(webstrategyvo);
 		ResultMessage result=strategydataservice.delete_web(webstrategypo);

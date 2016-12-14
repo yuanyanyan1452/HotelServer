@@ -223,7 +223,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	public ResultMessage updateClientCredit(int clientid, int value, int tag) {
 		// TODO Auto-generated method stub
 		ClientPO clientpo=clientdataservice.find(clientid);
-		int credit=clientpo.getclientid();
+		int credit=clientpo.getcredit();
 		if(tag==1){
 			credit+=value;
 		}
