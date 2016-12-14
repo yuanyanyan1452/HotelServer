@@ -77,7 +77,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 			OrderVO ordervo=orderpo_list3.get(i).changetoordervo();
 			ordervo_list.add(ordervo);
 		}
-		return null;
+		return ordervo_list;
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> order_market_browseUnfilled() {
-		ArrayList<OrderPO> unfilled_order_list=orderdataservice.findByState("ABNORMAL");
+		ArrayList<OrderPO> unfilled_order_list=orderdataservice.findByState("异常");
 		ArrayList<OrderVO> list=new ArrayList<OrderVO>();
 		for(int i=0;i<unfilled_order_list.size();i++){
 			OrderVO ordervo=unfilled_order_list.get(i).changetoordervo();
@@ -156,7 +156,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ResultMessage order_market_cancelAbnormal(int orderid) {
 		OrderPO po=orderdataservice.findByid(orderid);
-		po.setstate("已撤销");
+		po.setstate("撤销");
 		Date time=new Date();
 		po.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(po);
@@ -171,9 +171,10 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=0;i<roomlist.size();i++){
 			RoomOrderVO roomvo=roomlist.get(i);
 			for(int j=0;j<roomlistttt.size();j++){
-				if(roomvo.getroom_type().equals(roomlistttt.get(j).getroom_type()))
-			price+=roomvo.getnum_of_days()*roomvo.getroom_number()*roomlistttt.get(j).getprice();
-				break;
+				if(roomvo.getroom_type().equals(roomlistttt.get(j).getroom_type())){
+					price+=roomvo.getnum_of_days()*roomvo.getroom_number()*roomlistttt.get(j).getprice();
+					break;
+				}
 			}
 		}
 		
@@ -189,10 +190,11 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=0;i<roomlist.size();i++){
 			RoomOrderVO roomvo=roomlist.get(i);
 			for(int j=0;j<roomlistttt.size();j++){
-				if(roomvo.getroom_type().equals(roomlistttt.get(j).getroom_type()))
-			price+=roomvo.getnum_of_days()*roomvo.getroom_number()*roomlistttt.get(j).getprice();
-			room_number+=roomvo.getroom_number();
-				break;
+				if(roomvo.getroom_type().equals(roomlistttt.get(j).getroom_type())){
+					price+=roomvo.getnum_of_days()*roomvo.getroom_number()*roomlistttt.get(j).getprice();
+					room_number+=roomvo.getroom_number();
+					break;
+				}
 			}
 		}
 		ArrayList<Integer> price_list=new ArrayList<Integer>();
