@@ -2,6 +2,7 @@ package service.blservice;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import objects.ResultMessage;
 import vo.ClientVO;
@@ -24,6 +25,15 @@ public interface ManageBLService extends Remote{
 		public WebMarketVO webmarket_getvo(String username)throws RemoteException;
 		
 		public WebManagerVO webmanager_getvo(String username)throws RemoteException;
+		
+		public ArrayList<ClientVO> getallclientvo() throws RemoteException;
+		
+		public ArrayList<HotelVO> getallhotelvo() throws RemoteException;
+		
+		public ArrayList<HotelWorkerVO> getallhotelworkervo() throws RemoteException;
+		
+		public ArrayList<WebMarketVO> getallwebmarketvo() throws RemoteException;
+		
 		/**
 		 * @param clientid
 		 * @return 搜索客户

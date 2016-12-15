@@ -1,19 +1,29 @@
 package service.blservice.Impl;
 
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 import objects.Client;
 import objects.Hotel;
 import objects.HotelWorker;
 import objects.ObjectChange;
 import objects.ResultMessage;
+import po.ClientPO;
+import po.HotelPO;
+import po.HotelWorkerPO;
 import po.WebManagerPO;
 import po.WebMarketPO;
 import service.VOChange;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
 import service.blservice.ManageBLService;
+import service.dataservice.ClientDataService;
+import service.dataservice.HotelDataService;
+import service.dataservice.HotelWorkerDataService;
 import service.dataservice.ManageDataService;
+import service.dataservice.Impl.ClientDataServiceImpl;
+import service.dataservice.Impl.HotelDataServiceImpl;
+import service.dataservice.Impl.HotelWorkerDataServiceImpl;
 import service.dataservice.Impl.ManageDataServiceImpl;
 import vo.ClientVO;
 import vo.HotelVO;
@@ -25,6 +35,9 @@ public class ManageBLServiceImpl implements ManageBLService {
 	ManageDataService managedataservice=new ManageDataServiceImpl();
 	HotelBLService hotelblservice=new HotelBLServiceImpl();
 	ClientBLService clientblservice=new ClientBLServiceImpl();
+	ClientDataService clientdataservice= new ClientDataServiceImpl();
+	HotelDataService hoteldataservice=new HotelDataServiceImpl();
+	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();
 	VOChange vochange=new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
@@ -56,6 +69,50 @@ public class ManageBLServiceImpl implements ManageBLService {
 		webmanagerpo.setpassword(newpassword);
 		ResultMessage result=managedataservice.updateWebManager(webmanagerpo);
 		return result;
+	}
+	
+	@Override
+	public ArrayList<ClientVO> getallclientvo() throws RemoteException {
+		ArrayList<ClientPO> clientpo_list=clientdataservice.getallclientPO();
+		ArrayList<ClientVO> clientvo_list=new ArrayList<ClientVO>();
+		for(int i=0;i<clientpo_list.size();i++){
+			ClientVO clientvo=clientpo_list.get(i).changetoclientvo();
+			clientvo_list.add(clientvo);
+		}
+		return clientvo_list;
+	}
+
+	@Override
+	public ArrayList<HotelVO> getallhotelvo() throws RemoteException {
+		ArrayList<HotelPO> hotelpo_list=hoteldataservice.getAllHotelPO();
+		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
+		for(int i=0;i<hotelpo_list.size();i++){
+			HotelVO hotelvo=hotelpo_list.get(i).changetohotelvo();
+			hotelvo_list.add(hotelvo);
+		}
+		return hotelvo_list;
+	}
+
+	@Override
+	public ArrayList<HotelWorkerVO> getallhotelworkervo() throws RemoteException {
+		ArrayList<HotelWorkerPO> hotelworkerpo_list=hotelworkerdataservice.getallhotelworkerPO();
+		ArrayList<HotelWorkerVO> hotelworkervo_list=new ArrayList<HotelWorkerVO>();
+		for(int i=0;i<hotelworkerpo_list.size();i++){
+			HotelWorkerVO hotelworkervo=hotelworkerpo_list.get(i).changetohotelworkervo();
+			hotelworkervo_list.add(hotelworkervo);
+		}
+		return hotelworkervo_list;
+	}
+
+	@Override
+	public ArrayList<WebMarketVO> getallwebmarketvo() throws RemoteException {
+		ArrayList<WebMarketPO> webmarketpo_list=managedataservice.getallwebmarketPO();
+		ArrayList<WebMarketVO> webmarketvo_list=new ArrayList<WebMarketVO>();
+		for(int i=0;i<webmarketpo_list.size();i++){
+			WebMarketVO webmarketvo=webmarketpo_list.get(i).changetowebmarketvo();
+			webmarketvo_list.add(webmarketvo);
+		}
+		return webmarketvo_list;
 	}
 	
 	@Override
@@ -135,6 +192,8 @@ public class ManageBLServiceImpl implements ManageBLService {
 		WebManagerVO vo=webmanagerpo.changetowebmanagervo();
 		return vo;
 	}
+
+	
 
 	
 

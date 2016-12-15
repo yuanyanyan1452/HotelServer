@@ -206,6 +206,30 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
+	public ArrayList<ClientVO> getallclientvo() throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.getallclientvo();
+	}
+
+	@Override
+	public ArrayList<HotelVO> getallhotelvo() throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.getallhotelvo();
+	}
+
+	@Override
+	public ArrayList<HotelWorkerVO> getallhotelworkervo() throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.getallhotelworkervo();
+	}
+
+	@Override
+	public ArrayList<WebMarketVO> getallwebmarketvo() throws RemoteException {
+		// TODO Auto-generated method stub
+		return managebl.getallwebmarketvo();
+	}
+	
+	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException {
 		return managebl.manage_searchClient(clientid);
 	}
@@ -447,6 +471,10 @@ public class DataRemoteObject extends UnicastRemoteObject
 	public ClientVO client_getclientvo(String username) throws RemoteException {
 		return clientbl.client_getclientvo(username);
 	}
+
+
+
+	
 
 
 
