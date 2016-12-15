@@ -7,6 +7,9 @@ import objects.*;
 
 public interface HotelDataService {
 
+	//网管查看所有酒店
+	public ArrayList<HotelPO> getAllHotel();
+	
 	//明确地址商圈后查看酒店
 	public ArrayList<HotelPO> show_hotel_list(String address,String business_address);
 	

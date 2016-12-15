@@ -148,7 +148,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 		return result;
 	}
 
-	
+	//这里为啥返回Client，，不返回ClientVO
 	@Override
 	public Client checkClientInfo(int clientid) {
 		ClientPO clientpo=clientdataservice.find(clientid);

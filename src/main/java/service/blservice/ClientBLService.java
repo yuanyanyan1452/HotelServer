@@ -64,7 +64,7 @@ public interface ClientBLService extends Remote{
 	 */
 	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid,int hotelid)throws RemoteException;
 
-	/**
+	/** 
 	 * @param info
 	 * @param clientid
 	 * @return 客户注册会员
