@@ -38,6 +38,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 		return hotelworkerlist;
 	}
 
+
 	@Override
 	public HotelWorkerPO find(int hotelid) {
 		Connection conn = Connect.getConn();
@@ -59,11 +60,14 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			e.printStackTrace();
 		}
 		return po;
+
 	}
+
 
 	@Override
 	public synchronized ResultMessage insert(HotelWorkerPO po) {
 		Connection conn = Connect.getConn();
+
 		String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key')";
 		PreparedStatement pstmt;
 		try {
@@ -82,6 +86,8 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			return ResultMessage.Fail;
 		}
 	}
+
+	    
 
 	public void set_id(HotelWorkerPO po) {
 		Connection conn = Connect.getConn();
@@ -156,22 +162,22 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 
 	public HotelWorkerPO gethotelworkerpo(String username, String password) {
 		Connection conn = Connect.getConn();
-		String sql = "select hotelid,decode(name,'key'),decode(contact,'key') from hotelworker where username = encode(?,'key') and password = encode(?,'key')"; // 需要执行的sql语句
-		PreparedStatement pstmt;
-		try {
-			pstmt = (PreparedStatement) conn.prepareStatement(sql);
-			pstmt.setString(1, username);
-			pstmt.setString(2, password);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				HotelWorkerPO po = new HotelWorkerPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
-						BlobtoString(rs.getBlob("decode(contact,'key')")), username, password);
-				return po;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
+
+	    String sql = "select hotelid,decode(name,'key'),decode(contact,'key') from hotelworker where username = encode(?,'key') and password = encode(?,'key')";	//需要执行的sql语句
+	    PreparedStatement pstmt;
+	    try {
+	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
+	        pstmt.setString(1,username);
+	        pstmt.setString(2, password);
+	        ResultSet rs = pstmt.executeQuery();
+	        while(rs.next()){
+	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("hotelid"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
+			return po;
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
 	}
 
 	public int findhotelid_of_hotelworkerbyUsername(String username) {
@@ -213,4 +219,5 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 		}
 		return null;
 	}
+	
 }
