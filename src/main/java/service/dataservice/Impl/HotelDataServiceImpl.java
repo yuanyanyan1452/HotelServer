@@ -12,129 +12,48 @@ import po.OrderPO;
 import service.dataservice.HotelDataService;
 
 public class HotelDataServiceImpl implements HotelDataService{
+	
+	@Override
+	public ArrayList<HotelPO> getAllHotel(){
+		String sql="select*from hotel";
+		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+		ArrayList<HotelPO> hotel_list=hotel.find(sql);
+		return hotel_list;
+		
+	}
 
 	@Override
 	public ArrayList<HotelPO> show_hotel_list(String address,String business_address){
-		ArrayList<HotelPO> hotel_list=new ArrayList<HotelPO>();
-		Connection conn=Connect.getConn();
-		PreparedStatement ps=null;
-		ResultSet rs=null;
 		String sql="select *from hotel where address like '%"+address+"%' "
 				+ "and business_address='"+business_address+"'";
-		try{
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while(rs.next()){
-				HotelPO hotelPO=new HotelPO();
-				hotelPO.setid(rs.getInt("id"));
-				hotelPO.setname(rs.getString("name"));
-				hotelPO.setaddress(rs.getString("address"));
-				hotelPO.setbussiness_address(rs.getString("business_address"));
-				hotelPO.setintroduction(rs.getString("introduction"));
-				hotelPO.setservice(rs.getString("service"));
-				hotelPO.setstar(rs.getString("star"));
-				hotelPO.setscore(rs.getString("score"));
-				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
-				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
-				hotel_list.add(hotelPO);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		
+		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+		ArrayList<HotelPO> hotel_list=hotel.find(sql);
 		return hotel_list;
 	}
 
 	@Override
 	public HotelPO findByid(int hotelid){
-		HotelPO hotelPO = new HotelPO();
-		Connection conn = Connect.getConn();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		String sql = "select * from hotel where id = "+hotelid;
-	
-		try{
-			ps=conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while(rs.next()){
-				hotelPO.setid(rs.getInt("id"));
-				hotelPO.setname(rs.getString("name"));
-				hotelPO.setaddress(rs.getString("address"));
-				hotelPO.setbussiness_address(rs.getString("business_address"));
-				hotelPO.setintroduction(rs.getString("introduction"));
-				hotelPO.setservice(rs.getString("service"));
-				hotelPO.setstar(rs.getString("star"));
-				hotelPO.setscore(rs.getString("score"));
-				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
-				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return hotelPO;
+		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+		ArrayList<HotelPO> hotel_list=hotel.find(sql);
+		return hotel_list.get(0);
 	}
 
 	
 	@Override
 	public ArrayList<HotelPO> findByName(String hotelname) {
-		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
-		Connection conn = Connect.getConn();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		String sql = "select * from hotel where name like '%"+hotelname+"%'";
-
-		try{
-			ps=conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while(rs.next()){
-				HotelPO hotelPO = new HotelPO();
-				hotelPO.setid(rs.getInt("id"));
-				hotelPO.setname(rs.getString("name"));
-				hotelPO.setaddress(rs.getString("address"));
-				hotelPO.setbussiness_address(rs.getString("business_address"));
-				hotelPO.setintroduction(rs.getString("introduction"));
-				hotelPO.setservice(rs.getString("service"));
-				hotelPO.setstar(rs.getString("star"));
-				hotelPO.setscore(rs.getString("score"));
-				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
-				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
-				list.add(hotelPO);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return list;
+		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+		ArrayList<HotelPO> hotel_list=hotel.find(sql);
+		return hotel_list;
 	}
 	
 	@Override
 	public ArrayList<HotelPO> findByStar(String star){
-		ArrayList<HotelPO> list=new ArrayList<HotelPO>();
-		Connection conn=Connect.getConn();
-		PreparedStatement ps=null;
-		ResultSet rs=null;
 		String sql="select*from hotel where star='"+star+"'";
-		
-		try{
-			ps=conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while(rs.next()){
-				HotelPO hotelPO=new HotelPO();
-				hotelPO.setid(rs.getInt("id"));
-				hotelPO.setname(rs.getString("name"));
-				hotelPO.setaddress(rs.getString("address"));
-				hotelPO.setbussiness_address(rs.getString("business_address"));
-				hotelPO.setintroduction(rs.getString("introduction"));
-				hotelPO.setservice(rs.getString("service"));
-				hotelPO.setstar(rs.getString("star"));
-				hotelPO.setscore(rs.getString("score"));
-				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
-				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
-				list.add(hotelPO);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		}
-		return list;
+		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
+		ArrayList<HotelPO> hotel_list=hotel.find(sql);
+		return hotel_list;
 	}
 	
 	@Override
@@ -296,8 +215,38 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return s;
 		
 	}
+	
+	public ArrayList<HotelPO> find(String sql){
+		ArrayList<HotelPO> hotel_list=new ArrayList<HotelPO>();
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				HotelPO hotelPO=new HotelPO();
+				hotelPO.setid(rs.getInt("id"));
+				hotelPO.setname(rs.getString("name"));
+				hotelPO.setaddress(rs.getString("address"));
+				hotelPO.setbussiness_address(rs.getString("business_address"));
+				hotelPO.setintroduction(rs.getString("introduction"));
+				hotelPO.setservice(rs.getString("service"));
+				hotelPO.setstar(rs.getString("star"));
+				hotelPO.setscore(rs.getString("score"));
+				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
+				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
+				hotel_list.add(hotelPO);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return hotel_list;
+		
+	}
 //	public static void main(String[] args){
 //		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-//		System.out.println(hotel.findByName("天丰").get(0).getaddress());
+//		System.out.println(hotel.getAllHotel().size());
 //	}
 }

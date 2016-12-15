@@ -17,249 +17,51 @@ public class OrderDataServiceImpl implements OrderDataService {
 
 	@Override
 	public OrderPO findByid(int id) {
-		Connection conn = Connect.getConn();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		String sql = "select *from orderrecord where id="+id;
-		OrderPO po = new OrderPO();
-		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		try{
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while(rs.next()){
-				po.setid(rs.getInt("id"));
-				po.setclientid(rs.getInt("clientid"));
-				po.sethotelid(rs.getInt("hotelid"));
-				po.setstate(rs.getString("state"));
-				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(null);
-				}else{
-					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
-				}
-				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(fmt.parse(rs.getString("start_time")));
-				po.setend_time(fmt.parse(rs.getString("end_time")));
-				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
-				String r=rs.getString("room_order");
-				po.setroom_order(transformToArray(r));
-				po.setprice(rs.getInt("price"));
-				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
-				po.sethave_child(rs.getBoolean("havechild"));
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		} 
-		return po;
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list.get(0);
 	}
 	
 	@Override
 	public ArrayList<OrderPO> findByClientid(int clientid) {
-		Connection conn = Connect.getConn();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		String sql = "select *from orderrecord where clientid="+clientid;
-		ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
-		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try{
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while(rs.next()){
-				OrderPO po = new OrderPO();
-				po.setid(rs.getInt("id"));
-				po.setclientid(rs.getInt("clientid"));
-				po.sethotelid(rs.getInt("hotelid"));
-				po.setstate(rs.getString("state"));
-				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(null);
-				}else{
-					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
-				}
-				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(fmt.parse(rs.getString("start_time")));
-				po.setend_time(fmt.parse(rs.getString("end_time")));
-				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
-				String r=rs.getString("room_order");
-				po.setroom_order(transformToArray(r));
-				po.setprice(rs.getInt("price"));
-				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
-				po.sethave_child(rs.getBoolean("havechild"));
-				orderlist.add(po);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return orderlist;
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list;
 	}
 	
 	@Override
 	public ArrayList<OrderPO> findByStatus(int clientid,String state,boolean execute){
-				Connection conn = Connect.getConn();
-				PreparedStatement ps = null;
-				ResultSet rs = null;
-				String sql = "select *from orderrecord where clientid='"+clientid+"' and"
-						+ "state='"+state+"' and execute='"+execute+"'";
-				ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
-				SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				
-				try{
-					ps=conn.prepareStatement(sql);
-					rs=ps.executeQuery();
-					while(rs.next()){
-						OrderPO po = new OrderPO();
-						po.setid(rs.getInt("id"));
-						po.setclientid(rs.getInt("clientid"));
-						po.sethotelid(rs.getInt("hotelid"));
-						po.setstate(rs.getString("state"));
-						if(rs.getString("cancel_time")==null){
-							po.setcancel_time(null);
-						}else{
-							po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
-						}
-						po.setexecute(rs.getBoolean("execute"));
-						po.setstart_time(fmt.parse(rs.getString("start_time")));
-						po.setend_time(fmt.parse(rs.getString("end_time")));
-						po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
-						String r=rs.getString("room_order");
-						po.setroom_order(transformToArray(r));
-						po.setprice(rs.getInt("price"));
-						po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
-						po.sethave_child(rs.getBoolean("havechild"));
-						orderlist.add(po);
-					}
-				}catch(SQLException e){
-					e.printStackTrace();
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				return orderlist;
+		String sql = "select *from orderrecord where clientid='"+clientid+"' and"
+				+ "state='"+state+"' and execute='"+execute+"'";
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list;		
 	}
 
 	@Override
 	public ArrayList<OrderPO> findByState(String state){
-		ArrayList<OrderPO> list=new ArrayList<OrderPO>();
-		Connection conn=Connect.getConn();
-		PreparedStatement ps=null;
-		ResultSet rs=null;
 		String sql="select*from orderrecord where state='"+state+"'";
-		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try{
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while(rs.next()){
-				OrderPO po = new OrderPO();
-				po.setid(rs.getInt("id"));
-				po.setclientid(rs.getInt("clientid"));
-				po.sethotelid(rs.getInt("hotelid"));
-				po.setstate(rs.getString("state"));
-				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(null);
-				}else{
-					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
-				}
-				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(fmt.parse(rs.getString("start_time")));
-				po.setend_time(fmt.parse(rs.getString("end_time")));
-				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
-				String r=rs.getString("room_order");
-				po.setroom_order(transformToArray(r));
-				po.setprice(rs.getInt("price"));
-				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
-				po.sethave_child(rs.getBoolean("havechild"));
-				list.add(po);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return list;
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list;
 	}
 	
 	@Override
 	public ArrayList<OrderPO> findByExecute(boolean execute) {
-		ArrayList<OrderPO> list=new ArrayList<OrderPO>();
-		Connection conn=Connect.getConn();
-		PreparedStatement ps=null;
-		ResultSet rs=null;
 		String sql="select*from orderrecord where execute='"+execute+"'";
-		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		try{
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while(rs.next()){
-				OrderPO po = new OrderPO();
-				po.setid(rs.getInt("id"));
-				po.setclientid(rs.getInt("clientid"));
-				po.sethotelid(rs.getInt("hotelid"));
-				po.setstate(rs.getString("state"));
-				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(null);
-				}else{
-					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
-				}
-				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(fmt.parse(rs.getString("start_time")));
-				po.setend_time(fmt.parse(rs.getString("end_time")));
-				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
-				String r=rs.getString("room_order");
-				po.setroom_order(transformToArray(r));
-				po.setprice(rs.getInt("price"));
-				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
-				po.sethave_child(rs.getBoolean("havechild"));
-				list.add(po);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return list;
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list;
 	}
+	
 	@Override
 	public ArrayList<OrderPO> findByHotelid(int hotelid) {
-		Connection conn = Connect.getConn();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
 		String sql = "select *from orderrecord where hotelid="+hotelid;
-		ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
-		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
-		try{
-			ps=conn.prepareStatement(sql);
-			rs=ps.executeQuery();
-			while(rs.next()){
-				OrderPO po = new OrderPO();
-				po.setid(rs.getInt("id"));
-				po.setclientid(rs.getInt("clientid"));
-				po.sethotelid(rs.getInt("hotelid"));
-				po.setstate(rs.getString("state"));
-				if(rs.getString("cancel_time")==null){
-					po.setcancel_time(null);
-				}else{
-					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
-				}
-				po.setexecute(rs.getBoolean("execute"));
-				po.setstart_time(fmt.parse(rs.getString("start_time")));
-				po.setend_time(fmt.parse(rs.getString("end_time")));
-				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
-				String r=rs.getString("room_order");
-				po.setroom_order(transformToArray(r));
-				po.setprice(rs.getInt("price"));
-				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
-				po.sethave_child(rs.getBoolean("havechild"));
-				orderlist.add(po);
-			}
-		}catch(SQLException e){
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return orderlist;
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list;
 	}
 
 	@Override
@@ -399,14 +201,48 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return s;
 	}
 	
+	public ArrayList<OrderPO> find(String sql){
+		Connection conn = Connect.getConn();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<OrderPO> orderlist=new ArrayList<OrderPO>();
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try{
+			ps=conn.prepareStatement(sql);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				OrderPO po = new OrderPO();
+				po.setid(rs.getInt("id"));
+				po.setclientid(rs.getInt("clientid"));
+				po.sethotelid(rs.getInt("hotelid"));
+				po.setstate(rs.getString("state"));
+				if(rs.getString("cancel_time")==null){
+					po.setcancel_time(null);
+				}else{
+					po.setcancel_time(fmt.parse(rs.getString("cancel_time")));
+				}
+				po.setexecute(rs.getBoolean("execute"));
+				po.setstart_time(fmt.parse(rs.getString("start_time")));
+				po.setend_time(fmt.parse(rs.getString("end_time")));
+				po.setlatest_execute_time(fmt.parse(rs.getString("latest_execute_time")));
+				String r=rs.getString("room_order");
+				po.setroom_order(transformToArray(r));
+				po.setprice(rs.getInt("price"));
+				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
+				po.sethave_child(rs.getBoolean("havechild"));
+				orderlist.add(po);
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return orderlist;
+	}
+	
 //	public static void main(String[]args){
 //		OrderDataServiceImpl order=new OrderDataServiceImpl();
-////		ArrayList<RoomOrderPO> list=new ArrayList<RoomOrderPO>();
-////		list.add(new RoomOrderPO("标准间",1,2));
-//		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		OrderPO po;
-//		
-//			System.out.print(order.findByid(1).getcancel_time());
+//		System.out.print(order.findByClientid(1).get(0).getprice());
 //		
 //	}
 

@@ -9,11 +9,11 @@ public class ClientVO implements Serializable {
 	int clientid;
 	String username;
 	String password;
-	String client_name;
-	String contact;
 	int credit;
 	ArrayList<String> credit_record;
 	VIPInfo info;
+	String client_name;
+	String contact;
 
 	
 	public ClientVO(int clientid, String client_name, String contact, int credit, ArrayList<String> credit_record,

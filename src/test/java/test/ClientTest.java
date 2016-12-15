@@ -1,188 +1,188 @@
-//package test;
-//
-//import java.util.ArrayList;
-//
-//import org.junit.Assert;
-//import org.junit.Test;
-//
-//import mock.MockClient1;
-//import mock.MockClient30;
-//import mock.MockHotel30;
-//import mock.MockHotel31;
-//import mock.MockHotel32;
-//import mock.MockHotel33;
-//import mock.MockHotel34;
-//import mock.MockHotel35;
-//import mock.MockHotel36;
-//import objects.ResultMessage;
-//import objects.RoomType;
-//import objects.VIPInfo;
-//import objects.VIPInfo.VIPType;
-//import service.blservice.ClientBLService;
-//import service.blservice.Impl.ClientBLServiceImpl;
-//import vo.ClientVO;
-//import vo.EvaluationVO;
-//import vo.HotelVO;
-//
-//public class ClientTest {
-//	// 测试提供给界面的接口
-//	@Test
-//	public void client_checkInfoTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		ArrayList<String> credit_record = new ArrayList<String>();
-//		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
-//		ClientVO vo = new ClientVO(1, "张三", "11111111111", 0, credit_record, info);
-//		Assert.assertEquals(vo, clientcontroller.client_checkInfo(1));
-//	}
-//
-//	@Test
-//	public void client_updateInfoTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		ArrayList<String> credit_record = new ArrayList<String>();
-//		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
-//		ClientVO vo = new ClientVO(1, "张三", "11111111111", 0, credit_record, info);
-//		Assert.assertEquals(ResultMessage.Success, clientcontroller.client_updateInfo(vo));
-//	}
-//
-//	@Test
-//	public void client_getpreviousHotelListTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1, "可用", 1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client, clientcontroller.client_getpreviousHotelList(1));
-//	}
-//
-//	@Test
-//	public void client_setLocationTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel30 hotel30 = new MockHotel30("南京");
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?", 1,"可用", 1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client, clientcontroller.client_setLocation(hotel30.getLocation()));
-//	}
-//
-//	@Test
-//	public void client_searchHotelTest1() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel31 hotel31 = new MockHotel31("如家");
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1, "可用", 1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client, clientcontroller.client_searchHotel(hotel31.getHotelname()));
-//	}
-//
-//	@Test
-//	public void client_searchHotelTest2() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel32 hotel32 = new MockHotel32(RoomType.DOUBLEROOM);
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1, "可用", 1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client, clientcontroller.client_searchHotel(hotel32.getType()));
-//	}
-//
-//	@Test
-//	public void client_searchHotelTest3() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel33 hotel33 = new MockHotel33(100, 200);
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1, "可用", 1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client,
-//				clientcontroller.client_searchHotel(hotel33.getLowprice(), hotel33.getHighprice()));
-//	}
-//
-//	@Test
-//	public void client_searchHotelTest4() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel34 hotel34 = new MockHotel34("2001/01/01", "2001/01/03");
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1,"可用", 1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client,
-//				clientcontroller.client_searchHotel(hotel34.getInTime(), hotel34.getLeaveTime()));
-//	}
-//
-//	@Test
-//	public void client_searchHotelTest5() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel35 hotel35 = new MockHotel35(1);
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?", 1,"可用",1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client, clientcontroller.client_searchHotel(hotel35.getStar()));
-//	}
-//
-//	@Test
-//	public void client_searchHotelTest6() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockHotel36 hotel36 = new MockHotel36(4.0, 5.0);
-//		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1, "可用",1,1);
-//		HotelList_Client.add(hotel);
-//		Assert.assertEquals(HotelList_Client,
-//				clientcontroller.client_searchHotel(hotel36.getLowscore(), hotel36.getHighscore()));
-//	}
-//
-//	@Test
-//	public void client_checkHotelInfoTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		HotelVO hotel = new HotelVO(1,"南京", "新街�?", "如家", "如家酒店", "酒店�?有服�?",1,"可用", 1,1);
-//		Assert.assertEquals(hotel, clientcontroller.client_checkHotelInfo(1));
-//	}
-//
-//	@Test
-//	public void client_checkCreditTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockClient30 client30 = new MockClient30(1);
-//		Assert.assertEquals(0, clientcontroller.client_checkCredit(client30.getId()));
-//	}
-//
-//	@Test
-//	public void client_checkCreditListTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockClient30 client30 = new MockClient30(1);
-//		ArrayList<String> strings = new ArrayList<>();
-//		Assert.assertEquals(strings, clientcontroller.client_checkCreditList(client30.getId()));
-//	}
-//
-//	@Test
-//	public void client_evaluateHotelTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockClient30 client30 = new MockClient30(1);
-//		EvaluationVO evaluation = new EvaluationVO(4.0, "good");
-//		Assert.assertEquals(ResultMessage.Success, clientcontroller.client_evaluateHotel(evaluation, client30.getId()));
-//	}
-//
-//	@Test
-//	public void client_enrollVIPTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockClient30 client30 = new MockClient30(1);
-//		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2001/01/01");
-//		Assert.assertEquals(ResultMessage.Success, clientcontroller.client_enrollVIP(info, client30.getId()));
-//	}
-//
-//	// 测试提供给同层的接口
-//	@Test
-//	public void updateClientCreditTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		Assert.assertEquals(ResultMessage.Success, clientcontroller.updateClientCredit(1, 100, 0));
-//	}
-//
-//	@Test
-//	public void checkClientInfoTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockClient1 client1 = new MockClient1(1);
-//		Assert.assertEquals(client1, clientcontroller.checkClientInfo(1));
-//	}
-//
-//	@Test
-//	public void updateClientInfoTest() {
-//		ClientBLService clientcontroller = new ClientBLServiceImpl();
-//		MockClient1 client2 = new MockClient1(2);
-//		Assert.assertEquals(ResultMessage.Success, clientcontroller.updateClientInfo(client2));
-//	}
-//}
-//
+package test;
+
+import static org.junit.Assert.assertEquals;
+
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+import objects.Client;
+import objects.ResultMessage;
+import objects.VIPInfo;
+import objects.VIPInfo.VIPType;
+import service.blservice.Impl.ClientBLServiceImpl;
+import vo.ClientVO;
+import vo.EvaluationVO;
+import vo.HotelVO;
+
+public class ClientTest {
+
+	ClientBLServiceImpl client = new ClientBLServiceImpl();
+	
+	@Test
+	public void test_client_login() {
+		ResultMessage flag = client.client_login("relate", "chinese");
+		assertEquals(ResultMessage.Success,flag);
+	}
+	
+	@Test
+	public void test_client_getclientvo(){
+		ArrayList<String>credit_record=new ArrayList<String>();
+		credit_record.add("'2016-11-12 12:05:39',1,订单执行，1050,2500");
+		credit_record.add("'2016-11-21 07:00:00',3,订单执行，2800,4800");
+		VIPInfo info=new VIPInfo(VIPType.Enterprise,"三级会员,南京大学, 仙林中心,学则路");
+		ClientVO vo=new ClientVO(1,"xijinping","8989",4800,credit_record,info,"relate","chinese");
+		try {
+			assertEquals(vo,client.client_getclientvo("relate"));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_client_register(){
+		ResultMessage flag = client.client_register("liuqin", "test");
+		assertEquals(ResultMessage.Success,flag);
+	}
+	
+	@Test
+	public void test_client_change_password(){
+		try {
+			ResultMessage flag = client.client_change_password("sing", "fans", "appreciate");
+			assertEquals(ResultMessage.Success,flag);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Test
+	public void test_client_checkInfo(){
+		ArrayList<String>credit_record=new ArrayList<String>();
+		credit_record.add("'2016-11-12 12:05:39',1,订单执行，1050,2500");
+		credit_record.add("'2016-11-21 07:00:00',3,订单执行，2800,4800");
+		VIPInfo info=new VIPInfo(VIPType.Enterprise,"三级会员,南京大学, 仙林中心,学则路");
+		ClientVO vo=new ClientVO(1,"xijinping","8989",4800,credit_record,info,"relate","chinese");
+		
+		assertEquals(vo,client.client_checkInfo(1));
+	}
+	
+	@Test
+	public void test_client_updateInfo(){
+		
+		ArrayList<String>credit_record=new ArrayList<String>();
+		credit_record.add("'2016-11-12 12:05:39',1,订单执行，1050,2500");
+		credit_record.add("'2016-11-21 07:00:00',3,订单执行，2800,4800");
+		credit_record.add("'2016-12-01 10:00:00',9,订单执行，500,5300");
+		VIPInfo info=new VIPInfo(VIPType.Enterprise,"三级会员,南京大学, 仙林中心,学则路");
+		ClientVO vo=new ClientVO(1,"xijinping","8989",4800,credit_record,info,"relate","chinese");
+		
+		assertEquals(ResultMessage.Success,client.client_updateInfo(vo));
+	}
+	
+	@Test
+	public void test_client_getpreviousHotelList(){
+		ArrayList<HotelVO> hotel_list=new ArrayList<HotelVO>();
+		ArrayList<String>evalu=new ArrayList<String>();
+		evalu.add("just so so");
+		evalu.add("bad");
+		ArrayList<Integer> book_id=new ArrayList<Integer>();
+		book_id.add(2);
+		book_id.add(3);
+		hotel_list.add(new HotelVO(1,"天丰大酒店","南京市白下区洪武路26号","新街口","四星级商务酒店",
+				"wifi,餐饮,停车","四星级","4.1,15",evalu,book_id));
+		
+		try {
+			assertEquals(hotel_list,client.client_getpreviousHotelList(2));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_client_checkCredit(){
+		assertEquals(1000,client.client_checkCredit(2));
+	}
+	
+	@Test
+	public void test_client_checkCreditList(){
+		ArrayList<String>credit_record=new ArrayList<String>();
+		credit_record.add("'2016-11-08 04:18:36',2,订单异常,2300,100");
+		assertEquals(credit_record,client.client_checkCreditList(3));
+	}
+	
+	@Test
+	public void test_client_checkHotelInfo(){
+		ArrayList<String>evalu=new ArrayList<String>();
+		evalu.add("just so so");
+		evalu.add("bad");
+		ArrayList<Integer> book_id=new ArrayList<Integer>();
+		book_id.add(2);
+		book_id.add(3);
+		HotelVO vo = new HotelVO(1,"天丰大酒店","南京市白下区洪武路26号","新街口","四星级商务酒店",
+				"wifi,餐饮,停车","四星级","4.1,15",evalu,book_id);
+		
+		try {
+			assertEquals(vo,client.client_checkHotelInfo(1));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_client_evaluateHotel(){
+		EvaluationVO vo=new EvaluationVO(4.2,"nice");
+		try {
+			assertEquals(ResultMessage.Success,client.client_evaluateHotel(vo, 2, 2));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_client_enrollVIP(){
+		VIPInfo info=new VIPInfo(VIPType.NORMAL,"一级会员,05-13,鼓楼");
+		assertEquals(ResultMessage.Success,client.client_enrollVIP(info, 3));
+	}
+	
+	@Test
+	public void test_client_updateClientCreditList(){
+		try {
+			assertEquals(ResultMessage.Success,client.client_updateClientCreditList(2, "'2016-12-08 01:11:46',10,订单执行,1200,2200"));
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void test_updateClientCredit(){
+		assertEquals(ResultMessage.Success,client.updateClientCredit(3, 200, 1));
+	}
+	
+	@Test
+	public void test_checkClientInfo(){
+		ArrayList<String> record=new ArrayList<String>();
+		record.add("'2016-11-08 04:18:36',2,订单异常，2300，100");
+		VIPInfo info=new VIPInfo(VIPType.NORMAL,"一级会员,05-13,鼓楼");
+		Client c = new Client(3,"glance","5656",300,record,info,"sing","appreciate");
+		
+		assertEquals(c,client.checkClientInfo(3));
+	}
+
+	@Test
+	public void test_updateClientInfo(){
+		ArrayList<String> record=new ArrayList<String>();
+		record.add("'2016-11-08 04:18:36',2,订单异常，2300，100");
+		VIPInfo info=new VIPInfo(VIPType.NORMAL,"二级会员,05-13,鼓楼");
+		ClientVO vo = new ClientVO(3,"glance","5656",300,record,info,"sing","appreciate");
+		
+		assertEquals(ResultMessage.Success,client.client_updateInfo(vo));
+	}
+}
