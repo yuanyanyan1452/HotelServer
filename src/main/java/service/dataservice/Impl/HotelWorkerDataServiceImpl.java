@@ -38,14 +38,15 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
 	public static void main(String[] args){
 		HotelWorkerDataServiceImpl a= new HotelWorkerDataServiceImpl();
-		String s = a.find(1).getname();
-		System.out.println(s);
+		HotelWorkerPO po=new HotelWorkerPO(0,null,null,"jerry","zhi");
+		a.insert(po);
+
 	}
 	
 	@Override
 	public synchronized ResultMessage insert(HotelWorkerPO po){
 		Connection conn = Connect.getConn();
-	    String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key')";
+	    String sql = "insert into hotelworker(hotelid,name,contact,username,password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'))";
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -60,8 +61,8 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        return ResultMessage.Success;
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        return ResultMessage.Fail;
 	    }
+	    return ResultMessage.Fail;
 	}
 	
 
@@ -146,7 +147,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        pstmt.setString(2, password);
 	        ResultSet rs = pstmt.executeQuery();
 	        while(rs.next()){
-	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("id"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
+	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("hotelid"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
 			return po;
 	        }
 	    } catch (SQLException e) {
@@ -194,4 +195,5 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 		}
 		return null;
 	}
+	
 }
