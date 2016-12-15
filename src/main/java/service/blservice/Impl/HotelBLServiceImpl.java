@@ -137,7 +137,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public ArrayList<HotelVO> searchHotelByname(ArrayList<HotelVO> list,String hotelname) {
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
-			if(list.get(i).getname()==hotelname){
+			if(list.get(i).getname().contains(hotelname)){
 				newlist.add(list.get(i));
 			}
 		}

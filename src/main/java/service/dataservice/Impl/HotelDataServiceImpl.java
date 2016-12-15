@@ -68,12 +68,12 @@ public class HotelDataServiceImpl implements HotelDataService{
 			ps.setString(1, po.getname());
 			ps.setString(2, po.getaddress());
 			ps.setString(3, po.getbussiness_address());
-			ps.setString(4, po.getintroduction());
-			ps.setString(5, po.getservice());
+			ps.setString(4, "");
+			ps.setString(5, "");
 			ps.setString(6, po.getstar());
 			ps.setString(7, po.getscore());
-			ps.setString(8, evaluTransformToStr(po.gethotel_evaluation()));
-			ps.setString(9, bookTransformToStr(po.getbook_clientid()));
+			ps.setString(8,"");
+			ps.setString(9, "");
 			int i=ps.executeUpdate();
 			setid(po);
 			if(i==0){
