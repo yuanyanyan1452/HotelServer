@@ -19,7 +19,7 @@ public class BL {
 			OrderPO orderpo=orderpo_list.get(i);
 			Date latest_execute_time=orderpo.getlatest_execute_time();
 			boolean compare=date.after(latest_execute_time);
-			if(compare&&orderpo.getstate()=="正常"){
+			if(compare&&orderpo.getstate().equals("正常")){
 				orderpo.setstate("异常");
 				orderdataservice.update(orderpo);
 			}
