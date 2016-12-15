@@ -1,9 +1,12 @@
 package service.dataservice;
 
+import java.util.ArrayList;
+
 import objects.ResultMessage;
 import po.HotelWorkerPO;
 
 public interface HotelWorkerDataService {
+	public ArrayList<HotelWorkerPO> getallhotelworkerPO();
 
 	public HotelWorkerPO find(int hotelid);
 	

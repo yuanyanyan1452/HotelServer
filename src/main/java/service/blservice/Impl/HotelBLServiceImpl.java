@@ -104,8 +104,16 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage addHotelWorker(HotelWorker worker) {
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
-		ResultMessage result=hotelworkerdataservice.insert(po);
-		return result;
+		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.find(po.gethotelid());
+		if(hotelworkerpo.getname().equals(null)){
+			ResultMessage result=hotelworkerdataservice.insert(po);
+			return result;
+		
+		}
+		else{
+			return ResultMessage.Fail;
+		}
+		
 	}
 
 	@Override

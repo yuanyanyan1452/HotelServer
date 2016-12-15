@@ -1,10 +1,15 @@
 
 package service.dataservice;
 
-import po.*;
-import objects.*;
+import java.util.ArrayList;
+
+import objects.ResultMessage;
+import po.WebManagerPO;
+import po.WebMarketPO;
 
 public interface ManageDataService {
+		public ArrayList<WebMarketPO> getallwebmarketPO();
+		
 		public WebMarketPO findWebMarket(int WebMarketid);
 		
 		public ResultMessage insertWebMarket(WebMarketPO po);

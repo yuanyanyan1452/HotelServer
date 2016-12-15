@@ -1,11 +1,15 @@
 
 package service.dataservice;
 
-import po.*;
-import objects.*;
+import java.util.ArrayList;
+
+import objects.ResultMessage;
+import po.ClientPO;
 public interface ClientDataService {
 	
 	public ClientPO find(int clientid);
+	
+	public ArrayList<ClientPO> getallclientPO(); 
 	
 	public ResultMessage insert(ClientPO po);
 	

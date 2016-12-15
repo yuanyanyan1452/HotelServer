@@ -14,7 +14,7 @@ import service.dataservice.HotelDataService;
 public class HotelDataServiceImpl implements HotelDataService{
 	
 	@Override
-	public ArrayList<HotelPO> getAllHotel(){
+	public ArrayList<HotelPO> getAllHotelPO(){
 		String sql="select*from hotel";
 		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
 		ArrayList<HotelPO> hotel_list=hotel.find(sql);
