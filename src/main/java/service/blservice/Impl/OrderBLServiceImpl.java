@@ -208,7 +208,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		//获得订单本来总价和房间数量
 		ArrayList<Double> price_list=new ArrayList<Double>();
 		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
-		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy(clientid);
+		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy();
 		//ArrayList<HotelStrategyVO> adapthotelstrategy=new ArrayList<HotelStrategyVO>();
 		//ArrayList<WebStrategyVO> adaptwebstrategy=new ArrayList<WebStrategyVO>();
 		

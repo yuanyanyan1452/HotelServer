@@ -79,8 +79,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ArrayList<WebStrategyVO> getWebStrategy(int clientid) throws RemoteException {
-		return strategybl.getWebStrategy(clientid);
+	public ArrayList<WebStrategyVO> getWebStrategy() throws RemoteException {
+		return strategybl.getWebStrategy();
 	}
 
 	@Override

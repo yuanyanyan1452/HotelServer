@@ -56,7 +56,7 @@ public class StrategyBLServiceImpl implements StrategyBLService {
 	}
 
 	@Override
-	public ArrayList<WebStrategyVO> getWebStrategy(int clientid) {
+	public ArrayList<WebStrategyVO> getWebStrategy() {
 		ArrayList<WebStrategyPO> webstrategypo_list=strategydataservice.showlist_web();
 		ArrayList<WebStrategyVO> webstrategyvo_list=new ArrayList<WebStrategyVO>();
 		for(int i=0;i<webstrategypo_list.size();i++){
