@@ -21,10 +21,12 @@ import service.dataservice.ClientDataService;
 import service.dataservice.HotelDataService;
 import service.dataservice.HotelWorkerDataService;
 import service.dataservice.ManageDataService;
+import service.dataservice.OrderDataService;
 import service.dataservice.Impl.ClientDataServiceImpl;
 import service.dataservice.Impl.HotelDataServiceImpl;
 import service.dataservice.Impl.HotelWorkerDataServiceImpl;
 import service.dataservice.Impl.ManageDataServiceImpl;
+import service.dataservice.Impl.OrderDataServiceImpl;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -38,6 +40,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	ClientDataService clientdataservice= new ClientDataServiceImpl();
 	HotelDataService hoteldataservice=new HotelDataServiceImpl();
 	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();
+	OrderDataService orderdataservice=new OrderDataServiceImpl();
 	VOChange vochange=new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
@@ -117,8 +120,8 @@ public class ManageBLServiceImpl implements ManageBLService {
 	
 	@Override
 	public int getordernumber() throws RemoteException{
-		//TODO
-		return 0;
+		int num=orderdataservice.getAllOrder();
+		return num;
 	}
 	
 	@Override
