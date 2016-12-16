@@ -178,10 +178,12 @@ public class HotelDataServiceImpl implements HotelDataService{
 	
 	public ArrayList<Integer> bookTransformToArray(String s){
 		ArrayList<Integer> book_clientid=new ArrayList<Integer>();
-		String[]trans=s.split(",");
-		for(int i=0;i<trans.length;i++){
-			int temp=Integer.parseInt(trans[i]);
-			book_clientid.add(temp);
+		if (!s.isEmpty()) {
+			String[] trans=s.split(",");
+			for(int i=0;i<trans.length;i++){
+				int temp=Integer.parseInt(trans[i]);
+				book_clientid.add(temp);
+			}
 		}
 		return book_clientid;
 	}
