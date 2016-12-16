@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import objects.Hotel;
 import objects.ResultMessage;
 import po.HotelPO;
 import po.OrderPO;
@@ -89,7 +90,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from hotel where address = "+po.getaddress() ;
+		String sql = "select * from hotel where address = '"+po.getaddress()+"'" ;
 		try{
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -247,6 +248,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 	}
 //	public static void main(String[] args){
 //		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-//		System.out.println(hotel.getAllHotel().size());
+//		ArrayList<String>evalu=new ArrayList<String>();
+//		ArrayList<Integer>book_id=new ArrayList<Integer>();
+//		HotelPO po = new HotelPO(4,"凯撒酒店","徐州市经济开发区","金山桥","四星级商务酒店","wifi,餐饮，洗浴，娱乐","四星级",null,evalu,book_id);
+//		hotel.insert(po);
 //	}
 }

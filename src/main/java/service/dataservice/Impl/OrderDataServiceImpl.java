@@ -16,6 +16,14 @@ import service.dataservice.OrderDataService;
 public class OrderDataServiceImpl implements OrderDataService {
 
 	@Override
+	public int getAllOrder(){
+		String sql = "select*from orderrecord";
+		OrderDataServiceImpl order=new OrderDataServiceImpl();
+		ArrayList<OrderPO> order_list=order.find(sql);
+		return order_list.size();
+	}
+	
+	@Override
 	public OrderPO findByid(int id) {
 		String sql = "select *from orderrecord where id="+id;
 		OrderDataServiceImpl order=new OrderDataServiceImpl();

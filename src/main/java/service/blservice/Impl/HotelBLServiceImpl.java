@@ -158,7 +158,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 		for(int i=0;i<list.size();i++){
 			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
 			for(int j=0;j<roomlist.size();j++){
-				if(roomlist.get(j).getroom_type()==type){
+				if(roomlist.get(j).getroom_type().equals(type)){
 					newlist.add(list.get(i));
 					break;
 				}
@@ -192,7 +192,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public ArrayList<HotelVO> searchHotelBystar(ArrayList<HotelVO> list,String star) {
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
-			if(list.get(i).getstar()==star){
+			if(list.get(i).getstar().equals(star)){
 				newlist.add(list.get(i));
 			}
 		}
@@ -239,7 +239,12 @@ public class HotelBLServiceImpl implements HotelBLService {
 		return vo;
 	}
 
-
+//	public static void main(String[]args){
+//		HotelBLServiceImpl hotel=new HotelBLServiceImpl();
+//		ArrayList<HotelVO> hotelvo_list=hotel.searchHotelBylocation("南京","新街口");
+//		ArrayList<HotelVO> testhotelvo_list=hotel.searchHotelByroom(hotelvo_list, "大床房");
+//		System.out.print(testhotelvo_list.size());
+//	}
 	
 
 	
