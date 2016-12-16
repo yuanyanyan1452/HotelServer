@@ -159,12 +159,12 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public int calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid) throws RemoteException {
+	public double calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid) throws RemoteException {
 		return orderbl.calculateTotalwithoutStrategy(roomlist,hotelid);
 	}
 
 	@Override
-	public int calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid,int clientid) throws RemoteException {
+	public double calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid,int clientid) throws RemoteException {
 		return orderbl.calculateTotalwithStrategy(roomlist, hotelid,clientid);
 	}
 
@@ -207,26 +207,27 @@ public class DataRemoteObject extends UnicastRemoteObject
 	
 	@Override
 	public ArrayList<ClientVO> getallclientvo() throws RemoteException {
-		// TODO Auto-generated method stub
 		return managebl.getallclientvo();
 	}
 
 	@Override
 	public ArrayList<HotelVO> getallhotelvo() throws RemoteException {
-		// TODO Auto-generated method stub
 		return managebl.getallhotelvo();
 	}
 
 	@Override
 	public ArrayList<HotelWorkerVO> getallhotelworkervo() throws RemoteException {
-		// TODO Auto-generated method stub
 		return managebl.getallhotelworkervo();
 	}
 
 	@Override
 	public ArrayList<WebMarketVO> getallwebmarketvo() throws RemoteException {
-		// TODO Auto-generated method stub
 		return managebl.getallwebmarketvo();
+	}
+	
+	@Override
+	public int getordernumber() throws RemoteException {
+		return managebl.getordernumber();
 	}
 	
 	@Override
@@ -472,6 +473,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return clientbl.client_getclientvo(username);
 	}
 
+
+
+	
 
 
 	

@@ -1,13 +1,12 @@
 package objects;
 
-public class WebStrategy1 extends WebStrategy implements Calculate {
-	//开业酬宾
-	
+public class HotelStrategy5 extends HotelStrategy implements Calculate {
+	// 双十一折扣
+
 	@Override
 	public double calculate(int clientid, int hotelid, double price, int roomnumber) {
-		price*=0.9;
+		price *= 0.7;
 		return price;
 	}
-
 
 }

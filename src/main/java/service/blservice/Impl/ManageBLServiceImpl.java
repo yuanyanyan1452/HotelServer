@@ -116,6 +116,12 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 	
 	@Override
+	public int getordernumber() throws RemoteException{
+		//TODO
+		return 0;
+	}
+	
+	@Override
 	public ClientVO manage_searchClient(int clientid) throws RemoteException{
 		Client client= clientblservice.checkClientInfo(clientid);
 		ClientVO clientvo=objectchange.changetoclientvo(client);
