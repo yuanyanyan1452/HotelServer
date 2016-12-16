@@ -217,10 +217,10 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return max_price;
 	}
 	
-//	public static void main(String[]args){
-//		RoomDataServiceImpl room=new RoomDataServiceImpl();
-//		int min_price=room.find_min_price(2);
-//		System.out.println(min_price);
-//	}
+	public static void main(String[]args){
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		ArrayList<RoomPO> list=room.find(1);
+		System.out.print(list.get(2).getroom_type());
+	}
 	
 }

@@ -7,6 +7,9 @@ import objects.*;
 
 public interface OrderDataService {
 
+	//网管查看共有多少个订单
+	public int getAllOrder();
+	
 	//通过订单号寻找相应订单信息；
 	public OrderPO findByid (int id) ;
 	

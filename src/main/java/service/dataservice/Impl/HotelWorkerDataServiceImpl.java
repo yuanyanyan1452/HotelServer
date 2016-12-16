@@ -107,13 +107,15 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public synchronized ResultMessage update(HotelWorkerPO po) {
 		Connection conn = Connect.getConn();
-		String sql = "update hotelworker set name=encode(?,'key'),contact=(?,'key') where hotelid=?";
+		String sql = "update hotelworker set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key') where hotelid=?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, po.getname());
 			pstmt.setString(2, po.getcontact());
-			pstmt.setInt(3, po.gethotelid());
+			pstmt.setString(3, po.getusername());
+			pstmt.setString(4, po.getpassword());
+			pstmt.setInt(5, po.gethotelid());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
