@@ -134,8 +134,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ResultMessage order_client_cancel(int clientid, int orderid) throws RemoteException {
-		return orderbl.order_client_cancel(clientid, orderid);
+	public ResultMessage order_client_cancel(int orderid) throws RemoteException {
+		return orderbl.order_client_cancel( orderid);
 	}
 
 	@Override
