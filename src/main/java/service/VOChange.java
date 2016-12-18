@@ -89,9 +89,8 @@ public class VOChange {
 		hotel.setservice(hotelvo.getservice());
 		hotel.setstar(hotelvo.getstar());
 		hotel.setevaluation(hotelvo.gethotel_evaluation());
+		hotel.setscore(hotelvo.getscore());
 		hotel.setbook_clientid(hotelvo.getbook_clientid());
-		hotel.setbook_clientid(hotelvo.getbook_clientid());
-		//评价,评分没写
 		return hotel;
 		
 	}

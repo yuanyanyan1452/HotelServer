@@ -61,7 +61,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 	public synchronized ResultMessage insert(HotelPO po) {
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
-		PreparedStatement ps = null;
+		PreparedStatement ps = null; 
 		String sql = "insert into hotel values(NULL,?,?,?,?,?,?,?,?,?)";
 
 		try{
@@ -179,31 +179,33 @@ public class HotelDataServiceImpl implements HotelDataService{
 	
 	public ArrayList<Integer> bookTransformToArray(String s){
 		ArrayList<Integer> book_clientid=new ArrayList<Integer>();
-		if (!s.isEmpty()) {
-			String[] trans=s.split(",");
-			for(int i=0;i<trans.length;i++){
-				int temp=Integer.parseInt(trans[i]);
-				book_clientid.add(temp);
-			}
+		String[]trans=s.split(",");
+		for(int i=0;i<trans.length;i++){
+			int temp=Integer.parseInt(trans[i]);
+			book_clientid.add(temp);
 		}
 		return book_clientid;
 	}
 	
 	public String bookTransformToStr(ArrayList<Integer> book_clientid){
 		String s="";
-		for(int i=0;i<book_clientid.size()-1;i++){
-			s+=String.valueOf(book_clientid.get(i))+",";
+		if(book_clientid.size()>0){
+			for(int i=0;i<book_clientid.size()-1;i++){
+				s+=String.valueOf(book_clientid.get(i))+",";
+			}
+			s+=String.valueOf(book_clientid.get(book_clientid.size()-1));
 		}
-		s+=String.valueOf(book_clientid.get(book_clientid.size()-1));
 		return s;
 	}
 	
 	public ArrayList<String> evaluTransformToArray(String s){
 		ArrayList<String> evalu = new ArrayList<String>();
-		String[]e=s.split(",");
-		for(int i=0;i<e.length;i++){
-			String temp=e[i];
-			evalu.add(temp);
+		if(s!=null){
+			String[]e=s.split(",");
+			for(int i=0;i<e.length;i++){
+				String temp=e[i];
+				evalu.add(temp);
+			}
 		}
 		return evalu;
 		
