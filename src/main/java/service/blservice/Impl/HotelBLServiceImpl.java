@@ -97,6 +97,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage addHotel(Hotel hotel) {
 		HotelPO po=objectchange.changetohotelpo(hotel);
+		po.setscore(po.getscore()+",1");
 		ResultMessage result=hoteldataservice.insert(po);
 		return result;
 	}
