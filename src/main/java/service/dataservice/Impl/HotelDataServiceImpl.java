@@ -80,6 +80,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 			if(i==0){
 				flag = ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -97,6 +99,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 			while(rs.next()){
 				po.setid(rs.getInt(1));
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -126,6 +130,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 			if(i==0){
 				flag = ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -146,6 +152,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -240,6 +248,8 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
 				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
 				hotel_list.add(hotelPO);
+				ps.close();
+				conn.close();
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

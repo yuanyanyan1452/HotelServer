@@ -34,6 +34,9 @@ public class ManageDataServiceImpl implements ManageDataService {
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 				webmarketlist.add(po);
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -57,6 +60,9 @@ public class ManageDataServiceImpl implements ManageDataService {
 				po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -78,6 +84,8 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.close();
 			conn.close();
 			set_id(po); // setid
+			pstmt.close();
+			conn.close();
 			return ResultMessage.Success;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -95,6 +103,9 @@ public class ManageDataServiceImpl implements ManageDataService {
 			while (rs.next()) {
 				po.setwebmarketid(rs.getInt(1));
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -144,6 +155,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 		Connection conn = Connect.getConn();
 		String sql = "select id from webmarket where username =encode(?,'key') and password = encode(?,'key')";
 		PreparedStatement pstmt;
+		ResultMessage flag = null;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -151,12 +163,16 @@ public class ManageDataServiceImpl implements ManageDataService {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				if (rs.getInt("id") != -1)
-					return ResultMessage.Success;
+					flag = ResultMessage.Success;
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			flag = ResultMessage.Fail;
 		}
-		return ResultMessage.Fail;
+		return flag;
 	}
 
 	@Override
@@ -170,11 +186,15 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
+			WebMarketPO po = null;
 			while (rs.next()) {
-				WebMarketPO po = new WebMarketPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
+				po = new WebMarketPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
 						BlobtoString(rs.getBlob("decode(contact,'key')")), username, password);
-				return po;
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+			return po;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -194,6 +214,9 @@ public class ManageDataServiceImpl implements ManageDataService {
 			while (rs.next()) {
 				result = rs.getInt("id");
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -211,13 +234,17 @@ public class ManageDataServiceImpl implements ManageDataService {
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
+			WebManagerPO po = null;
 			while (rs.next()) {
-				WebManagerPO po = new WebManagerPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
+				po = new WebManagerPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
 						BlobtoString(rs.getBlob("decode(contact,'key')")),
 						BlobtoString(rs.getBlob("decode(username,'key')")),
 						BlobtoString(rs.getBlob("decode(password,'key')")));
-				return po;
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+			return po;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -239,6 +266,8 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.close();
 			conn.close();
 			set_id(po);
+			pstmt.close();
+			conn.close();
 			return ResultMessage.Success;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -256,6 +285,9 @@ public class ManageDataServiceImpl implements ManageDataService {
 			while (rs.next()) {
 				po.setwebmanagerid(rs.getInt(1));
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -299,12 +331,13 @@ public class ManageDataServiceImpl implements ManageDataService {
 		}
 		return ResultMessage.Fail;
 	}
-
+	
 	@Override
 	public ResultMessage checkWebManager(String username, String password) {
 		Connection conn = Connect.getConn();
 		String sql = "select id from webmanager where username =encode(?,'key') and password = encode(?,'key')";
 		PreparedStatement pstmt;
+		ResultMessage flag = ResultMessage.Fail;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -312,12 +345,15 @@ public class ManageDataServiceImpl implements ManageDataService {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				if (rs.getInt("id") != -1)
-					return ResultMessage.Success;
+					flag = ResultMessage.Success;
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return ResultMessage.Fail;
+		return flag;
 	}
 
 	@Override
@@ -325,16 +361,20 @@ public class ManageDataServiceImpl implements ManageDataService {
 		Connection conn = Connect.getConn();
 		String sql = "select id,decode(name,'key'),decode(contact,'key') from webmanager where username=encode(?,'key') and password=encode(?,'key')"; // 需要执行的sql语句
 		PreparedStatement pstmt;
+		WebManagerPO po =  new WebManagerPO();
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				WebManagerPO po = new WebManagerPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
+				po = new WebManagerPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
 						BlobtoString(rs.getBlob("decode(contact,'key')")), username, password);
-				return po;
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
+			return po;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -354,6 +394,9 @@ public class ManageDataServiceImpl implements ManageDataService {
 			while (rs.next()) {
 				result = rs.getInt("id");
 			}
+			rs.close();
+			pstmt.close();
+			conn.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
