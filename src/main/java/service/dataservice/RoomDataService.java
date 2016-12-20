@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import objects.ResultMessage;
 import po.OrderPO;
+import po.RoomOrderPO;
 import po.RoomPO;
 
 public interface RoomDataService {
@@ -20,6 +21,12 @@ public interface RoomDataService {
 	//更新可用房间信息
 	public ResultMessage update(RoomPO po);
 	
+	//退房时房间数量增加
+	public ResultMessage check_out(OrderPO po);
+	
 	//每次生成订单时房间数量减少
 	public ResultMessage reduce(OrderPO po);
+	
+	//线下入住房间数量减少
+	public ResultMessage reduceOffline(int hotelid,ArrayList<RoomOrderPO> room_order);
 }

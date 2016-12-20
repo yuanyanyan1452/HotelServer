@@ -107,12 +107,42 @@ public class RoomDataServiceImpl implements RoomDataService{
 		}
 		return flag;
 	}
-
+	
+	@Override
+	public synchronized ResultMessage check_out(OrderPO po){
+		ResultMessage flag=ResultMessage.Success;
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		
+		int hotelid=po.gethotelid();
+		ArrayList<RoomOrderPO>room_order=po.getroom_order();
+		for(int i=0;i<room_order.size();i++){
+			String type=room_order.get(i).getroom_type();
+			int order_num=room_order.get(i).getroom_number();
+			int num=available_num(hotelid,type);
+			num=num+order_num;
+			
+			flag=room.changeRoomNum(num, hotelid, type);
+			if(flag==ResultMessage.Fail){
+				return flag;
+			}
+			
+		}
+		return flag;
+		
+	}
 	@Override
 	public synchronized ResultMessage reduce(OrderPO po){
-		ResultMessage flag=ResultMessage.Success;
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
 		int hotelid=po.gethotelid();
-		ArrayList<RoomOrderPO> room_order=po.getroom_order();
+		ArrayList<RoomOrderPO>room_order=po.getroom_order();
+		ResultMessage flag=room.reduceOffline(hotelid, room_order);
+		return flag;
+	}
+	
+	@Override
+	public synchronized ResultMessage reduceOffline(int hotelid,ArrayList<RoomOrderPO> room_order){
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		ResultMessage flag=ResultMessage.Success;
 		
 		for(int i=0;i<room_order.size();i++){
 			String type=room_order.get(i).getroom_type();
@@ -120,23 +150,32 @@ public class RoomDataServiceImpl implements RoomDataService{
 			int num=available_num(hotelid,type);
 			num=num-order_num;
 			
-			Connection conn=Connect.getConn();
-			PreparedStatement ps=null;
-			String sql="update room set available_num=? where hotelid=? and room_type=?";
-			try{
-				ps=conn.prepareStatement(sql);
-				ps.setInt(1, num);
-				ps.setInt(2,hotelid);
-				ps.setString(3, type);
-				
-				int j=ps.executeUpdate();
-				if(j==0){
-					flag=ResultMessage.Fail;
-				}
-			}catch(SQLException e){
-				e.printStackTrace();
+			flag=room.changeRoomNum(num, hotelid, type);
+			if(flag==ResultMessage.Fail){
+				return flag;
 			}
 			
+		}
+		return flag;
+	}
+	
+	public ResultMessage changeRoomNum(int num,int hotelid,String room_type){
+		ResultMessage flag=ResultMessage.Success;
+		Connection conn=Connect.getConn();
+		PreparedStatement ps=null;
+		String sql="update room set available_num=? where hotelid=? and room_type=?";
+		try{
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, num);
+			ps.setInt(2,hotelid);
+			ps.setString(3, room_type);
+			
+			int j=ps.executeUpdate();
+			if(j==0){
+				flag=ResultMessage.Fail;
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
 		}
 		return flag;
 	}
@@ -217,10 +256,15 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return max_price;
 	}
 	
-	public static void main(String[]args){
-		RoomDataServiceImpl room=new RoomDataServiceImpl();
-		ArrayList<RoomPO> list=room.find(1);
-		System.out.print(list.get(2).getroom_type());
-	}
+//	public static void main(String[]args){
+//		RoomDataServiceImpl room=new RoomDataServiceImpl();
+//		ArrayList<RoomOrderPO> room_order=new ArrayList<RoomOrderPO>();
+//		RoomOrderPO po=new RoomOrderPO("大床房",1,2);
+//		room_order.add(po);
+//		po=new RoomOrderPO("双人房",2,3);
+//		room_order.add(po);
+//		room.reduceOffline(1, room_order);
+//		
+//	}
 	
 }

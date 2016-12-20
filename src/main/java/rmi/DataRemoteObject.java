@@ -10,6 +10,7 @@ import objects.Hotel;
 import objects.HotelWorker;
 import objects.ResultMessage;
 import objects.VIPInfo;
+import po.RoomOrderPO;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
 import service.blservice.ManageBLService;
@@ -183,6 +184,24 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return orderbl.order_findbyid(orderid);
 	}
 	
+	@Override
+	public ResultMessage order_checkout(int orderid)throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderbl.order_checkout(orderid);
+	}
+
+	@Override
+	public ResultMessage offline_checkin(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderbl.offline_checkin(hotelid, room_order);
+	}
+
+	@Override
+	public ResultMessage offline_checkout(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
+		// TODO Auto-generated method stub
+		return orderbl.offline_checkout(hotelid, room_order);
+	}
+
 	@Override
 	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
 		return managebl.webmanager_login(username, password);
@@ -473,6 +492,11 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return clientbl.client_getclientvo(username);
 	}
 
+
+
+
+
+	
 
 
 	

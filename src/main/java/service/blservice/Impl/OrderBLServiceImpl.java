@@ -16,6 +16,7 @@ import objects.WebStrategy3;
 import objects.WebStrategy4;
 import objects.WebStrategy5;
 import po.OrderPO;
+import po.RoomOrderPO;
 import po.RoomPO;
 import service.BL;
 import service.VOChange;
@@ -304,6 +305,18 @@ public class OrderBLServiceImpl implements OrderBLService {
 		orderpo.setstart_time(info.getCheckIn());
 		orderpo.setend_time(info.getPlanCheckOut());
 		ResultMessage result =orderdataservice.update(orderpo);
+//		ArrayList<RoomPO> room_list=roomdataservice.find(orderpo.gethotelid());
+//		ArrayList<RoomOrderPO> roomorder=orderpo.getroom_order();
+//		for(int i=0;i<roomorder.size();i++){
+//			for(int j=0;j<room_list.size();i++){
+//				if(roomorder.get(i).getroom_type().equals(room_list.get(i).getroom_type())){
+//					RoomPO roompo=room_list.get(i);
+//					roompo.setavailable_num(roompo.getavailable_num()-roomorder.get(j).getroom_number());
+//					roomdataservice.update(roompo);
+//				}
+//			}
+//		}
+		roomdataservice.reduce(orderpo);
 		return result;
 	}
 
@@ -312,6 +325,37 @@ public class OrderBLServiceImpl implements OrderBLService {
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		OrderVO ordervo=orderpo.changetoordervo();
 		return ordervo;
+	}
+
+	@Override
+	public ResultMessage order_checkout(int orderid) {
+		Date date= new Date();
+		OrderPO orderpo=orderdataservice.findByid(orderid);
+		orderpo.setend_time(date);
+		ResultMessage result=orderdataservice.update(orderpo);
+		roomdataservice.check_out(orderpo);
+		return result;
+	}
+
+	@Override
+	public ResultMessage offline_checkin(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList <RoomOrderPO> roomorderpo=new ArrayList<RoomOrderPO>();
+		for(int i=0;i<room_order.size();i++){
+			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ResultMessage offline_checkout(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
+		ArrayList <RoomOrderPO> roomorderpo=new ArrayList<RoomOrderPO>();
+		for(int i=0;i<room_order.size();i++){
+			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
+		}
+		ResultMessage result=roomdataservice.reduceOffline(hotelid, roomorderpo);
+		return result;
 	}
 
 }

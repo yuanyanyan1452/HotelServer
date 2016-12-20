@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import objects.ResultMessage;
+import po.RoomOrderPO;
 import vo.AccommodationVO;
 import vo.OrderVO;
 import vo.RoomOrderVO;
@@ -108,4 +109,10 @@ public interface OrderBLService extends Remote{
 	public ResultMessage order_checkin(AccommodationVO info,int orderid)throws RemoteException;
 	
 	public OrderVO order_findbyid(int orderid)throws RemoteException;
+
+	public ResultMessage order_checkout(int orderid)throws RemoteException;
+	
+	public ResultMessage offline_checkin(int hotelid,ArrayList<RoomOrderVO> room_order)throws RemoteException;
+	
+	public ResultMessage offline_checkout(int hotelid,ArrayList<RoomOrderVO> room_order)throws RemoteException;
 }
