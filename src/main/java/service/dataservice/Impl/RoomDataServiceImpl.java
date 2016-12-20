@@ -34,6 +34,8 @@ public class RoomDataServiceImpl implements RoomDataService{
 				po.setprice(rs.getInt("price"));
 				roomlist.add(po);
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -58,6 +60,8 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -77,6 +81,8 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -102,6 +108,8 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -195,6 +203,8 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(j==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -213,6 +223,9 @@ public class RoomDataServiceImpl implements RoomDataService{
 			while(rs.next()){
 				available_num=rs.getInt("available_num");
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -230,6 +243,9 @@ public class RoomDataServiceImpl implements RoomDataService{
 			while(rs.next()){
 				po.setid(rs.getInt(1));
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -250,6 +266,9 @@ public class RoomDataServiceImpl implements RoomDataService{
 					min_price=rs.getInt("price");
 				}
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -271,21 +290,24 @@ public class RoomDataServiceImpl implements RoomDataService{
 					max_price=rs.getInt("price");
 				}
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
 		return max_price;
 	}
 	
-	public static void main(String[]args){
-		RoomDataServiceImpl room=new RoomDataServiceImpl();
-		ArrayList<RoomOrderPO> room_order=new ArrayList<RoomOrderPO>();
-		RoomOrderPO po=new RoomOrderPO("大床房",1,2);
-		room_order.add(po);
-		po=new RoomOrderPO("双人房",2,3);
-		room_order.add(po);
-		room.addOffline(1, room_order);
-		
-	}
+//	public static void main(String[]args){
+//		RoomDataServiceImpl room=new RoomDataServiceImpl();
+//		ArrayList<RoomOrderPO> room_order=new ArrayList<RoomOrderPO>();
+//		RoomOrderPO po=new RoomOrderPO("大床房",1,2);
+//		room_order.add(po);
+//		po=new RoomOrderPO("双人房",2,3);
+//		room_order.add(po);
+//		room.addOffline(1, room_order);
+//		
+//	}
 	
 }
