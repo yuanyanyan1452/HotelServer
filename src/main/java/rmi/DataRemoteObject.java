@@ -200,7 +200,6 @@ public class DataRemoteObject extends UnicastRemoteObject
 	
 	@Override
 	public ArrayList<OrderVO> get_client_hotel_order(int clientid, int hotelid) throws RemoteException {
-		// TODO Auto-generated method stub
 		return orderbl.get_client_hotel_order(clientid, hotelid);
 	}
 	
@@ -320,6 +319,11 @@ public class DataRemoteObject extends UnicastRemoteObject
 	@Override
 	public ResultMessage hotel_importRoom(RoomVO room) throws RemoteException {
 		return hotelbl.hotel_importRoom(room);
+	}
+	
+	@Override
+	public ResultMessage hotel_updateRoom(RoomVO room) throws RemoteException {
+		return hotelbl.hotel_updateRoom(room);
 	}
 
 	@Override
@@ -498,6 +502,10 @@ public class DataRemoteObject extends UnicastRemoteObject
 	public ClientVO client_getclientvo(String username) throws RemoteException {
 		return clientbl.client_getclientvo(username);
 	}
+
+
+
+	
 
 
 

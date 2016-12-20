@@ -65,7 +65,25 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage hotel_importRoom(RoomVO room) {
 		RoomPO po=vochange.roomvo_to_roompo(room);
+		po.setavailable_num(po.gettotal_num());
 		ResultMessage result=roomdataservice.insert(po);
+		return result;
+	}
+	
+	@Override
+	public ResultMessage hotel_updateRoom(RoomVO room) throws RemoteException {
+		ArrayList<RoomPO> roomlist=roomdataservice.find(room.gethotelid());
+		RoomPO roompo=new RoomPO();
+		for(int i=0;i<roomlist.size();i++){
+			if(roomlist.get(i).getroom_type().equals(room.getroom_type())){
+				roompo=roomlist.get(i);
+			}
+		}
+		if(roompo.gettotal_num()<room.getavailable_num()){
+			roompo.settotal_num(room.getavailable_num());
+			roompo.setavailable_num(room.getavailable_num());
+		}
+		ResultMessage result=roomdataservice.update(roompo);
 		return result;
 	}
 
@@ -249,6 +267,8 @@ public class HotelBLServiceImpl implements HotelBLService {
 		}
 		return allroom;
 	}
+
+
 
 //	public static void main(String[]args){
 //		HotelBLServiceImpl hotel=new HotelBLServiceImpl();
