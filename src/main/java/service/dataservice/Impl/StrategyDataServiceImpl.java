@@ -413,9 +413,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		return wslist;
 	}
 	
-	public static void main(String[]args){
-		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
-		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
-	}
+//	public static void main(String[]args){
+//		StrategyDataServiceImpl strategy=new StrategyDataServiceImpl();
+//		System.out.println(strategy.find_web("一级会员折扣").getstart_time());
+//	}
 
 }
