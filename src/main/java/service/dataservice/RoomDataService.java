@@ -22,7 +22,10 @@ public interface RoomDataService {
 	public ResultMessage update(RoomPO po);
 	
 	//退房时房间数量增加
-	public ResultMessage check_out(OrderPO po);
+	public ResultMessage add(OrderPO po);
+	
+	//线下退房时房间数量增加
+	public ResultMessage addOffline(int hotelid,ArrayList<RoomOrderPO> room_order);
 	
 	//每次生成订单时房间数量减少
 	public ResultMessage reduce(OrderPO po);

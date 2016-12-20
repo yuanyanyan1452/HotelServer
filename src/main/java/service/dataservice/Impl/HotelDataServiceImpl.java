@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import objects.Hotel;
 import objects.ResultMessage;
 import po.HotelPO;
 import po.OrderPO;

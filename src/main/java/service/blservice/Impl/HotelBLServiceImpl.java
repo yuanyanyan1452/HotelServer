@@ -186,7 +186,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ArrayList<HotelVO> searchHotelBytime(ArrayList<HotelVO> list,String inTime, String leaveTime) {
 		// TODO Auto-generated method stub
-		return null;
+		return list;
 	}
 
 	@Override
@@ -238,6 +238,16 @@ public class HotelBLServiceImpl implements HotelBLService {
 		HotelWorkerPO po=hotelworkerdataservice.find(id);
 		HotelWorkerVO vo=po.changetohotelworkervo();
 		return vo;
+	}
+
+	@Override
+	public ArrayList<RoomVO> getallroom(int hotelid) throws RemoteException {
+		ArrayList<RoomVO> allroom=new ArrayList<RoomVO>();
+		ArrayList<RoomPO> roomlist=roomdataservice.find(hotelid);
+		for(int i=0;i<roomlist.size();i++){
+			allroom.add(roomlist.get(i).changetoroomvo());
+		}
+		return allroom;
 	}
 
 //	public static void main(String[]args){

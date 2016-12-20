@@ -109,7 +109,7 @@ public class RoomDataServiceImpl implements RoomDataService{
 	}
 	
 	@Override
-	public synchronized ResultMessage check_out(OrderPO po){
+	public synchronized ResultMessage add(OrderPO po){
 		ResultMessage flag=ResultMessage.Success;
 		RoomDataServiceImpl room=new RoomDataServiceImpl();
 		
@@ -130,6 +130,27 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return flag;
 		
 	}
+	
+	@Override
+	public synchronized ResultMessage addOffline(int hotelid,ArrayList<RoomOrderPO>room_order){
+		ResultMessage flag=ResultMessage.Success;
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		
+		for(int i=0;i<room_order.size();i++){
+			String type=room_order.get(i).getroom_type();
+			int order_num=room_order.get(i).getroom_number();
+			int num=available_num(hotelid,type);
+			num=num+order_num;
+			
+			flag=room.changeRoomNum(num, hotelid, type);
+			if(flag==ResultMessage.Fail){
+				return flag;
+			}
+			
+		}
+		return flag;
+	}
+	
 	@Override
 	public synchronized ResultMessage reduce(OrderPO po){
 		RoomDataServiceImpl room=new RoomDataServiceImpl();
@@ -256,15 +277,15 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return max_price;
 	}
 	
-//	public static void main(String[]args){
-//		RoomDataServiceImpl room=new RoomDataServiceImpl();
-//		ArrayList<RoomOrderPO> room_order=new ArrayList<RoomOrderPO>();
-//		RoomOrderPO po=new RoomOrderPO("大床房",1,2);
-//		room_order.add(po);
-//		po=new RoomOrderPO("双人房",2,3);
-//		room_order.add(po);
-//		room.reduceOffline(1, room_order);
-//		
-//	}
+	public static void main(String[]args){
+		RoomDataServiceImpl room=new RoomDataServiceImpl();
+		ArrayList<RoomOrderPO> room_order=new ArrayList<RoomOrderPO>();
+		RoomOrderPO po=new RoomOrderPO("大床房",1,2);
+		room_order.add(po);
+		po=new RoomOrderPO("双人房",2,3);
+		room_order.add(po);
+		room.addOffline(1, room_order);
+		
+	}
 	
 }

@@ -333,19 +333,18 @@ public class OrderBLServiceImpl implements OrderBLService {
 		OrderPO orderpo=orderdataservice.findByid(orderid);
 		orderpo.setend_time(date);
 		ResultMessage result=orderdataservice.update(orderpo);
-		roomdataservice.check_out(orderpo);
+		roomdataservice.add(orderpo);
 		return result;
 	}
 
 	@Override
 	public ResultMessage offline_checkin(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
-		// TODO Auto-generated method stub
 		ArrayList <RoomOrderPO> roomorderpo=new ArrayList<RoomOrderPO>();
 		for(int i=0;i<room_order.size();i++){
 			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
 		}
-		
-		return null;
+		ResultMessage result=roomdataservice.addOffline(hotelid, roomorderpo);
+		return result;
 	}
 
 	@Override
@@ -356,6 +355,20 @@ public class OrderBLServiceImpl implements OrderBLService {
 		}
 		ResultMessage result=roomdataservice.reduceOffline(hotelid, roomorderpo);
 		return result;
+	}
+
+	@Override
+	public ArrayList<OrderVO> get_client_hotel_order(int clientid, int hotelid) throws RemoteException {
+		// TODO Auto-generated method stub
+		ArrayList<OrderPO> orderpolist=orderdataservice.findByClientid(clientid);
+		ArrayList<OrderVO> ordervolist=new ArrayList<OrderVO>();
+		for(int i=0;i<orderpolist.size();i++){
+			OrderPO po=orderpolist.get(i);
+			if(po.gethotelid()==hotelid){
+				ordervolist.add(po.changetoordervo());
+			}
+		}
+		return ordervolist;
 	}
 
 }
