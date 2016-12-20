@@ -34,9 +34,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 				po.setprice(rs.getInt("price"));
 				roomlist.add(po);
 			}
-			rs.close();
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -61,8 +58,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -82,8 +77,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -109,8 +102,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -142,8 +133,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 				if(j==0){
 					flag=ResultMessage.Fail;
 				}
-				ps.close();
-				conn.close();
 			}catch(SQLException e){
 				e.printStackTrace();
 			}
@@ -164,9 +153,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 			while(rs.next()){
 				available_num=rs.getInt("available_num");
 			}
-			rs.close();
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -184,9 +170,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 			while(rs.next()){
 				po.setid(rs.getInt(1));
 			}
-			rs.close();
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -207,9 +190,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 					min_price=rs.getInt("price");
 				}
 			}
-			rs.close();
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -231,9 +211,6 @@ public class RoomDataServiceImpl implements RoomDataService{
 					max_price=rs.getInt("price");
 				}
 			}
-			rs.close();
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

@@ -14,13 +14,6 @@ import po.HotelWorkerPO;
 import service.dataservice.HotelWorkerDataService;
 
 public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
-	
-	public static void main(String[] args){
-		HotelWorkerDataServiceImpl a = new HotelWorkerDataServiceImpl();
-		ArrayList<HotelWorkerPO> b =a.getallhotelworkerPO();
-		System.out.println(b.size());
-	}
-	
 	@Override
 	public ArrayList<HotelWorkerPO> getallhotelworkerPO() {
 		Connection conn = Connect.getConn();
@@ -39,9 +32,6 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 				hotelworkerlist.add(po);
 			}
-			rs.close();
-			pstmt.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -66,9 +56,6 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 				po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 			}
-			rs.close();
-			pstmt.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -112,9 +99,6 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			while (rs.next()) {
 				po.sethotelid(rs.getInt(1));
 			}
-			rs.close();
-			pstmt.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -163,7 +147,6 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 		Connection conn = Connect.getConn();
 		String sql = "select hotelid from hotelworker where username =encode(?,'key') and password = encode(?,'key')";
 		PreparedStatement pstmt;
-		ResultMessage flag = null;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
 			pstmt.setString(1, username);
@@ -171,16 +154,12 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				if (rs.getInt("hotelid") != -1)
-					flag = ResultMessage.Success;
+					return ResultMessage.Success;
 			}
-			rs.close();
-			pstmt.close();
-			conn.close();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return flag;
+		return ResultMessage.Fail;
 	}
 
 	public HotelWorkerPO gethotelworkerpo(String username, String password) {
@@ -193,18 +172,14 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        pstmt.setString(1,username);
 	        pstmt.setString(2, password);
 	        ResultSet rs = pstmt.executeQuery();
-	        HotelWorkerPO po = new HotelWorkerPO();
 	        while(rs.next()){
-	        	po = new HotelWorkerPO(rs.getInt("hotelid"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
-	        }
-	        rs.close();
-			pstmt.close();
-			conn.close();
+	        	HotelWorkerPO po = new HotelWorkerPO(rs.getInt("hotelid"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
 			return po;
+	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
-	        return null;
 	    }
+	    return null;
 	}
 
 	public int findhotelid_of_hotelworkerbyUsername(String username) {
@@ -219,9 +194,6 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			while (rs.next()) {
 				result = rs.getInt("hotelid");
 			}
-			rs.close();
-			pstmt.close();
-			conn.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
