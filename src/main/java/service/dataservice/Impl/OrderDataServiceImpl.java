@@ -104,8 +104,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -123,8 +121,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 			while(rs.next()){
 				po.setid(rs.getInt(1));
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -142,8 +138,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -184,8 +178,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
-			ps.close();
-			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -247,8 +239,6 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
 				po.sethave_child(rs.getBoolean("havechild"));
 				orderlist.add(po);
-				ps.close();
-				conn.close();
 			}
 		}catch(SQLException e){
 			e.printStackTrace();

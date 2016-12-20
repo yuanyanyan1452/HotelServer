@@ -56,8 +56,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 				clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 				clientpolist.add(clientpo);
-				pstmt.close();
-				conn.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -101,8 +99,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 					clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 					clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 				}
-				pstmt.close();
-				conn.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,8 +139,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 			while (rs.next()) {
 				po.setclientid(rs.getInt(1));
 			}
-			pstmt.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -306,8 +300,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 				if (rs.getInt("id") != -1)
 					return ResultMessage.Success;
 			}
-			pstmt.close();
-			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -326,8 +318,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 			while (rs.next()) {
 				result = rs.getInt("id");
 			}
-			pstmt.close();
-			conn.close();
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -335,5 +325,13 @@ public class ClientDataServiceImpl implements ClientDataService {
 		}
 	}
 
+	// public static void main(String[] args) {
+	// ClientDataServiceImpl a = new ClientDataServiceImpl();
+	// a.find(1);
+	// ArrayList<String> aaa = new ArrayList<String>();
+	// VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
+	// ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info);
+	// a.insert(po);
+	// }
 
 }
