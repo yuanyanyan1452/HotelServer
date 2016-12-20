@@ -45,6 +45,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setexecuteway(rs.getString("executeway"));
 				po.setsuperposition(rs.getBoolean("superposition"));
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
@@ -83,6 +86,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -100,6 +105,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			while(rs.next()){
 				po.setid(rs.getInt(1));
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -116,6 +124,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			while(rs.next()){
 				po.setid(rs.getInt(1));
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -134,6 +145,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -171,6 +184,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -209,6 +224,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setsuperposition(rs.getBoolean("superposition"));
 				hslist.add(po);
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 				e.printStackTrace();
 		} catch (ParseException e) {
@@ -246,6 +264,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setexecuteway(rs.getString("executeway"));
 				po.setsuperposition(rs.getBoolean("superposition"));
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
@@ -283,6 +304,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -302,6 +325,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -338,6 +363,8 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 			if(i==0){
 				flag=ResultMessage.Fail;
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -375,6 +402,9 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 				po.setsuperposition(rs.getBoolean("superposition"));
 				wslist.add(po);
 			}
+			rs.close();
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 				e.printStackTrace();
 		} catch (ParseException e) {
