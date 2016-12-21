@@ -15,6 +15,7 @@ import objects.WebStrategy2;
 import objects.WebStrategy3;
 import objects.WebStrategy4;
 import objects.WebStrategy5;
+import po.HotelPO;
 import po.OrderPO;
 import po.RoomOrderPO;
 import po.RoomPO;
@@ -23,9 +24,11 @@ import service.VOChange;
 import service.blservice.OrderBLService;
 import service.blservice.StrategyBLService;
 import service.dataservice.ClientDataService;
+import service.dataservice.HotelDataService;
 import service.dataservice.OrderDataService;
 import service.dataservice.RoomDataService;
 import service.dataservice.Impl.ClientDataServiceImpl;
+import service.dataservice.Impl.HotelDataServiceImpl;
 import service.dataservice.Impl.OrderDataServiceImpl;
 import service.dataservice.Impl.RoomDataServiceImpl;
 import vo.AccommodationVO;
@@ -39,6 +42,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	RoomDataService roomdataservice=new RoomDataServiceImpl();
 	StrategyBLService strategyblservice=new StrategyBLServiceImpl();
 	ClientDataService clientblservice=new ClientDataServiceImpl();
+	HotelDataService hoteldataservice=new HotelDataServiceImpl();
 	VOChange vochange =new VOChange();
 	BL bl=new BL();
 	@Override
@@ -140,6 +144,20 @@ public class OrderBLServiceImpl implements OrderBLService {
 	public ResultMessage order_client_generate(OrderVO vo) {
 		OrderPO po=vochange.ordervo_to_orderpo(vo);
 		ResultMessage result=orderdataservice.insert(po);
+		HotelPO hotelpo=hoteldataservice.findByid(vo.gethotelid());
+		ArrayList<Integer> clientidlist=hotelpo.getbook_clientid();
+		int newid=vo.getclientid();
+		boolean hh=true;
+		for(int i=0;i<clientidlist.size();i++){
+			if(newid==clientidlist.get(i)){
+				hh=false;
+				break;
+			}
+		}
+		if(hh){
+			clientidlist.add(newid);
+		}
+		hotelpo.setbook_clientid(clientidlist);
 		return result;
 	}
 
