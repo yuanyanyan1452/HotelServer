@@ -80,7 +80,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 
 	@Override
 	public ArrayList<HotelVO> client_getpreviousHotelList(int clientid) throws RemoteException{
-		ArrayList<Hotel> previoushotel_list=hotelblservice.previousHotel(clientid);
+		ArrayList<Hotel> previoushotel_list=hotelblservice.getpreviousHotel(clientid);
 		ArrayList<HotelVO> previoushotelVO_list=new ArrayList<HotelVO>();
 		ArrayList<Integer> hotelid=new ArrayList<Integer>();
 		for(int i=0;i<previoushotel_list.size();i++){

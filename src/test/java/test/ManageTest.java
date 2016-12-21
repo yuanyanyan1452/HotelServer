@@ -92,7 +92,7 @@ public class ManageTest {
 		ClientVO vo = new ClientVO(3,"glance","5656",300,record,info,"sing","appreciate");
 		
 		try {
-			assertEquals(vo,manage.manage_searchClient(3));
+			assertEquals(vo,manage.manage_searchClientByClientid(3));
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,7 +144,7 @@ public class ManageTest {
 	public void test_manage_searchHotelWorker(){
 		HotelWorkerVO vo=new HotelWorkerVO(1,"Susan","1111","Matin","yyj");
 		try {
-			assertEquals(vo,manage.manage_searchHotelWorker(1));
+			assertEquals(vo,manage.manage_searchHotelWorkerByHotelid(1));
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -171,7 +171,7 @@ public class ManageTest {
 	@Test
 	public void test_manage_searchMarketWorker(){
 		WebMarketVO vo=new WebMarketVO(1,"小方","5678","beauty","23333");
-		assertEquals(vo,manage.manage_searchMarketWorker(1));
+		assertEquals(vo,manage.manage_searchMarketWorkerByWebmarketid(1));
 	}
 	
 	@Test
