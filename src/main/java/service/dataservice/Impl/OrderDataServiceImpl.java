@@ -112,6 +112,10 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return flag;
 	}
 
+	/**
+	 * 使得po的id与数据库持久化数据保持一致
+	 * @param po
+	 */
 	public void setid(OrderPO po){
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -192,6 +196,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return flag;
 	}
 	
+	/**
+	 * 数据库与代码层数据类型不一致相互转化的方法，String转ArrayList<RoomOrderPO>
+	 * @param s
+	 * @return
+	 */
 	public ArrayList<RoomOrderPO> transformToArray(String s){
 		ArrayList<RoomOrderPO>room_order=new ArrayList<RoomOrderPO>();
 		if(s!=null){
@@ -208,6 +217,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return room_order;
 	}
 	
+	/**
+	 * 数据库与代码层数据类型不一致相互转化的方法，ArrayList<RoomOrderPO>转String
+	 * @param r
+	 * @return
+	 */
 	public String transformToStr(ArrayList<RoomOrderPO>r){
 		String s = "";
 		if(r.size()>0){
@@ -221,6 +235,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 		return s;
 	}
 	
+	/**
+	 * 工具类方法，供数据层根据不同参数查找订单的方法调用
+	 * @param sql
+	 * @return
+	 */
 	public ArrayList<OrderPO> find(String sql){
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;

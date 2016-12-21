@@ -232,6 +232,10 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return available_num;
 	}
 	
+	/**
+	 * 是po的id与数据库持久化数据保持一致
+	 * @param po
+	 */
 	public void setid(RoomPO po){
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
@@ -251,6 +255,11 @@ public class RoomDataServiceImpl implements RoomDataService{
 		}
 	}
 	
+	/**
+	 * 根据hotelid找出酒店最低价，供酒店数据层调用
+	 * @param hotelid
+	 * @return
+	 */
 	public int find_min_price(int hotelid){
 		int min_price=0;
 		Connection conn=Connect.getConn();
@@ -275,6 +284,11 @@ public class RoomDataServiceImpl implements RoomDataService{
 		return min_price;
 	}
 	
+	/**
+	 * 查找酒店最高价，供酒店数据层调用
+	 * @param hotelid
+	 * @return
+	 */
 	public int find_max_price(int hotelid){
 		int max_price=0;
 		Connection conn=Connect.getConn();

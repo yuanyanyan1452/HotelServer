@@ -94,6 +94,10 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		return flag;
 	}
 
+	/**
+	 * 使po的id与数据库持久化数据保持一致
+	 * @param po
+	 */
 	public void sethsid(HotelStrategyPO po){
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -113,6 +117,10 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		}
 	}
 	
+	/**
+	 * 使po的id与数据库持久化数据保持一致
+	 * @param po
+	 */
 	public void setwsid(WebStrategyPO po){
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
