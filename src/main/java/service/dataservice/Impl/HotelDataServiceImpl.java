@@ -19,10 +19,12 @@ public class HotelDataServiceImpl implements HotelDataService{
 		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
 		ArrayList<HotelPO> hotel_list=hotel.find(sql);
 		return hotel_list;
+		
 	}
-	
 
-
+	/**
+	 * 根据地址商圈查找酒店
+	 */
 	@Override
 	public ArrayList<HotelPO> show_hotel_list(String address,String business_address){
 		String sql="select *from hotel where address like '%"+address+"%' "
@@ -88,6 +90,10 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return flag;
 	}
 	
+	/**
+	 * 使po的id与数据库持久化数据保持一致
+	 * @param po
+	 */
 	public void setid(HotelPO po){
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
@@ -160,6 +166,9 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return flag;
 	}
 
+	/**
+	 * 查找客户预定过的所有酒店
+	 */
 	@Override
 	public ArrayList<HotelPO> showClientHotels(int clientid) {
 		ArrayList<HotelPO> hotelList=new ArrayList<HotelPO>();
@@ -175,36 +184,48 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return hotelList;
 	}
 
+	/**
+	 * 查找酒店最低价，供酒店逻辑层调用
+	 * @param hotelid
+	 * @return
+	 */
 	public int find_min_price(int hotelid){
 		RoomDataServiceImpl room=new RoomDataServiceImpl();
 		return room.find_min_price(hotelid);
 	}
 	
+	/**
+	 * 查找酒店最高价，供酒店逻辑层调用
+	 * @param hotelid
+	 * @return
+	 */
 	public int find_max_price(int hotelid){
 		RoomDataServiceImpl room=new RoomDataServiceImpl();
 		return room.find_max_price(hotelid);
 	}
 	
+	/**
+	 * 数据库与代码层数据类型不同而相互转化的方法，String转ArrayList<Integer>
+	 * @param s
+	 * @return
+	 */
 	public ArrayList<Integer> bookTransformToArray(String s){
 		ArrayList<Integer> book_clientid=new ArrayList<Integer>();
-<<<<<<< HEAD
 		if(s!=null&& !s.equals("")){
 			String[]trans=s.split(",");
 			for(int i=0;i<trans.length;i++){
 				int temp=Integer.parseInt(trans[i]);
-=======
-		if (!s.equals("") && s!= null) {
-			String[] trans = s.split(",");
-			for (int i = 0; i < trans.length; i++) {
-				int temp = Integer.parseInt(trans[i]);
->>>>>>> refs/remotes/Four-People/master
 				book_clientid.add(temp);
 			}
 		}
 		return book_clientid;
 	}
 	
-	
+	/**
+	 * 数据库与代码层数据类型不同而相互转化的方法，ArrayList<Integer>转String
+	 * @param book_clientid
+	 * @return
+	 */
 	public String bookTransformToStr(ArrayList<Integer> book_clientid){
 		String s="";
 		if(book_clientid.size()>0){
@@ -216,15 +237,15 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return s;
 	}
 	
+	/**
+	 * 数据库与代码层数据类型不同而相互转化的方法，String转ArrayList<String>
+	 * @param s
+	 * @return
+	 */
 	public ArrayList<String> evaluTransformToArray(String s){
 		ArrayList<String> evalu = new ArrayList<String>();
-<<<<<<< HEAD
 		if(s!=null&& !s.equals("")){
 			String[]e=s.split(",");
-=======
-		if(s!=null && !s.equals("")){
-			String[] e=s.split(",");
->>>>>>> refs/remotes/Four-People/master
 			for(int i=0;i<e.length;i++){
 				String temp=e[i];
 				evalu.add(temp);
@@ -234,6 +255,11 @@ public class HotelDataServiceImpl implements HotelDataService{
 		
 	}
 	
+	/**
+	 * 数据库与代码层数据类型不同而相互转化的方法，ArrayList<String>转String
+	 * @param evalu
+	 * @return
+	 */
 	public String evaluTransformToStr(ArrayList<String> evalu){
 		String s="";
 		for(int i=0;i<evalu.size()-1;i++){
@@ -244,6 +270,11 @@ public class HotelDataServiceImpl implements HotelDataService{
 		
 	}
 	
+	/**
+	 * 工具类方法，供数据层多个搜索酒店的方法调用
+	 * @param sql
+	 * @return
+	 */
 	public ArrayList<HotelPO> find(String sql){
 		ArrayList<HotelPO> hotel_list=new ArrayList<HotelPO>();
 		Connection conn=Connect.getConn();
@@ -277,7 +308,6 @@ public class HotelDataServiceImpl implements HotelDataService{
 		
 	}
 
-<<<<<<< HEAD
 //	public static void main(String[] args){
 //		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
 ////		String s="";
@@ -289,6 +319,4 @@ public class HotelDataServiceImpl implements HotelDataService{
 ////		hotel.insert(po);
 //	}
 	
-=======
->>>>>>> refs/remotes/Four-People/master
 }
