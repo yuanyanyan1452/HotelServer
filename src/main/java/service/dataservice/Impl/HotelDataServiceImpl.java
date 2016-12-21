@@ -211,10 +211,12 @@ public class HotelDataServiceImpl implements HotelDataService{
 	 */
 	public ArrayList<Integer> bookTransformToArray(String s){
 		ArrayList<Integer> book_clientid=new ArrayList<Integer>();
-		String[]trans=s.split(",");
-		for(int i=0;i<trans.length;i++){
-			int temp=Integer.parseInt(trans[i]);
-			book_clientid.add(temp);
+		if(s!=null&& !s.equals("")){
+			String[]trans=s.split(",");
+			for(int i=0;i<trans.length;i++){
+				int temp=Integer.parseInt(trans[i]);
+				book_clientid.add(temp);
+			}
 		}
 		return book_clientid;
 	}
@@ -242,7 +244,7 @@ public class HotelDataServiceImpl implements HotelDataService{
 	 */
 	public ArrayList<String> evaluTransformToArray(String s){
 		ArrayList<String> evalu = new ArrayList<String>();
-		if(s!=null){
+		if(s!=null&& !s.equals("")){
 			String[]e=s.split(",");
 			for(int i=0;i<e.length;i++){
 				String temp=e[i];
@@ -305,11 +307,16 @@ public class HotelDataServiceImpl implements HotelDataService{
 		return hotel_list;
 		
 	}
+
 //	public static void main(String[] args){
 //		HotelDataServiceImpl hotel=new HotelDataServiceImpl();
-//		ArrayList<String>evalu=new ArrayList<String>();
-//		ArrayList<Integer>book_id=new ArrayList<Integer>();
-//		HotelPO po = new HotelPO(4,"凯撒酒店","徐州市经济开发区","金山桥","四星级商务酒店","wifi,餐饮，洗浴，娱乐","四星级",null,evalu,book_id);
-//		hotel.insert(po);
+////		String s="";
+////		ArrayList<Integer>id=hotel.bookTransformToArray(s);
+//		ArrayList<HotelPO> b = hotel.getAllHotelPO();
+//		System.out.println(b.size());
+////		ArrayList<Integer>book_id=new ArrayList<Integer>();
+////		HotelPO po = new HotelPO(4,"凯撒酒店","徐州市经济开发区","金山桥","四星级商务酒店","wifi,餐饮，洗浴，娱乐","四星级",null,evalu,book_id);
+////		hotel.insert(po);
 //	}
+	
 }
