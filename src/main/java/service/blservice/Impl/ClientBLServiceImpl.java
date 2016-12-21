@@ -2,6 +2,7 @@ package service.blservice.Impl;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 import objects.Client;
 import objects.Hotel;
@@ -84,16 +85,14 @@ public class ClientBLServiceImpl implements ClientBLService {
 		ArrayList<HotelVO> previoushotelVO_list=new ArrayList<HotelVO>();
 		ArrayList<Integer> hotelid=new ArrayList<Integer>();
 		for(int i=0;i<previoushotel_list.size();i++){
-			HotelVO hotelvo=objectchange.changetohotelvo(previoushotel_list.get(i));
-			for(int j=0;j<hotelid.size();j++){
-				if(!hotelid.contains(hotelvo.getid())){
-					hotelid.add(hotelvo.getid());
-					previoushotelVO_list.add(hotelvo);
-				}
-			}
+			hotelid.add(previoushotel_list.get(i).getid());
 		}
-		
-		
+		LinkedHashSet<Integer> set=new LinkedHashSet<Integer>(hotelid);
+		ArrayList<Integer> newidlist=new ArrayList<Integer>(set);
+		for(int i=0;i<newidlist.size();i++){
+			HotelVO hotelvo=hotelblservice.hotel_getInfo(newidlist.get(i));
+			previoushotelVO_list.add(hotelvo);
+		}
 	
 		return previoushotelVO_list;
 	}
