@@ -102,7 +102,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from hotelstrategy where name = "+po.getname() ;
+		String sql = "select * from hotelstrategy where name = '"+po.getname()+"'" ;
 		try{
 			ps=conn.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -206,7 +206,7 @@ public class StrategyDataServiceImpl implements StrategyDataService {
 		Connection conn=Connect.getConn();
 		PreparedStatement ps=null;
 		ResultSet rs=null;
-		String sql="select *from hotelstrategy where hotelid='"+hotelid+"";
+		String sql="select *from hotelstrategy where hotelid='"+hotelid+"'";
 		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{
