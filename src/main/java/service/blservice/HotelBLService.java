@@ -138,6 +138,15 @@ public interface HotelBLService extends Remote{
 	 * @throws RemoteException
 	 */
 	public ArrayList<HotelVO> searchHotelByscore(ArrayList<HotelVO> list,double lowscore, double highscore)throws RemoteException;
+
+	/**
+	 * 搜索酒店时只搜索自己预订过的酒店
+	 * @param hotelvolist
+	 * @param clientid
+	 * @return
+	 * @throws RemoteException
+	 */
+	public ArrayList<HotelVO> searchpreviousHotelList(ArrayList<HotelVO> hotelvolist,int clientid)throws RemoteException;
 	
 	/**
 	 * 客户评价酒店

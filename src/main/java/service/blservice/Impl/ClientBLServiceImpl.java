@@ -95,6 +95,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 		}
 	
 		return previoushotelVO_list;
+		
 	}
 
 	@Override
