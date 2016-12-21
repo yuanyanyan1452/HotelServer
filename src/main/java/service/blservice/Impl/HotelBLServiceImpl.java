@@ -236,7 +236,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 			for(int j=0;j<booked_clientid.size();j++){
 				if(booked_clientid.get(j)==clientid){
 					x=true;
-					System.out.println(hotelvo.getname());
 					break;
 				}
 			}
@@ -244,7 +243,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 				newlist.add(hotelvo);
 			}
 		}
-		System.out.println(newlist.size());
 		return newlist;
 	}
 	
