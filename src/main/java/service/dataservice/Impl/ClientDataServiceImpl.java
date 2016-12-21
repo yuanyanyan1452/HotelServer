@@ -90,19 +90,16 @@ public class ClientDataServiceImpl implements ClientDataService {
 					CreditRecordList.add(CreditRecords[i]);
 				}
 				clientpo.setcredit_record(CreditRecordList);
-				if (rs.getString("info") == null) {
+				
+				if (rs.getString("viptype")==null || rs.getString("viptype").equals("")) {
 					clientpo.setvipinfo(null);
-					if (rs.getString("info").equals(null)) {
-						clientpo.setvipinfo(null);
-					} else if (rs.getString("info").contains("normal")) {
-						clientpo.setvipinfo(new VIPInfo(VIPType.NORMAL, rs.getString("info")));
-					} else if (rs.getString("info").contains("enterprise")) {
-						clientpo.setvipinfo(new VIPInfo(VIPType.Enterprise, rs.getString("info")));
-					}
-					clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
-					clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
+				} else if (rs.getString("viptype").contains("normal")) {
+					clientpo.setvipinfo(new VIPInfo(VIPType.NORMAL, rs.getString("info")));
+				} else if (rs.getString("viptype").contains("enterprise")) {
+					clientpo.setvipinfo(new VIPInfo(VIPType.Enterprise, rs.getString("info")));
 				}
-			
+				clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
+				clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 			}
 			pstmt.close();
 			conn.close();
@@ -178,6 +175,19 @@ public class ClientDataServiceImpl implements ClientDataService {
 		}
 	}
 
+	 public static void main(String[] args) {
+	 ClientDataServiceImpl a = new ClientDataServiceImpl();
+	// ArrayList<String> aaa = new ArrayList<String>();
+	// VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
+	// ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info,"1","1");
+	// a.insert(po);
+	 //a.find(1);
+	 ClientPO po = a.find(1);
+	 po.setcontact("8888");
+	 a.update(po);
+	// a.update(po);
+	 }
+	
 	@Override
 	public synchronized ResultMessage update(ClientPO po) {
 		Connection conn = Connect.getConn();
@@ -208,12 +218,9 @@ public class ClientDataServiceImpl implements ClientDataService {
 				pstmt.setString(5, "");
 				pstmt.setString(6, "");
 			}
-
-			stream = new ByteArrayInputStream(po.getusername().getBytes());
-			pstmt.setBinaryStream(7, stream, stream.available());
-
-			stream = new ByteArrayInputStream(po.getpassword().getBytes());
-			pstmt.setBinaryStream(8, stream, stream.available());
+			
+			pstmt.setString(7, po.getusername());
+			pstmt.setString(8, po.getpassword());
 			pstmt.setInt(9, po.getclientid());
 			pstmt.executeUpdate();
 			pstmt.close();
@@ -243,17 +250,6 @@ public class ClientDataServiceImpl implements ClientDataService {
 		return ResultMessage.Fail;
 	}
 
-	// public static void main(String[] args) {
-	// ClientDataServiceImpl a = new ClientDataServiceImpl();
-	//// ArrayList<String> aaa = new ArrayList<String>();
-	//// VIPInfo info = new VIPInfo(VIPType.NORMAL, "1");
-	//// ClientPO po = new ClientPO(1, "yyy", "1", 320, aaa,info,"1","1");
-	//// a.insert(po);
-	// a.find(1);
-	// System.out.println(a.check("1","1"));
-	//// a.update(po);
-	//
-	// }
 	public ClientPO getclientpo(String username, String password) {
 		Connection conn = Connect.getConn();
 		String sql = "select id,decode(name,'key'),decode(contact,'key'),credit,creditrecord,viptype,info from client where username =encode(?,'key') and password = encode(?,'key')";
@@ -279,7 +275,9 @@ public class ClientDataServiceImpl implements ClientDataService {
 					CreditRecordList.add(CreditRecords[i]);
 				}
 				clientpo.setcredit_record(CreditRecordList);
-				if (rs.getString("info").contains("normal")) {
+				if(rs.getString("viptype")==null){
+					clientpo.setvipinfo(null);
+				} else if (rs.getString("viptype").contains("normal")) {
 					clientpo.setvipinfo(new VIPInfo(VIPType.NORMAL, rs.getString("info")));
 				} else
 					clientpo.setvipinfo(new VIPInfo(VIPType.Enterprise, rs.getString("info")));
@@ -294,7 +292,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 		}
 		return null;
 	}
-
+	
 	public ResultMessage check(String username, String password) {
 		Connection conn = Connect.getConn();
 		String sql = "select id from client where username =encode(?,'key') and password = encode(?,'key')";
