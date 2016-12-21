@@ -11,7 +11,7 @@ public class ServerRunner {
 	
 	public static void main(String[] args) {
 		new ServerRunner();
-		final long timeintervals=10000;
+		final long timeintervals=24*3600*1000;
 		Runnable runnable=new Runnable(){
 		BL bl=new BL();
 		public void run(){

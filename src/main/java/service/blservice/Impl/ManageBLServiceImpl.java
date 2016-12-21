@@ -125,7 +125,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 	
 	@Override
-	public ClientVO manage_searchClient(int clientid) throws RemoteException{
+	public ClientVO manage_searchClientByClientid(int clientid) throws RemoteException{
 		Client client= clientblservice.checkClientInfo(clientid);
 		ClientVO clientvo=objectchange.changetoclientvo(client);
 		return clientvo;
@@ -153,7 +153,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public HotelWorkerVO manage_searchHotelWorker(int hotelid) throws RemoteException{
+	public HotelWorkerVO manage_searchHotelWorkerByHotelid(int hotelid) throws RemoteException{
 		HotelWorker hotelworker=hotelblservice.searchHotelWorker(hotelid);
 		HotelWorkerVO hotelworkervo=objectchange.changetohotelworkervo(hotelworker);
 		return hotelworkervo;
@@ -174,7 +174,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	}
 
 	@Override
-	public WebMarketVO manage_searchMarketWorker(int marketWorkerid) {
+	public WebMarketVO manage_searchMarketWorkerByWebmarketid(int marketWorkerid) {
 		WebMarketPO webmarketpo=managedataservice.findWebMarket(marketWorkerid);
 		WebMarketVO webmarketvo=webmarketpo.changetowebmarketvo();		return webmarketvo;
 	}

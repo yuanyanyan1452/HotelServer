@@ -3,8 +3,6 @@ package test;
 import static org.junit.Assert.assertEquals;
 
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -13,7 +11,6 @@ import objects.Hotel;
 import objects.HotelWorker;
 import objects.ResultMessage;
 import service.blservice.Impl.HotelBLServiceImpl;
-import vo.AccommodationVO;
 import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -46,7 +43,7 @@ public class HotelTest {
 	
 	@Test
 	public void testhotel_checkInfo(){
-		HotelVO hotelVO = hotelblImpl.hotel_checkInfo(1);
+		HotelVO hotelVO = hotelblImpl.hotel_getInfo(1);
 		ArrayList<String>evalu=new ArrayList<String>();
 		evalu.add("just so so");
 		evalu.add("bad");
@@ -61,7 +58,6 @@ public class HotelTest {
 	
 	@Test
 	public void testhotel_updateInfo(){
-		HotelVO hotelVO = hotelblImpl.hotel_checkInfo(1);
 		ArrayList<String>evalu=new ArrayList<String>();
 		evalu.add("just so so");
 		evalu.add("bad");
@@ -81,21 +77,20 @@ public class HotelTest {
 		assertEquals(ResultMessage.Success,hotelblImpl.hotel_importRoom(roomvo));
 	}
 	
-	@Test
-	public void testhotel_updateAccomodation() throws RemoteException{
-		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		AccommodationVO accomodationvo;
-		try {
-			accomodationvo = new AccommodationVO("314",fmt.parse("2016-11-12 14:00:00"), fmt.parse("2016-11-15 13:10:15"), fmt.parse("2016-11-15 14:00:00"));
-			int orderid =1;
-			
-			assertEquals(ResultMessage.Success,hotelblImpl.hotel_updateAccomodation(accomodationvo,orderid));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//	@Test
+//	public void testhotel_updateAccomodation() throws RemoteException{
+//		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		AccommodationVO accomodationvo;
+//		try {
+//			accomodationvo = new AccommodationVO("314",fmt.parse("2016-11-12 14:00:00"), fmt.parse("2016-11-15 13:10:15"), fmt.parse("2016-11-15 14:00:00"));
+//			int orderid =1;
+//			
+//			assertEquals(ResultMessage.Success,hotelblImpl.hotel_updateAccomodation(accomodationvo,orderid));
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
 	
 	@Test
 	public void testsearchHotelByLocation(){
@@ -259,7 +254,7 @@ public class HotelTest {
 		ArrayList<Hotel> testHotelList_Client=new ArrayList<Hotel>();
 		Hotel hotel=new Hotel();
 		testHotelList_Client.add(hotel);
-		ArrayList<Hotel> HotelList=hotelblImpl.previousHotel(1);
+		ArrayList<Hotel> HotelList=hotelblImpl.getpreviousHotel(1);
 		
 		assertEquals(testHotelList_Client,HotelList);
 	}

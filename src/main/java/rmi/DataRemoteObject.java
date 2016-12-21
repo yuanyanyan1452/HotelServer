@@ -3,7 +3,6 @@ package rmi;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Date;
 
 import objects.Client;
 import objects.Hotel;
@@ -104,33 +103,33 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid) throws RemoteException {
-		return orderbl.order_client_browse(clientid);
+	public ArrayList<OrderVO> findorderByClientid(int clientid) throws RemoteException {
+		return orderbl.findorderByClientid(clientid);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid, String state) throws RemoteException {
-		return orderbl.order_client_browse(clientid, state);
+	public ArrayList<OrderVO> findorderBy_Clientid_State(int clientid, String state) throws RemoteException {
+		return orderbl.findorderBy_Clientid_State(clientid, state);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute) throws RemoteException {
-		return orderbl.order_client_browse(clientid, isExecute);
+	public ArrayList<OrderVO> findorderBy_Clientid_Execute(int clientid, boolean isExecute) throws RemoteException {
+		return orderbl.findorderBy_Clientid_Execute(clientid, isExecute);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid) throws RemoteException {
-		return orderbl.order_hotel_browse(hotelid);
+	public ArrayList<OrderVO> findorderByHotelid(int hotelid) throws RemoteException {
+		return orderbl.findorderByHotelid(hotelid);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) throws RemoteException {
-		return orderbl.order_hotel_browse(hotelid, state);
+	public ArrayList<OrderVO> findorderBy_Hotelid_State(int hotelid, String state) throws RemoteException {
+		return orderbl.findorderBy_Hotelid_State(hotelid, state);
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) throws RemoteException {
-		return orderbl.order_hotel_browse(hotelid, isExecute);
+	public ArrayList<OrderVO> findorderBy_Hotelid_Execute(int hotelid, boolean isExecute) throws RemoteException {
+		return orderbl.findorderBy_Hotelid_Execute(hotelid, isExecute);
 	}
 
 	@Override
@@ -166,11 +165,6 @@ public class DataRemoteObject extends UnicastRemoteObject
 	@Override
 	public double calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid,int clientid) throws RemoteException {
 		return orderbl.calculateTotalwithStrategy(roomlist, hotelid,clientid);
-	}
-
-	@Override
-	public ResultMessage updateActualLeaveTime(int orderid, Date leaveTime) throws RemoteException{
-		return orderbl.updateActualLeaveTime(orderid, leaveTime);
 	}
 	
 	@Override
@@ -251,8 +245,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
-	public ClientVO manage_searchClient(int clientid) throws RemoteException {
-		return managebl.manage_searchClient(clientid);
+	public ClientVO manage_searchClientByClientid(int clientid) throws RemoteException {
+		return managebl.manage_searchClientByClientid(clientid);
 	}
 
 	@Override
@@ -271,8 +265,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public HotelWorkerVO manage_searchHotelWorker(int hotelid) throws RemoteException {
-		return managebl.manage_searchHotelWorker(hotelid);
+	public HotelWorkerVO manage_searchHotelWorkerByHotelid(int hotelid) throws RemoteException {
+		return managebl.manage_searchHotelWorkerByHotelid(hotelid);
 	}
 
 	@Override
@@ -286,8 +280,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public WebMarketVO manage_searchMarketWorker(int marketWorkerid) throws RemoteException {
-		return managebl.manage_searchMarketWorker(marketWorkerid);
+	public WebMarketVO manage_searchMarketWorkerByWebmarketid(int marketWorkerid) throws RemoteException {
+		return managebl.manage_searchMarketWorkerByWebmarketid(marketWorkerid);
 	}
 
 	@Override
@@ -307,8 +301,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public HotelVO hotel_checkInfo(int hotelid) throws RemoteException {
-		return hotelbl.hotel_checkInfo(hotelid);
+	public HotelVO hotel_getInfo(int hotelid) throws RemoteException {
+		return hotelbl.hotel_getInfo(hotelid);
 	}
 
 	@Override
@@ -326,10 +320,6 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return hotelbl.hotel_updateRoom(room);
 	}
 
-	@Override
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid) throws RemoteException {
-		return hotelbl.hotel_updateAccomodation(info,orderid);
-	}
 
 	@Override
 	public Hotel searchHotel(int hotelid) throws RemoteException{
@@ -337,8 +327,8 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 
 	@Override
-	public ArrayList<Hotel> previousHotel(int clientid) throws RemoteException{
-		return hotelbl.previousHotel(clientid);
+	public ArrayList<Hotel> getpreviousHotel(int clientid) throws RemoteException{
+		return hotelbl.getpreviousHotel(clientid);
 	}
 
 	@Override

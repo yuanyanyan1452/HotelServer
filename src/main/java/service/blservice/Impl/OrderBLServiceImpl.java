@@ -42,7 +42,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	VOChange vochange =new VOChange();
 	BL bl=new BL();
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid) {
+	public ArrayList<OrderVO> findorderByClientid(int clientid) {
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByClientid(clientid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -53,7 +53,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid, String state) {
+	public ArrayList<OrderVO> findorderBy_Clientid_State(int clientid, String state) {
 		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, state, true);
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, state, false);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
@@ -69,7 +69,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute) {
+	public ArrayList<OrderVO> findorderBy_Clientid_Execute(int clientid, boolean isExecute) {
 		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, "NORMAL", isExecute);
 		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, "ABNORMAL", isExecute);
 		ArrayList<OrderPO> orderpo_list3=orderdataservice.findByStatus(clientid, "CANCELLED", isExecute);
@@ -90,7 +90,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid) {
+	public ArrayList<OrderVO> findorderByHotelid(int hotelid) {
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -101,7 +101,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid, String state) {
+	public ArrayList<OrderVO> findorderBy_Hotelid_State(int hotelid, String state) {
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -114,7 +114,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	}
 
 	@Override
-	public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) {
+	public ArrayList<OrderVO> findorderBy_Hotelid_Execute(int hotelid, boolean isExecute) {
 		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
@@ -291,13 +291,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 		return min_price;
 	}
 
-	@Override
-	public ResultMessage updateActualLeaveTime(int orderid, Date leaveTime) {
-		OrderPO orderpo=orderdataservice.findByid(orderid);
-		orderpo.setend_time(leaveTime);
-		ResultMessage result=orderdataservice.update(orderpo);
-		return result;
-	}
 
 	@Override
 	public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {

@@ -19,7 +19,6 @@ import service.dataservice.RoomDataService;
 import service.dataservice.Impl.HotelDataServiceImpl;
 import service.dataservice.Impl.HotelWorkerDataServiceImpl;
 import service.dataservice.Impl.RoomDataServiceImpl;
-import vo.AccommodationVO;
 import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -49,7 +48,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public HotelVO hotel_checkInfo(int hotelid) {
+	public HotelVO hotel_getInfo(int hotelid) {
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		HotelVO hotelvo=hotelpo.changetohotelvo();
 		return hotelvo;
@@ -88,12 +87,6 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public ResultMessage hotel_updateAccomodation(AccommodationVO info,int orderid) throws RemoteException {
-		ResultMessage result=orderblservice.order_checkin(info, orderid);
-		return result;
-	}
-
-	@Override
 	public Hotel searchHotel(int hotelid) {
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		Hotel hotel=hotelpo.changetohotel(hotelpo);
@@ -101,7 +94,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
-	public ArrayList<Hotel> previousHotel(int clientid) {
+	public ArrayList<Hotel> getpreviousHotel(int clientid) {
 		ArrayList<HotelPO> previoushotelpo_list =hoteldataservice.showClientHotels(clientid);
 		ArrayList<Hotel> previoushotel_list=new ArrayList<Hotel>();
 		for(int i=0;i<previoushotelpo_list.size();i++){

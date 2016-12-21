@@ -294,9 +294,10 @@ public class HotelDataServiceImpl implements HotelDataService{
 				hotelPO.sethotel_evaluation(evaluTransformToArray(rs.getString("hotel_evaluation")));
 				hotelPO.setbook_clientid(bookTransformToArray(rs.getString("book_clientid")));
 				hotel_list.add(hotelPO);
-				ps.close();
-				conn.close();
+				
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

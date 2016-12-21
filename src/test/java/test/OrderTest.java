@@ -41,7 +41,7 @@ public class OrderTest {
 				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
 		expect_list.add(ordervo1);
 
-		ArrayList<OrderVO> orderlist = OrderImpl.order_client_browse(3);
+		ArrayList<OrderVO> orderlist = OrderImpl.findorderByClientid(3);
 		assertEquals(expect_list, orderlist);
 	}
 
@@ -57,7 +57,7 @@ public class OrderTest {
 				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
 		expect_list.add(ordervo1);
 		
-		ArrayList<OrderVO> orderlist = OrderImpl.order_client_browse(3,"异常");
+		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Clientid_State(3,"异常");
 		assertEquals(expect_list, orderlist);
 
 	}
@@ -74,7 +74,7 @@ public class OrderTest {
 				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
 		expect_list.add(ordervo1);
 		
-		ArrayList<OrderVO> orderlist = OrderImpl.order_client_browse(3,false);
+		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Clientid_Execute(3,false);
 
 		assertEquals(expect_list, orderlist);
 
@@ -91,7 +91,7 @@ public class OrderTest {
 				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true);
 		expect_list.add(ordervo1);
 
-		ArrayList<OrderVO> orderlist = OrderImpl.order_hotel_browse(1);
+		ArrayList<OrderVO> orderlist = OrderImpl.findorderByHotelid(1);
 		
 		assertEquals(expect_list, orderlist);
 
@@ -108,7 +108,7 @@ public class OrderTest {
 				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true);
 		expect_list.add(ordervo1);
 
-		ArrayList<OrderVO> orderlist = OrderImpl.order_hotel_browse(1,"正常");
+		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Hotelid_State(1,"正常");
 
 		assertEquals(expect_list, orderlist);
 
@@ -125,7 +125,7 @@ public class OrderTest {
 				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true);
 		expect_list.add(ordervo1);
 
-		ArrayList<OrderVO> orderlist = OrderImpl.order_hotel_browse(1,true);
+		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Hotelid_Execute(1,true);
 
 		assertEquals(expect_list, orderlist);
 
@@ -218,17 +218,17 @@ public class OrderTest {
 
 	}
 
-	@Test
-
-	public void testupdateActualLeaveTime() {
-
-		OrderBLServiceImpl OrderImpl = new OrderBLServiceImpl();
-
-		ResultMessage result = OrderImpl.updateActualLeaveTime(7, String2Date("2016-12-1-12-00-00"));
-
-		assertEquals(ResultMessage.Success, result);
-
-	}
+//	@Test
+//
+//	public void testupdateActualLeaveTime() {
+//
+//		OrderBLServiceImpl OrderImpl = new OrderBLServiceImpl();
+//
+//		ResultMessage result = OrderImpl.updateActualLeaveTime(7, String2Date("2016-12-1-12-00-00"));
+//
+//		assertEquals(ResultMessage.Success, result);
+//
+//	}
 	
 	Date String2Date(String str){
 		Date date;

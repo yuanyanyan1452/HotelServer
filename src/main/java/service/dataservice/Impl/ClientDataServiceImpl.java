@@ -56,9 +56,10 @@ public class ClientDataServiceImpl implements ClientDataService {
 				clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 				clientpolist.add(clientpo);
-				pstmt.close();
-				conn.close();
+		
 			}
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -101,9 +102,10 @@ public class ClientDataServiceImpl implements ClientDataService {
 					clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 					clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
 				}
-				pstmt.close();
-				conn.close();
+			
 			}
+			pstmt.close();
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
