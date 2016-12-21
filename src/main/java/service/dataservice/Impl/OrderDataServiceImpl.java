@@ -251,9 +251,10 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
 				po.sethave_child(rs.getBoolean("havechild"));
 				orderlist.add(po);
-				ps.close();
-				conn.close();
+				
 			}
+			ps.close();
+			conn.close();
 		}catch(SQLException e){
 			e.printStackTrace();
 		} catch (ParseException e) {
