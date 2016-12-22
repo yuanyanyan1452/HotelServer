@@ -34,6 +34,7 @@ public class ObjectChange {
 		po.setvipinfo(client.info);
 		po.setusername(client.username);
 		po.setpassword(client.password);
+		po.setlogged(client.logged);
 		return po;
 	}
 	
@@ -47,6 +48,7 @@ public class ObjectChange {
 		vo.setvipinfo(client.info);
 		vo.setusername(client.username);
 		vo.setpassword(client.password);
+		vo.setlogged(client.logged);
 		return vo;
 	}
 	
@@ -113,6 +115,7 @@ public class ObjectChange {
 		po.setcontact(worker.contact);
 		po.setusername(worker.username);
 		po.setpassword(worker.password);
+		po.setlogged(worker.logged);
 		return po;
 	}
 	
@@ -123,6 +126,7 @@ public class ObjectChange {
 		vo.setcontact(worker.contact);
 		vo.setusername(worker.username);
 		vo.setpassword(worker.password);
+		vo.setlogged(worker.logged);
 		return vo;
 	}
 	
@@ -133,6 +137,7 @@ public class ObjectChange {
 		po.setcontact(manager.contact);
 		po.setusername(manager.username);
 		po.setpassword(manager.password);
+		po.setlogged(manager.logged);
 		return po;
 	}
 	
@@ -143,6 +148,7 @@ public class ObjectChange {
 		vo.setcontact(manager.contact);
 		vo.setusername(manager.username);
 		vo.setpassword(manager.password);
+		vo.setlogged(manager.logged);
 		return vo;
 	}
 	
@@ -238,6 +244,7 @@ public class ObjectChange {
 		po.setcontact(market.contact);
 		po.setusername(market.username);
 		po.setpassword(market.password);
+		po.setlogged(market.logged);
 		return po;
 	}
 	
@@ -248,6 +255,7 @@ public class ObjectChange {
 		vo.setcontact(market.contact);
 		vo.setusername(market.username);
 		vo.setpassword(market.password);
+		vo.setlogged(market.logged);
 		return vo;
 	}
 	

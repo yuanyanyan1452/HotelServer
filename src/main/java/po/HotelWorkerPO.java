@@ -11,6 +11,7 @@ public class HotelWorkerPO implements Serializable{
 	String contact;
 	String username;
 	String password;
+	boolean logged;
 	
 	public HotelWorkerPO(){
 		hotelid=0;
@@ -18,6 +19,7 @@ public class HotelWorkerPO implements Serializable{
 		contact=null;
 		username=null;
 		password=null;
+		logged=false;
 	}
 	
 	public HotelWorkerPO(int id,String n,String c,String u,String p){
@@ -26,6 +28,7 @@ public class HotelWorkerPO implements Serializable{
 		contact=c;
 		username=u;
 		password=p;
+		logged=false;
 	}
 	
 	public int gethotelid() {
@@ -63,6 +66,13 @@ public class HotelWorkerPO implements Serializable{
 		this.password = password;
 	}
 	
+	public boolean getlogged() {
+		return this.logged;
+	}
+	public void setlogged(boolean logged) {
+		this.logged = logged;
+	}
+	
 	public HotelWorker changetohotelworker(){
 		HotelWorker hotelworker=new HotelWorker();
 		hotelworker.sethotelid(this.hotelid);
@@ -70,6 +80,7 @@ public class HotelWorkerPO implements Serializable{
 		hotelworker.setcontact(this.contact);
 		hotelworker.setusername(this.username);
 		hotelworker.setpassword(this.password);
+		hotelworker.setlogged(this.logged);
 		return hotelworker;
 	}
 	
@@ -80,6 +91,7 @@ public class HotelWorkerPO implements Serializable{
 		vo.setcontact(this.contact);
 		vo.setusername(this.username);
 		vo.setpassword(this.password);
+		vo.setlogged(this.logged);
 		return vo;
 	}
 	

@@ -11,6 +11,7 @@ public class WebMarketPO implements Serializable{
 	String contact;
 	String username;
 	String password;
+	boolean logged;
 	
 	public WebMarketPO(){
 		webmarketid = 0;
@@ -18,6 +19,7 @@ public class WebMarketPO implements Serializable{
 		contact=null;
 		username=null;
 		password=null;
+		logged=false;
 	}
 	
 	public WebMarketPO(int id,String n,String c,String u,String p){
@@ -26,6 +28,7 @@ public class WebMarketPO implements Serializable{
 		contact=c;
 		username=u;
 		password=p;
+		logged=false;
 	}
 
 	public int getwebmarketid() {
@@ -68,6 +71,14 @@ public class WebMarketPO implements Serializable{
 		this.password = password;
 	}
 	
+	public boolean getlogged() {
+		return this.logged;
+	}
+
+	public void setlogged(boolean logged) {
+		this.logged = logged;
+	}
+	
 	public WebMarket changetowebmarket(){
 		WebMarket webmarket=new WebMarket();
 		webmarket.setwebmarketid(this.webmarketid);
@@ -75,6 +86,7 @@ public class WebMarketPO implements Serializable{
 		webmarket.setcontact(this.contact);
 		webmarket.setusername(this.username);
 		webmarket.setpassword(this.password);
+		webmarket.setlogged(this.logged);
 		return webmarket;
 	}
 	
@@ -85,6 +97,7 @@ public class WebMarketPO implements Serializable{
 		vo.setcontact(this.contact);
 		vo.setusername(this.username);
 		vo.setpassword(this.password);
+		vo.setlogged(this.logged);
 		return vo;
 	}
 	

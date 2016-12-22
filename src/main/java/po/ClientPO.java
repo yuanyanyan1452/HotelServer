@@ -16,6 +16,7 @@ public class ClientPO implements Serializable {
 	VIPInfo info;
 	String username;
 	String password;
+	boolean logged;
 	
 	public ClientPO(){
 		clientid=0;
@@ -26,6 +27,7 @@ public class ClientPO implements Serializable {
 		info=null;
 		username=null;
 		password=null;
+		logged=false;
 	}
 	
 	public ClientPO(int clientid, String client_name, String contact, int credit, ArrayList<String> credit_record,
@@ -39,6 +41,7 @@ public class ClientPO implements Serializable {
 		this.info = info;
 		this.username = username;
 		this.password = password;
+		this.logged = false;
 	}
 
 	public VIPInfo getinfo() {
@@ -113,6 +116,14 @@ public class ClientPO implements Serializable {
 		this.info = info;
 	}
 	
+	public boolean getlogged() {
+		return logged;
+	}
+
+	public void setlogged(boolean logged) {
+		this.logged = logged;
+	}
+	
 	public ClientVO changetoclientvo(){
 		ClientVO vo=new ClientVO(0,null,null,0,null,null,null,null);
 		vo.setclientid(this.clientid);
@@ -123,6 +134,8 @@ public class ClientPO implements Serializable {
 		vo.setvipinfo(this.info);
 		vo.setusername(this.username);
 		vo.setpassword(this.password);
+		vo.setlogged(this.logged);
+		
 		return vo;
 	}
 	
@@ -135,6 +148,7 @@ public class ClientPO implements Serializable {
 		client.setcredit_record(this.credit_record);
 		client.setusername(this.username);
 		client.setpassword(this.password);
+		client.setlogged(this.logged);
 		
 		return client;
 	}

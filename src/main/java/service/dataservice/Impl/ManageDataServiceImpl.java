@@ -19,7 +19,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public ArrayList<WebMarketPO> getallwebmarketPO() {
 		Connection conn = Connect.getConn();
-		String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from webmarket "; // 需要执行的sql语句
+		String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key'),logged from webmarket "; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		ArrayList<WebMarketPO> webmarketlist = new ArrayList<WebMarketPO>();
 		try {
@@ -32,6 +32,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 				po.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
 				po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
+				po.setlogged(rs.getBoolean("logged"));
 				webmarketlist.add(po);
 			}
 			rs.close();
@@ -46,7 +47,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized WebMarketPO findWebMarket(int WebMarketid) {
 		Connection conn = Connect.getConn();
-		String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from webmarket where id = '"
+		String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key'),logged from webmarket where id = '"
 				+ WebMarketid + "'"; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		WebMarketPO po = new WebMarketPO();
@@ -59,6 +60,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 				po.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
 				po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
+				po.setlogged(rs.getBoolean("logged"));
 			}
 			rs.close();
 			pstmt.close();
@@ -72,7 +74,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage insertWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
-		String sql = "insert into webmarket(id,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'))";
+		String sql = "insert into webmarket(id,Name,Contact,Username,Password,logged) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'),?)";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -80,6 +82,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.setString(2, po.getcontact());
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
+			pstmt.setBoolean(5, po.getlogged());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -114,7 +117,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage updateWebMarket(WebMarketPO po) {
 		Connection conn = Connect.getConn();
-		String sql = "update webmarket set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key') where id=?";
+		String sql = "update webmarket set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key'),logged=? where id=?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -122,7 +125,8 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.setString(2, po.getcontact());
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
-			pstmt.setInt(5, po.getwebmarketid());
+			pstmt.setBoolean(5, po.getlogged());
+			pstmt.setInt(6, po.getwebmarketid());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -178,7 +182,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public WebMarketPO getwebmarketpo(String username, String password) {
 		Connection conn = Connect.getConn();
-		String sql = "select id,decode(name,'key'),decode(contact,'key') from webmarket where username =encode(?,'key') and password=encode(?,'key')"; // 需要执行的sql语句
+		String sql = "select id,decode(name,'key'),decode(contact,'key'),logged from webmarket where username =encode(?,'key') and password=encode(?,'key')"; // 需要执行的sql语句
 		PreparedStatement pstmt;
 
 		try {
@@ -190,6 +194,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 			while (rs.next()) {
 				po = new WebMarketPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
 						BlobtoString(rs.getBlob("decode(contact,'key')")), username, password);
+				po.setlogged(rs.getBoolean("logged"));
 			}
 			rs.close();
 			pstmt.close();
@@ -228,7 +233,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized WebManagerPO findWebManager(int WebManagerid) {
 		Connection conn = Connect.getConn();
-		String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from webmanager where id = '"
+		String sql = "select id,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key'),logged from webmanager where id = '"
 				+ WebManagerid + "'"; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		try {
@@ -240,6 +245,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 						BlobtoString(rs.getBlob("decode(contact,'key')")),
 						BlobtoString(rs.getBlob("decode(username,'key')")),
 						BlobtoString(rs.getBlob("decode(password,'key')")));
+				po.setlogged(rs.getBoolean("logged"));
 			}
 			rs.close();
 			pstmt.close();
@@ -254,7 +260,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage insertWebManager(WebManagerPO po) {
 		Connection conn = Connect.getConn();
-		String sql = "insert into webnamager(id,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'))";
+		String sql = "insert into webnamager(id,Name,Contact,Username,Password,logged) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'),?)";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -262,6 +268,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.setString(2, "");
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
+			pstmt.setBoolean(5, po.getlogged());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -296,7 +303,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public synchronized ResultMessage updateWebManager(WebManagerPO po) {
 		Connection conn = Connect.getConn();
-		String sql = "update webmanager set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key') where id="
+		String sql = "update webmanager set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key'),logged=? where id="
 				+ po.getwebmanagerid();
 		PreparedStatement pstmt;
 		try {
@@ -305,6 +312,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 			pstmt.setString(2, po.getcontact());
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
+			pstmt.setBoolean(5, po.getlogged());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -359,7 +367,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 	@Override
 	public WebManagerPO getwebmanagerpo(String username, String password) {
 		Connection conn = Connect.getConn();
-		String sql = "select id,decode(name,'key'),decode(contact,'key') from webmanager where username=encode(?,'key') and password=encode(?,'key')"; // 需要执行的sql语句
+		String sql = "select id,decode(name,'key'),decode(contact,'key'),logged from webmanager where username=encode(?,'key') and password=encode(?,'key')"; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		WebManagerPO po =  new WebManagerPO();
 		try {
@@ -370,6 +378,7 @@ public class ManageDataServiceImpl implements ManageDataService {
 			while (rs.next()) {
 				po = new WebManagerPO(rs.getInt("id"), BlobtoString(rs.getBlob("decode(name,'key')")),
 						BlobtoString(rs.getBlob("decode(contact,'key')")), username, password);
+				po.setlogged(rs.getBoolean("logged"));
 			}
 			rs.close();
 			pstmt.close();
@@ -425,5 +434,11 @@ public class ManageDataServiceImpl implements ManageDataService {
 		}
 		return null;
 	}
+	
+//	public static void main(String[]args){
+//		ManageDataServiceImpl manage=new ManageDataServiceImpl();
+//		WebMarketPO po=manage.getwebmarketpo("beauty", "23333");
+//		System.out.println(po.getlogged());
+//	}
 
 }
