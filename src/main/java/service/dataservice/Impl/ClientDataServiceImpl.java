@@ -47,11 +47,11 @@ public class ClientDataServiceImpl implements ClientDataService {
 					clientpo.setcredit_record(CreditRecordList);
 				}
 
-				if (rs.getString("info") == null) {
+				if (rs.getString("viptype") == null  ||rs.getString("viptype").equals("")) {
 					clientpo.setvipinfo(null);
-				} else if (rs.getString("info").contains("normal")) {
+				} else if (rs.getString("viptype").contains("normal")) {
 					clientpo.setvipinfo(new VIPInfo(VIPType.NORMAL, rs.getString("info")));
-				} else if (rs.getString("info").contains("enterprise"))
+				} else if (rs.getString("viptype").contains("enterprise"))
 					clientpo.setvipinfo(new VIPInfo(VIPType.Enterprise, rs.getString("info")));
 				clientpo.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				clientpo.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
@@ -211,7 +211,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 					tempCreditRecord += CreditRecordList.get(i);
 			}
 			pstmt.setString(4, tempCreditRecord);
-			if (po.getvipinfo() != null) {
+			if (po.getvipinfo() != null && !po.getvipinfo().equals("")) {
 				pstmt.setString(5, po.getvipinfo().getType().toString());
 				pstmt.setString(6, po.getvipinfo().getInfo());
 			} else {
@@ -275,7 +275,7 @@ public class ClientDataServiceImpl implements ClientDataService {
 					CreditRecordList.add(CreditRecords[i]);
 				}
 				clientpo.setcredit_record(CreditRecordList);
-				if(rs.getString("viptype")==null){
+				if(rs.getString("viptype")==null || rs.getString("viptype").equals("")){
 					clientpo.setvipinfo(null);
 				} else if (rs.getString("viptype").contains("normal")) {
 					clientpo.setvipinfo(new VIPInfo(VIPType.NORMAL, rs.getString("info")));
