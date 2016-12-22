@@ -10,11 +10,14 @@ public class WebStrategy3 extends WebStrategy implements Calculate{
 	ClientBLService clientblservice=new ClientBLServiceImpl();
 	@Override
 	public double calculate(int clientid, int hotelid, double price, int roomnumber) throws RemoteException {
-		Client client=clientblservice.checkClientInfo(clientid);
-		String[] vipinfo=client.getvipinfo().getInfo().split(",");
-		String viplevel=vipinfo[0];
-		price=calculatebyviplevel(price, viplevel);
-		return 0;
+//		Client client=clientblservice.checkClientInfo(clientid);
+//		String vipinfo1=client.getvipinfo().getInfo();
+//		if(!vipinfo1.equals("")){
+//		String[] vipinfolist=vipinfo1.split(",");
+//		String viplevel=vipinfolist[0];
+//		price=calculatebyviplevel(price, viplevel);
+//		}
+		return price;
 	}
 
 	public double calculatebyviplevel(double price,String viplevel){

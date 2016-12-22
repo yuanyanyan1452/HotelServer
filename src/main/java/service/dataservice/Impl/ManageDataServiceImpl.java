@@ -76,8 +76,8 @@ public class ManageDataServiceImpl implements ManageDataService {
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
-			pstmt.setString(1, "");
-			pstmt.setString(2, "");
+			pstmt.setString(1, po.getname());
+			pstmt.setString(2, po.getcontact());
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
 			pstmt.executeUpdate();
