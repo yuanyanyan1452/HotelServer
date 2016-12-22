@@ -11,6 +11,7 @@ public class WebManagerPO implements Serializable{
 	String contact;
 	String username;
 	String password;
+	boolean logged;
 	
 	public WebManagerPO(){
 		webmanagerid=0;
@@ -18,6 +19,7 @@ public class WebManagerPO implements Serializable{
 		contact=null;
 		username=null;
 		password=null;
+		logged=false;
 	}
 	
 	public WebManagerPO(int i,String n,String c,String u,String p){
@@ -26,6 +28,7 @@ public class WebManagerPO implements Serializable{
 		contact=c;
 		username=u;
 		password=p;
+		logged=false;
 //		id=i;
 	}
 	public int getwebmanagerid() {
@@ -64,6 +67,13 @@ public class WebManagerPO implements Serializable{
 		this.password = password;
 	}
 	
+	public boolean getlogged() {
+		return logged;
+	}
+	public void setlogged(boolean logged) {
+		this.logged = logged;
+	}
+	
 	public Manage changetowebmanager(){
 		Manage webmanager=new Manage();
 		webmanager.setwebmanagerid(this.webmanagerid);
@@ -71,6 +81,7 @@ public class WebManagerPO implements Serializable{
 		webmanager.setcontact(this.contact);
 		webmanager.setusername(this.username);
 		webmanager.setpassword(this.password);
+		webmanager.setlogged(this.logged);
 		return webmanager;
 	}
 	
@@ -81,6 +92,7 @@ public class WebManagerPO implements Serializable{
 		vo.setcontact(this.contact);
 		vo.setusername(this.username);
 		vo.setpassword(this.password);
+		vo.setlogged(this.logged);
 		return vo;
 	}
 }

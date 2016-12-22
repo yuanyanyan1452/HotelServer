@@ -15,16 +15,16 @@ import service.dataservice.HotelWorkerDataService;
 
 public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	
-	public static void main(String[] args){
-		HotelWorkerDataServiceImpl a = new HotelWorkerDataServiceImpl();
-		ArrayList<HotelWorkerPO> b =a.getallhotelworkerPO();
-		System.out.println(b.size());
-	}
+//	public static void main(String[] args){
+//		HotelWorkerDataServiceImpl a = new HotelWorkerDataServiceImpl();
+//		HotelWorkerPO po=new HotelWorkerPO(1,"John","1111","Matin","ddm");
+//		System.out.println(a.update(po));
+//	}
 	
 	@Override
 	public ArrayList<HotelWorkerPO> getallhotelworkerPO() {
 		Connection conn = Connect.getConn();
-		String sql = "select hotelid,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from hotelworker "; // 需要执行的sql语句
+		String sql = "select hotelid,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key'),logged from hotelworker "; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		ArrayList<HotelWorkerPO> hotelworkerlist = new ArrayList<HotelWorkerPO>();
 		try {
@@ -37,6 +37,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 				po.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
 				po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
+				po.setlogged(rs.getBoolean("logged"));
 				hotelworkerlist.add(po);
 			}
 			rs.close();
@@ -52,7 +53,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public HotelWorkerPO find(int hotelid) {
 		Connection conn = Connect.getConn();
-		String sql = "select hotelid,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key') from hotelworker where hotelid = "
+		String sql = "select hotelid,decode(name,'key'),decode(contact,'key'),decode(username,'key'),decode(password,'key'),logged from hotelworker where hotelid = "
 				+ hotelid; // 需要执行的sql语句
 		PreparedStatement pstmt;
 		HotelWorkerPO po = new HotelWorkerPO();
@@ -65,6 +66,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 				po.setcontact(BlobtoString(rs.getBlob("decode(contact,'key')")));
 				po.setusername(BlobtoString(rs.getBlob("decode(username,'key')")));
 				po.setpassword(BlobtoString(rs.getBlob("decode(password,'key')")));
+				po.setlogged(rs.getBoolean("logged"));
 			}
 			rs.close();
 			pstmt.close();
@@ -81,7 +83,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	public synchronized ResultMessage insert(HotelWorkerPO po) {
 		Connection conn = Connect.getConn();
 
-		String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key')";
+		String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password,logged) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'),?)";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -89,6 +91,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			pstmt.setString(2, "");
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
+			pstmt.setBoolean(5, po.getlogged());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -123,7 +126,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	@Override
 	public synchronized ResultMessage update(HotelWorkerPO po) {
 		Connection conn = Connect.getConn();
-		String sql = "update hotelworker set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key') where hotelid=?";
+		String sql = "update hotelworker set name=encode(?,'key'),contact=encode(?,'key'),username=encode(?,'key'),password=encode(?,'key'),logged=? where hotelid=?";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -131,7 +134,8 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 			pstmt.setString(2, po.getcontact());
 			pstmt.setString(3, po.getusername());
 			pstmt.setString(4, po.getpassword());
-			pstmt.setInt(5, po.gethotelid());
+			pstmt.setBoolean(5, po.getlogged());
+			pstmt.setInt(6, po.gethotelid());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -186,7 +190,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	public HotelWorkerPO gethotelworkerpo(String username, String password) {
 		Connection conn = Connect.getConn();
 
-	    String sql = "select hotelid,decode(name,'key'),decode(contact,'key') from hotelworker where username = encode(?,'key') and password = encode(?,'key')";	//需要执行的sql语句
+	    String sql = "select hotelid,decode(name,'key'),decode(contact,'key'),logged from hotelworker where username = encode(?,'key') and password = encode(?,'key')";	//需要执行的sql语句
 	    PreparedStatement pstmt;
 	    try {
 	        pstmt = (PreparedStatement)conn.prepareStatement(sql);
@@ -196,6 +200,7 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	        HotelWorkerPO po = new HotelWorkerPO();
 	        while(rs.next()){
 	        	po = new HotelWorkerPO(rs.getInt("hotelid"),BlobtoString(rs.getBlob("decode(name,'key')")),BlobtoString(rs.getBlob("decode(contact,'key')")),username,password);
+	        	po.setlogged(rs.getBoolean("logged"));
 	        }
 	        rs.close();
 			pstmt.close();

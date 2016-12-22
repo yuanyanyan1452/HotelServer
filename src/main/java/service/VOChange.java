@@ -46,6 +46,7 @@ public class VOChange {
 		clientpo.setcredit(clientvo.getcredit());
 		clientpo.setcredit_record(clientvo.getcredit_record());
 		clientpo.setvipinfo(clientvo.getvipinfo());
+		clientpo.setlogged(clientvo.getlogged());
 		return clientpo;
 	}
 	
@@ -59,6 +60,7 @@ public class VOChange {
 		client.setcredit(clientvo.getcredit());
 		client.setcredit_record(clientvo.getcredit_record());
 		client.setvipinfo(clientvo.getvipinfo());
+		client.setlogged(clientvo.getlogged());
 		return client;
 	}
 	
@@ -204,6 +206,7 @@ public class VOChange {
 		po.setpassword(vo.getpassword());
 		po.setname(vo.getname());
 		po.setcontact(vo.getcontact());
+		po.setlogged(vo.getlogged());
 		return po;
 	}
 	
@@ -214,6 +217,7 @@ public class VOChange {
 		hw.setpassword(vo.getpassword());
 		hw.setname(vo.getname());
 		hw.setcontact(vo.getcontact());
+		hw.setlogged(vo.getlogged());
 		return hw;
 	}
 	
@@ -224,6 +228,7 @@ public class VOChange {
 		po.setpassword(vo.getpassword());
 		po.setname(vo.getname());
 		po.setcontact(vo.getcontact());
+		po.setlogged(vo.getlogged());
 		return po;
 	}
 	
@@ -234,6 +239,7 @@ public class VOChange {
 		wm.setpassword(vo.getpassword());
 		wm.setname(vo.getname());
 		wm.setcontact(vo.getcontact());
+		wm.setlogged(vo.getlogged());
 		return wm;
 	}
 	
@@ -244,6 +250,7 @@ public class VOChange {
 		po.setpassword(vo.getpassword());
 		po.setname(vo.getname());
 		po.setcontact(vo.getcontact());
+		po.setlogged(vo.getlogged());
 		return po;
 	}
 	
@@ -254,6 +261,7 @@ public class VOChange {
 		wm.setpassword(vo.getpassword());
 		wm.setname(vo.getname());
 		wm.setcontact(vo.getcontact());
+		wm.setlogged(vo.getlogged());
 		return wm;
 	}
 	
