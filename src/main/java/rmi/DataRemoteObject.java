@@ -387,6 +387,12 @@ public class DataRemoteObject extends UnicastRemoteObject
 	}
 	
 	@Override
+	public ArrayList<HotelVO> searchpreviousHotelList(ArrayList<HotelVO> hotelvolist, int clientid)
+			throws RemoteException {
+		return hotelbl.searchpreviousHotelList(hotelvolist, clientid);
+	}
+	
+	@Override
 	public ResultMessage evalutehotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
 		return hotelbl.evalutehotel(e, clientid, hotelid);
 	}
@@ -492,6 +498,10 @@ public class DataRemoteObject extends UnicastRemoteObject
 	public ClientVO client_getclientvo(String username) throws RemoteException {
 		return clientbl.client_getclientvo(username);
 	}
+
+
+
+
 
 
 

@@ -83,25 +83,25 @@ public class ClientTest {
 		assertEquals(ResultMessage.Success,client.client_updateInfo(vo));
 	}
 	
-	@Test
-	public void test_client_getpreviousHotelList(){
-		ArrayList<HotelVO> hotel_list=new ArrayList<HotelVO>();
-		ArrayList<String>evalu=new ArrayList<String>();
-		evalu.add("just so so");
-		evalu.add("bad");
-		ArrayList<Integer> book_id=new ArrayList<Integer>();
-		book_id.add(2);
-		book_id.add(3);
-		hotel_list.add(new HotelVO(1,"天丰大酒店","南京市白下区洪武路26号","新街口","四星级商务酒店",
-				"wifi,餐饮,停车","四星级","4.1,15",evalu,book_id));
-		
-		try {
-			assertEquals(hotel_list,client.client_getpreviousHotelList(2));
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	@Test
+//	public void test_client_getpreviousHotelList(){
+//		ArrayList<HotelVO> hotel_list=new ArrayList<HotelVO>();
+//		ArrayList<String>evalu=new ArrayList<String>();
+//		evalu.add("just so so");
+//		evalu.add("bad");
+//		ArrayList<Integer> book_id=new ArrayList<Integer>();
+//		book_id.add(2);
+//		book_id.add(3);
+//		hotel_list.add(new HotelVO(1,"天丰大酒店","南京市白下区洪武路26号","新街口","四星级商务酒店",
+//				"wifi,餐饮,停车","四星级","4.1,15",evalu,book_id));
+//		
+//		try {
+//			assertEquals(hotel_list,client.client_getpreviousHotelList(2));
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	@Test
 	public void test_client_checkCredit(){

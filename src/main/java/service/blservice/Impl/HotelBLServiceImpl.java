@@ -226,6 +226,27 @@ public class HotelBLServiceImpl implements HotelBLService {
 	}
 
 	@Override
+	public ArrayList<HotelVO> searchpreviousHotelList(ArrayList<HotelVO> hotelvolist, int clientid)
+			throws RemoteException {
+		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
+		for(int i=0;i<hotelvolist.size();i++){
+			HotelVO hotelvo=hotelvolist.get(i);
+			ArrayList<Integer> booked_clientid=hotelvo.getbook_clientid();
+			boolean x=false;
+			for(int j=0;j<booked_clientid.size();j++){
+				if(booked_clientid.get(j)==clientid){
+					x=true;
+					break;
+				}
+			}
+			if(x){
+				newlist.add(hotelvo);
+			}
+		}
+		return newlist;
+	}
+	
+	@Override
 	public ResultMessage evalutehotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		String score=hotelpo.getscore();
@@ -260,6 +281,8 @@ public class HotelBLServiceImpl implements HotelBLService {
 		}
 		return allroom;
 	}
+
+
 
 
 
