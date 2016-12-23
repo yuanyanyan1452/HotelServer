@@ -149,7 +149,7 @@ public class ClientPO implements Serializable {
 		client.setusername(this.username);
 		client.setpassword(this.password);
 		client.setlogged(this.logged);
-		
+		//vipinfo没转
 		return client;
 	}
 
