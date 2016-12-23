@@ -137,6 +137,18 @@ public class OrderBLServiceImpl implements OrderBLService {
 		Date time=new Date();
 		orderpo.setcancel_time(time);
 		ResultMessage result=orderdataservice.update(orderpo);
+		ArrayList<RoomPO> roomlist=roomdataservice.find(orderpo.gethotelid());
+		ArrayList<RoomOrderPO> roomorderlist=orderpo.getroom_order();
+		for(int i=0;i<roomorderlist.size();i++){
+			RoomOrderPO roompo=roomorderlist.get(i);
+			for(int j=0;j<roomlist.size();j++){
+				RoomPO roomPO=roomlist.get(j);
+				if(roomPO.getroom_type().equals(roompo.getroom_type())){
+					roomPO.setavailable_num(roomPO.getavailable_num()+roompo.getroom_number());
+					roomdataservice.update(roomPO);
+				}
+			}
+		}
 		return result;
 	}
 
@@ -158,6 +170,18 @@ public class OrderBLServiceImpl implements OrderBLService {
 			clientidlist.add(newid);
 		}
 		hotelpo.setbook_clientid(clientidlist);
+		ArrayList<RoomPO> roomlist=roomdataservice.find(vo.gethotelid());
+		ArrayList<RoomOrderVO> roomorderlist=vo.getroom_order();
+		for(int i=0;i<roomorderlist.size();i++){
+			RoomOrderVO roomvo=roomorderlist.get(i);
+			for(int j=0;j<roomlist.size();j++){
+				RoomPO roomPO=roomlist.get(j);
+				if(roomPO.getroom_type().equals(roomvo.getroom_type())){
+					roomPO.setavailable_num(roomPO.getavailable_num()-roomvo.getroom_number());
+					roomdataservice.update(roomPO);
+				}
+			}
+		}
 		return result;
 	}
 
@@ -228,8 +252,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<Double> price_list=new ArrayList<Double>();
 		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
 		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy();
-		//ArrayList<HotelStrategyVO> adapthotelstrategy=new ArrayList<HotelStrategyVO>();
-		//ArrayList<WebStrategyVO> adaptwebstrategy=new ArrayList<WebStrategyVO>();
 		
 		Date nowdate=new Date();
 		for(int i=0;i<hotelstrategy_list.size();i++){
@@ -316,17 +338,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 		orderpo.setstart_time(info.getCheckIn());
 		orderpo.setend_time(info.getPlanCheckOut());
 		ResultMessage result =orderdataservice.update(orderpo);
-//		ArrayList<RoomPO> room_list=roomdataservice.find(orderpo.gethotelid());
-//		ArrayList<RoomOrderPO> roomorder=orderpo.getroom_order();
-//		for(int i=0;i<roomorder.size();i++){
-//			for(int j=0;j<room_list.size();i++){
-//				if(roomorder.get(i).getroom_type().equals(room_list.get(i).getroom_type())){
-//					RoomPO roompo=room_list.get(i);
-//					roompo.setavailable_num(roompo.getavailable_num()-roomorder.get(j).getroom_number());
-//					roomdataservice.update(roompo);
-//				}
-//			}
-//		}
 		roomdataservice.reduce(orderpo);
 		return result;
 	}
@@ -370,7 +381,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> get_client_hotel_order(int clientid, int hotelid) throws RemoteException {
-		// TODO Auto-generated method stub
 		ArrayList<OrderPO> orderpolist=orderdataservice.findByClientid(clientid);
 		ArrayList<OrderVO> ordervolist=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpolist.size();i++){
