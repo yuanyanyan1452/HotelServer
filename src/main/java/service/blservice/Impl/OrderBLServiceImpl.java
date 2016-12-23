@@ -139,16 +139,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ResultMessage result=orderdataservice.update(orderpo);
 		ArrayList<RoomPO> roomlist=roomdataservice.find(orderpo.gethotelid());
 		ArrayList<RoomOrderPO> roomorderlist=orderpo.getroom_order();
-		for(int i=0;i<roomorderlist.size();i++){
-			RoomOrderPO roompo=roomorderlist.get(i);
-			for(int j=0;j<roomlist.size();j++){
-				RoomPO roomPO=roomlist.get(j);
-				if(roomPO.getroom_type().equals(roompo.getroom_type())){
-					roomPO.setavailable_num(roomPO.getavailable_num()+roompo.getroom_number());
-					roomdataservice.update(roomPO);
-				}
-			}
-		}
+		roomdataservice.add(orderpo);
 		return result;
 	}
 
@@ -170,18 +161,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 			clientidlist.add(newid);
 		}
 		hotelpo.setbook_clientid(clientidlist);
-		ArrayList<RoomPO> roomlist=roomdataservice.find(vo.gethotelid());
-		ArrayList<RoomOrderVO> roomorderlist=vo.getroom_order();
-		for(int i=0;i<roomorderlist.size();i++){
-			RoomOrderVO roomvo=roomorderlist.get(i);
-			for(int j=0;j<roomlist.size();j++){
-				RoomPO roomPO=roomlist.get(j);
-				if(roomPO.getroom_type().equals(roomvo.getroom_type())){
-					roomPO.setavailable_num(roomPO.getavailable_num()-roomvo.getroom_number());
-					roomdataservice.update(roomPO);
-				}
-			}
-		}
+		roomdataservice.reduce(po);
 		return result;
 	}
 
@@ -247,7 +227,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 				}
 			}
 		}
-		
+		double price1=0;
+		double price2=0;
 		//获得订单本来总价和房间数量
 		ArrayList<Double> price_list=new ArrayList<Double>();
 		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
@@ -260,28 +241,28 @@ public class OrderBLServiceImpl implements OrderBLService {
 		switch(hotelstrategyvo.getid()){
 		case 1:
 			HotelStrategy1 hs1=new HotelStrategy1();
-			price=hs1.calculate(clientid, hotelid, price, roomnumber);
-			price_list.add(price);
+			price1=hs1.calculate(clientid, hotelid, price, roomnumber);
+			price_list.add(price1);
 			break;
 		case 2:
 			HotelStrategy2 hs2=new HotelStrategy2();
-			price=hs2.calculate(clientid, hotelid, price, roomnumber);
-			price_list.add(price);
+			price1=hs2.calculate(clientid, hotelid, price, roomnumber);
+			price_list.add(price1);
 			break;
 		case 3:
 			HotelStrategy3 hs3=new HotelStrategy3();
-			price=hs3.calculate(clientid, hotelid, price, roomnumber);
-			price_list.add(price);
+			price1=hs3.calculate(clientid, hotelid, price, roomnumber);
+			price_list.add(price1);
 			break;
 		case 4:
 			HotelStrategy4 hs4=new HotelStrategy4();
-			price=hs4.calculate(clientid, hotelid, price, roomnumber);
-			price_list.add(price);
+			price1=hs4.calculate(clientid, hotelid, price, roomnumber);
+			price_list.add(price1);
 			break;
 		case 5:
 			HotelStrategy5 hs5=new HotelStrategy5();
-			price=hs5.calculate(clientid, hotelid, price, roomnumber);
-			price_list.add(price);
+			price1=hs5.calculate(clientid, hotelid, price, roomnumber);
+			price_list.add(price1);
 			break;
 			
 		}
@@ -294,28 +275,28 @@ public class OrderBLServiceImpl implements OrderBLService {
 		switch(webstrategy_list.get(i).getid()){
 		case 1:
 			WebStrategy1 ws1=new WebStrategy1();
-			price=ws1.calculate(clientid, hotelid, price, roomnumber);
-			price_list.add(price);
+			price2=ws1.calculate(clientid, hotelid, price, roomnumber);
+			price_list.add(price2);
 			break;
 		case 2:
 			WebStrategy2 ws2=new WebStrategy2();
-		   	price=ws2.calculate(clientid, hotelid, price, roomnumber);
-		    price_list.add(price);
+		   	price2=ws2.calculate(clientid, hotelid, price, roomnumber);
+		    price_list.add(price2);
 		    break;
 		case 3:
 		case 4:
 		case 5:
 		   WebStrategy3 ws3=new WebStrategy3();
-		   price=ws3.calculate(clientid, hotelid, price, roomnumber);
+		   price2=ws3.calculate(clientid, hotelid, price, roomnumber);
 		   WebStrategy5 ws5=new WebStrategy5();
 		   ws5.setcondition(webstrategy_list.get(i).getcondition());
-		   price=ws5.calculate(clientid, hotelid, price, roomnumber);
-		   price_list.add(price);
+		   price2=ws5.calculate(clientid, hotelid, price2, roomnumber);
+		   price_list.add(price2);
 		   break;
 		case 6:
 			WebStrategy4 ws4=new WebStrategy4();
-		   	price=ws4.calculate(clientid, hotelid, price, roomnumber);
-		    price_list.add(price);
+		   	price2=ws4.calculate(clientid, hotelid, price, roomnumber);
+		    price_list.add(price2);
 		}
 		}
 		
@@ -338,7 +319,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 		orderpo.setstart_time(info.getCheckIn());
 		orderpo.setend_time(info.getPlanCheckOut());
 		ResultMessage result =orderdataservice.update(orderpo);
-		roomdataservice.reduce(orderpo);
 		return result;
 	}
 
@@ -356,6 +336,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		orderpo.setend_time(date);
 		ResultMessage result=orderdataservice.update(orderpo);
 		roomdataservice.add(orderpo);
+		
 		return result;
 	}
 
@@ -365,7 +346,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=0;i<room_order.size();i++){
 			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
 		}
-		ResultMessage result=roomdataservice.addOffline(hotelid, roomorderpo);
+		ResultMessage result=roomdataservice.reduceOffline(hotelid, roomorderpo);
 		return result;
 	}
 
@@ -375,7 +356,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=0;i<room_order.size();i++){
 			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
 		}
-		ResultMessage result=roomdataservice.reduceOffline(hotelid, roomorderpo);
+		ResultMessage result=roomdataservice.addOffline(hotelid, roomorderpo);
 		return result;
 	}
 
