@@ -27,6 +27,7 @@ public class OrderPO implements Serializable {
 	int price;
 	int expect_number_of_people;
 	boolean havechild;
+	String evaluation;
 	
 	public OrderPO(){
 		id=0;
@@ -42,8 +43,9 @@ public class OrderPO implements Serializable {
 		price=0;
 		expect_number_of_people=0;
 		havechild=false;
+		evaluation=null;
 	}
-	public OrderPO(int i,int cid,int hid,String s,Date cancel,boolean e,Date st,Date et,Date lt,ArrayList<RoomOrderPO>list,int p,int en,boolean child){
+	public OrderPO(int i,int cid,int hid,String s,Date cancel,boolean e,Date st,Date et,Date lt,ArrayList<RoomOrderPO>list,int p,int en,boolean child,String eva){
 		id=i;
 		clientid=cid;
 		hotelid=hid;
@@ -57,6 +59,7 @@ public class OrderPO implements Serializable {
 		price=p;
 		expect_number_of_people=en;
 		havechild=child;
+		evaluation=eva;
 	}
 	
 	public void setid(int id){
@@ -149,6 +152,14 @@ public class OrderPO implements Serializable {
 	public boolean gethave_child(){
 		return havechild;
 	}
+	
+	public void setevaluation(String evaluation){
+		this.evaluation=evaluation;
+	}
+	public String getevaluation(){
+		return evaluation;
+	}
+	
 	public Order changetoorder(){
 		Order order=new Order();
 		order.setid(this.id);
@@ -160,6 +171,7 @@ public class OrderPO implements Serializable {
 		order.setstart_time(this.start_time);
 		order.setend_time(this.end_time);
 		order.setlatest_execute_time(this.latest_execute_time);
+		order.setevaluation(this.evaluation);
 		ArrayList<RoomOrder> roomorderlist = new ArrayList<RoomOrder>();
 		for(int i=0;i<this.room_order.size();i++){
 			roomorderlist.add(room_order.get(i).changetoroomorder());
@@ -190,6 +202,7 @@ public class OrderPO implements Serializable {
 		vo.setprice(this.price);
 		vo.setexpect_number_of_people(this.expect_number_of_people);
 		vo.sethave_child(this.havechild);
+		vo.setevaluation(this.evaluation);
 		return vo;
 	}
 }

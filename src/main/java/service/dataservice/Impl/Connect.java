@@ -20,7 +20,7 @@ public class Connect {
 //			InputStreamReader read=new InputStreamReader(new FileInputStream(file));
 //			BufferedReader bufferedRead=new BufferedReader(read);
 			String username="root";
-			String password="123456";
+			String password="Yyj980226";
 //			read.close();
 			Class.forName(driver);//classLoader,加载对应驱动
 			conn = (Connection)DriverManager.getConnection(url,username,password);

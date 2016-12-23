@@ -77,7 +77,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		ResultMessage flag = ResultMessage.Success;
 		Connection conn = Connect.getConn();
 		PreparedStatement ps = null;
-		String sql = "insert into orderrecord values(NULL,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into orderrecord values(NULL,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{
@@ -99,6 +99,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps.setInt(10,po.getprice());
 			ps.setInt(11, po.getexpect_number_of_people());
 			ps.setBoolean(12, po.gethave_child());
+			if(po.getevaluation()!=null){
+				ps.setString(13, po.getevaluation());
+			}else{
+				ps.setString(13, "");
+			}
 			int i=ps.executeUpdate();
 			setid(po);
 			if(i==0){
@@ -161,7 +166,7 @@ public class OrderDataServiceImpl implements OrderDataService {
 		PreparedStatement ps=null;
 		String sql = "update orderrecord set clientid=?,hotelid=?,state=?,cancel_time=?,execute=?,start_time=?,"
 				+ "end_time=?,latest_execute_time=?,room_order=?,price=?,"
-				+ "expect_number_of_people=?,havechild=? where id=?";
+				+ "expect_number_of_people=?,havechild=?,evaluation=? where id=?";
 		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		try{
@@ -183,7 +188,12 @@ public class OrderDataServiceImpl implements OrderDataService {
 			ps.setInt(10,po.getprice());
 			ps.setInt(11, po.getexpect_number_of_people());
 			ps.setBoolean(12, po.gethave_child());
-			ps.setInt(13, po.getid());
+			if(po.getevaluation()!=null){
+				ps.setString(13, po.getevaluation());
+			}else{
+				ps.setString(13, "");
+			}
+			ps.setInt(14, po.getid());
 			int i=ps.executeUpdate();
 			if(i==0){
 				flag=ResultMessage.Fail;
@@ -269,6 +279,11 @@ public class OrderDataServiceImpl implements OrderDataService {
 				po.setprice(rs.getInt("price"));
 				po.setexpect_number_of_people(rs.getInt("expect_number_of_people"));
 				po.sethave_child(rs.getBoolean("havechild"));
+				if(rs.getString("evaluation")==null){
+					po.setevaluation(null);
+				}else{
+					po.setevaluation(rs.getString("evaluation"));
+				}
 				orderlist.add(po);
 				
 			}

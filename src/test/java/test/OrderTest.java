@@ -38,7 +38,7 @@ public class OrderTest {
 		roomorderlist.add(new RoomOrderVO("标准间",1,2));
 		roomorderlist.add(new RoomOrderVO("大床房",1,2));
 		OrderVO ordervo1 = new OrderVO(2,3,2,"异常",null,
-				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
+				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false,"bad");
 		expect_list.add(ordervo1);
 
 		ArrayList<OrderVO> orderlist = OrderImpl.findorderByClientid(3);
@@ -54,7 +54,7 @@ public class OrderTest {
 		roomorderlist.add(new RoomOrderVO("标准间",1,2));
 		roomorderlist.add(new RoomOrderVO("大床房",1,2));
 		OrderVO ordervo1 = new OrderVO(2,3,2,"异常",null,
-				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
+				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false,"bad");
 		expect_list.add(ordervo1);
 		
 		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Clientid_State(3,"异常");
@@ -71,7 +71,7 @@ public class OrderTest {
 		roomorderlist.add(new RoomOrderVO("标准间",1,2));
 		roomorderlist.add(new RoomOrderVO("大床房",1,2));
 		OrderVO ordervo1 = new OrderVO(2,3,2,"异常",null,
-				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
+				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false,"bad");
 		expect_list.add(ordervo1);
 		
 		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Clientid_Execute(3,false);
@@ -88,7 +88,7 @@ public class OrderTest {
 		ArrayList<RoomOrderVO> roomorderlist = new ArrayList<RoomOrderVO>();
 		roomorderlist.add(new RoomOrderVO("标准间",1,3));
 		OrderVO ordervo1 = new OrderVO(1,1,1,"正常",null,
-				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true);
+				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true,"just so so");
 		expect_list.add(ordervo1);
 
 		ArrayList<OrderVO> orderlist = OrderImpl.findorderByHotelid(1);
@@ -105,7 +105,7 @@ public class OrderTest {
 		ArrayList<RoomOrderVO> roomorderlist = new ArrayList<RoomOrderVO>();
 		roomorderlist.add(new RoomOrderVO("标准间",1,3));
 		OrderVO ordervo1 = new OrderVO(1,1,1,"正常",null,
-				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true);
+				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true,"just so so");
 		expect_list.add(ordervo1);
 
 		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Hotelid_State(1,"正常");
@@ -122,7 +122,7 @@ public class OrderTest {
 		ArrayList<RoomOrderVO> roomorderlist = new ArrayList<RoomOrderVO>();
 		roomorderlist.add(new RoomOrderVO("标准间",1,3));
 		OrderVO ordervo1 = new OrderVO(1,1,1,"正常",null,
-				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true);
+				true,String2Date("2016-11-12 14:00:00"),String2Date("2016-11-15 13:10:25"),String2Date("2016-11-12 16:02:03"),roomorderlist,1050,2,true,"just so so");
 		expect_list.add(ordervo1);
 
 		ArrayList<OrderVO> orderlist = OrderImpl.findorderBy_Hotelid_Execute(1,true);
@@ -144,7 +144,7 @@ public class OrderTest {
 
 	public void testorder_client_generate() {
 		ArrayList<RoomOrderVO> list = new ArrayList<RoomOrderVO>();
-		OrderVO ordervo = new OrderVO(1,1,1,"1",null,true,null,null,null,list,1,1,false);
+		OrderVO ordervo = new OrderVO(1,1,1,"1",null,true,null,null,null,list,1,1,false,null);
 
 		ResultMessage flag = OrderImpl.order_client_generate(ordervo);
 
@@ -171,7 +171,7 @@ public class OrderTest {
 		roomorderlist.add(new RoomOrderVO("标准间",1,2));
 		roomorderlist.add(new RoomOrderVO("大床房",1,2));
 		OrderVO ordervo1 = new OrderVO(2,3,2,"异常",null,
-				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false);
+				false,String2Date("2016-11-08 04:18:36"),String2Date("2016-11-10 08:30:41"),String2Date("2016-11-08 12:00:00"),roomorderlist,2500,3,false,"bad");
 		expect_list.add(ordervo1);
 
 		assertEquals(expect_list, OrderImpl.order_market_browseUnfilled());

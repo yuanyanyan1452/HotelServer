@@ -180,6 +180,7 @@ public class ObjectChange {
 		po.setstart_time(order.start_time);
 		po.setend_time(order.end_time);
 		po.setlatest_execute_time(order.latest_execute_time);
+		po.setevaluation(order.evaluation);
 		ArrayList<RoomOrderPO> list = new ArrayList<RoomOrderPO>();
 		for(int i=0;i<order.room_order.size();i++){
 			list.add(changetoroomorderpo(order.room_order.get(i)));
@@ -212,6 +213,7 @@ public class ObjectChange {
 		vo.setprice(order.price);
 		vo.setexpect_number_of_people(order.expect_number_of_people);
 		vo.sethave_child(order.havechild);
+		vo.setevaluation(order.evaluation);
 		return vo;
 	}
 	
