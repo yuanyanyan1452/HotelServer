@@ -2,6 +2,7 @@ package objects;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import service.blservice.ClientBLService;
 import service.blservice.Impl.ClientBLServiceImpl;
@@ -12,6 +13,8 @@ public class WebStrategy5 extends WebStrategy implements Calculate{
 	ClientBLService clientblservice=new ClientBLServiceImpl();
 	@Override
 	public double calculate(int clientid, int hotelid, double price, int roomnumber) throws RemoteException {
+		Date nowdate=new Date();
+//		if(nowdate.after(start_time)&&nowdate.before(end_time)){
 		ClientVO client=clientblservice.client_checkInfo(clientid);
 		String [] vipinfo=client.getvipinfo().info.split(",");
 		ArrayList<Double> pricelist=new ArrayList<Double>();
@@ -29,16 +32,18 @@ public class WebStrategy5 extends WebStrategy implements Calculate{
 				pricelist.add(price);
 			}
 		}
-		double min_price=price;
+		
+		
 		if(!pricelist.isEmpty()){
 		price=pricelist.get(0);
 		for(int i=1;i<pricelist.size();i++){
-			if(pricelist.get(i)<min_price){
-				min_price=pricelist.get(i);
+			if(pricelist.get(i)<price){
+				price=pricelist.get(i);
 			}
 		}
+//		}
 		}
-		return min_price;
+		return price;
 //		return price;
 	}
 

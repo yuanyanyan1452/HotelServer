@@ -1,6 +1,7 @@
 package objects;
 
 import java.rmi.RemoteException;
+import java.util.Date;
 
 import service.blservice.ClientBLService;
 import service.blservice.Impl.ClientBLServiceImpl;
@@ -11,6 +12,8 @@ public class WebStrategy3 extends WebStrategy implements Calculate{
 	ClientBLService clientblservice=new ClientBLServiceImpl();
 	@Override
 	public double calculate(int clientid, int hotelid, double price, int roomnumber) throws RemoteException {
+		Date nowdate=new Date();
+//		if(nowdate.after(start_time)&&nowdate.before(end_time)){
 		ClientVO client=clientblservice.client_checkInfo(clientid);
 		String vipinfo1=client.getvipinfo().getInfo();
 		if(!vipinfo1.equals("")){
@@ -18,6 +21,7 @@ public class WebStrategy3 extends WebStrategy implements Calculate{
 		String viplevel=vipinfolist[0];
 		price=calculatebyviplevel(price, viplevel);
 		}
+//		}
 		return price;
 	}
 

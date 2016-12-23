@@ -16,12 +16,13 @@ public class HotelStrategy2 extends HotelStrategy implements Calculate{
 		ClientVO client=clientblservice.client_checkInfo(clientid);
 		SimpleDateFormat format = new SimpleDateFormat("MM-dd");
 		Date date=new Date();
+//		if(date.after(start_time)&&date.before(end_time)){
 		String time=format.format(date);
 		String [] vipinfo=client.getvipinfo().getInfo().split(",");
-		if(vipinfo[1].equals(time)){
+		if(vipinfo[1]!=""&&vipinfo[1].equals(time)){
 			price*=0.5;
 		}
-		
+//		}
 		return price;
 	}
 
