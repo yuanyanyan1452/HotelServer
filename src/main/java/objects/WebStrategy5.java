@@ -29,13 +29,15 @@ public class WebStrategy5 extends WebStrategy implements Calculate{
 				pricelist.add(price);
 			}
 		}
-		double min_price=pricelist.get(0);
+		double min_price=price;
+		if(!pricelist.isEmpty()){
+		price=pricelist.get(0);
 		for(int i=1;i<pricelist.size();i++){
 			if(pricelist.get(i)<min_price){
 				min_price=pricelist.get(i);
 			}
 		}
-		
+		}
 		return min_price;
 //		return price;
 	}

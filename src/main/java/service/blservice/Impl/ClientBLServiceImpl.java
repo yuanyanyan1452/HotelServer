@@ -135,7 +135,9 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage client_updateClientCreditList(int clientid, String CreditInfo) throws RemoteException {
 		ClientPO clientpo=clientdataservice.find(clientid);
-		clientpo.getcredit_record().add(CreditInfo);
+		ArrayList<String> creditrecord=clientpo.getcredit_record();
+		creditrecord.add(CreditInfo);
+		clientpo.setcredit_record(creditrecord);
 		ResultMessage result=clientdataservice.update(clientpo);
 		return result;
 	}
@@ -153,6 +155,16 @@ public class ClientBLServiceImpl implements ClientBLService {
 			credit-=value;
 		}
 		clientpo.setcredit(credit);
+		VIPInfo info=new VIPInfo();
+		info.setType(clientpo.getvipinfo().getType());
+		String[] infor=clientpo.getvipinfo().getInfo().split(",");
+		infor[0]=update_client_viplevel(credit);
+		String newinfo="";
+		for(int i=0;i<infor.length;i++){
+			newinfo+=infor[i];
+		}
+		info.setInfo(newinfo);
+		clientpo.setvipinfo(info);
 		ResultMessage result=clientdataservice.update(clientpo);
 		return result;
 	}
@@ -178,6 +190,23 @@ public class ClientBLServiceImpl implements ClientBLService {
 		ClientPO clientpo=clientdataservice.find(clientid);
 		ClientVO vo=clientpo.changetoclientvo();
 		return vo;
+	}
+
+	@Override
+	public String update_client_viplevel(int credit) {
+		int[] postpointarray={5000,50000,500000};
+		int[] preintarray={0,5000,50000};
+		String[] level={"一级会员","二级会员","三级会员"};
+		String viplevel="";
+		for(int i=0;i<=1;i++){
+			if(preintarray[i]<credit&&postpointarray[i]>=credit){
+				viplevel= level[i];
+			}
+		}
+		if(credit>500000){
+			viplevel= level[2];
+		}
+		return viplevel;
 	}
 
 	

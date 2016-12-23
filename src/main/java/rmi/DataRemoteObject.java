@@ -501,6 +501,13 @@ public class DataRemoteObject extends UnicastRemoteObject
 
 
 
+	@Override
+	public String update_client_viplevel(int credit) throws RemoteException{
+		return clientbl.update_client_viplevel(credit);
+	}
+
+
+
 
 
 

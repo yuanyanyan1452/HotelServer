@@ -153,4 +153,11 @@ public interface ClientBLService extends Remote{
 	 * @throws RemoteException
 	 */
 	public ResultMessage updateClientInfo(Client client)throws RemoteException;
+	
+	/**
+	 * 根据信用值更新客户会员等级
+	 * @param credit
+	 * @return
+	 */
+	public String update_client_viplevel(int credit)throws RemoteException;
 }
