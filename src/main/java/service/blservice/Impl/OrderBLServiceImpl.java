@@ -162,6 +162,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 			clientidlist.add(newid);
 		}
 		hotelpo.setbook_clientid(clientidlist);
+		hoteldataservice.update(hotelpo);
 		roomdataservice.reduce(po);
 		return result;
 	}
