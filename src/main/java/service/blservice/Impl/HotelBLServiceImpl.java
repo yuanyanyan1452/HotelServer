@@ -16,7 +16,9 @@ import service.blservice.OrderBLService;
 import service.datafactory.datafactory;
 import service.datafactory.datafactoryImpl;
 import service.dataservice.HotelDataService;
+import service.dataservice.HotelWorkerDataService;
 import service.dataservice.Impl.HotelDataServiceImpl;
+import service.dataservice.Impl.HotelWorkerDataServiceImpl;
 import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -25,6 +27,7 @@ import vo.RoomVO;
 public class HotelBLServiceImpl implements HotelBLService {
 	datafactory datafactory=new datafactoryImpl();
 	HotelDataService hoteldataservice=new HotelDataServiceImpl();
+	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();
 	OrderBLService orderblservice= new OrderBLServiceImpl();
 	VOChange vochange =new VOChange();
 	ObjectChange objectchange=new ObjectChange();
@@ -113,10 +116,10 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage addHotelWorker(HotelWorker worker) {
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
-		if(!po.getname().equals("")){
+		HotelWorkerPO search=hotelworkerdataservice.find(po.gethotelid());
+		if(search.getname()==null){
 			ResultMessage result=datafactory.getHotelWorkerDataService().insert(po);
 			return result;
-		
 		}
 		else{
 			return ResultMessage.Fail;
