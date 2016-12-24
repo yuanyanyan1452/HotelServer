@@ -13,37 +13,34 @@ import po.RoomPO;
 import service.VOChange;
 import service.blservice.HotelBLService;
 import service.blservice.OrderBLService;
+import service.datafactory.datafactory;
+import service.datafactory.datafactoryImpl;
 import service.dataservice.HotelDataService;
-import service.dataservice.HotelWorkerDataService;
-import service.dataservice.RoomDataService;
 import service.dataservice.Impl.HotelDataServiceImpl;
-import service.dataservice.Impl.HotelWorkerDataServiceImpl;
-import service.dataservice.Impl.RoomDataServiceImpl;
 import vo.EvaluationVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
 import vo.RoomVO;
 
 public class HotelBLServiceImpl implements HotelBLService {
+	datafactory datafactory=new datafactoryImpl();
 	HotelDataService hoteldataservice=new HotelDataServiceImpl();
-	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();		
-	RoomDataService roomdataservice=new RoomDataServiceImpl();
 	OrderBLService orderblservice= new OrderBLServiceImpl();
 	VOChange vochange =new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
 	@Override
 	public ResultMessage hotelworker_login(String username, String password) throws RemoteException {
-		ResultMessage result=hotelworkerdataservice.check(username, password);
+		ResultMessage result=datafactory.getHotelWorkerDataService().check(username, password);
 		return result;
 	}
 	
 	@Override
 	public ResultMessage hotelworker_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.gethotelworkerpo(username, oldpassword);
+		HotelWorkerPO hotelworkerpo=datafactory.getHotelWorkerDataService().gethotelworkerpo(username, oldpassword);
 		hotelworkerpo.setpassword(newpassword);
-		ResultMessage result=hotelworkerdataservice.update(hotelworkerpo);
+		ResultMessage result=datafactory.getHotelWorkerDataService().update(hotelworkerpo);
 		return result;
 	}
 
@@ -65,13 +62,13 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public ResultMessage hotel_importRoom(RoomVO room) {
 		RoomPO po=vochange.roomvo_to_roompo(room);
 		po.setavailable_num(po.gettotal_num());
-		ResultMessage result=roomdataservice.insert(po);
+		ResultMessage result=datafactory.getRoomDataService().insert(po);
 		return result;
 	}
 	
 	@Override
 	public ResultMessage hotel_updateRoom(RoomVO room) throws RemoteException {
-		ArrayList<RoomPO> roomlist=roomdataservice.find(room.gethotelid());
+		ArrayList<RoomPO> roomlist=datafactory.getRoomDataService().find(room.gethotelid());
 		RoomPO roompo=new RoomPO();
 		for(int i=0;i<roomlist.size();i++){
 			if(roomlist.get(i).getroom_type().equals(room.getroom_type())){
@@ -82,7 +79,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 			roompo.settotal_num(room.getavailable_num());
 			roompo.setavailable_num(room.getavailable_num());
 		}
-		ResultMessage result=roomdataservice.update(roompo);
+		ResultMessage result=datafactory.getRoomDataService().update(roompo);
 		return result;
 	}
 
@@ -116,9 +113,9 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage addHotelWorker(HotelWorker worker) {
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
-		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.find(po.gethotelid());
+		HotelWorkerPO hotelworkerpo=datafactory.getHotelWorkerDataService().find(po.gethotelid());
 		if(hotelworkerpo.getname().equals(null)){
-			ResultMessage result=hotelworkerdataservice.insert(po);
+			ResultMessage result=datafactory.getHotelWorkerDataService().insert(po);
 			return result;
 		
 		}
@@ -130,7 +127,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public HotelWorker searchHotelWorker(int hotelid) {
-		HotelWorkerPO hotelworkerpo=hotelworkerdataservice.find(hotelid);
+		HotelWorkerPO hotelworkerpo=datafactory.getHotelWorkerDataService().find(hotelid);
 		HotelWorker hotelworker=hotelworkerpo.changetohotelworker();
 		return hotelworker;
 	}
@@ -138,7 +135,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage updateHotelWokerInfo( HotelWorker worker) {
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
-		ResultMessage result=hotelworkerdataservice.update(po);
+		ResultMessage result=datafactory.getHotelWorkerDataService().update(po);
 		return result;
 	}
 
@@ -168,7 +165,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public ArrayList<HotelVO> searchHotelByroom(ArrayList<HotelVO> list,String type) {
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
-			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
+			ArrayList<RoomPO> roomlist=datafactory.getRoomDataService().find(list.get(i).getid());
 			for(int j=0;j<roomlist.size();j++){
 				if(roomlist.get(j).getroom_type().equals(type)){
 					newlist.add(list.get(i));
@@ -183,7 +180,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	public ArrayList<HotelVO> searchHotelByprice(ArrayList<HotelVO> list,int lowprice, int highprice) {
 		ArrayList<HotelVO> newlist=new ArrayList<HotelVO>();
 		for(int i=0;i<list.size();i++){
-			ArrayList<RoomPO> roomlist=roomdataservice.find(list.get(i).getid());
+			ArrayList<RoomPO> roomlist=datafactory.getRoomDataService().find(list.get(i).getid());
 			for(int j=0;j<roomlist.size();j++){
 				if(roomlist.get(j).getprice()<=highprice&&roomlist.get(j).getprice()>=lowprice){
 					newlist.add(list.get(i));
@@ -266,8 +263,8 @@ public class HotelBLServiceImpl implements HotelBLService {
 
 	@Override
 	public HotelWorkerVO hotelworker_getvo(String username) throws RemoteException {
-		int id=hotelworkerdataservice.findhotelid_of_hotelworkerbyUsername(username);
-		HotelWorkerPO po=hotelworkerdataservice.find(id);
+		int id=datafactory.getHotelWorkerDataService().findhotelid_of_hotelworkerbyUsername(username);
+		HotelWorkerPO po=datafactory.getHotelWorkerDataService().find(id);
 		HotelWorkerVO vo=po.changetohotelworkervo();
 		return vo;
 	}
@@ -275,7 +272,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ArrayList<RoomVO> getallroom(int hotelid) throws RemoteException {
 		ArrayList<RoomVO> allroom=new ArrayList<RoomVO>();
-		ArrayList<RoomPO> roomlist=roomdataservice.find(hotelid);
+		ArrayList<RoomPO> roomlist=datafactory.getRoomDataService().find(hotelid);
 		for(int i=0;i<roomlist.size();i++){
 			allroom.add(roomlist.get(i).changetoroomvo());
 		}

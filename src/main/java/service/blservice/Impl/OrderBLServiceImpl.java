@@ -24,31 +24,21 @@ import service.BL;
 import service.VOChange;
 import service.blservice.OrderBLService;
 import service.blservice.StrategyBLService;
-import service.dataservice.ClientDataService;
-import service.dataservice.HotelDataService;
-import service.dataservice.OrderDataService;
-import service.dataservice.RoomDataService;
-import service.dataservice.Impl.ClientDataServiceImpl;
-import service.dataservice.Impl.HotelDataServiceImpl;
-import service.dataservice.Impl.OrderDataServiceImpl;
-import service.dataservice.Impl.RoomDataServiceImpl;
+import service.datafactory.datafactory;
+import service.datafactory.datafactoryImpl;
 import vo.AccommodationVO;
-import vo.HotelStrategyVO;
 import vo.OrderVO;
 import vo.RoomOrderVO;
-import vo.WebStrategyVO;
 
 public class OrderBLServiceImpl implements OrderBLService {
-	OrderDataService orderdataservice=new OrderDataServiceImpl();
-	RoomDataService roomdataservice=new RoomDataServiceImpl();
+	datafactory datafactory=new datafactoryImpl();
 	StrategyBLService strategyblservice=new StrategyBLServiceImpl();
-	ClientDataService clientblservice=new ClientDataServiceImpl();
-	HotelDataService hoteldataservice=new HotelDataServiceImpl();
 	VOChange vochange =new VOChange();
 	BL bl=new BL();
+	
 	@Override
 	public ArrayList<OrderVO> findorderByClientid(int clientid) {
-		ArrayList<OrderPO> orderpo_list=orderdataservice.findByClientid(clientid);
+		ArrayList<OrderPO> orderpo_list=datafactory.getOrderDataService().findByClientid(clientid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
 			OrderVO ordervo=orderpo_list.get(i).changetoordervo();
@@ -59,8 +49,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> findorderBy_Clientid_State(int clientid, String state) {
-		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, state, true);
-		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, state, false);
+		ArrayList<OrderPO> orderpo_list1=datafactory.getOrderDataService().findByStatus(clientid, state, true);
+		ArrayList<OrderPO> orderpo_list2=datafactory.getOrderDataService().findByStatus(clientid, state, false);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list1.size();i++){
 			OrderVO ordervo=orderpo_list1.get(i).changetoordervo();
@@ -75,9 +65,9 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> findorderBy_Clientid_Execute(int clientid, boolean isExecute) {
-		ArrayList<OrderPO> orderpo_list1=orderdataservice.findByStatus(clientid, "NORMAL", isExecute);
-		ArrayList<OrderPO> orderpo_list2=orderdataservice.findByStatus(clientid, "ABNORMAL", isExecute);
-		ArrayList<OrderPO> orderpo_list3=orderdataservice.findByStatus(clientid, "CANCELLED", isExecute);
+		ArrayList<OrderPO> orderpo_list1=datafactory.getOrderDataService().findByStatus(clientid, "NORMAL", isExecute);
+		ArrayList<OrderPO> orderpo_list2=datafactory.getOrderDataService().findByStatus(clientid, "ABNORMAL", isExecute);
+		ArrayList<OrderPO> orderpo_list3=datafactory.getOrderDataService().findByStatus(clientid, "CANCELLED", isExecute);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list1.size();i++){
 			OrderVO ordervo=orderpo_list1.get(i).changetoordervo();
@@ -96,7 +86,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> findorderByHotelid(int hotelid) {
-		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderPO> orderpo_list=datafactory.getOrderDataService().findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
 			OrderVO ordervo=orderpo_list.get(i).changetoordervo();
@@ -107,7 +97,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> findorderBy_Hotelid_State(int hotelid, String state) {
-		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderPO> orderpo_list=datafactory.getOrderDataService().findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
 			if(orderpo_list.get(i).getstate()==state){
@@ -120,7 +110,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ArrayList<OrderVO> findorderBy_Hotelid_Execute(int hotelid, boolean isExecute) {
-		ArrayList<OrderPO> orderpo_list=orderdataservice.findByHotelid(hotelid);
+		ArrayList<OrderPO> orderpo_list=datafactory.getOrderDataService().findByHotelid(hotelid);
 		ArrayList<OrderVO> ordervo_list=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpo_list.size();i++){
 			if(orderpo_list.get(i).getexecute()==isExecute){
@@ -133,22 +123,22 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_client_cancel( int orderid) {
-		OrderPO orderpo=orderdataservice.findByid(orderid);
+		OrderPO orderpo=datafactory.getOrderDataService().findByid(orderid);
 		orderpo.setstate("已撤销");
 		Date time=new Date();
 		orderpo.setcancel_time(time);
-		ResultMessage result=orderdataservice.update(orderpo);
+		ResultMessage result=datafactory.getOrderDataService().update(orderpo);
 //		ArrayList<RoomPO> roomlist=roomdataservice.find(orderpo.gethotelid());
 //		ArrayList<RoomOrderPO> roomorderlist=orderpo.getroom_order();
-		roomdataservice.add(orderpo);
+		datafactory.getRoomDataService().add(orderpo);
 		return result;
 	}
 
 	@Override
 	public ResultMessage order_client_generate(OrderVO vo) {
 		OrderPO po=vochange.ordervo_to_orderpo(vo);
-		ResultMessage result=orderdataservice.insert(po);
-		HotelPO hotelpo=hoteldataservice.findByid(vo.gethotelid());
+		ResultMessage result=datafactory.getOrderDataService().insert(po);
+		HotelPO hotelpo=datafactory.getHotelDataService().findByid(vo.gethotelid());
 		ArrayList<Integer> clientidlist=hotelpo.getbook_clientid();
 		int newid=vo.getclientid();
 		boolean hh=true;
@@ -162,22 +152,22 @@ public class OrderBLServiceImpl implements OrderBLService {
 			clientidlist.add(newid);
 		}
 		hotelpo.setbook_clientid(clientidlist);
-		hoteldataservice.update(hotelpo);
-		roomdataservice.reduce(po);
+		datafactory.getHotelDataService().update(hotelpo);
+		datafactory.getRoomDataService().reduce(po);
 		return result;
 	}
 
 	@Override
 	public ResultMessage order_hotel_execute(int orderid) {
-		OrderPO po=orderdataservice.findByid(orderid);
+		OrderPO po=datafactory.getOrderDataService().findByid(orderid);
 		po.setexecute(true);
-		ResultMessage result=orderdataservice.update(po);
+		ResultMessage result=datafactory.getOrderDataService().update(po);
 		return result;
 	}
 
 	@Override
 	public ArrayList<OrderVO> order_market_browseUnfilled() {
-		ArrayList<OrderPO> unfilled_order_list=orderdataservice.findByState("异常");
+		ArrayList<OrderPO> unfilled_order_list=datafactory.getOrderDataService().findByState("异常");
 		ArrayList<OrderVO> list=new ArrayList<OrderVO>();
 		for(int i=0;i<unfilled_order_list.size();i++){
 			OrderVO ordervo=unfilled_order_list.get(i).changetoordervo();
@@ -188,18 +178,18 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_market_cancelAbnormal(int orderid) {
-		OrderPO po=orderdataservice.findByid(orderid);
+		OrderPO po=datafactory.getOrderDataService().findByid(orderid);
 		po.setstate("撤销");
 		Date time=new Date();
 		po.setcancel_time(time);
-		ResultMessage result=orderdataservice.update(po);
+		ResultMessage result=datafactory.getOrderDataService().update(po);
 		return result;
 	}
 
 	@Override
 	public double calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist,int hotelid) throws RemoteException {
 		double price = 0;
-		ArrayList<RoomPO> roomlistttt=roomdataservice.find(hotelid);
+		ArrayList<RoomPO> roomlistttt=datafactory.getRoomDataService().find(hotelid);
 		
 		for(int i=0;i<roomlist.size();i++){
 			RoomOrderVO roomvo=roomlist.get(i);
@@ -216,9 +206,10 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public double calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist, int hotelid,int clientid) throws RemoteException {
+		//获得订单本来总价和房间数量
 		int roomnumber = 0;
 		double price = 0;
-		ArrayList<RoomPO> roomlistttt=roomdataservice.find(hotelid);
+		ArrayList<RoomPO> roomlistttt=datafactory.getRoomDataService().find(hotelid);
 		for(int i=0;i<roomlist.size();i++){
 			RoomOrderVO roomvo=roomlist.get(i);
 			for(int j=0;j<roomlistttt.size();j++){
@@ -229,12 +220,12 @@ public class OrderBLServiceImpl implements OrderBLService {
 				}
 			}
 		}
+		
 		double price1=0;
-		double price2=0;
-		//获得订单本来总价和房间数量
+	
 		ArrayList<Double> price_list=new ArrayList<Double>();
-		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
-		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy();
+//		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
+//		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy();
 		price_list.add(price);
 		
 		//策略模式
@@ -294,16 +285,16 @@ public class OrderBLServiceImpl implements OrderBLService {
 
 	@Override
 	public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {
-		OrderPO orderpo=orderdataservice.findByid(orderid);
+		OrderPO orderpo=datafactory.getOrderDataService().findByid(orderid);
 		orderpo.setstart_time(info.getCheckIn());
 		orderpo.setend_time(info.getPlanCheckOut());
-		ResultMessage result =orderdataservice.update(orderpo);
+		ResultMessage result =datafactory.getOrderDataService().update(orderpo);
 		return result;
 	}
 
 	@Override
 	public OrderVO order_findbyid(int orderid) throws RemoteException {
-		OrderPO orderpo=orderdataservice.findByid(orderid);
+		OrderPO orderpo=datafactory.getOrderDataService().findByid(orderid);
 		OrderVO ordervo=orderpo.changetoordervo();
 		return ordervo;
 	}
@@ -311,10 +302,10 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ResultMessage order_checkout(int orderid) {
 		Date date= new Date();
-		OrderPO orderpo=orderdataservice.findByid(orderid);
+		OrderPO orderpo=datafactory.getOrderDataService().findByid(orderid);
 		orderpo.setend_time(date);
-		ResultMessage result=orderdataservice.update(orderpo);
-		roomdataservice.add(orderpo);
+		ResultMessage result=datafactory.getOrderDataService().update(orderpo);
+		datafactory.getRoomDataService().add(orderpo);
 		
 		return result;
 	}
@@ -325,7 +316,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=0;i<room_order.size();i++){
 			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
 		}
-		ResultMessage result=roomdataservice.reduceOffline(hotelid, roomorderpo);
+		ResultMessage result=datafactory.getRoomDataService().reduceOffline(hotelid, roomorderpo);
 		return result;
 	}
 
@@ -335,13 +326,13 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=0;i<room_order.size();i++){
 			roomorderpo.add(vochange.roomordervo_to_roomorderpo(room_order.get(i)));
 		}
-		ResultMessage result=roomdataservice.addOffline(hotelid, roomorderpo);
+		ResultMessage result=datafactory.getRoomDataService().addOffline(hotelid, roomorderpo);
 		return result;
 	}
 
 	@Override
 	public ArrayList<OrderVO> get_client_hotel_order(int clientid, int hotelid) throws RemoteException {
-		ArrayList<OrderPO> orderpolist=orderdataservice.findByClientid(clientid);
+		ArrayList<OrderPO> orderpolist=datafactory.getOrderDataService().findByClientid(clientid);
 		ArrayList<OrderVO> ordervolist=new ArrayList<OrderVO>();
 		for(int i=0;i<orderpolist.size();i++){
 			OrderPO po=orderpolist.get(i);

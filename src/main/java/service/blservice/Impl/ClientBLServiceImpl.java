@@ -13,32 +13,32 @@ import po.ClientPO;
 import service.VOChange;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
-import service.dataservice.ClientDataService;
-import service.dataservice.Impl.ClientDataServiceImpl;
+import service.datafactory.datafactory;
+import service.datafactory.datafactoryImpl;
 import vo.ClientVO;
 import vo.EvaluationVO;
 import vo.HotelVO;
 
 public class ClientBLServiceImpl implements ClientBLService {
-	ClientDataService clientdataservice=new ClientDataServiceImpl();
-	HotelBLService hotelblservice=new HotelBLServiceImpl();
+	datafactory datafactory=new datafactoryImpl();
+	HotelBLService hotelblservice =new HotelBLServiceImpl();
 	VOChange vochange =new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
 	@Override
 	public ResultMessage client_login(String username,String password){
-		ResultMessage result=clientdataservice.check(username, password);
+		ResultMessage result=datafactory.getClientDataService().check(username, password);
 		return result;
 	}
 	
 	@Override
 	public ResultMessage client_register(String username,String password){
 		ClientPO clientpo=new ClientPO();
-		int clientid=clientdataservice.findClientIDbyUsername(username);
+		int clientid=datafactory.getClientDataService().findClientIDbyUsername(username);
 		if(clientid!=-1){
 		clientpo.setusername(username);
 		clientpo.setpassword(password);
-		ResultMessage result=clientdataservice.insert(clientpo);
+		ResultMessage result=datafactory.getClientDataService().insert(clientpo);
 		return result;
 		}
 		else{
@@ -50,12 +50,12 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage client_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		ResultMessage result=clientdataservice.check(username, oldpassword);
+		ResultMessage result=datafactory.getClientDataService().check(username, oldpassword);
 		System.out.println("r1="+result);
 		if(result==ResultMessage.Success){
-		ClientPO clientpo=clientdataservice.getclientpo(username, oldpassword);
+		ClientPO clientpo=datafactory.getClientDataService().getclientpo(username, oldpassword);
 		clientpo.setpassword(newpassword);
-		ResultMessage result1=clientdataservice.update(clientpo);
+		ResultMessage result1=datafactory.getClientDataService().update(clientpo);
 		System.out.println("r2="+result1);
 		return result1;
 		}
@@ -67,7 +67,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	
 	@Override
 	public ClientVO client_checkInfo(int clientid) {
-		ClientPO clientpo=clientdataservice.find(clientid);
+		ClientPO clientpo=datafactory.getClientDataService().find(clientid);
 		ClientVO clientvo=clientpo.changetoclientvo();
 		return clientvo;
 	}
@@ -75,7 +75,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage client_updateInfo(ClientVO vo) {
 		ClientPO po=vochange.clientvo_to_clientpo(vo);
-		ResultMessage result=clientdataservice.update(po);
+		ResultMessage result=datafactory.getClientDataService().update(po);
 		return result;
 	}
 
@@ -100,13 +100,13 @@ public class ClientBLServiceImpl implements ClientBLService {
 
 	@Override
 	public int client_checkCredit(int clientid) {
-		int credit_number=clientdataservice.find(clientid).getcredit();
+		int credit_number=datafactory.getClientDataService().find(clientid).getcredit();
 		return credit_number;
 	}
 
 	@Override
 	public ArrayList<String> client_checkCreditList(int clientid) {
-		ArrayList<String> credit_list=clientdataservice.find(clientid).getcredit_record();
+		ArrayList<String> credit_list=datafactory.getClientDataService().find(clientid).getcredit_record();
 		return credit_list;
 	}
 
@@ -125,20 +125,20 @@ public class ClientBLServiceImpl implements ClientBLService {
 
 	@Override
 	public ResultMessage client_enrollVIP(VIPInfo info, int clientid) {
-		ClientPO po=clientdataservice.find(clientid);
+		ClientPO po=datafactory.getClientDataService().find(clientid);
 		po.setvipinfo(info);
-		ResultMessage result=clientdataservice.update(po);
+		ResultMessage result=datafactory.getClientDataService().update(po);
 		return result;
 	}
 	
 
 	@Override
 	public ResultMessage client_updateClientCreditList(int clientid, String CreditInfo) throws RemoteException {
-		ClientPO clientpo=clientdataservice.find(clientid);
+		ClientPO clientpo=datafactory.getClientDataService().find(clientid);
 		ArrayList<String> creditrecord=clientpo.getcredit_record();
 		creditrecord.add(CreditInfo);
 		clientpo.setcredit_record(creditrecord);
-		ResultMessage result=clientdataservice.update(clientpo);
+		ResultMessage result=datafactory.getClientDataService().update(clientpo);
 		return result;
 	}
 
@@ -146,7 +146,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 	//
 	@Override
 	public ResultMessage updateClientCredit(int clientid, int value, int tag) {
-		ClientPO clientpo=clientdataservice.find(clientid);
+		ClientPO clientpo=datafactory.getClientDataService().find(clientid);
 		int credit=clientpo.getcredit();
 		if(tag==1){
 			credit+=value;
@@ -165,14 +165,14 @@ public class ClientBLServiceImpl implements ClientBLService {
 		}
 		info.setInfo(newinfo);
 		clientpo.setvipinfo(info);
-		ResultMessage result=clientdataservice.update(clientpo);
+		ResultMessage result=datafactory.getClientDataService().update(clientpo);
 		return result;
 	}
 
 	//这里为啥返回Client，，不返回ClientVO
 	@Override
 	public Client checkClientInfo(int clientid) {
-		ClientPO clientpo=clientdataservice.find(clientid);
+		ClientPO clientpo=datafactory.getClientDataService().find(clientid);
 		Client client=clientpo.changetoclient();
 		return client;
 	}
@@ -180,14 +180,14 @@ public class ClientBLServiceImpl implements ClientBLService {
 	@Override
 	public ResultMessage updateClientInfo(Client client) {
 		ClientPO po=objectchange.changetoclientpo(client);
-		ResultMessage result=clientdataservice.update(po);
+		ResultMessage result=datafactory.getClientDataService().update(po);
 		return result;
 	}
 
 	@Override
 	public ClientVO client_getclientvo(String username) throws RemoteException {
-		int clientid=clientdataservice.findClientIDbyUsername(username);
-		ClientPO clientpo=clientdataservice.find(clientid);
+		int clientid=datafactory.getClientDataService().findClientIDbyUsername(username);
+		ClientPO clientpo=datafactory.getClientDataService().find(clientid);
 		ClientVO vo=clientpo.changetoclientvo();
 		return vo;
 	}

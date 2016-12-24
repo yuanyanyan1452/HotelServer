@@ -17,16 +17,8 @@ import service.VOChange;
 import service.blservice.ClientBLService;
 import service.blservice.HotelBLService;
 import service.blservice.ManageBLService;
-import service.dataservice.ClientDataService;
-import service.dataservice.HotelDataService;
-import service.dataservice.HotelWorkerDataService;
-import service.dataservice.ManageDataService;
-import service.dataservice.OrderDataService;
-import service.dataservice.Impl.ClientDataServiceImpl;
-import service.dataservice.Impl.HotelDataServiceImpl;
-import service.dataservice.Impl.HotelWorkerDataServiceImpl;
-import service.dataservice.Impl.ManageDataServiceImpl;
-import service.dataservice.Impl.OrderDataServiceImpl;
+import service.datafactory.datafactory;
+import service.datafactory.datafactoryImpl;
 import vo.ClientVO;
 import vo.HotelVO;
 import vo.HotelWorkerVO;
@@ -34,49 +26,45 @@ import vo.WebManagerVO;
 import vo.WebMarketVO;
 
 public class ManageBLServiceImpl implements ManageBLService {
-	ManageDataService managedataservice=new ManageDataServiceImpl();
+	datafactory datafactory=new datafactoryImpl();
 	HotelBLService hotelblservice=new HotelBLServiceImpl();
 	ClientBLService clientblservice=new ClientBLServiceImpl();
-	ClientDataService clientdataservice= new ClientDataServiceImpl();
-	HotelDataService hoteldataservice=new HotelDataServiceImpl();
-	HotelWorkerDataService hotelworkerdataservice=new HotelWorkerDataServiceImpl();
-	OrderDataService orderdataservice=new OrderDataServiceImpl();
 	VOChange vochange=new VOChange();
 	ObjectChange objectchange=new ObjectChange();
 	
 	@Override
 	public ResultMessage webmanager_login(String username, String password) throws RemoteException {
-		ResultMessage result=managedataservice.checkWebManager(username, password);
+		ResultMessage result=datafactory.getManageDataService().checkWebManager(username, password);
 		return result;
 	}
 
 	@Override
 	public ResultMessage webmarket_login(String username, String password) throws RemoteException {
-		ResultMessage result=managedataservice.checkWebMarket(username, password);
+		ResultMessage result=datafactory.getManageDataService().checkWebMarket(username, password);
 		return result;
 	}
 	
 	@Override
 	public ResultMessage webmarket_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		WebMarketPO webmarketpo=managedataservice.getwebmarketpo(username, oldpassword);
+		WebMarketPO webmarketpo=datafactory.getManageDataService().getwebmarketpo(username, oldpassword);
 		webmarketpo.setpassword(newpassword);
-		ResultMessage result=managedataservice.updateWebMarket(webmarketpo);
+		ResultMessage result=datafactory.getManageDataService().updateWebMarket(webmarketpo);
 		return result;
 	}
 
 	@Override
 	public ResultMessage webmanager_change_password(String username, String oldpassword, String newpassword)
 			throws RemoteException {
-		WebManagerPO webmanagerpo=managedataservice.getwebmanagerpo(username, oldpassword);
+		WebManagerPO webmanagerpo=datafactory.getManageDataService().getwebmanagerpo(username, oldpassword);
 		webmanagerpo.setpassword(newpassword);
-		ResultMessage result=managedataservice.updateWebManager(webmanagerpo);
+		ResultMessage result=datafactory.getManageDataService().updateWebManager(webmanagerpo);
 		return result;
 	}
 	
 	@Override
 	public ArrayList<ClientVO> getallclientvo() throws RemoteException {
-		ArrayList<ClientPO> clientpo_list=clientdataservice.getallclientPO();
+		ArrayList<ClientPO> clientpo_list=datafactory.getClientDataService().getallclientPO();
 		ArrayList<ClientVO> clientvo_list=new ArrayList<ClientVO>();
 		for(int i=0;i<clientpo_list.size();i++){
 			ClientVO clientvo=clientpo_list.get(i).changetoclientvo();
@@ -87,7 +75,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ArrayList<HotelVO> getallhotelvo() throws RemoteException {
-		ArrayList<HotelPO> hotelpo_list=hoteldataservice.getAllHotelPO();
+		ArrayList<HotelPO> hotelpo_list=datafactory.getHotelDataService().getAllHotelPO();
 		ArrayList<HotelVO> hotelvo_list=new ArrayList<HotelVO>();
 		for(int i=0;i<hotelpo_list.size();i++){
 			HotelVO hotelvo=hotelpo_list.get(i).changetohotelvo();
@@ -98,7 +86,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ArrayList<HotelWorkerVO> getallhotelworkervo() throws RemoteException {
-		ArrayList<HotelWorkerPO> hotelworkerpo_list=hotelworkerdataservice.getallhotelworkerPO();
+		ArrayList<HotelWorkerPO> hotelworkerpo_list=datafactory.getHotelWorkerDataService().getallhotelworkerPO();
 		ArrayList<HotelWorkerVO> hotelworkervo_list=new ArrayList<HotelWorkerVO>();
 		for(int i=0;i<hotelworkerpo_list.size();i++){
 			HotelWorkerVO hotelworkervo=hotelworkerpo_list.get(i).changetohotelworkervo();
@@ -109,7 +97,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 
 	@Override
 	public ArrayList<WebMarketVO> getallwebmarketvo() throws RemoteException {
-		ArrayList<WebMarketPO> webmarketpo_list=managedataservice.getallwebmarketPO();
+		ArrayList<WebMarketPO> webmarketpo_list=datafactory.getManageDataService().getallwebmarketPO();
 		ArrayList<WebMarketVO> webmarketvo_list=new ArrayList<WebMarketVO>();
 		for(int i=0;i<webmarketpo_list.size();i++){
 			WebMarketVO webmarketvo=webmarketpo_list.get(i).changetowebmarketvo();
@@ -120,7 +108,7 @@ public class ManageBLServiceImpl implements ManageBLService {
 	
 	@Override
 	public int getordernumber() throws RemoteException{
-		int num=orderdataservice.getAllOrder();
+		int num=datafactory.getOrderDataService().getAllOrder();
 		return num;
 	}
 	
@@ -169,35 +157,35 @@ public class ManageBLServiceImpl implements ManageBLService {
 	@Override
 	public ResultMessage manage_addMarketWorker(WebMarketVO webmarketvo) {
 		WebMarketPO po=vochange.marketvo_to_marketpo(webmarketvo);
-		ResultMessage result=managedataservice.insertWebMarket(po);
+		ResultMessage result=datafactory.getManageDataService().insertWebMarket(po);
 		return result;
 	}
 
 	@Override
 	public WebMarketVO manage_searchMarketWorkerByWebmarketid(int marketWorkerid) {
-		WebMarketPO webmarketpo=managedataservice.findWebMarket(marketWorkerid);
+		WebMarketPO webmarketpo=datafactory.getManageDataService().findWebMarket(marketWorkerid);
 		WebMarketVO webmarketvo=webmarketpo.changetowebmarketvo();		return webmarketvo;
 	}
 
 	@Override
 	public ResultMessage manage_updateMarketWorker(WebMarketVO mw) {
 		WebMarketPO po=vochange.marketvo_to_marketpo(mw);
-		ResultMessage result=managedataservice.updateWebMarket(po);
+		ResultMessage result=datafactory.getManageDataService().updateWebMarket(po);
 		return result;
 	}
 
 	@Override
 	public WebMarketVO webmarket_getvo(String username) throws RemoteException {
-		int id=managedataservice.findWebMarketIDbyUsername(username);
-		WebMarketPO webmarketpo=managedataservice.findWebMarket(id);
+		int id=datafactory.getManageDataService().findWebMarketIDbyUsername(username);
+		WebMarketPO webmarketpo=datafactory.getManageDataService().findWebMarket(id);
 		WebMarketVO vo=webmarketpo.changetowebmarketvo();
 		return vo;
 	}
 
 	@Override
 	public WebManagerVO webmanager_getvo(String username) throws RemoteException {
-		int id=managedataservice.findWebManagerIDbyUsername(username);
-		WebManagerPO webmanagerpo=managedataservice.findWebManager(id);
+		int id=datafactory.getManageDataService().findWebManagerIDbyUsername(username);
+		WebManagerPO webmanagerpo=datafactory.getManageDataService().findWebManager(id);
 		WebManagerVO vo=webmanagerpo.changetowebmanagervo();
 		return vo;
 	}
