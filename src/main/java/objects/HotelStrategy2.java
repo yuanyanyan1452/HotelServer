@@ -15,6 +15,7 @@ public class HotelStrategy2 extends HotelStrategy implements Calculate{
 	Date start_time;
 	Date end_time;
 	ClientBLService clientblservice=new ClientBLServiceImpl();
+	
 	@Override
 	public double calculate(int clientid, int hotelid, double price, int roomnumber) throws RemoteException {
 		try {
@@ -29,9 +30,11 @@ public class HotelStrategy2 extends HotelStrategy implements Calculate{
 		Date date=new Date();
 		if(date.after(start_time)&&date.before(end_time)){
 		String time=format.format(date);
-		String [] vipinfo=client.getvipinfo().getInfo().split(",");
-		if(vipinfo[1]!=""&&vipinfo[1].equals(time)){
-			price*=0.5;
+		if(client.getvipinfo()!=null){
+			String [] vipinfo=client.getvipinfo().getInfo().split(",");
+			if(!vipinfo[1].equals("")&&vipinfo[1].equals(time)){
+				price*=0.5;
+			}
 		}
 		}
 		return price;

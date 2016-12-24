@@ -26,11 +26,13 @@ public class WebStrategy3 extends WebStrategy implements Calculate{
 		}
 		if(nowdate.after(start_time)&&nowdate.before(end_time)){
 		ClientVO client=clientblservice.client_checkInfo(clientid);
-		String vipinfo1=client.getvipinfo().getInfo();
-		if(!vipinfo1.equals("")){
-		String[] vipinfolist=vipinfo1.split(",");
-		String viplevel=vipinfolist[0];
-		price=calculatebyviplevel(price, viplevel);
+		if(client.getvipinfo()!=null){
+			String vipinfo1=client.getvipinfo().getInfo();
+			if(!vipinfo1.equals("")){
+				String[] vipinfolist=vipinfo1.split(",");
+				String viplevel=vipinfolist[0];
+				price=calculatebyviplevel(price, viplevel);
+			}
 		}
 		}
 		return price;
