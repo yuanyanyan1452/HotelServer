@@ -113,8 +113,7 @@ public class HotelBLServiceImpl implements HotelBLService {
 	@Override
 	public ResultMessage addHotelWorker(HotelWorker worker) {
 		HotelWorkerPO po=objectchange.changetohotelworkerpo(worker);
-		HotelWorkerPO hotelworkerpo=datafactory.getHotelWorkerDataService().find(po.gethotelid());
-		if(hotelworkerpo.getname().equals(null)){
+		if(!po.getname().equals("")){
 			ResultMessage result=datafactory.getHotelWorkerDataService().insert(po);
 			return result;
 		
