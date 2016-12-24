@@ -235,6 +235,8 @@ public class OrderBLServiceImpl implements OrderBLService {
 		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
 		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy();
 		price_list.add(price);
+		
+		//策略模式
 		HotelStrategy1 h1=new HotelStrategy1();
 		HotelStrategy2 h2=new HotelStrategy2();
 		HotelStrategy3 h3=new HotelStrategy3();
@@ -276,73 +278,6 @@ public class OrderBLServiceImpl implements OrderBLService {
 		price1=strategy.getprice(clientid, hotelid, price, roomnumber);
 		price_list.add(price1);
 		
-//		Date nowdate=new Date();
-//		for(int i=0;i<hotelstrategy_list.size();i++){
-//		HotelStrategyVO hotelstrategyvo=hotelstrategy_list.get(i);
-//		if(nowdate.after(hotelstrategyvo.getstart_time())&&nowdate.before(hotelstrategyvo.getend_time())){
-//		switch(hotelstrategyvo.getid()){
-//		case 1:
-//			HotelStrategy1 hs1=new HotelStrategy1();
-//			price1=hs1.calculate(clientid, hotelid, price, roomnumber);
-//			price_list.add(price1);
-//			break;
-//		case 2:
-//			HotelStrategy2 hs2=new HotelStrategy2();
-//			price1=hs2.calculate(clientid, hotelid, price, roomnumber);
-//			price_list.add(price1);
-//			break;
-//		case 3:
-//			HotelStrategy3 hs3=new HotelStrategy3();
-//			price1=hs3.calculate(clientid, hotelid, price, roomnumber);
-//			price_list.add(price1);
-//			break;
-//		case 4:
-//			HotelStrategy4 hs4=new HotelStrategy4();
-//			price1=hs4.calculate(clientid, hotelid, price, roomnumber);
-//			price_list.add(price1);
-//			break;
-//		case 5:
-//			HotelStrategy5 hs5=new HotelStrategy5();
-//			price1=hs5.calculate(clientid, hotelid, price, roomnumber);
-//			price_list.add(price1);
-//			break;
-//			
-//		}
-//		}
-//		}
-//		
-//		
-//		for(int i=0;i<webstrategy_list.size();i++){
-//		if(nowdate.after(webstrategy_list.get(i).getstart_time())&&nowdate.before(webstrategy_list.get(i).getend_time())){
-//		switch(webstrategy_list.get(i).getid()){
-//		case 1:
-//			WebStrategy1 ws1=new WebStrategy1();
-//			price2=ws1.calculate(clientid, hotelid, price, roomnumber);
-//			price_list.add(price2);
-//			break;
-//		case 2:
-//			WebStrategy2 ws2=new WebStrategy2();
-//		   	price2=ws2.calculate(clientid, hotelid, price, roomnumber);
-//		    price_list.add(price2);
-//		    break;
-//		case 3:
-//		case 4:
-//		case 5:
-//		   WebStrategy3 ws3=new WebStrategy3();
-//		   price2=ws3.calculate(clientid, hotelid, price, roomnumber);
-//		   WebStrategy5 ws5=new WebStrategy5();
-//		   ws5.setcondition(webstrategy_list.get(i).getcondition());
-//		   price2=ws5.calculate(clientid, hotelid, price2, roomnumber);
-//		   price_list.add(price2);
-//		   break;
-//		case 6:
-//			WebStrategy4 ws4=new WebStrategy4();
-//		   	price2=ws4.calculate(clientid, hotelid, price, roomnumber);
-//		    price_list.add(price2);
-//		}
-//		}
-//		
-//		}
 		double min_price=price;
 		if(!price_list.isEmpty()){
 		min_price=price_list.get(0);
