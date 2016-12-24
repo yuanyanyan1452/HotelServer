@@ -27,29 +27,31 @@ public class WebStrategy5 extends WebStrategy implements Calculate{
 		}
 		if(nowdate.after(start_time)&&nowdate.before(end_time)){
 		ClientVO client=clientblservice.client_checkInfo(clientid);
-		String [] vipinfo=client.getvipinfo().info.split(",");
-		ArrayList<Double> pricelist=new ArrayList<Double>();
-		for(int i=2;i<vipinfo.length;i++){
-			switch(vipinfo[i]){
-			case "新街口":
-			case "学则路":
-				pricelist.add(price*0.9);
-				break;
-			case "仙林中心":
-			case "玄武路":
-				pricelist.add(price*0.8);
-				break;
-			default:
-				pricelist.add(price);
+		if(client.getvipinfo()!=null){
+			String [] vipinfo=client.getvipinfo().info.split(",");
+			ArrayList<Double> pricelist=new ArrayList<Double>();
+			for(int i=2;i<vipinfo.length;i++){
+				switch(vipinfo[i]){
+				case "新街口":
+				case "学则路":
+					pricelist.add(price*0.9);
+					break;
+				case "仙林中心":
+				case "玄武路":
+					pricelist.add(price*0.8);
+					break;
+				default:
+					pricelist.add(price);
+				}
 			}
-		}
 		
 		
 		if(!pricelist.isEmpty()){
-		price=pricelist.get(0);
-		for(int i=1;i<pricelist.size();i++){
-			if(pricelist.get(i)<price){
-				price=pricelist.get(i);
+			price=pricelist.get(0);
+			for(int i=1;i<pricelist.size();i++){
+				if(pricelist.get(i)<price){
+					price=pricelist.get(i);
+				}
 			}
 		}
 		}

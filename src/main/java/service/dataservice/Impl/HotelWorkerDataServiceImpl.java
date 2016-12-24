@@ -83,15 +83,16 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 	public synchronized ResultMessage insert(HotelWorkerPO po) {
 		Connection conn = Connect.getConn();
 
-		String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password,logged) values(NULL,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'),?)";
+		String sql = "insert into hotelworker(hotelid,Name,Contact,Username,Password,logged) values(?,encode(?,'key'),encode(?,'key'),encode(?,'key'),encode(?,'key'),?)";
 		PreparedStatement pstmt;
 		try {
 			pstmt = (PreparedStatement) conn.prepareStatement(sql);
-			pstmt.setString(1, po.getname());
-			pstmt.setString(2, po.getcontact());
-			pstmt.setString(3, po.getusername());
-			pstmt.setString(4, po.getpassword());
-			pstmt.setBoolean(5, po.getlogged());
+			pstmt.setInt(1, po.gethotelid());
+			pstmt.setString(2, po.getname());
+			pstmt.setString(3, po.getcontact());
+			pstmt.setString(4, po.getusername());
+			pstmt.setString(5, po.getpassword());
+			pstmt.setBoolean(6, po.getlogged());
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();
@@ -254,5 +255,10 @@ public class HotelWorkerDataServiceImpl implements HotelWorkerDataService {
 		}
 		return null;
 	}
+	
+//	public static void main(String[]args){
+//		HotelWorkerDataServiceImpl worker=new HotelWorkerDataServiceImpl();
+//		System.out.println(worker.find(9).getname());
+//	}
 	
 }

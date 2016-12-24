@@ -146,10 +146,10 @@ public class ClientPO implements Serializable {
 		client.setcontact(this.contact);
 		client.setcredit(this.credit);
 		client.setcredit_record(this.credit_record);
+		client.setvipinfo(this.info);
 		client.setusername(this.username);
 		client.setpassword(this.password);
 		client.setlogged(this.logged);
-		//vipinfo没转
 		return client;
 	}
 

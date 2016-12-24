@@ -17,7 +17,13 @@ import po.ClientPO;
 import service.dataservice.ClientDataService;
 
 public class ClientDataServiceImpl implements ClientDataService {
-
+	
+	public static void main(String[] args){
+		ClientDataServiceImpl a= new ClientDataServiceImpl();
+		ClientPO po = a.find(7);
+		System.out.println(po.getvipinfo());
+	}
+	
 	@Override
 	public synchronized ArrayList<ClientPO> getallclientPO() {
 		Connection conn = Connect.getConn();
