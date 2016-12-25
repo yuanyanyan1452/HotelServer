@@ -262,10 +262,12 @@ public class HotelDataServiceImpl implements HotelDataService{
 	 */
 	public String evaluTransformToStr(ArrayList<String> evalu){
 		String s="";
-		for(int i=0;i<evalu.size()-1;i++){
-			s+=evalu.get(i)+",";
+		if(evalu.size()>0){
+			for(int i=0;i<evalu.size()-1;i++){
+				s+=evalu.get(i)+",";
+			}
+			s+=evalu.get(evalu.size()-1);
 		}
-		s+=evalu.get(evalu.size()-1);
 		return s;
 		
 	}
