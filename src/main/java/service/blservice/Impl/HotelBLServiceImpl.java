@@ -78,10 +78,10 @@ public class HotelBLServiceImpl implements HotelBLService {
 				roompo=roomlist.get(i);
 			}
 		}
-		if(roompo.gettotal_num()<room.getavailable_num()){
-			roompo.settotal_num(room.getavailable_num());
-			roompo.setavailable_num(room.getavailable_num());
-		}
+		int booked_num=roompo.gettotal_num()-roompo.getavailable_num();
+		int avail=room.gettotal_num()-booked_num;
+		roompo=vochange.roomvo_to_roompo(room);
+		roompo.setavailable_num(avail);
 		ResultMessage result=datafactory.getRoomDataService().update(roompo);
 		return result;
 	}
