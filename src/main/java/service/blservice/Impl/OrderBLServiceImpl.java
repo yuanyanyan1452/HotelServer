@@ -124,7 +124,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	@Override
 	public ResultMessage order_client_cancel( int orderid) {
 		OrderPO orderpo=datafactory.getOrderDataService().findByid(orderid);
-		orderpo.setstate("已撤销");
+		orderpo.setstate("撤销");
 		Date time=new Date();
 		orderpo.setcancel_time(time);
 		ResultMessage result=datafactory.getOrderDataService().update(orderpo);

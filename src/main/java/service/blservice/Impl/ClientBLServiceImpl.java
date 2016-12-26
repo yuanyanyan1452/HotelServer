@@ -155,14 +155,18 @@ public class ClientBLServiceImpl implements ClientBLService {
 			credit-=value;
 		}
 		clientpo.setcredit(credit);
+		
+		//更新会员等级
 		VIPInfo info=new VIPInfo();
 		info.setType(clientpo.getvipinfo().getType());
 		String[] infor=clientpo.getvipinfo().getInfo().split(",");
 		infor[0]=update_client_viplevel(credit);
 		String newinfo="";
-		for(int i=0;i<infor.length;i++){
+		for(int i=0;i<infor.length-1;i++){
 			newinfo+=infor[i];
+			newinfo+=",";
 		}
+		newinfo+=infor[infor.length-1];
 		info.setInfo(newinfo);
 		clientpo.setvipinfo(info);
 		ResultMessage result=datafactory.getClientDataService().update(clientpo);
