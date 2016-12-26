@@ -1,5 +1,6 @@
 package logiccontroller;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import mock.MockClient1;
@@ -9,32 +10,36 @@ import vo.*;
 import service.blservice.*;
 
 public class ClientController implements ClientBLService {
-	// �ͻ���Ϣ
+	// 客户信息
 	int clientid = 1;
-	String client_name = "����";
-	String contact = "11111111111";
-	int credit = 0;
+	String client_name = "relate";
+	String contact = "8989";
+	int credit = 4800;
 	ArrayList<String> credit_record = new ArrayList<String>();
-	VIPInfo info = new VIPInfo(VIPType.NORMAL,"2000/01/01");
+	VIPInfo info = new VIPInfo(VIPType.NORMAL,"三级会员,南京大学, 仙林中心,学则路");
+	String username="relate";
+	String password="chinese";
+	boolean logged=false;
 
-	// �Ƶ���Ϣ
-	String address = "�Ͼ�";
-	String business_address = "�½ֿ�";
-	String hotel_name = "���";
-	String introduction = "��";
-	String service = "��";
-	String room_state = "δԤ��";
-	String room_type = "˫�˷�";
-	int room_number = 1;
-	int room_price = 200;
-	String order = "��";
-	String evaluation = "��";
-
+	// 酒店信息
+	int id=1;
+	String name="天丰大酒店";
+	String address = "南京市白下区洪武路26号";
+	String business_address = "新街口";
+	String introduction = "四星级商务酒店";
+	String service = "wifi,餐饮,停车";
+	String star="四星级";
+	String score="4.2,20";
+	ArrayList<String>hotel_evaluation=new ArrayList<String>();
+	ArrayList<Integer>book_clientid=new ArrayList<Integer>();
+	
+	@Override
 	public ClientVO client_checkInfo(int clientid) {
-		ClientVO client = new ClientVO(clientid,client_name,contact,credit,credit_record,info);
+		ClientVO client = new ClientVO(clientid,client_name,contact,credit,credit_record,info,username,password);
 		return client;
 	}
-
+	
+	@Override
 	public ResultMessage client_updateInfo(ClientVO vo) {
 		if (vo != null) {
 			return ResultMessage.Success;
@@ -42,34 +47,18 @@ public class ClientController implements ClientBLService {
 			return ResultMessage.Fail;
 		}
 	}
-
+	
+	@Override
 	public ArrayList<HotelVO> client_getpreviousHotelList(int clientid) {
 		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
+		HotelVO hotel = new HotelVO(1,name,address, business_address, introduction, service, star,score,hotel_evaluation,book_clientid);
 		HotelList_Client.add(hotel);
 		return HotelList_Client;
 	}
 
-	public ArrayList<HotelVO> client_setLocation(String location) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
-	public ArrayList<HotelVO> client_searchHotel(String hotelname) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
+	@Override
 	public HotelVO client_checkHotelInfo(int hotelid) {
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
+		HotelVO hotel = new HotelVO(1,name,address, business_address, introduction, service, star,score,hotel_evaluation,book_clientid);
 		return hotel;
 	}
 
@@ -84,64 +73,10 @@ public class ClientController implements ClientBLService {
 	}
 
 	@Override
-	public ArrayList<HotelVO> client_searchHotel(RoomType type) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotel(int lowprice, int highprice) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotel(String inTime, String leaveTime) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotel(int star) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
-	@Override
-	public ArrayList<HotelVO> client_searchHotel(double lowscore, double highscore) {
-		ArrayList<HotelVO> HotelList_Client = new ArrayList<HotelVO>();
-		HotelVO hotel = new HotelVO(1,address, business_address, hotel_name, introduction, service, room_state, room_type,
-				room_number, room_price, order, evaluation);
-		HotelList_Client.add(hotel);
-		return HotelList_Client;
-	}
-
-	@Override
-	public ResultMessage client_evaluateHotel(Evaluation e, int clientid) {
-		if(e!=null){
-			return ResultMessage.Success;
-		}
-		else
-			return ResultMessage.Fail;
-	}
-
-	@Override
 	public ResultMessage client_enrollVIP(VIPInfo info, int clientid) {
 		if(info!=null){
 			return ResultMessage.Success;
-		}
+		} 
 		else
 			return ResultMessage.Fail;
 	}
@@ -175,6 +110,94 @@ public class ClientController implements ClientBLService {
 		else {
 			return ResultMessage.Fail;
 		}
+	}
+
+	@Override
+	public ResultMessage client_login(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(username.equals(this.username)&&password.equals(this.password)){
+			return ResultMessage.Success;
+		}else{
+			return ResultMessage.Fail;
+		}
+	}
+
+	@Override
+	public ClientVO client_getclientvo(String username) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(username.equals(this.username)){
+			ClientVO client=new ClientVO(clientid,client_name,contact,credit,credit_record,info,username,password);
+			return client;
+		}else{
+			return null;
+		}
+	}
+
+	@Override
+	public ResultMessage client_register(String username, String password) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(!username.equals(this.username)&&username!=null&&password!=null){
+			return ResultMessage.Success;
+		}else{
+			return ResultMessage.Fail;
+		}
+	}
+
+	@Override
+	public ResultMessage client_change_password(String username, String oldpassword, String newpassword)
+			throws RemoteException {
+		// TODO Auto-generated method stub
+		if(username.equals("relate")&&oldpassword.equals(this.password)){
+			this.password=newpassword;
+			return ResultMessage.Success;
+		}else{
+			return ResultMessage.Fail;
+		}
+	}
+
+	@Override
+	public ResultMessage client_evaluateHotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(clientid==this.clientid&&hotelid==this.id){
+			String[]temp=this.score.split(",");
+			double s=Double.parseDouble(temp[0]);
+			s=(s*Integer.parseInt(temp[1])+e.getScore())/(Integer.parseInt(temp[1])+1);
+			score=s+","+(Integer.parseInt(temp[1])+1);
+			hotel_evaluation.add(e.getComments());
+			return ResultMessage.Success;
+		}else{
+			return ResultMessage.Fail;
+		}
+	}
+
+	@Override
+	public ResultMessage client_updateClientCreditList(int clientid, String CreditInfo) throws RemoteException {
+		// TODO Auto-generated method stub
+		if(clientid==this.clientid){
+			credit_record.add(CreditInfo);
+			return ResultMessage.Success;
+		}
+		else{
+			return ResultMessage.Fail;
+		}
+	}
+
+	@Override
+	public String update_client_viplevel(int credit) throws RemoteException {
+		// TODO Auto-generated method stub
+		int[] postpointarray={5000,50000,500000};
+		int[] preintarray={0,5000,50000};
+		String[] level={"一级会员","二级会员","三级会员"};
+		String viplevel="";
+		for(int i=0;i<=1;i++){
+			if(preintarray[i]<credit&&postpointarray[i]>=credit){
+				viplevel= level[i];
+			}
+		}
+		if(credit>500000){
+			viplevel= level[2];
+		}
+		return viplevel;
 	}
 
 }

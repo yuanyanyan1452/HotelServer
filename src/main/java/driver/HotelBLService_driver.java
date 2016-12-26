@@ -13,54 +13,49 @@ public class HotelBLService_driver {
 
 	public void drive(HotelBLService hotelBLService){
 
-		//²âÊÔhotel_checkInfo
-		HotelVO hotelVO = hotelBLService.hotel_checkInfo(1);
+		//hotel_checkInfo
+		HotelVO hotelVO = hotelBLService.hotel_getInfo(1);
 		System.out.println(hotelVO.getname());
 		System.out.println(hotelVO.getaddress());
 		System.out.println(hotelVO.getbussiness_address());
 		System.out.println(hotelVO.getintroduction());
 		System.out.println(hotelVO.getservice());
-		System.out.println(hotelVO.getevaluation());
-		System.out.println(hotelVO.getroom_state());
-		System.out.println(hotelVO.getorder());
-		System.out.println(hotelVO.getroom_type());
-		System.out.println(hotelVO.getroom_price());
-		System.out.println(hotelVO.getroom_number());
+		System.out.println(hotelVO.gethotel_evaluation());
 
 		
 
-		//²âÊÔhotel_updateInfo
+		//hotel_updateInfo
 		ResultMessage resultMessage = hotelBLService.hotel_updateInfo(
-				new HotelVO(1,"ÄÏ¾©","ÐÂ½Ö¿Ú", "Èç¼Ò", "Èç¼Ò¾Æµê", "¾ÆµêËùÓÐ·þÎñ", "¿ÉÓÃ", "Ë«ÈË·¿", 1, 100, "", "good"));
+				new HotelVO(1,"ï¿½Ï¾ï¿½","ï¿½Â½Ö¿ï¿½", "ï¿½ï¿½ï¿½", "ï¿½ï¿½Ò¾Æµï¿½", "ï¿½Æµï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "Ë«ï¿½Ë·ï¿½", 1, 100, "", "good"));
 		if(resultMessage == ResultMessage.Success){
-			System.out.println("¸üÐÂ¾ÆµêÐÅÏ¢³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½Â¾Æµï¿½ï¿½ï¿½Ï¢ï¿½É¹ï¿½");
 		}
 		else {
-			System.out.println("¸üÐÂ¾ÆµêÐÅÏ¢Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½Â¾Æµï¿½ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
 		}
 
 		
 
-		//²âÊÔhotel_importRoom
+		//hotel_importRoom
 		Room room=new Room();
 		resultMessage = hotelBLService.hotel_importRoom(room);
 		if (resultMessage==ResultMessage.Success) {
-			System.out.println("Â¼Èë¿ÉÓÃ·¿¼ä³É¹¦");
+			System.out.println("Â¼ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½É¹ï¿½");
 		}
 		else {
-			System.out.println("Â¼Èë¿ÉÓÃ·¿¼äÊ§°Ü");
+			System.out.println("Â¼ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 		}
 
 		
 
-		//²âÊÔhotel_updateAccomdation
-		AccommodationInfo ac=new AccommodationInfo();
-		resultMessage = hotelBLService.hotel_updateAccomodation(ac);
+		//hotel_updateAccomdation
+		AccommodationVO ac=new AccommodationVO(null, null, null, null);
+		resultMessage = hotelBLService.hotel_updateInfo(ac);
 		if (resultMessage == ResultMessage.Success) {
-			System.out.println("¸üÐÂÈë×¡ÐÅÏ¢³É¹¦");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¡ï¿½ï¿½Ï¢ï¿½É¹ï¿½");
 		}
 		else {
-			System.out.println("¸üÐÂÈë×¡ÐÅÏ¢Ê§°Ü");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¡ï¿½ï¿½Ï¢Ê§ï¿½ï¿½");
 		}
 	}
 }
