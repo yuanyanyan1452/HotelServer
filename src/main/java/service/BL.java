@@ -30,7 +30,7 @@ public class BL {
 				ClientPO clientpo=clientdataservice.find(orderpo.getclientid());
 				int newcredit=clientpo.getcredit()-orderpo.getprice();
 				clientpo.setcredit(newcredit);
-				String creditinfo="'"+format.format(date)+"'"+","+String.valueOf(orderpo.getid())+","+"订单自动置为异常,"+"-"+String.valueOf(orderpo.getprice())+","+String.valueOf(newcredit);
+				String creditinfo=format.format(date)+","+String.valueOf(orderpo.getid())+","+"订单自动置为异常,"+"-"+String.valueOf(orderpo.getprice())+","+String.valueOf(newcredit);
 				ArrayList<String> newcreditrecord=clientpo.getcredit_record();
 				newcreditrecord.add(creditinfo);
 				clientpo.setcredit_record(newcreditrecord);
