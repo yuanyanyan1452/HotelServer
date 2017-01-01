@@ -157,6 +157,7 @@ public class ClientBLServiceImpl implements ClientBLService {
 		clientpo.setcredit(credit);
 		
 		//更新会员等级
+		if(clientpo.getvipinfo() != null){
 		VIPInfo info=new VIPInfo();
 		info.setType(clientpo.getvipinfo().getType());
 		String[] infor=clientpo.getvipinfo().getInfo().split(",");
@@ -169,6 +170,8 @@ public class ClientBLServiceImpl implements ClientBLService {
 		newinfo+=infor[infor.length-1];
 		info.setInfo(newinfo);
 		clientpo.setvipinfo(info);
+		}
+		
 		ResultMessage result=datafactory.getClientDataService().update(clientpo);
 		return result;
 	}
