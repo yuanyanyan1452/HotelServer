@@ -1,6 +1,7 @@
 package service.blservice.Impl;
 
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import objects.Hotel;
@@ -247,14 +248,15 @@ public class HotelBLServiceImpl implements HotelBLService {
 	
 	@Override
 	public ResultMessage evalutehotel(EvaluationVO e, int clientid, int hotelid) throws RemoteException {
+		DecimalFormat df=new DecimalFormat("0.00");
 		HotelPO hotelpo=hoteldataservice.findByid(hotelid);
 		String score=hotelpo.getscore();
 		String [] scorelist=score.split(",");
 		double average_score=Double.parseDouble(scorelist[0]);
 		int numofpeople=Integer.parseInt(scorelist[1]);
 		int new_numofpeople=numofpeople+1;
-		double new_average_score=((average_score*numofpeople)+e.getScore())/new_numofpeople;
-		String newscore=String.valueOf(new_average_score)+","+String.valueOf(new_numofpeople);
+		String new_average_score=df.format(((average_score*numofpeople)+e.getScore())/new_numofpeople);
+		String newscore=new_average_score+","+String.valueOf(new_numofpeople);
 		hotelpo.setscore(newscore);
 		ArrayList<String> newcomment=hotelpo.gethotel_evaluation();
 		newcomment.add(e.getComments());
