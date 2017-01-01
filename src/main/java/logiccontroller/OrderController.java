@@ -308,6 +308,12 @@ public class OrderController implements OrderBLService{
 			return null;
 		}
 		
+		@Override
+		public String getstrategyname() throws RemoteException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
 		
 		
 }

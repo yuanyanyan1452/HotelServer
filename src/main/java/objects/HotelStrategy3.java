@@ -18,7 +18,6 @@ public class HotelStrategy3 extends HotelStrategy implements Calculate{
 			start_time=fmt.parse(" 2000-01-01 00:00:00");
 			end_time=fmt.parse("2100-12-30 00:00:00");
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(nowdate.after(start_time)&&nowdate.before(end_time)){

@@ -167,6 +167,12 @@ public class DataRemoteObject extends UnicastRemoteObject
 		return orderbl.calculateTotalwithStrategy(roomlist, hotelid,clientid);
 	}
 	
+
+	@Override
+	public String getstrategyname() throws RemoteException {
+		return orderbl.getstrategyname();
+	}
+	
 	@Override
 	public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {
 		return orderbl.order_checkin(info, orderid);
@@ -505,6 +511,9 @@ public class DataRemoteObject extends UnicastRemoteObject
 	public String update_client_viplevel(int credit) throws RemoteException{
 		return clientbl.update_client_viplevel(credit);
 	}
+
+
+
 
 
 
