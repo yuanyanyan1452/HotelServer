@@ -2,7 +2,6 @@ package driver;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import vo.*;
-import service.*;
 import service.blservice.*;
 import objects.*;
 import objects.VIPInfo.VIPType;
@@ -69,7 +68,7 @@ public class ClientBLService_driver {
 		System.out.println(vo.getcontact());
 		System.out.println(vo.getcredit());
 		ArrayList<String> list1 = vo.getcredit_record();
-		for(String s:list1){
+		for(@SuppressWarnings("unused") String s:list1){
 			System.out.println(list1);
 		}
 		VIPInfo info = vo.getvipinfo();
