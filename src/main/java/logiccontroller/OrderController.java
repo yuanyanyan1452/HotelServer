@@ -1,142 +1,313 @@
 package logiccontroller;
 
 
+import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import vo.*;
-import service.blservice.*;
-import objects.*;
+import java.util.Date;
+
+import objects.ResultMessage;
+import service.blservice.OrderBLService;
+import vo.AccommodationVO;
+import vo.OrderVO;
+import vo.RoomOrderVO;
+import vo.RoomVO;
 
 public class OrderController implements OrderBLService{
-	//∂©µ•≤Œ ˝
-		int id=000001;
-		String state="’˝≥£";
-		boolean execute=false;
-		String hotel="»Áº“";
-		String start_time="2016-10-16-19:00";
-		String end_time="2016-10-20-12:00";
-		String latest_execute_time="2016-10-17-12:00";
-		String room_type="À´»À∑ø";
-		int room_number=1;
-		String strategy="Œﬁ";
-		int price=800;
+	SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:dd");
+	//ËÆ¢Âçï‰ø°ÊÅØ
+		int id=1;
+		int clientid=1;
+		int hotelid=1;
+		String state="Ê≠£Â∏∏";
+		Date cancel_time=null;
+		boolean execute=true;
+		String start_time="2017-01-01 00:00:00";
+		String end_time="2017-01-05 00:00:00";
+		String latest_execute_time="2017-01-02 00:00:00";
+		ArrayList<RoomOrderVO>room_order=new ArrayList<RoomOrderVO>();
+		int price=1800;
 		int expect_number_of_people=2;
+		boolean havechild=false;
+		String evaluation="nice";
+		
+		//ËÆ¢ÂçïÁöÑÊàøÈó¥‰ø°ÊÅØ
+		RoomOrderVO roomorder1=new RoomOrderVO("Ê†áÂáÜÈó¥",1,5);
+		RoomOrderVO roomorder2=new RoomOrderVO("Âèå‰∫∫Êàø",1,3);
+		RoomOrderVO roomorder3=new RoomOrderVO("Â§ßÂ∫äÊàø",2,4);
+		
+		//ÊàøÈó¥‰ø°ÊÅØ
+		RoomVO room1=new RoomVO(1,1,"Ê†áÂáÜÈó¥",22,4,350);
+		RoomVO room2=new RoomVO(2,1,"Â§ßÂ∫äÊàø",8,6,480);
+		RoomVO room3=new RoomVO(3,1,"Âèå‰∫∫Êàø",20,12,540);
+		
+		
+		@Override
+		public ArrayList<OrderVO> findorderByClientid(int clientid) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO>findByClientid=new ArrayList<OrderVO>();
+			if(clientid==this.clientid){
+				try {
+					room_order.add(roomorder1);
+					room_order.add(roomorder2);
+					room_order.add(roomorder3);
+					findByClientid.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+							fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+							expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return findByClientid;
+		}
+		@Override
+		public ArrayList<OrderVO> findorderBy_Clientid_State(int clientid, String state) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO>findBy_clientid_state=new ArrayList<OrderVO>();
+			if(clientid==this.clientid&&state.equals(this.state)){
+				try {
+					room_order.add(roomorder1);
+					room_order.add(roomorder2);
+					room_order.add(roomorder3);
+					findBy_clientid_state.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+								fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+								expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return findBy_clientid_state;
+		}
+		@Override
+		public ArrayList<OrderVO> findorderBy_Clientid_Execute(int clientid, boolean isExecute) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO>findBy_clientid_execute=new ArrayList<OrderVO>();
+			if(clientid==this.clientid&&isExecute==this.execute){
+				try {
+					room_order.add(roomorder1);
+					room_order.add(roomorder2);
+					room_order.add(roomorder3);
+					findBy_clientid_execute.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+								fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+								expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return findBy_clientid_execute;
+		}
+		@Override
+		public ArrayList<OrderVO> findorderByHotelid(int hotelid) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO>findBy_hotelid=new ArrayList<OrderVO>();
+			if(hotelid==this.hotelid){
+				try {
+					room_order.add(roomorder1);
+					room_order.add(roomorder2);
+					room_order.add(roomorder3);
+					findBy_hotelid.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+								fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+								expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return findBy_hotelid;
+		}
+		@Override
+		public ArrayList<OrderVO> findorderBy_Hotelid_State(int hotelid, String state) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO>findBy_hotelid_state=new ArrayList<OrderVO>();
+			if(hotelid==this.hotelid&&state.equals(this.state)){
+				try {
+					room_order.add(roomorder1);
+					room_order.add(roomorder2);
+					room_order.add(roomorder3);
+					findBy_hotelid_state.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+								fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+								expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return findBy_hotelid_state;
+		}
+		@Override
+		public ArrayList<OrderVO> findorderBy_Hotelid_Execute(int hotelid, boolean isExecute) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO>findBy_hotelid_execute=new ArrayList<OrderVO>();
+			if(hotelid==this.hotelid&&isExecute==this.execute){
+				try {
+					room_order.add(roomorder1);
+					room_order.add(roomorder2);
+					room_order.add(roomorder3);
+					findBy_hotelid_execute.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+								fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+								expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return findBy_hotelid_execute;
+		}
+		@Override
+		public ResultMessage order_client_cancel(int orderid) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(orderid!=0){
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ResultMessage order_client_generate(OrderVO vo) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(vo!=null){
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ResultMessage order_hotel_execute(int orderid) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(orderid==this.id){
+				execute=true;
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ArrayList<OrderVO> order_market_browseUnfilled() throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO> market_browse=new ArrayList<OrderVO>();
+			try {
+				room_order.add(roomorder1);
+				room_order.add(roomorder2);
+				room_order.add(roomorder3);
+				market_browse.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+									fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+									expect_number_of_people,havechild,evaluation));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return market_browse;
+		}
+		@Override
+		public ResultMessage order_market_cancelAbnormal(int orderid) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(orderid==this.id){
+				state="Â∑≤Êí§ÈîÄ";
+				cancel_time=new Date();
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public double calculateTotalwithoutStrategy(ArrayList<RoomOrderVO> roomlist, int hotelid)
+				throws RemoteException {
+			// TODO Auto-generated method stub
+			double price = 0;
+			ArrayList<RoomVO> roomlistttt=new ArrayList<RoomVO>();
+			roomlistttt.add(room1);
+			roomlistttt.add(room2);
+			roomlistttt.add(room3);
+			for(int i=0;i<roomlist.size();i++){
+				RoomOrderVO roomvo=roomlist.get(i);
+				for(int j=0;j<roomlistttt.size();j++){
+					if(roomvo.getroom_type().equals(roomlistttt.get(j).getroom_type())){
+						price+=roomvo.getnum_of_days()*roomvo.getroom_number()*roomlistttt.get(j).getprice();
+						break;
+					}
+				}
+			}
+			
+			return price;
+		}
+		@Override
+		public double calculateTotalwithStrategy(ArrayList<RoomOrderVO> roomlist, int hotelid, int clientid)
+				throws RemoteException {
+			// TODO Auto-generated method stub
+			double price=1800;
+			return price;
+		}
+		@Override
+		public OrderVO order_findbyid(int orderid) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(orderid==this.id){
+				room_order.add(roomorder1);
+				room_order.add(roomorder2);
+				room_order.add(roomorder3);
+				try {
+					return new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+										fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+										expect_number_of_people,havechild,evaluation);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return null;
+		}
+		@Override
+		public ResultMessage order_checkin(AccommodationVO info, int orderid) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(info!=null&&orderid==this.id){
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ResultMessage order_checkout(int orderid) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(orderid==this.id){
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ResultMessage offline_checkin(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(hotelid==this.hotelid&&room_order!=null){
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ResultMessage offline_checkout(int hotelid, ArrayList<RoomOrderVO> room_order) throws RemoteException {
+			// TODO Auto-generated method stub
+			if(hotelid==this.hotelid&&room_order!=null){
+				return ResultMessage.Success;
+			}
+			return ResultMessage.Fail;
+		}
+		@Override
+		public ArrayList<OrderVO> get_client_hotel_order(int clientid, int hotelid) throws RemoteException {
+			// TODO Auto-generated method stub
+			ArrayList<OrderVO> client_hotel_order=new ArrayList<OrderVO>();
+			if(clientid==this.clientid&&hotelid==this.hotelid){
+				room_order.add(roomorder1);
+				room_order.add(roomorder2);
+				room_order.add(roomorder3);
+				try {
+					client_hotel_order.add(new OrderVO(id,clientid,hotelid,state,cancel_time,execute,
+										fmt.parse(start_time),fmt.parse(end_time),fmt.parse(latest_execute_time),room_order,price,
+										expect_number_of_people,havechild,evaluation));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return client_hotel_order;
+			}
+			return null;
+		}
 		
 		
 		
-		//øÕªß‰Ø¿¿∂©µ•
-		public ArrayList<OrderVO> order_client_browse(){
-			ArrayList<OrderVO> OrderList_Client=new ArrayList<OrderVO>();
-			OrderVO neworder=new OrderVO(id,state,execute,hotel,start_time,end_time,latest_execute_time,room_type,room_number,strategy,price,expect_number_of_people);
-			OrderList_Client.add(neworder);
-			return OrderList_Client;
-		}
-		
-		//æ∆µÍπ§◊˜»À‘±‰Ø¿¿∂©µ•
-		public ArrayList<OrderVO> order_hotel_browse(){
-			ArrayList<OrderVO> OrderList_Hotel=new ArrayList<OrderVO>();
-			OrderVO neworder=new OrderVO(id,state,execute,hotel,start_time,end_time,latest_execute_time,room_type,room_number,strategy,price,expect_number_of_people);
-			OrderList_Hotel.add(neworder);
-			return OrderList_Hotel;
-		}
-		
-		//øÕªß≥∑œ˙∂©µ•
-		public ResultMessage order_client_cancel(){
-			return ResultMessage.Success;
-		}
-		
-		//øÕªß…˙≥…∂©µ•
-		public OrderVO order_client_generate(String input){
-			OrderVO neworder=new OrderVO(id,state,execute,hotel,start_time,end_time,latest_execute_time,room_type,room_number,strategy,price,expect_number_of_people);
-			return neworder;
-		}
-		
-		//æ∆µÍπ§◊˜»À‘±÷¥––∂©µ•
-		public ResultMessage order_hotel_execute(ClientVO c){
-			return ResultMessage.Success;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_client_browse(int clientid) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_client_browse(int clientid, OrderState state) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_client_browse(int clientid, boolean isExecute) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_hotel_browse(int hotelid) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_hotel_browse(int hotelid, OrderState state) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_hotel_browse(int hotelid, boolean isExecute) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ResultMessage order_client_cancel(int clientid, int orderid) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ResultMessage order_client_generate(OrderVO vo) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ResultMessage order_hotel_execute(int orderid) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ArrayList<OrderVO> order_market_browseUnfilled() {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public ResultMessage order_market_cancelAbnormal(int orderid) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-
-		@Override
-		public int calculateTotalwithoutStrategy(RoomType type, int num) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public int calculateTotalwithStrategy(RoomType type, int num, ArrayList<HotelStrategy> list1,
-				ArrayList<WebStrategy> list2) {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-
-		@Override
-		public ResultMessage updateActualLeaveTime(int orderid, String leaveTime) {
-			// TODO Auto-generated method stub
-			return null;
-		}
 }

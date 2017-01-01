@@ -1,85 +1,251 @@
 package driver;
 
 
+import java.rmi.RemoteException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import vo.*;
-import service.*;
 import service.blservice.*;
 import objects.*;
-import objects.VIPInfo.VIPType;
 
 public class OrderBLService_driver {
 	public void drive(OrderBLService orderBLService){
 		
-		//�ͻ��鿴����
-		ArrayList<OrderVO> OrderList_Client=new ArrayList<OrderVO>();
-		OrderList_Client=orderBLService.order_client_browse(1);
-		OrderVO order=OrderList_Client.get(0);
-		System.out.println(order.getid());
-		System.out.println(order.getstate());
-		System.out.println(order.getexecute());
-		System.out.println(order.gethotel());
-		System.out.println(order.getstart_time());
-		System.out.println(order.getend_time());
-		System.out.println(order.getlatest_execute_time());
-		System.out.println(order.getroom_type());
-		System.out.println(order.getroom_number());
-		System.out.println(order.getstrategy());
-		System.out.println(order.getprice());
-		System.out.println(order.getexpect_number_of_people());
+		SimpleDateFormat fmt=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		ResultMessage resultMessage=ResultMessage.Fail;
 		
-		//�Ƶ깤����Ա�鿴����
-		ArrayList<OrderVO> OrderList_Hotel=new ArrayList<OrderVO>();
-		OrderList_Hotel=orderBLService.order_hotel_browse(1);
-		OrderVO hotel=OrderList_Hotel.get(0);
-		System.out.println(hotel.getid());
-		System.out.println(hotel.getstate());
-		System.out.println(hotel.getexecute());
-		System.out.println(hotel.gethotel());
-		System.out.println(hotel.getstart_time());
-		System.out.println(hotel.getend_time());
-		System.out.println(hotel.getlatest_execute_time());
-		System.out.println(hotel.getroom_type());
-		System.out.println(hotel.getroom_number());
-		System.out.println(hotel.getstrategy());
-		System.out.println(hotel.getprice());
-		System.out.println(hotel.getexpect_number_of_people());
+		ArrayList<RoomOrderVO>roomlist=new ArrayList<RoomOrderVO>();
+		roomlist.add(new RoomOrderVO("标准间",1,5));
+		roomlist.add(new RoomOrderVO("双人房",1,3));
+		roomlist.add(new RoomOrderVO("大床房",2,4));
 		
-		//�ͻ���������
-		ResultMessage result_client=orderBLService.order_client_cancel(1,1);
-		if(result_client==ResultMessage.Success){
-			System.out.println("�����ɹ�");
-		}
-		else{
-			System.out.println("����ʧ��");
+		//findorderByClientid
+		ArrayList<OrderVO> client_orderlist;
+		try {
+			client_orderlist = orderBLService.findorderByClientid(1);
+			System.out.println(client_orderlist);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
-		//�ͻ����ɶ���
-		OrderVO o=new OrderVO(0, null, false, null, null, null, null, null, 0, null, 0, 0);
-		ResultMessage order1=orderBLService.order_client_generate(o);
-//		System.out.println(order1.getid());
-//		System.out.println(order1.getstate());
-//		System.out.println(order1.getexecute());
-//		System.out.println(order1.gethotel());
-//		System.out.println(order1.getstart_time());
-//		System.out.println(order1.getend_time());
-//		System.out.println(order1.getlatest_execute_time());
-//		System.out.println(order1.getroom_type());
-//		System.out.println(order1.getroom_number());
-//		System.out.println(order1.getstrategy());
-//		System.out.println(order1.getprice());
-//		System.out.println(order1.getexpect_number_of_people());
+		//findorderBy_Clientid_State
+		try {
+			ArrayList<OrderVO>findByState=orderBLService.findorderBy_Clientid_State(1, "正常");
+			System.out.println(findByState);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		//�Ƶ깤����Աִ�ж���
-		ArrayList<String> credit_record = new ArrayList<String>();
-		VIPInfo info = new VIPInfo(VIPType.NORMAL, "2000/01/01");
-		ClientVO vo = new ClientVO(1, "����", "11111111111", 0, credit_record, info);
-		ResultMessage result_hotel=orderBLService.order_hotel_execute(1);
-		if(result_hotel==ResultMessage.Success){
-			System.out.println("ִ�ж����ɹ�");
+		//findorderBy_Clientid_Execute
+		ArrayList<OrderVO> findByExecute = null;
+		try {
+			findByExecute = orderBLService.findorderBy_Clientid_Execute(1, true);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else{
-			System.out.println("ִ�ж���ʧ��");
+		System.out.println(findByExecute);
+		
+		//findorderByHotelid
+		ArrayList<OrderVO> findByHotelid = null;
+		try {
+			findByHotelid = orderBLService.findorderByHotelid(1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		System.out.println(findByHotelid);
+		
+		//findorderBy_Hotelid_State
+		ArrayList<OrderVO> findByHotel_State = null;
+		try {
+			findByHotel_State = orderBLService.findorderBy_Hotelid_State(1, "正常");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(findByHotel_State);
+		
+		//findorderBy_Hotelid_Execute
+		ArrayList<OrderVO> findByHotel_Exe = null;
+		try {
+			findByHotel_Exe = orderBLService.findorderBy_Hotelid_Execute(1, true);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(findByHotel_Exe);
+		
+		//order_client_cancel
+		try {
+			resultMessage=orderBLService.order_client_cancel(1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("撤销成功");
+		}else{
+			System.out.println("撤销失败");
+		}
+		
+		//order_client_generate
+		ArrayList<RoomOrderVO>generateRoom=new ArrayList<RoomOrderVO>();
+		generateRoom.add(new RoomOrderVO("标准间",1,5));
+		OrderVO generateOrder = null;
+		try {
+			generateOrder = new OrderVO(1,1,1,"正常",null,false,fmt.parse("2017-01-01 00:00:00"),
+					fmt.parse("2017-01-05 00:00:00"),fmt.parse("2017-01-02 00:00:00"),generateRoom,1800,1,false,"nice");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			resultMessage=orderBLService.order_client_generate(generateOrder);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("下单成功");
+		}else{
+			System.out.println("下单失败");
+		}
+		
+		//order_hotel_execute
+		try {
+			resultMessage=orderBLService.order_hotel_execute(1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("订单已执行");
+		}else{
+			System.out.println("订单未执行");
+		}
+		
+		//order_market_browseUnfilled
+		ArrayList<OrderVO> market_browse = null;
+		try {
+			market_browse = orderBLService.order_market_browseUnfilled();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(market_browse);
+		
+		//order_market_cancelAbnormal
+		try {
+			resultMessage=orderBLService.order_market_cancelAbnormal(2);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("撤销异常订单成功");
+		}else{
+			System.out.println("撤销异常订单失败");
+		}
+		
+		//calculateTotalwithoutStrategy
+		try {
+			double totalWithoutStrate=orderBLService.calculateTotalwithoutStrategy(roomlist, 1);
+			System.out.println(totalWithoutStrate);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//calculateTotalwithStrategy
+		double totalWithStrate = 0;
+		try {
+			totalWithStrate = orderBLService.calculateTotalwithStrategy(roomlist, 1, 1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(totalWithStrate);
+		
+		//order_findbyid
+		OrderVO findOrderByid = null;
+		try {
+			findOrderByid = orderBLService.order_findbyid(1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(findOrderByid);
+		
+		//order_checkin
+		try {
+			AccommodationVO accommodation=new AccommodationVO("314",fmt.parse("2017-01-01 00:00:00"),
+					fmt.parse("2017-01-05 00:00:00"),null);
+			resultMessage=orderBLService.order_checkin(accommodation, 1);
+			if(resultMessage==ResultMessage.Success){
+				System.out.println("入住成功");
+			}else{
+				System.out.println("入住失败");
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//order_checkout
+		try {
+			resultMessage=orderBLService.order_checkout(1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("退房成功");
+		}else{
+			System.out.println("退房失败");
+		}
+		
+		//offline_checkin
+		try {
+			resultMessage=orderBLService.offline_checkin(1, roomlist);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("线下入住成功");
+		}else{
+			System.out.println("线下入住失败");
+		}
+		
+		//offline_checkout
+		try {
+			resultMessage=orderBLService.offline_checkout(1, roomlist);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(resultMessage==ResultMessage.Success){
+			System.out.println("线下退房成功");
+		}else{
+			System.out.println("线下退房失败");
+		}
+		
+		//get_client_hotel_order
+		ArrayList<OrderVO> client_hotel_order = null;
+		try {
+			client_hotel_order = orderBLService.get_client_hotel_order(1, 1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(client_hotel_order);
+		
 	}
 }
