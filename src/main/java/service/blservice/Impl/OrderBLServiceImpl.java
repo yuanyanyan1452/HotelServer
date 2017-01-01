@@ -35,6 +35,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 	StrategyBLService strategyblservice=new StrategyBLServiceImpl();
 	VOChange vochange =new VOChange();
 	BL bl=new BL();
+	String strategyname=null;
 	
 	@Override
 	public ArrayList<OrderVO> findorderByClientid(int clientid) {
@@ -224,10 +225,17 @@ public class OrderBLServiceImpl implements OrderBLService {
 		double price1=0;
 	
 		ArrayList<Double> price_list=new ArrayList<Double>();
-//		ArrayList<HotelStrategyVO>  hotelstrategy_list=strategyblservice.getHotelStrategy(hotelid);
-//		ArrayList<WebStrategyVO> webstrategy_list=strategyblservice.getWebStrategy();
-		price_list.add(price);
-		
+		ArrayList<String> strategylist=new ArrayList<String>();
+		strategylist.add("酒店开业酬宾");
+		strategylist.add("生日特惠折扣特惠折扣");
+		strategylist.add("三间及以上预定折扣");
+		strategylist.add("合作企业客户折扣");
+		strategylist.add("酒店双十一折扣");
+		strategylist.add("网站开业酬宾");
+		strategylist.add("网站双十一折扣");
+		strategylist.add("会员等级折扣");
+		strategylist.add("关门大吉折扣");
+		strategylist.add("商圈折扣");
 		//策略模式
 		HotelStrategy1 h1=new HotelStrategy1();
 		HotelStrategy2 h2=new HotelStrategy2();
@@ -276,6 +284,7 @@ public class OrderBLServiceImpl implements OrderBLService {
 		for(int i=1;i<price_list.size();i++){
 			if(min_price>price_list.get(i)){
 				min_price=price_list.get(i);
+				strategyname=strategylist.get(i);
 			}
 		}
 		}
@@ -342,6 +351,11 @@ public class OrderBLServiceImpl implements OrderBLService {
 		}
 		return ordervolist;
 		
+	}
+
+	@Override
+	public String getstrategyname() throws RemoteException {
+		return strategyname;
 	}
 
 }
